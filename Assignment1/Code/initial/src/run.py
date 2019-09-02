@@ -1,8 +1,4 @@
-import sys,os
-sys.path.append('./test/')
-import subprocess
-import unittest
-from antlr4 import *
+
 
 #Make sure that ANTLR_JAR is set to antlr-4.7.2-complete.jar
 ANTLR_JAR = os.environ.get('ANTLR_JAR')
