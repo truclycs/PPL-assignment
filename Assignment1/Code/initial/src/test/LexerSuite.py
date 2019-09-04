@@ -6,7 +6,7 @@ class LexerSuite(unittest.TestCase):
     def test_identifier(self):
         """test identifiers"""
         self.assertTrue(TestLexer.checkLexeme("abc","abc,<EOF>",101))
-        self.assertTrue(TestLexer.checkLexeme("aCB","aCB,<EOF>",102))
+        self.assertTrue(TestLexer.checkLexeme("xyz","xyz,<EOF>",102))
         self.assertTrue(TestLexer.checkLexeme("aAsVN","aAsVN,<EOF>",103))
     def test_integer(self):
         """test integers"""
