@@ -11,25 +11,26 @@ grammar MC;
     from lexererr import *
 }
 
-@lexer::member {
+@lexer::members {
 def emit(self):
     tk = self.type
-    if tk == UNCLOSE_STRING:       
-        result = super.emit();
+    if tk == self.UNCLOSE_STRING:       
+        result = super().emit();
         raise UncloseString(result.text);
-    elif tk == ILLEGAL_ESCAPE:
-        result = super.emit();
+    elif tk == self.ILLEGAL_ESCAPE:
+        result = super().emit();
         raise IllegalEscape(result.text);
-    elif tk == ERROR_CHAR:
-        result = super.emit();
+    elif tk == self.ERROR_CHAR:
+        result = super().emit();
         raise ErrorToken(result.text); 
     else:
-        return super.emit();
+        return super().emit();
 }
 
 options {
 	language = Python3;
 }
+
 
 program: many_declarations+ EOF;
 many_declarations: 
@@ -37,7 +38,7 @@ many_declarations:
     | function_declaration;
 
 /*----------------------------------------------------------------
-                        2 Program Structure
+                        2 Program Structure (done)
 ------------------------------------------------------------------*/
 
 //2.1 Variable declaration
@@ -51,7 +52,7 @@ variable: ID (LSB INTLIT RSB)?;
 many_variables: variable (COMMA variable)*;
 
 //2.2 Function declaration  
-`
+
 function_declaration: type ID LB parameter_list RB block_statement;
 
 type: 
@@ -61,6 +62,7 @@ type:
 
 parameter_list: parameter_declaration (COMMA parameter_declaration)*;
 parameter_declaration:  primitive_type ID (LSB RSB)?;
+
 
 /*----------------------------------------------------------------
                     3 Lexical Specification 
@@ -75,6 +77,8 @@ parameter_declaration:  primitive_type ID (LSB RSB)?;
 /*----------------------------------------------------------------
                         4 Types and Values
 ------------------------------------------------------------------*/
+MC_types: primitive_type | void_type | (array | array_pointer_type);
+
 //4.1 The void Type and Values 
 //4.2 The boolean Type and Values 
 //4.3 The int Type and Values
@@ -84,7 +88,7 @@ parameter_declaration:  primitive_type ID (LSB RSB)?;
 //4.7 Array Pointer Type
 
 /*----------------------------------------------------------------
-                           5 Variables 10
+                           5 Variables
 ------------------------------------------------------------------*/
 //5.1 Global Variables 
 //5.2 Local Variables
@@ -92,6 +96,8 @@ parameter_declaration:  primitive_type ID (LSB RSB)?;
 /*----------------------------------------------------------------
                             6 Expressions 
 ------------------------------------------------------------------*/
+expression: (operand | operator)+;
+operand: literal | ID | element_of_array | function_call;
 
 //6.1 Precedence and Associativity 
 //6.2 Type Coercions 
@@ -104,6 +110,17 @@ parameter_declaration:  primitive_type ID (LSB RSB)?;
 ------------------------------------------------------------------*/
 
 //7.1 The if Statement
+if_statement: if_else | if_no_else;
+
+if_else: 
+    IF LB BOOL RB 
+        statement1
+    ELSE
+        statement2
+
+if_no_else:
+    IF LS BOOL RS
+        statement1;
 //7.2 The do while Statement 
 
 //7.3 The for Statement 
@@ -155,6 +172,7 @@ SEMI: ';';
 COMMA: ',';
 WS : [ \t\r\n]+ -> skip;
 IF: 'if';
+ELSE: 'else';
 FOR: 'for';
 BREAK: 'break';
 CONTINUE: 'continue';

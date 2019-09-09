@@ -27,7 +27,7 @@ class TestLexer:
         lexer = MCLexer(inputfile)
         try:
             TestLexer.printLexeme(dest,lexer)
-        except (ErrorToken, UncloseString, IllegalEscape) as err:
+        except (ErrorToken,UncloseString,IllegalEscape) as err:
             dest.write(err.message)
         finally:
             dest.close() 
@@ -39,8 +39,8 @@ class TestLexer:
     def printLexeme(dest,lexer):
         tok = lexer.nextToken()
         if tok.type != Token.EOF:
-            dest.write(tok.text + ",")
-            TestLexer.printLexeme(dest, lexer)
+            dest.write(tok.text+",")
+            TestLexer.printLexeme(dest,lexer)
         else:
             dest.write("<EOF>")
 class NewErrorListener(ConsoleErrorListener):
@@ -81,4 +81,7 @@ class TestParser:
             dest.close()
         dest = open("./test/solutions/" + str(num) + ".txt","r")
         line = dest.read()
-        return line == expect        
+        return line == expect
+
+
+        
