@@ -55,4 +55,4 @@ def printUsage():
     print("python3 run.py test ParserSuite")
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+    main(sys.argv[1:])

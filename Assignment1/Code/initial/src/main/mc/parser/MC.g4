@@ -16,7 +16,7 @@ def emit(self):
     tk = self.type
     if tk == self.UNCLOSE_STRING:       
         result = super().emit();
-        raise UncloseString(result.text);
+        raise UncloseString(result.text); 
     elif tk == self.ILLEGAL_ESCAPE:
         result = super().emit();
         raise IllegalEscape(result.text);
@@ -28,7 +28,7 @@ def emit(self):
 }
 
 options {
-	language = Python3;
+	language=Python3;
 }
 
 
@@ -38,7 +38,7 @@ many_declarations
     | function_declaration;
 
 /*----------------------------------------------------------------
-                        2 Program Structure
+                        2 Program Structure (done)
 ------------------------------------------------------------------*/
 
 //2.1 Variable declaration
@@ -57,19 +57,18 @@ many_variables: variable (COMMA variable)*;
 
 //2.2 Function declaration  
 
-function_declaration: type ID LB parameter_list RB block_statement;
+function_declaration: type ID LB parameter_list? RB block_statement;
 
 type
     : primitive_type 
     | array_pointer_type 
-    | void_type;
+    | VOID; //void_type = 'void'?
+
+void_type: ;
 
 parameter_list: parameter_declaration (COMMA parameter_declaration)*;
 
 parameter_declaration:  primitive_type ID (LSB RSB)?;
-
-block_statement: LP (variable_declaration | statement)* RP;
-
 
 /*----------------------------------------------------------------
                     3 Lexical Specification 
@@ -78,9 +77,9 @@ block_statement: LP (variable_declaration | statement)* RP;
 
 //3.2 Comments
 
-//LINE_COMMENT: '//'~[\n]* -> skip;
+BLOCK_COMMENT: '/*' .*? '*/' -> skip;
 
-//BLOCK_COMMENT: '/*' .*? '*/' -> skip;
+LINE_COMMENT: '//' ~[\n]* -> skip;
 
 //3.3 Token Set 
 
@@ -107,7 +106,7 @@ STRING: 'string';
 ADD: '+';
 MUL: '*';
 NOT: '!';
-OR: '|';
+OR: '||';
 NOT_EQUAL: '!=';
 LESS: '<';
 LESS_EQUAL: '<=';
@@ -132,15 +131,19 @@ SEMI: ';';
 COMMA: ',';
 
 //3.5 Literals
-literal
-    : INTLIT
-    | FLOATLIT
-    | BOOLIT
-    | STRINGLIT;
 
-INTLIT: [0-9]+;
-FLOATLIT: ;
-BOOLIT: TRUE | FALSE;
+fragment digit: [0-9];
+
+INTLIT: digit+;
+
+fragment e: [Ee];
+fragment dot: '.';
+FLOAT_LIT: digit? dot?;
+
+BOOLIT
+    : TRUE 
+    | FALSE;
+
 STRINGLIT:;
 
 /*----------------------------------------------------------------
@@ -160,17 +163,23 @@ void_type: ;
 //4.6 Array Types and Their Values 
 //4.7 Array Pointer Type
 
+array_pointer_type
+    : input_parameter
+    | output_parameter;
+
+input_parameter: primitive_type ID LSB RSB;
+
+output_parameter: primitive_type LSB RSB;
+
 /*----------------------------------------------------------------
                            5 Variables
 ------------------------------------------------------------------*/
-variables
-    : global_variable
-    | local_variable;
+// variables
+//     : global_variable
+//     | local_variable;
 
 //5.1 Global Variables 
-global_variable:;
 //5.2 Local Variables
-local_variable:;
 
 /*----------------------------------------------------------------
                             6 Expressions 
@@ -186,6 +195,9 @@ operand
 //6.1 Precedence and Associativity 
 //6.2 Type Coercions 
 //6.3 Index Expression 
+
+index_expression: expression LSB expression RSB;
+
 //6.4 Invocation Expression 
 //6.5 Evaluation Order 
 
@@ -210,13 +222,13 @@ if_statement
     | if_no_else;
 
 if_else: 
-    IF LB BOOL RB 
+    IF LB expression RB 
         statement1
     ELSE
         statement2;
 
 if_no_else:
-    IF LS BOOL RS
+    IF LB expression RB
         statement1;
 
 //7.2 The do while Statement 
@@ -224,14 +236,29 @@ if_no_else:
 DO ;
 
 //7.3 The for Statement 
-for_statement: FOR LB exp1 SEMI exp2 SEMI exp3 RNB statement;
 
+for_statement: FOR LB exp1 SEMI exp2 SEMI exp3 RB statement;
 
 //7.4 The break Statement 
+
+break_statement: BREAK SEMI;
+
 //7.5 The continue Statement 
+
+continue_statement: CONTINUE SEMI;
+
 //7.6 The return Statement 
+
+return_statement;
+
 //7.7 The expression Statement
+
+expression_statement: expression SEMI;
+
 //7.8 The block statement 
+
+block_statement: LP (variable_declaration | statement)* RP;
+
 /*----------------------------------------------------------------
                         8 Built-in Functions 
 ------------------------------------------------------------------*/
@@ -244,12 +271,8 @@ for_statement: FOR LB exp1 SEMI exp2 SEMI exp3 RNB statement;
                        10 The main function 
 ------------------------------------------------------------------*/
 
-
-
-
-
 WS : [ \t\r\n]+ -> skip;
-ID: [a-zA-Z_][a-zA-Z_0-9]*;
+ID: [a-zA-Z_][a-zA-Z0-9_]*; 
 
 ERROR_CHAR: .;
 UNCLOSE_STRING: .;
