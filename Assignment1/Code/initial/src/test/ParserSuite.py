@@ -2,7 +2,6 @@ import unittest
 from TestUtils import TestParser
 
 class ParserSuite(unittest.TestCase):
-    
     def test_simple_program(self):
         """Simple program: int main() {} """
         input = """int main() {}"""
@@ -22,3 +21,11 @@ class ParserSuite(unittest.TestCase):
         input = """int main( {}"""
         expect = "Error on line 1 col 10: {"
         self.assertTrue(TestParser.checkParser(input,expect,203))
+
+    def test(self):
+        inp = """int main() {x = false; y = true;}"""
+        out = "successful"
+        self.assertTrue(TestParser.checkParser(inp,out,204))
+
+
+

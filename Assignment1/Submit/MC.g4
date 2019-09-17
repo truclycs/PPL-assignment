@@ -34,23 +34,28 @@ options {
 ------------------------------------------------------------------*/
 
 program: many_declarations+ EOF;
-many_declarations: variable_declaration | function_declaration;
+many_declarations
+    : variable_declaration 
+    | function_declaration;
+
+//2.1 Variable declaration
 
 variable_declaration: primitive_type (variable | many_variables) SEMI;
+
+primitive_type: BOOL | INT | FLOAT | STRING;
 
 many_variables: variable (COMMA variable)*;
 
 variable: ID (LSB INTLIT RSB)?;
 
+//2.2 Function declaration  
+
 function_declaration: types ID LB parameter_list? RB block_statement;
 
-types   : primitive_type 
-        | array_pointer_type 
-        | VOID; 
-
-primitive_type: BOOL | INT | FLOAT | STRING;
-
-array_pointer_type: primitive_type ID? LSB RSB;
+types
+    : primitive_type 
+    | array_pointer_type 
+    | VOID; 
 
 block_statement: LP (variable_declaration | statement)* RP;
 
@@ -58,57 +63,94 @@ parameter_list: parameter_declaration (COMMA parameter_declaration)*;
 
 parameter_declaration:  primitive_type ID (LSB RSB)?;
 
-expression  : expression1 ASSIGN expression
-            | expression1;
+expression
+    : expression1 ASSIGN expression
+    | expression1;
 
-expression1 : expression1 OR expression2 
-            | expression2;
+expression1
+    : expression1 OR expression2 
+    | expression2;
 
-expression2 : expression2 AND expression3
-            | expression3;
+expression2
+    : expression2 AND expression3
+    | expression3;
 
-expression3 : expression4 (EQUAL | NOT_EQUAL) expression4
-            | expression4;
+expression3
+    : expression4 EQUAL expression4
+    | expression4 NOT_EQUAL expression4
+    | expression4;
 
-expression4 : expression5 (LESS| GREATER | LESS_EQUAL | GREATER_EQUAL) expression5
-            | expression5;
+expression4
+    : expression5 LESS expression5
+    | expression5 GREATER expression5
+    | expression5 LESS_EQUAL expression5
+    | expression5 GREATER_EQUAL expression5
+    | expression5;
 
-expression5 : expression5 (ADD | SUB) expression6
-            | expression6;
+expression5 
+    : expression5 ADD expression6
+    | expression5 SUB expression6
+    | expression6;
 
-expression6 : expression6 (DIV | MUL | MOD) expression7
-            | expression7;
+expression6
+    : expression6 DIV expression7
+    | expression6 MUL expression7
+    | expression6 MOD expression7
+    | expression7;
 
-expression7 : (SUB | NOT) expression7
-            |expression8;
+expression7
+    : SUB expression7
+    | NOT expression7
+    |expression8;
 
-expression8 : operand LSB expression RSB
-            | operand;
+expression8
+    : expression8 LSB expression RSB
+    | expression9;
 
-literal: INTLIT | FLOATLIT | BOOLLIT | STRINGLIT;
-operand     : literal 
-            | LB expression RB
-            | function_call
-            | ID;
+expression9
+    : LB expression RB
+    | operand;
+
+array_pointer_type
+    : input_parameter
+    | output_parameter;
+
+input_parameter: primitive_type ID LSB RSB;
+
+output_parameter: primitive_type LSB RSB;
+
+operand
+    : literal 
+    | ID 
+    | function_call;
+    //| element_of_array;
 
 function_call: ID LB list_expression? RB;
+
 list_expression: expression (COMMA expression)*;
 
-statement   : if_statement
-            | for_statement
-            | while_statement
-            | break_statement
-            | continue_statement
-            | return_statement
-            | expression_statement
-            | block_statement;
+statement
+    : if_statement
+    | for_statement
+    | while_statement
+    | break_statement
+    | continue_statement
+    | return_statement
+    | expression_statement
+    | block_statement;
 
-if_statement: IF LB expression RB statement (ELSE statement)?;
-while_statement: DO statement+ WHILE expression SEMI;
-for_statement: FOR LB expression SEMI expression SEMI expression RB statement;
+if_statement: IF LB expression RB statement SEMI (ELSE statement SEMI)?;
+
+while_statement: DO (statement SEMI)+ WHILE expression;
+
+for_statement: FOR LB expression SEMI expression SEMI expression RB statement SEMI;
+
 break_statement: BREAK SEMI;
+
 continue_statement: CONTINUE SEMI;
+
 return_statement: RETURN expression? SEMI;
+
 expression_statement: expression SEMI;
 
 /*----------------------------------------------------------------
@@ -116,9 +158,8 @@ expression_statement: expression SEMI;
 ------------------------------------------------------------------*/
 
 BLOCK_COMMENT: '/*' .*? '*/' -> skip;
-LINE_COMMENT: '//' ~[\r\n]* -> skip;
+LINE_COMMENT: '//' ~[\n]* -> skip;
 
-STRING: 'string';
 BOOL: 'boolean';
 BREAK: 'break';
 CONTINUE: 'continue';
@@ -131,7 +172,11 @@ RETURN: 'return';
 VOID: 'void';
 DO: 'do';
 WHILE: 'while';
+TRUE: 'true';
+FALSE: 'false';
+STRING: 'string';
 
+// OPERATORS
 ADD: '+';
 MUL: '*';
 NOT: '!';
@@ -157,11 +202,17 @@ RP: '}';
 SEMI: ';';
 COMMA: ',';
 
+literal: INTLIT | FLOATLIT | BOOLLIT | STRINGLIT;
+
 fragment DIGIT: [0-9];
 fragment EXPONENT: [eE] '-'? DIGIT+;
+
 INTLIT: DIGIT+;
-FLOATLIT: DIGIT+ ('.' DIGIT*)? EXPONENT? | '.' DIGIT+ EXPONENT?;
-BOOLLIT: 'true' | 'false';
+
+FLOATLIT: DIGIT+ ('.' DIGIT*)? EXPONENT? 
+        | '.' DIGIT+ EXPONENT?;
+
+BOOLLIT: TRUE | FALSE;
 
 ID: [a-zA-Z_][a-zA-Z0-9_]*; 
 WS : [ \t\r\n]+ -> skip ; 

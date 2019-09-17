@@ -5,11 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
-            "type": "python",
+            "name": "antlr4-program",
+            "type": "antlr-debug",
             "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal"
+            "input": "C:/Users/Truc Ly/Documents/GitHub/PPL/Assignment1/Code/initial/src/test/testcases/201.txt",
+            "grammar": "C:/Users/Truc Ly/Documents/GitHub/PPL/Assignment1/Code/initial/src/main/mc/parser/MC.g4",
+            "startRule": "program",
+            "printParseTree": true,
+            "visualParseTree": true
         }
     ]
 }

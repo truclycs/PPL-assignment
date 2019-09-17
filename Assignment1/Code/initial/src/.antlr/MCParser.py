@@ -1,10 +1,9 @@
-# Generated from main/mc/parser/MC.g4 by ANTLR 4.7.2
+# Generated from c:\Users\Truc Ly\Documents\GitHub\PPL\Assignment1\Code\initial\src\MC.g4 by ANTLR 4.7.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
 import sys
-
 
 def serializedATN():
     with StringIO() as buf:
@@ -268,10 +267,9 @@ class MCParser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.2")
+        self.checkVersion("4.7.1")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
-
 
 
 
@@ -293,12 +291,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_program
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitProgram" ):
-                return visitor.visitProgram(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -332,7 +324,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Many_declarationsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -349,12 +340,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_many_declarations
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitMany_declarations" ):
-                return visitor.visitMany_declarations(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -388,7 +373,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Variable_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -412,12 +396,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_variable_declaration
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitVariable_declaration" ):
-                return visitor.visitVariable_declaration(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -454,7 +432,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Many_variablesContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -476,12 +453,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_many_variables
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitMany_variables" ):
-                return visitor.visitMany_variables(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -515,7 +486,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class VariableContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -536,12 +506,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_variable
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitVariable" ):
-                return visitor.visitVariable(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -575,7 +539,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Function_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -605,12 +568,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_function_declaration
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFunction_declaration" ):
-                return visitor.visitFunction_declaration(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -648,7 +605,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class TypesContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -668,12 +624,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_types
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitTypes" ):
-                return visitor.visitTypes(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -713,7 +663,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Primitive_typeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -734,12 +683,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_primitive_type
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitPrimitive_type" ):
-                return visitor.visitPrimitive_type(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -766,7 +709,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Array_pointer_typeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -788,12 +730,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_array_pointer_type
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitArray_pointer_type" ):
-                return visitor.visitArray_pointer_type(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -827,7 +763,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Block_statementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -856,12 +791,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_block_statement
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitBlock_statement" ):
-                return visitor.visitBlock_statement(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -907,7 +836,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Parameter_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -929,12 +857,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_parameter_list
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitParameter_list" ):
-                return visitor.visitParameter_list(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -968,7 +890,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Parameter_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -990,12 +911,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_parameter_declaration
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitParameter_declaration" ):
-                return visitor.visitParameter_declaration(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1029,7 +944,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1049,12 +963,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_expression
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression" ):
-                return visitor.visitExpression(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1092,7 +1000,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Expression1Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1112,12 +1019,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_expression1
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression1" ):
-                return visitor.visitExpression1(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1163,7 +1064,6 @@ class MCParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
-
     class Expression2Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1183,12 +1083,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_expression2
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression2" ):
-                return visitor.visitExpression2(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1234,7 +1128,6 @@ class MCParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
-
     class Expression3Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1256,12 +1149,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_expression3
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression3" ):
-                return visitor.visitExpression3(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1305,7 +1192,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Expression4Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1333,12 +1219,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_expression4
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression4" ):
-                return visitor.visitExpression4(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1382,7 +1262,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Expression5Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1405,12 +1284,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_expression5
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression5" ):
-                return visitor.visitExpression5(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1462,7 +1335,6 @@ class MCParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
-
     class Expression6Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1488,12 +1360,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_expression6
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression6" ):
-                return visitor.visitExpression6(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1545,7 +1411,6 @@ class MCParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
-
     class Expression7Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1568,12 +1433,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_expression7
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression7" ):
-                return visitor.visitExpression7(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1615,7 +1474,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Expression8Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1638,12 +1496,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_expression8
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression8" ):
-                return visitor.visitExpression8(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1683,7 +1535,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class LiteralContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1704,12 +1555,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_literal
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitLiteral" ):
-                return visitor.visitLiteral(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1735,7 +1580,6 @@ class MCParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class OperandContext(ParserRuleContext):
 
@@ -1766,12 +1610,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_operand
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitOperand" ):
-                return visitor.visitOperand(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1821,7 +1659,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Function_callContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1843,12 +1680,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_function_call
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFunction_call" ):
-                return visitor.visitFunction_call(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1882,7 +1713,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class List_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1904,12 +1734,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_list_expression
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitList_expression" ):
-                return visitor.visitList_expression(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -1942,7 +1766,6 @@ class MCParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class StatementContext(ParserRuleContext):
 
@@ -1984,12 +1807,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_statement
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitStatement" ):
-                return visitor.visitStatement(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -2053,7 +1870,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class If_statementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2085,12 +1901,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_if_statement
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitIf_statement" ):
-                return visitor.visitIf_statement(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -2129,7 +1939,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class While_statementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2158,12 +1967,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_while_statement
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitWhile_statement" ):
-                return visitor.visitWhile_statement(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -2203,7 +2006,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class For_statementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2238,12 +2040,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_for_statement
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFor_statement" ):
-                return visitor.visitFor_statement(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -2280,7 +2076,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Break_statementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2295,12 +2090,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_break_statement
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitBreak_statement" ):
-                return visitor.visitBreak_statement(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -2323,7 +2112,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Continue_statementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2338,12 +2126,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_continue_statement
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitContinue_statement" ):
-                return visitor.visitContinue_statement(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -2366,7 +2148,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Return_statementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2385,12 +2166,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_return_statement
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitReturn_statement" ):
-                return visitor.visitReturn_statement(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -2422,7 +2197,6 @@ class MCParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Expression_statementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2438,12 +2212,6 @@ class MCParser ( Parser ):
 
         def getRuleIndex(self):
             return MCParser.RULE_expression_statement
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression_statement" ):
-                return visitor.visitExpression_statement(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 

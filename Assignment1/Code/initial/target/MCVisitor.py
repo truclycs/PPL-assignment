@@ -24,18 +24,13 @@ class MCVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MCParser#primitive_type.
-    def visitPrimitive_type(self, ctx:MCParser.Primitive_typeContext):
+    # Visit a parse tree produced by MCParser#many_variables.
+    def visitMany_variables(self, ctx:MCParser.Many_variablesContext):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by MCParser#variable.
     def visitVariable(self, ctx:MCParser.VariableContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by MCParser#many_variables.
-    def visitMany_variables(self, ctx:MCParser.Many_variablesContext):
         return self.visitChildren(ctx)
 
 
@@ -49,18 +44,8 @@ class MCVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MCParser#parameter_list.
-    def visitParameter_list(self, ctx:MCParser.Parameter_listContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by MCParser#parameter_declaration.
-    def visitParameter_declaration(self, ctx:MCParser.Parameter_declarationContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by MCParser#literal.
-    def visitLiteral(self, ctx:MCParser.LiteralContext):
+    # Visit a parse tree produced by MCParser#primitive_type.
+    def visitPrimitive_type(self, ctx:MCParser.Primitive_typeContext):
         return self.visitChildren(ctx)
 
 
@@ -69,18 +54,18 @@ class MCVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MCParser#input_parameter.
-    def visitInput_parameter(self, ctx:MCParser.Input_parameterContext):
+    # Visit a parse tree produced by MCParser#block_statement.
+    def visitBlock_statement(self, ctx:MCParser.Block_statementContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MCParser#output_parameter.
-    def visitOutput_parameter(self, ctx:MCParser.Output_parameterContext):
+    # Visit a parse tree produced by MCParser#parameter_list.
+    def visitParameter_list(self, ctx:MCParser.Parameter_listContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MCParser#operand.
-    def visitOperand(self, ctx:MCParser.OperandContext):
+    # Visit a parse tree produced by MCParser#parameter_declaration.
+    def visitParameter_declaration(self, ctx:MCParser.Parameter_declarationContext):
         return self.visitChildren(ctx)
 
 
@@ -129,8 +114,13 @@ class MCVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MCParser#expression9.
-    def visitExpression9(self, ctx:MCParser.Expression9Context):
+    # Visit a parse tree produced by MCParser#literal.
+    def visitLiteral(self, ctx:MCParser.LiteralContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MCParser#operand.
+    def visitOperand(self, ctx:MCParser.OperandContext):
         return self.visitChildren(ctx)
 
 
@@ -181,11 +171,6 @@ class MCVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by MCParser#expression_statement.
     def visitExpression_statement(self, ctx:MCParser.Expression_statementContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by MCParser#block_statement.
-    def visitBlock_statement(self, ctx:MCParser.Block_statementContext):
         return self.visitChildren(ctx)
 
 
