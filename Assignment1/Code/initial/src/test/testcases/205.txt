@@ -1,4 +1,0 @@
-string str;
-        void main(){
-            float k[3];
-        }

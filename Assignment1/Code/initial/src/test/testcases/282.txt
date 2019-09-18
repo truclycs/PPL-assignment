@@ -1,6 +1,0 @@
-float a, b[2];
-        int main()
-        {
-            int c;
-            a = a * b[0] + (a - 3) * b[1];
-        }

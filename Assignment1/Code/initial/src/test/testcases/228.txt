@@ -1,8 +1,0 @@
-int main(){
-            if (isPrime(n)) {
-                if (n > 1000) flag = true; //check if n > 1000
-                else n = 3 + n * 7;
-                print(n);
-            }
-            else print("n isn't a prime number!");
-        }

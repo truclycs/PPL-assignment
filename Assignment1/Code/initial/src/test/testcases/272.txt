@@ -1,3 +1,0 @@
-void main(){
-            myFavorites = "MeitanteiConan" + "MaiK" + "Sherlock" + "PPL;
-        }

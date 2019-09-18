@@ -1,4 +1,0 @@
-int a[10], b;
-        boolean _flag;
-        float f, arr[5];
-        string str;

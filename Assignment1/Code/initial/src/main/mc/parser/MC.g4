@@ -2,10 +2,6 @@
    * Student name: Nguyen Thi Truc Ly   *
    * Student ID: 1710187                *
    ************************************** */
-<<<<<<< HEAD
-=======
-
->>>>>>> 626ac39fdc3ced81c59e12b9bf8cc445495487e9
 grammar MC;
 
 @lexer::header {
@@ -32,7 +28,6 @@ options {
 	language = Python3;
 }
 
-<<<<<<< HEAD
 
 /*----------------------------------------------------------------
                                 PARSER
@@ -98,89 +93,6 @@ continue_stmt: CONTINUE SEMI;
 return_stmt: RETURN exp? SEMI;
 exp_stmt: exp SEMI;
 block_stmt: LP (var_decl | stmt)* RP;
-=======
-/*----------------------------------------------------------------
-                                PARSER
-------------------------------------------------------------------*/
-
-program: many_declarations+ EOF;
-many_declarations: variable_declaration | function_declaration;
-
-variable_declaration: primitive_type (variable | many_variables) SEMI;
-
-many_variables: variable (COMMA variable)*;
-
-variable: ID (LSB INTLIT RSB)?;
-
-function_declaration: types ID LB parameter_list? RB block_statement;
-
-types   : primitive_type 
-        | array_pointer_type 
-        | VOID; 
-
-primitive_type: BOOL | INT | FLOAT | STRING;
-
-array_pointer_type: primitive_type ID? LSB RSB;
-
-block_statement: LP (variable_declaration | statement)* RP;
-
-parameter_list: parameter_declaration (COMMA parameter_declaration)*;
-
-parameter_declaration:  primitive_type ID (LSB RSB)?;
-
-expression  : expression1 ASSIGN expression
-            | expression1;
-
-expression1 : expression1 OR expression2 
-            | expression2;
-
-expression2 : expression2 AND expression3
-            | expression3;
-
-expression3 : expression4 (EQUAL | NOT_EQUAL) expression4
-            | expression4;
-
-expression4 : expression5 (LESS| GREATER | LESS_EQUAL | GREATER_EQUAL) expression5
-            | expression5;
-
-expression5 : expression5 (ADD | SUB) expression6
-            | expression6;
-
-expression6 : expression6 (DIV | MUL | MOD) expression7
-            | expression7;
-
-expression7 : (SUB | NOT) expression7
-            |expression8;
-
-expression8 : operand LSB expression RSB
-            | operand;
-
-literal: INTLIT | FLOATLIT | BOOLLIT | STRINGLIT;
-operand     : literal 
-            | LB expression RB
-            | function_call
-            | ID;
-
-function_call: ID LB list_expression? RB;
-list_expression: expression (COMMA expression)*;
-
-statement   : if_statement
-            | for_statement
-            | while_statement
-            | break_statement
-            | continue_statement
-            | return_statement
-            | expression_statement
-            | block_statement;
-
-if_statement: IF LB expression RB statement (ELSE statement)?;
-while_statement: DO statement+ WHILE expression SEMI;
-for_statement: FOR LB expression SEMI expression SEMI expression RB statement;
-break_statement: BREAK SEMI;
-continue_statement: CONTINUE SEMI;
-return_statement: RETURN expression? SEMI;
-expression_statement: expression SEMI;
->>>>>>> 626ac39fdc3ced81c59e12b9bf8cc445495487e9
 
 /*----------------------------------------------------------------
                                 LEXER

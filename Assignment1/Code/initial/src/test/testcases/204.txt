@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-int a[10], b;
-        int main(){
-            float k;
-        }
-=======
-int main() {x = false; y = true;}
->>>>>>> 626ac39fdc3ced81c59e12b9bf8cc445495487e9

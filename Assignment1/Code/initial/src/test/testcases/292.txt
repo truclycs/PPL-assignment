@@ -1,7 +1,0 @@
-string str;
-        int main()
-        {   
-            str = "Conan " + "Meitantei";
-            printf(str);
-            return 0;
-        }

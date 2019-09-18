@@ -1,5 +1,0 @@
-int eval(int a, int b, string op) {
-            if (op == "+") return a + b;
-            if (op == "-") return a - b;
-            else error(op);
-        }

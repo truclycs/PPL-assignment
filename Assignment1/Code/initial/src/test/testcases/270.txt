@@ -1,3 +1,0 @@
-void main(){
-            isTiredNow = ((yes && ofCourse) || !no || true;
-        }

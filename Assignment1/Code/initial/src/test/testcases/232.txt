@@ -1,4 +1,0 @@
-
-        int main () {               //what's wrong with this program?
-            if (empty) break 123;
-        }

@@ -1,3 +1,0 @@
-void main(){
-            boo = a >= b <= c > d < e;
-        }

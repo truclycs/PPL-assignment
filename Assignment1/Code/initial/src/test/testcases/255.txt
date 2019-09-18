@@ -1,3 +1,0 @@
-int do_nothing(){
-            do while true;
-        }
