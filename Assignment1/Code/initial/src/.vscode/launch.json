@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
@@ -16,4 +17,23 @@
         }
         
     ]
+=======
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "antlr4-program",
+            "type": "antlr-debug",
+            "request": "launch",
+            "input": "C:/Users/Truc Ly/Documents/GitHub/PPL/Assignment1/Code/initial/src/test/testcases/201.txt",
+            "grammar": "C:/Users/Truc Ly/Documents/GitHub/PPL/Assignment1/Code/initial/src/main/mc/parser/MC.g4",
+            "startRule": "program",
+            "printParseTree": true,
+            "visualParseTree": true
+        }
+    ]
+>>>>>>> 626ac39fdc3ced81c59e12b9bf8cc445495487e9
 }

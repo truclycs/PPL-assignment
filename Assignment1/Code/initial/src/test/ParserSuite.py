@@ -14,6 +14,7 @@ class ParserSuite(unittest.TestCase):
         """Miss ) int main( {}"""
         input = """int main( {}"""
         expect = "Error on line 1 col 10: {"
+<<<<<<< HEAD
         self.assertTrue(TestParser.checkParser(input,expect,202))
 
     #############################################################################VARDECL_TEST(5)
@@ -927,3 +928,14 @@ class ParserSuite(unittest.TestCase):
         }"""
         expect = "successful"
         self.assertTrue(TestParser.checkParser(input,expect,300))
+=======
+        self.assertTrue(TestParser.checkParser(input,expect,203))
+
+    def test(self):
+        inp = """int main() {x = false; y = true;}"""
+        out = "successful"
+        self.assertTrue(TestParser.checkParser(inp,out,204))
+
+
+
+>>>>>>> 626ac39fdc3ced81c59e12b9bf8cc445495487e9
