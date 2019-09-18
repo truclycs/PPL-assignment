@@ -1,0 +1,3 @@
+boolean isPrime(int a) {}
+        boolean[] isArmstrong(int a[]) {}
+        void main(){}

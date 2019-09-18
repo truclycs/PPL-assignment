@@ -1,0 +1,8 @@
+float[] func(int a[], float b){}
+        void main(){
+            int a[5];
+            b = 1e-3;
+            float n;
+            n = (func(func(a[3], 3 - b*4)[a[1] + 6], - (b*5 + 3)) - h[a[0]]*foo(a[4]))[a[2] - 1];
+            print(n);
+        }

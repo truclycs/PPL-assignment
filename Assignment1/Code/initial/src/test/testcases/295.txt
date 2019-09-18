@@ -1,0 +1,8 @@
+int i;
+        int[] foo(){}
+        void main(){
+            i = 9;
+            i = i + foo()[2];
+            if (i < 9) print("True");
+            else print("False");
+        }

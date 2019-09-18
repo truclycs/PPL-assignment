@@ -1,0 +1,13 @@
+boolean isPrime(int n)
+        {
+            int j, flag;
+            for(j=2; j <= n/2; j = j+1)
+            {
+                if (n%j == 0)
+                {
+                    flag = 0;
+                    break;
+                }
+            }
+            return flag;
+        }

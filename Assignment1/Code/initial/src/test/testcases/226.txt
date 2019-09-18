@@ -1,0 +1,10 @@
+/* 
+        This is the program
+        */
+        void main(){
+            if (t == true) {
+                if (u  < 3) k = 6;
+                else k = goo(3);
+            }
+            else k = foo(u - 3);
+        }

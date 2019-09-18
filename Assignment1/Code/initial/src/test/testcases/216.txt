@@ -1,0 +1,3 @@
+void main(){
+            flag = !full || (empty == 0);
+        }

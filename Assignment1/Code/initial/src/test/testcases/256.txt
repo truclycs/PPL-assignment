@@ -1,0 +1,3 @@
+int main() {
+            do x = foo(x);
+        }

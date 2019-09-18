@@ -1,0 +1,3 @@
+int main(){
+            exp = b^4*c;
+        }

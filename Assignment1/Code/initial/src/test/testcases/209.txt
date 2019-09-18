@@ -1,0 +1,2 @@
+float[] goo(int a[], float b, boolean flag) {}
+        void main(){}

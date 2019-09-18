@@ -1,0 +1,3 @@
+void main(){
+            if !empty {next(ptr);}
+        }

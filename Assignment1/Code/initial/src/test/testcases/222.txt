@@ -1,0 +1,3 @@
+int main(){
+            _a = func(5-b) - func1(5.e-3,4-b)*6/12;
+        }

@@ -1,0 +1,5 @@
+void main(){
+            if (n >= 5) k = 3;
+            else k = 4;
+            else k = 5;
+        }

@@ -1,0 +1,3 @@
+int main(){
+            exp = foo(5, 1)[2];
+        }

@@ -1,0 +1,9 @@
+int main()
+        {
+            string s;
+            boolean flag;
+            s = "true" +"orfalse";
+            if (s == "true") flag = true;
+            else flag = false;
+            return flag;
+        }

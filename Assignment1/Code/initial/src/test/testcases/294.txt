@@ -1,0 +1,7 @@
+boolean flag;
+        int main()
+        {
+            flag = true;
+            if (flag) printf("It's over!");
+            return 0;
+        }

@@ -1,0 +1,10 @@
+/*This is a program*/
+        void main(){
+            int n, i;
+            n = 100;
+            for (i = 0; true; i = i + 1)
+            {
+                n = n - i;
+                if (n < i) break;
+            }
+        }

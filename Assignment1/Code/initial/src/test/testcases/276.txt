@@ -1,0 +1,3 @@
+void main(){
+            result = exponent(2 random(1,40));
+        }

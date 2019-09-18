@@ -1,0 +1,8 @@
+void main() {
+            {int i, k;
+                {
+                    int z;
+                    i = k = z = 5;
+                }
+            }
+        }

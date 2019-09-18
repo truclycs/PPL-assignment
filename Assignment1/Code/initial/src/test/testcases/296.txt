@@ -1,0 +1,12 @@
+boolean flag;
+        int round(float a){}
+        void main(){
+            float number;
+            flag = true;
+            do {
+                number = random(1, 200) / 10;
+                if (number == round(number)) flag = false;
+            } 
+            while (flag);
+            print(number);
+        }
