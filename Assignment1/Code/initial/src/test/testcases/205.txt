@@ -1,0 +1,5 @@
+ int a, b, c, d[5];
+                    float f;
+                    string f;
+                    boolean flag;
+                 
