@@ -1,0 +1,3 @@
+ int cal(int a) {
+                        while 1 + 1 == 2;
+                    }

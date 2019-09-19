@@ -1,0 +1,4 @@
+  int main() {                
+                    \*abcyz;
+                    return 0;
+                }

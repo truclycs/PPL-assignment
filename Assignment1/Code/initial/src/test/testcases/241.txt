@@ -1,0 +1,3 @@
+ int cal(int a) {
+                        if (a) print("OK");
+                    }

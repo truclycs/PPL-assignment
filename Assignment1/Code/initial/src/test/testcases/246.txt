@@ -1,0 +1,3 @@
+ int cal(int a) {
+                        do res = 1 + 1;
+                    }

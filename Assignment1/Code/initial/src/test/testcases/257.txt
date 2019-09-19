@@ -1,0 +1,4 @@
+int func(int a){
+                for(a = 10; a < 20; a = a + 1 ) i = i + 1;
+                continue;
+                void main() {}
