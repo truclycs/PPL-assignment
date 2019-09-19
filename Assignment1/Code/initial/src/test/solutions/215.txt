@@ -1,1 +1,1 @@
-Error on line 1 col 0: abc
+Error on line 2 col 18: b

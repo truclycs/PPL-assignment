@@ -491,12 +491,12 @@ class ParserSuite(unittest.TestCase):
                     if (h > c) x = min(p, b / 2);
                     else (h * x + c * min(f, (b - x * 2) / 2));
                     int x = min(f, b / 2);
-                    cexpect(h * min(p, (b - x * 2) / 2) + c * x);
-                    cexpect("\n");
+                    ch * min(p, (b - x * 2) / 2) + c * x);
+                    c("...");
                     }
                     return 0;
                 }"""
-        expect = ""
+        expect = "Error on line 6 col 26: ="
         self.assertTrue(TestParser.checkParser(input,expect,261))
 
     def test262(self):
@@ -763,8 +763,8 @@ class ParserSuite(unittest.TestCase):
 
     def test277(self):
         input = """  int main() {                
-                    int res = 0;
-                    for (int i = 0; i < m; i) {
+                    int res;
+                    for (i = 0; i < m; i) {
                         int A , B, B, C, D, E;
                         for (j = 0; j < n; j) {
                             if (s[j][i] == 'A') {
@@ -789,7 +789,7 @@ class ParserSuite(unittest.TestCase):
                     cexpect << res;
                     return 0;*/
                 }"""
-        expect = "'"
+        expect = "Error on line 6 col 36: ["
         self.assertTrue(TestParser.checkParser(input,expect,277))
 
     def test278(self):

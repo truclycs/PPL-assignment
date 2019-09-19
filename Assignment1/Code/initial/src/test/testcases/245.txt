@@ -1,3 +1,5 @@
- int cal(int a) {
-                        do  while 1 + 1 == 2
-                    }
+boolean assoc_order() {
+	int xFactor,RM,Jh0pe[10];
+	bool = a != b && 2 || foo(strings);
+} 
+        

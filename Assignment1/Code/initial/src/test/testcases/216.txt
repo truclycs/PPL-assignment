@@ -1,1 +1,8 @@
-abc() {x; x = y + 1;}
+
+void swap(float a, Type<T> b) 
+{	int t;
+t=a;
+a=b;
+b=t;
+return;  }
+        

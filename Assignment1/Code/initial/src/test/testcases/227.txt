@@ -1,1 +1,5 @@
- int a = a + 1; 
+void main() {
+	23[!a-b];
+	_abx123[Func[x==4.e8]];
+} 
+        

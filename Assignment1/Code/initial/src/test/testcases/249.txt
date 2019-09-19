@@ -1,3 +1,2 @@
- int cal(int a) {
-                        cal((a + 3) % 2 * 8);
-                    }
+void main( ){ if (a) if (b) if (c) a; else a; else }
+        

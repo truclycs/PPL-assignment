@@ -1,9 +1,12 @@
-  int main() {                
-                    if (a=b=c=d=e=f=d=f=e||1){
-                        break;
-                    }
-                    else {
-                        continue;
-                    }
-                    return 0;
-                }
+
+        int main()    
+        {    
+            int n1;
+            /* make a swap 
+            function // make it right
+            */
+            int swap (int a, int b) {
+                swap(a,b);
+            }
+        }    
+        

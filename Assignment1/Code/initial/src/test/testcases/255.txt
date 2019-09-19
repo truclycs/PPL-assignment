@@ -1,4 +1,4 @@
- void main() {
-                        float a[10];
-                        a[0] = 1.5;
-                    }
+void main() { 
+	do print("statement 1");a = b*25+.0e89; print(strings); while (true); 
+}
+        

@@ -1,3 +1,2 @@
- int cal(int a) {
-                        do res = 1 + 1 while
-                    }
+void main( ){ if (a) if (b) if (c) a; else a; else }
+        

@@ -1,3 +1,5 @@
- int cal(int a, int b, int c) {
-                        a = (b + c % a /b - c * a) - e;
-                    }
+void main() {
+	int arr[10];
+	arr[foo(x)]_list;
+} 
+        

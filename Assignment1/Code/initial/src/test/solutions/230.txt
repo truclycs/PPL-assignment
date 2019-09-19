@@ -1,1 +1,1 @@
-Error on line 2 col 23: int
+Error on line 3 col 3: [

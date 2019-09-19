@@ -1,12 +1,13 @@
-int main() {
-                    int t, b, p, f, h, c;
-                    cin(t);
-                    if (h > c) x = min(p, b / 2);
-                    cexpect(h * x + c * min(f, (b - x * 2) / 2));
-                    else int x = min(f, b / 2);
-                    cexpect(h * min(p, (b - x * 2) / 2) + c * x);
-                    cexpect("
-");
-                    }
-                    return 0;
-                }
+void main() { for(i=0; line[i]!="<EOF>"; i + 1)
+        {
+        if(line[i]=="a" || line[i]=="e" || line[i]=="i")
+        {
+            vowels;
+        }
+        else if((line[i]>="a"&& line[i]<="z") || (line[i]>="A"&& line[i]<="Z"))
+        {
+            consonants+1;
+        }
+        }
+    }
+        

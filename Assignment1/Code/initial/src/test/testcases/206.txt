@@ -1,4 +1,2 @@
-int main() {
-            if (a == b) c = d;
-            else c = e;
-        }
+void _v01D,	 try_V[88];
+        

@@ -1,5 +1,4 @@
-void foo () {
-                    int i, j, k[5];
-                    float arr[5];
-                    i = (j + i) /(j + k[arr[1]]) + 1999;
-                }
+void main() {
+	int[(25)*4%(a-bY)];
+	"Dope"+"Func!^"[index+"3e.0"]} 
+        

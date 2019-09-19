@@ -1,3 +1,13 @@
- int foo() {
-                    (-1+2*3+4/5%6)[2];
-                    } 
+
+        float f1;
+        int fac(int n) {
+            if (n == 0)
+                return 1;
+            else
+                return n*fac(n-1);
+        }
+
+        void _Army_(int a[], string b = 5) {
+
+        }    
+        

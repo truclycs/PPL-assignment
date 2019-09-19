@@ -1,3 +1,6 @@
- int cal(int a, int b, int c) {
-                        res =((a * b) / d + (f % 7 - 4);
-                    }
+string[] new() {
+	string str1, str2;
+	foo(5) = _2D_Arr[a[b[c[7]]]]%22%5;
+	root1 = -str1;
+	} 
+        

@@ -1,4 +1,14 @@
- int x; 
-                    int foo() {
-                        a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[aa[a[a[a[a[a[a[a[a[a[a[a[a]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]];
-                    } 
+
+        float f1;
+
+        int main()    
+        {    
+            int n1,t[5],;
+            n1 = 39 != 45 * 3;
+            /* make a swap 
+            function // make it right
+            */
+            break;
+            return;
+        }    
+        

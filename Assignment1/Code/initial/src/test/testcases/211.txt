@@ -1,9 +1,1 @@
-int x, y, z, d;
-                    float foo(int a, int b) {
-                        if (a = b)  
-                            if (a == x) 
-                                b == y;
-                            else
-                                c = z;
-                        else
-                    }
+float t

@@ -1,1 +1,8 @@
-boolean OK(int a) {return true; a(a);} 
+
+void[] swap(float a, Type<T> b) 
+{	int t;
+t=a;
+a=b;
+b=t;
+return;  }
+        

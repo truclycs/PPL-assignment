@@ -1,1 +1,1 @@
-Error on line 2 col 39: while
+Error on line 1 col 51: }

@@ -1,1 +1,8 @@
-abc() {x = y + 1}
+
+void swap(float a,b,c[], string t) 
+{	int t;
+t=a;
+a=b;
+b=t;
+return;  }
+        

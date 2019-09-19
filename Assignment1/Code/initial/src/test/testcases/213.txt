@@ -1,5 +1,2 @@
-int func(int par1, float par2){
-                        do a = 1; while a = 1;
-                        return a = 1;
-                    }
-                    void main() {}
+int foo(int a, float b[]) { i = a + b[3]; } ;
+        

@@ -1,12 +1,9 @@
- int[] func() {
-                        int a, b, c, x[10];
-                        if (flag == true) a = x[1];
-                        else break;
-                        continue;
-                        do (x[2] = 1); while a = b;
-                        x[3] = a * b - c + d / f % g;
-                        return a[1];
-                        return x;
-                        return;
 
-                    } 
+        float f1,t,i;
+        int main()    
+        {    
+            "str" = 39 != 45 * 3;
+            int n1;
+            return;
+        }    
+        

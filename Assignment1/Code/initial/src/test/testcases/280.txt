@@ -1,13 +1,8 @@
-  int main() {                
-                    int res;
-                    for (i = 0; i < m; i) {
-                        int A , B, B, C, D, E;
-                        for (j = 0; j < n; j) {
-                            if (s[j] == A) {
-                                A;
-                            }
-                        }
-                        res = max(max(max(max(A, B), C), D), E) * a[i];
-                    }
-                    return 0;
-                }
+
+        // main function is an entry of MC program
+        int main()
+        {
+            printf("Hello, World!\n");
+            return 0;
+        }
+        

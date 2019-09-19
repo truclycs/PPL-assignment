@@ -1,3 +1,5 @@
- int cal(int a) {
-                        if (a) print("OK");
-                    }
+boolean determine() {
+	int xFactor,a,b[10];
+	a < b <= c;
+} 
+        

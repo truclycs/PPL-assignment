@@ -1,3 +1,10 @@
-boolean[] func(boolean abc, float xyz) {
-                    float x;
-                }
+int[] __ARMY__(int S, float U, string G[], boolean A) 
+{ int i;
+ if (i>0) {
+	ret = S+U+G+A;
+	print(ret>="bias");
+	return ret; }
+}
+string Global_scale;
+void main() {} 
+        

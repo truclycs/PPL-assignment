@@ -1,1 +1,8 @@
-int a, b[];
+
+int[] _5Um(float a, boolean b) 
+{	int t;
+t=a;
+a=b;
+b=t;
+return a+b;  }
+        

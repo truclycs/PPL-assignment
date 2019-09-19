@@ -1,2 +1,5 @@
-/*NGUYEN THI TRUC LY*/
-                    // truclybk.cs@gmail.com
+void main() {
+	foo(4)[int];
+	return;
+} 
+        

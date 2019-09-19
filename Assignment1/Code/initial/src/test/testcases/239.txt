@@ -1,3 +1,5 @@
- int cal(int a, int b, int c) {
-                        res != ((a * b) / d ) && (-f % 7 - 4);
-                    }
+float double(int a, float b[]) {
+	float f;
+	double == (2*f)!;
+} 
+        

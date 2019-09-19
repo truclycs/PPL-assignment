@@ -1,4 +1,2 @@
-int main() {
-            if (a == b) c = d;
-            else c = e
-        }
+int[] list[7], t, _23;
+        

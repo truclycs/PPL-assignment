@@ -1,1 +1,8 @@
-int func(void x){}
+
+void swap(float a, boolean b
+	int t;
+t=a;
+a=b;
+b=t;
+return;  }
+        

@@ -1,3 +1,5 @@
- int cal(int a, int b, int c) {
-                        res = !((a * b) / d + (-f % 7 - 4));
-                    }
+string[] new() {
+	boolean elem1;
+	elem1 = 34e-0-;
+	} 
+        

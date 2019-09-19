@@ -1,3 +1,5 @@
-int foo() {
-                if (a) int i;
-            }
+void main() {
+	true[false];
+	if[a&&b];
+} 
+        

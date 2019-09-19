@@ -1,4 +1,16 @@
-  int main() {                
-                    \*abcyz;
-                    return 0;
-                }
+
+        int main()    
+        {    
+            int n1;
+            n1 = n2 = n3 = i = number = 2!=5;    
+            printf("Enter the number of elements:");    
+            scanf("%d",number);    
+            printf("\n",n1,n2);//printing 0 and 1    
+            for(i=2;i<number;i=i+1)//loop starts from 2 because 0 and 1 are already printed    
+            {    
+                break;    
+                print(a(b(c(d(e(f(g(h("strings")))))))));  
+            }  
+            return 0;  
+        }    
+        

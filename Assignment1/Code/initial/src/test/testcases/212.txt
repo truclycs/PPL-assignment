@@ -1,7 +1,3 @@
- float foo(int a, int b) {
-                        if (a == b)  
-                                b = y;
-                            else
-                                c = z;
-                        else
-                    }
+
+        int i,j,k[];
+        

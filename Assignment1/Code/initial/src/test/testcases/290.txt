@@ -1,2 +1,22 @@
- int x; //int a[];
-                    float string; 
+
+        float f1;
+        int fac(int n) {
+            if (n == 0)
+                return 1;
+            else
+                else n*fac(n-1);
+        }
+
+        int main()    
+        {    
+            do 
+                n1 <= 1999;
+                do 
+                continue;
+                for (i;j;k) fac(1);
+                while fac(n1);
+                print("this is not working 1234");
+            while you >= "world";
+            return;
+        }    
+        

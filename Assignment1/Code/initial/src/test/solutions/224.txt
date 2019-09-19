@@ -1,1 +1,1 @@
-Error on line 1 col 4: [
+Error on line 5 col 1: void

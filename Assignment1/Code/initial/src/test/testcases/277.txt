@@ -1,27 +1,10 @@
-  int main() {                
-                    int res = 0;
-                    for (int i = 0; i < m; i) {
-                        int A , B, B, C, D, E;
-                        for (j = 0; j < n; j) {
-                            if (s[j][i] == 'A') {
-                                A++;
-                            }
-                            if (s[j][i] == 'B') {
-                                B++;
-                            }
-                            if (s[j][i] == 'C') {
-                                C++;
-                            }
-                            if (s[j][i] == 'D') {
-                                D++;
-                            }
-                            if (s[j][i] == 'E') {
-                                E++;
-                            }
-                        }
-                        res += max(max(max(max(A, B), C), D), E) * a[i];
-                    }
-                
-                    cexpect << res;
-                    return 0;*/
-                }
+string[] CTF(string _capture_the_flag_){ 
+	continue ; 
+	{ 
+		goo("hello"); 
+		{
+			sekai == !world;
+		}
+	}
+}
+        

@@ -1,5 +1,2 @@
- int a, b, c, d[5];
-                    float f;
-                    string f;
-                    boolean flag;
-                 
+string Str[44],aBc, _3hg;
+        

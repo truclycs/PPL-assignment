@@ -1,10 +1,17 @@
-void main() {
-                    abc = foo();
-                    for( abc = 1; xyz == true; abc = abc + 1)
-                        if(abc == 1)
-                            abc = 0;
-                        else
-                            do abc = abc + 1;
-                            while xyz != false;
-                    string foo(){return x;}
-                }
+
+        float f1;
+        int fac(int n,t,k) {
+            if (n == 0)
+                return 1;
+            else
+                return n*fac(n-1);
+        }
+
+        int main()    
+        {    
+            int n1;
+            n1 == 39 != 45 * 3;
+            
+            return;
+        }    
+        

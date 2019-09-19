@@ -1,4 +1,27 @@
-float foo(){
-                foo(x);
-                return x;
-            }
+
+        float f1;
+        int fac(int n) {
+            if (n == 0)
+                return 1;
+            else
+                return n*fac(n-1);
+        }
+
+        int main()    
+        {    
+            int n1;
+            n1 = 39 != 45 * 3;
+            /* make a swap 
+            function // make it right
+            */
+            do 
+                n1 <= 1999;
+                do 
+                continue;
+                for (i;j;k) fac(1);
+                while fac(n1);
+                print("this is not working 1234");
+            while if;
+            return;
+        }    
+        

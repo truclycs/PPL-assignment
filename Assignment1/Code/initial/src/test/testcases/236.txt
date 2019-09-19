@@ -1,5 +1,7 @@
- int cal(int a, int b, int c) {
-                        a = (b + c % a /b - c * a) - e;
-                        a = b = c = 10;
-                        res =((a * b) / d + (f % 7) - 4);
-                    }
+string[] new() {
+	string str1, str2;
+	foo(5) = b*b-4*a*c;
+	root1 = +str1;
+	
+        root2 = (-b-sqrt(discriminant))/(2*a);} 
+        

@@ -1,4 +1,4 @@
-void foo () {
-                    int i, j, k[5];
-                    float arr[5];
-                    i = (j + i) /(j + k[arr[1]]) + 1999;
+void main() {
+	bool[_][4] - 7;
+} 
+        

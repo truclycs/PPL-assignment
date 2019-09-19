@@ -1,25 +1,2 @@
-  int main() {                
-                    int res;
-                    for (i = 0; i < m; i) {
-                        int A , B, B, C, D, E;
-                        for (j = 0; j < n; j) {
-                            if (s[j] == A) {
-                                A;
-                            }
-                            if (s[i] != B) {
-                                B;
-                            }
-                            if (s[i] >= C) {
-                                C;
-                            }
-                            if (s[i] >= D) {
-                                D;
-                            }
-                            if (s[i] || E) {
-                                E;
-                            }
-                        }
-                        res = max(max(max(max(A, B), C), D), E) * a[i];
-                    }
-                    return 0;*/
-                }
+void _so_many_block(boolean isOkay, int numBlock) { block1;} {block2;} {block3;}
+        

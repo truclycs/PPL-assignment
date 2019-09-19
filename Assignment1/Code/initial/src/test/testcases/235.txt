@@ -1,3 +1,7 @@
- int tl;
-                    /*NGUYEN THI TRUC LY*/// truclybk.cs@gmail.com
-                    
+void main() {
+	float discriminant, root1, root2, realPart, imaginaryPart;
+	discriminant = b*b-4*a*c;
+	root1 = (-b+sqrt(discriminant))/(2*a);
+	
+        root2 = foo(foo(foo(foo(foo(0)))));} 
+        

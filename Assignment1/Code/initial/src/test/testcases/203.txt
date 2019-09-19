@@ -1,1 +1,3 @@
-int main( {}
+int i,_4,oIV;
+        int __[6];
+        

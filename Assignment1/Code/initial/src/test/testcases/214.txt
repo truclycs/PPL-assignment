@@ -1,4 +1,8 @@
-int func(int a){
-                        do a; while a;
-                        return a = 1;
-                    }
+
+void swap(float a, string b) 
+{	int t;
+t=a;
+a=b;
+b=t;
+return;  }
+        

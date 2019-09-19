@@ -1,11 +1,8 @@
-void foo ( int i ) {
-                    int i,j,k[5];
-                    // ABC XYZ
-                }
-                void main() {
-                    /*trucly*/
-                    int abc;
-                    continue;
-                    res(i);
-                }
-                
+
+int[] num(int b[5]) 
+{	int t;
+t=a;
+a=b;
+b=t;
+return;  }
+        

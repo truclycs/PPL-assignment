@@ -1,3 +1,9 @@
- int foo() {
-                    [2](-1+2*3+4/5%6);
-                    } 
+
+        float f1,t;i;
+        int main()    
+        {    
+            int n1;
+            "str" = 39 != 45 * 3;
+            return;
+        }    
+        

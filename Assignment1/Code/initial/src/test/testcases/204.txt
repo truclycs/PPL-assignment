@@ -1,1 +1,3 @@
- int main() {else return 0;}
+boolean t,_____,t7T[99];
+        boolean f,t;
+        

@@ -1,6 +1,25 @@
-float foo(){
-                i=2;
-                foo(1.2);
-                foo(3*4);
-                100;
-            }
+
+        float f1;
+        int fac(int n) {
+            if (n == 0)
+                return 1;
+            else
+                return n*fac(n-1);
+        }
+
+        int main()    
+        {    
+            int n1;
+            n1 = 39 != 45 * 3;
+            /* make a swap 
+            function // make it right
+            */
+            do 
+                n1 <= 1999;
+                continue;
+                fac(n1);
+                print("this is not working 1234");
+            while fac(0);
+            return sum(1,"sunshine");
+        }    
+        
