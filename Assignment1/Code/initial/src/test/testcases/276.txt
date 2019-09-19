@@ -1,6 +1,6 @@
   int main() {
                 //  freopen("in.inp", "r", stdin);
-                //    freopen("in.out", "w", stdout);
+                //    freopen("in.expect", "w", stdexpect);
                     int n, m;
                     string s;
                     for (i = 0; i < n; i) {
@@ -34,6 +34,6 @@
                         res += max(max(max(max(A, B), C), D), E) * a[i];
                     }
                 
-                    cout << res;
+                    cexpect << res;
                     return 0;*/
                 }

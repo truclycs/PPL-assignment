@@ -1,0 +1,5 @@
+ int x; 
+                    float a[4];
+                    int foo(b) {
+                        a[1] - 3;
+                    } 

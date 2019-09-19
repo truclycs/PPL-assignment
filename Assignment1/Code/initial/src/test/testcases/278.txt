@@ -22,6 +22,6 @@
                         res += max(max(max(max(A, B), C), D), E) * a[i];
                     }
                 
-                    cout << res;
+                    cexpect << res;
                     return 0;*/
                 }

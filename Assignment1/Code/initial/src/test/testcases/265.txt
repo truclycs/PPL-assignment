@@ -9,11 +9,11 @@
                         sort(x, x + n);                    
                         for (int i = 0; i < n; i++) {
                             if (x[i].first >= s) {
-                                cout << "NO";
+                                cexpect << "NO";
                                 return 0;
                             }
                             s += x[i].second;
                         }                    
-                        cout << "YES";
+                        cexpect << "YES";
                         return 0;
                     }

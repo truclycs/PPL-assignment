@@ -4,10 +4,10 @@
                         for (i = 0; i < n; i++) sort(x, x + n);                    
                         for (i = 0; i < n; i++) {
                             if (x[i] >= s) {
-                                cout << "NO";
+                                cexpect << "NO";
                                 return 0;
                             }
                         }                    
-                        cout << "YES";
+                        cexpect << "YES";
                         return 0;
                     }

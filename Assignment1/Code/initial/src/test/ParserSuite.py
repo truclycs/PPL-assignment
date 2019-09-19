@@ -456,13 +456,13 @@ class ParserSuite(unittest.TestCase):
                         cin >> b >> p >> f >> h >> c;
                         if (h > c) 
                             int x = min(p, b / 2);
-                            cout << h * x + c * min(f, (b - x * 2) / 2);
+                            cexpect << h * x + c * min(f, (b - x * 2) / 2);
                         
                         else {
                             int x = min(f, b / 2);
-                            cout << h * min(p, (b - x * 2) / 2) + c * x;
+                            cexpect << h * min(p, (b - x * 2) / 2) + c * x;
                         }
-                        cout << "\n";
+                        cexpect << "\n";
                     }
                     return 0;
                 }"""
@@ -474,10 +474,10 @@ class ParserSuite(unittest.TestCase):
                     int t, b, p, f, h, c;
                     cin(t);
                     if (h > c) x = min(p, b / 2);
-                    cout(h * x + c * min(f, (b - x * 2) / 2));
+                    cexpect(h * x + c * min(f, (b - x * 2) / 2));
                     else int x = min(f, b / 2);
-                    cout(h * min(p, (b - x * 2) / 2) + c * x);
-                    cout("\n");
+                    cexpect(h * min(p, (b - x * 2) / 2) + c * x);
+                    cexpect("\n");
                     }
                     return 0;
                 }"""
@@ -491,8 +491,8 @@ class ParserSuite(unittest.TestCase):
                     if (h > c) x = min(p, b / 2);
                     else (h * x + c * min(f, (b - x * 2) / 2));
                     int x = min(f, b / 2);
-                    cout(h * min(p, (b - x * 2) / 2) + c * x);
-                    cout("\n");
+                    cexpect(h * min(p, (b - x * 2) / 2) + c * x);
+                    cexpect("\n");
                     }
                     return 0;
                 }"""
@@ -506,7 +506,7 @@ class ParserSuite(unittest.TestCase):
                     if (h > c) x = min(p, b / 2);
                     else (h * x + c * min(f, (b - x * 2) / 2));
                     int x = min(f, b / 2);
-                    cout(h * min(p, (b - x * 2) / 2) + c * x);
+                    cexpect(h * min(p, (b - x * 2) / 2) + c * x);
                     }
                     return 0;
                 }"""
@@ -517,7 +517,7 @@ class ParserSuite(unittest.TestCase):
         input = """int main() {
                     if (h > c) x = min(p, b / 2);
                     else (h * x + c * min(f, (b - x * 2) / 2));
-                    cout(h * min(p, (b - x * 2) / 2) + c * x);
+                    cexpect(h * min(p, (b - x * 2) / 2) + c * x);
                     }
                     return 0;
                 }"""
@@ -528,7 +528,7 @@ class ParserSuite(unittest.TestCase):
         input = """int main() {
                     if (h > c) x = min(p, b / 2);
                     else (h * x + c * min(f, (b - x * 2) / 2));
-                    cout(h * min(p, (b - x * 2) / 2) + c * x);
+                    cexpect(h * min(p, (b - x * 2) / 2) + c * x);
                     return 0;
                 }"""
         expect = "successful"
@@ -546,12 +546,12 @@ class ParserSuite(unittest.TestCase):
                         sort(x, x + n);                    
                         for (int i = 0; i < n; i++) {
                             if (x[i].first >= s) {
-                                cout << "NO";
+                                cexpect << "NO";
                                 return 0;
                             }
                             s += x[i].second;
                         }                    
-                        cout << "YES";
+                        cexpect << "YES";
                         return 0;
                     }"""
         expect = "."
@@ -566,11 +566,11 @@ class ParserSuite(unittest.TestCase):
                         for (int i = 0; i < n; i++) sort(x, x + n);                    
                         for (int i = 0; i < n; i++) {
                             if (x[i] >= s) {
-                                cout << "NO";
+                                cexpect << "NO";
                                 return 0;
                             }
                         }                    
-                        cout << "YES";
+                        cexpect << "YES";
                         return 0;
                     }"""
         expect = "Error on line 4 col 29: >"
@@ -585,11 +585,11 @@ class ParserSuite(unittest.TestCase):
                         for (int i = 0; i < n; i++) sort(x, x + n);                    
                         for (int i = 0; i < n; i++) {
                             if (x[i] >= s) {
-                                cout << "NO";
+                                cexpect << "NO";
                                 return 0;
                             }
                         }                    
-                        cout << "YES";
+                        cexpect << "YES";
                         return 0;
                     }"""
         expect = "Error on line 4 col 29: int"
@@ -602,11 +602,11 @@ class ParserSuite(unittest.TestCase):
                         for (i = 0; i < n; i++) sort(x, x + n);                    
                         for (i = 0; i < n; i++) {
                             if (x[i] >= s) {
-                                cout << "NO";
+                                cexpect << "NO";
                                 return 0;
                             }
                         }                    
-                        cout << "YES";
+                        cexpect << "YES";
                         return 0;
                     }"""
         expect = "Error on line 4 col 45: +"
@@ -620,14 +620,14 @@ class ParserSuite(unittest.TestCase):
                         for (i = 0; i < n; i) sort(x, x + n);                    
                         for (i = 0; i < n; i) {
                             if (x[i] >= s) {
-                                cout << "NO";
+                                cexpect << "NO";
                                 return 0;
                             }
                         }                    
-                        cout << "YES";
+                        cexpect << "YES";
                         return 0;
                     }"""
-        expect = "Error on line 7 col 38: <"
+        expect = "Error on line 7 col 41: <"
         self.assertTrue(TestParser.checkParser(input,expect,269))
 
     def test270(self):
@@ -721,7 +721,7 @@ class ParserSuite(unittest.TestCase):
     def test276(self):
         input = """  int main() {
                 //  freopen("in.inp", "r", stdin);
-                //    freopen("in.out", "w", stdout);
+                //    freopen("in.expect", "w", stdexpect);
                     int n, m;
                     string s;
                     for (i = 0; i < n; i) {
@@ -755,7 +755,7 @@ class ParserSuite(unittest.TestCase):
                         res += max(max(max(max(A, B), C), D), E) * a[i];
                     }
                 
-                    cout << res;
+                    cexpect << res;
                     return 0;*/
                 }"""
         expect = "successful"
@@ -786,7 +786,7 @@ class ParserSuite(unittest.TestCase):
                         res += max(max(max(max(A, B), C), D), E) * a[i];
                     }
                 
-                    cout << res;
+                    cexpect << res;
                     return 0;*/
                 }"""
         expect = "'"
@@ -817,7 +817,7 @@ class ParserSuite(unittest.TestCase):
                         res += max(max(max(max(A, B), C), D), E) * a[i];
                     }
                 
-                    cout << res;
+                    cexpect << res;
                     return 0;*/
                 }"""
         expect = "Error on line 6 col 36: ["
@@ -878,5 +878,216 @@ class ParserSuite(unittest.TestCase):
         expect = "\\"
         self.assertTrue(TestParser.checkParser(input,expect,281))
 
+    def test282(self):
+        input = """  int main() {                
+                    if (a=b=c=d=e=f=d=f=e|1){
+                        break;
+                    }
+                    return 0;
+                }"""
+        expect = "|"
+        self.assertTrue(TestParser.checkParser(input,expect,282))
+
+    def test283(self):
+        input = """  int main() {                
+                    if (a=b=c=d=e=f=d=f=e||1){
+                        break;
+                    }
+                    else {
+                        continue;
+                    }
+                    return 0;
+                }"""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,283))
+
+    def test284(self):
+        input = """int abc, xyz;
+            int f(boolean bl) {
+                x = false;
+                do abc = abc + 1;
+                while xyz != false;
+                return 0;
+            }
+            float foo(float x, float y){
+                x;
+                foo(x+y);
+                y;
+            }
+            boolean check(){
+                if(a>x)
+                return a;
+                else
+                if (a != 1)
+                    for(a = 10; a < 20; a = a + 1 )
+                        i = i + 1;
+                else
+                    for( abc = 1; xyz == true; abc = abc + 1)
+                if(abc == 1)
+                    abc = 0;
+                else
+                    do abc = abc + 1;
+                    while xyz != false;
+            }
+            void main() {
+            int abc;
+            int x,y;
+            for( abc = 1; xyz == true; abc = abc + 1)
+                if(abc == 1)
+                    abc = 0;
+                else
+                    do abc = abc + 1;
+                    while xyz != false;
+            return 0;
+            }"""
+
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,284))
 
 
+    def test285(self):
+        input = """int [ ] foo ( int b [ ] ) {
+                    if (ABC ) return a ;
+                    else return b ;
+            }
+            void main() {
+            for( abc = 1; xyz == true; abc = abc + 1)
+                if(abc == 1)
+                    abc = 0;
+                else
+                    do abc = abc + 1;
+                    while xyz != false;
+            }"""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,285))
+
+    def test286(self):
+        input = """float foo(){
+                i=2;
+                foo(1.2);
+                foo(3*4);
+                100;
+            }"""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,286))
+
+    def test287(self):
+        input ="""float foo(){
+                return x;
+            }
+            float foo(){
+                y = y * 13.7878;
+                return y;
+            }
+            """
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,287))
+
+    def test288(self):
+        input = """float foo(){
+                foo(x);
+                return x;
+            }"""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,288))
+
+    def test289(self):
+        input = """void main() {
+                    abc = foo();
+                    for( abc = 1; xyz == true; abc = abc + 1)
+                        if(abc == 1)
+                            abc = 0;
+                        else
+                            do abc = abc + 1;
+                            while xyz != false;
+                    string foo(){return x;}
+                }"""
+        expect = "Error on line 9 col 30: ("
+        self.assertTrue(TestParser.checkParser(input,expect,289))
+
+    def test290(self):
+        input = """ int x; //int a[];
+                    float string; """
+        expect = "Error on line 2 col 26: string"
+        self.assertTrue(TestParser.checkParser(input,expect,290))
+
+    def test291(self):
+        input = """ int x;
+                    float int[5]; """
+        expect = "Error on line 2 col 26: int"
+        self.assertTrue(TestParser.checkParser(input,expect,291))
+
+    def test292(self):
+        input = """ int x; 
+                    float a[4];
+                    int foo(b) {
+                        a[1] - 3;
+                    } """
+        expect = "Error on line 3 col 28: b"
+        self.assertTrue(TestParser.checkParser(input,expect,292))
+
+    def test293(self):
+        input = """ int x; 
+                    int foo() {
+                        a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[a[aa[a[a[a[a[a[a[a[a[a[a[a[a]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]];
+                    } """
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,293))
+    
+    def test294(self):
+        input = """ int foo() {
+                    a[((((0.0))))];
+                    } """
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,294))
+
+    def test295(self):
+        input = """ int foo() {
+                        return (-1+2*3+4/5%6)[2];
+                    } """
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,295))
+
+    def test296(self):
+        input = """ int foo() {
+                    a(-1+2*3+4/5%6)[2];
+                    } """
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,296))
+
+    def test297(self):
+        input = """ int foo() {
+                    (-1+2*3+4/5%6)[2];
+                    } """
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,297))
+
+    def test298(self):
+        input = """ int foo() {
+                    [2](-1+2*3+4/5%6);
+                    } """
+        expect = "Error on line 2 col 20: ["
+        self.assertTrue(TestParser.checkParser(input,expect,298))
+
+    def test299(self):
+        input = """ int[] func() {
+                        int a, b, c, x[10];
+                        if (flag == true) a = x[1];
+                        else break;
+                        continue;
+                        do (x[2] = 1); while a = b;
+                        x[3] = a * b - c + d / f % g;
+                        return a[1];
+                        return x;
+                        return;
+
+                    } """
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,299))
+
+    def test300(self):
+        input = """ void funcEnd() {
+                        print("END!");
+                    } """
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,300))

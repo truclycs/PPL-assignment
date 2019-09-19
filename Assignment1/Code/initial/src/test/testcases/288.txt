@@ -1,0 +1,4 @@
+float foo(){
+                foo(x);
+                return x;
+            }
