@@ -1,1 +1,1 @@
-fgg,123,Illegal Escape In String: \o
+cout,<,<,YES,;,<EOF>

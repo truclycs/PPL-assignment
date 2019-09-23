@@ -1,2 +1,10 @@
-void main( ){ if (a) if(c) a; else arr[0]; else a = 25; else c = a || b== e; }
-        
+
+                void main(){
+                    funcall(a, a + 1);
+                    if(PPL)
+                        return "Runnnnnnnnnn";
+                    else
+                        return;
+                    return "Still runnnnnnn";
+                }
+                

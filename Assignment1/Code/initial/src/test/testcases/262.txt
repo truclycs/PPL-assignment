@@ -1,3 +1,10 @@
-void main() { for(i=0; line[i]!="<EOF>"; i + 1) 
- }
-        
+
+                void main(){
+                    {/*
+                        This happens inside the scope!
+                    }*/
+                    if(ABC[ABC[5]]){
+                        thereIsSomethingWrong(lookup);
+                    }
+                }
+                

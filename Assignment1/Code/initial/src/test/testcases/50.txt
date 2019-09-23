@@ -1,3 +1,0 @@
- int cal(int a) {
-                        cal((a + 3) % 2 * 8 = b == c);
-                    }

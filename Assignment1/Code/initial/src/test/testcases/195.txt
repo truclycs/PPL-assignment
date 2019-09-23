@@ -1,1 +1,1 @@
- 123\ 
+mp[make_pair(foo, bar)]++;

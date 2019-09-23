@@ -1,4 +1,20 @@
-void main() {
-	int[(25)*4%(a-bY)];
-	"Dope"+"Func!^"[index+"3e.0"]} 
-        
+
+                void main(){
+                    if(goDown(floor4))
+                        if(goDown(floor3))
+                            if(goDown(floor2))
+                                if(goDown(floor1))
+                                    if(goDown(basement))
+                                        printf("Hello Annabelle!");
+                                    else
+                                        goUp();
+                                else
+                                    goUp();
+                            else
+                                goUp();
+                        else
+                            printf("You shouldn't go to the basement :)))");
+                    else
+
+                }
+                

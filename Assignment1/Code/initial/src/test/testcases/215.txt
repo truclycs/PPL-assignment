@@ -1,8 +1,6 @@
 
-void swap(float a,b,c[], string t) 
-{	int t;
-t=a;
-a=b;
-b=t;
-return;  }
-        
+                boolean true_false;
+                boolean isTrue(int a, b, c){
+                    printf("Yeah you can't declare parameters like that!")
+                }
+                

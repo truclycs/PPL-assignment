@@ -1,2 +1,1 @@
-int[] list[7], t, _23;
-        
+string void = "No, he is not. I am!!!";

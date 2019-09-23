@@ -1,2 +1,10 @@
-float flag(int _MD5checksum){ break true; }
-        
+
+                void main(){
+                    funcall(a, a + 1);
+                    if(youMeetSomeone)
+                        return say("Hi");
+                    else
+                        return A+B*C(a[a[3]]);
+                    return "Still runnnnnnn";
+                }
+                

@@ -1,1 +1,1 @@
- "abd254\"wr" 
+var knap = BooleanArray(sum + 1, {false})

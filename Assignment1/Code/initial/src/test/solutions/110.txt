@@ -1,1 +1,1 @@
-123,+,deg,==,abc,<EOF>
+123,abc,NTTL\\PPL,122,11,+,<EOF>

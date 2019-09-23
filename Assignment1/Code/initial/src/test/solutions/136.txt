@@ -1,1 +1,1 @@
-.45,;,1e-53,<EOF>
+abbb,/,*,654,+,8,hkl,;,l,-,2,Error Token &

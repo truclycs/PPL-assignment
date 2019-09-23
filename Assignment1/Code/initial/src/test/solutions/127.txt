@@ -1,1 +1,1 @@
-0.34E2,==,.0007,<EOF>
+Illegal Escape In String: CSE \z

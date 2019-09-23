@@ -1,3 +1,1 @@
-int i,_4,oIV;
-        int __[6];
-        
+boolean array[9;

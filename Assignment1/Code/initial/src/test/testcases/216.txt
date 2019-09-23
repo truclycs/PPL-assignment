@@ -1,8 +1,9 @@
 
-void swap(float a, Type<T> b) 
-{	int t;
-t=a;
-a=b;
-b=t;
-return;  }
-        
+                boolean true_false;
+                boolean isTrue(int a){
+                    int right, left;
+                    right = true;
+                    left = false;
+                    {}
+                }
+                

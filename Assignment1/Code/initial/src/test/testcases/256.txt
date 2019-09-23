@@ -1,7 +1,8 @@
-void main() { 
-	do { 
-		print("statement 1");}a = b*25+.0e89;{
-	}
-	while (a*b7||airplane); 
-}
-        
+
+                void main(){
+                    a = foo(a) + c -2*a;
+                    array[3] = foo(array[2] *3) + 34;
+                    for(a/b; b%c; c||d)
+                        foo(a+b, a-b, arr[3000]);
+                }
+                

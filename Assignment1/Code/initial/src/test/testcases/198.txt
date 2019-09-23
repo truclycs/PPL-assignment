@@ -1,1 +1,1 @@
- Ans34 ==== Mon 
+cin >> x[i].first >> x[i].second;

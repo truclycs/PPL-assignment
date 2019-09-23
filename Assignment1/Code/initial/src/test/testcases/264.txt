@@ -1,3 +1,9 @@
-void main() { for(i=0; ; i + 1) { int a; a = a + .2e-1 % "MOD" };
- }
-        
+
+                void main(){
+                    for(foo(a[3]); !fap(a+b,a*b[3+2*6[3]]); i = i + 3.3e-12)
+                        do
+                            A = A(((((3)))));
+                            B = (3.e-2+0.e3)[(4.5+2)[abc]];
+                        while(A || B && C || D && E == F);
+                }
+                

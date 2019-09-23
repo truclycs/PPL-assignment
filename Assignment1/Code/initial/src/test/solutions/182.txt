@@ -1,1 +1,1 @@
-Illegal Escape In String: \t\l
+Bubble,Cup,8,-,Finals,[,Online,Mirror,],<EOF>

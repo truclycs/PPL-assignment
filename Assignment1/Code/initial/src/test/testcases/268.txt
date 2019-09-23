@@ -1,2 +1,11 @@
-string[] CTF(string _capture_the_flag_){ break; }
-        
+
+                void main(){
+                    int var;
+                    fun(var);
+                    float str;
+                    fun(fun(str));
+                    string a3;
+                    fun(fun(fun(a3)));
+                    int a[1][1];
+                }
+                

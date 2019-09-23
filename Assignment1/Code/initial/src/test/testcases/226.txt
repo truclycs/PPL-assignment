@@ -1,11 +1,10 @@
-void main() {
-	if(i>5e2) {
-		i=a+3; // Basic add op
-		foo(2)[3+x] = a[b[2]] + 3; // Function invocation
-		boolean t;
-		t = B = T = S = true || (var - 9 % 5 && (.5e7 != sun)); 
-		/*A pretty long expression
-		that makes no sense*/
-	}
-} 
-        
+
+                void main(){
+                    if((life == difficult) || (feeling == depression)){
+                        hug = 3000;
+                        You = Someone(hug);
+                    }
+                    else
+                        printf("Have a good day!");
+                }
+                

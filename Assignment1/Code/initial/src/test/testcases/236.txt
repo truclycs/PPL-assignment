@@ -1,7 +1,14 @@
-string[] new() {
-	string str1, str2;
-	foo(5) = b*b-4*a*c;
-	root1 = +str1;
-	
-        root2 = (-b-sqrt(discriminant))/(2*a);} 
-        
+
+                void main(){
+                    int bePatient;
+                    do
+                    bePatient = 0;
+                    bePatient = 1;
+                    bePatient = 2;
+                    if(bePatient > 3)
+                        dontBePatientAnymore(":)");
+                    while(mood < usualState);
+                    do number1 + number2;
+                    while(number1 > number2);
+                }
+                

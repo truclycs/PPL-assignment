@@ -1,5 +1,11 @@
-void main() {
-	[idx]_Lst12;
-	_Lst12[a/9.0];
-} 
-        
+
+                void main(){
+                    if(1)
+                        if(2)
+                            if(3)
+                                if(4)
+                                    if(5)
+                    stopSayingIf();
+                    action(true);
+                }
+                

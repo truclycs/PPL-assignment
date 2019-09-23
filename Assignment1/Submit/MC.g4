@@ -100,6 +100,7 @@ block_stmt: LP (var_decl | stmt)* RP;
 
 BLOCK_COMMENT: '/*' .*? '*/' -> skip;
 LINE_COMMENT: '//' ~[\r\n]* -> skip;
+WS : [ \t\f\r\n]+ -> skip ; 
 
 STRING: 'string';
 BOOL: 'boolean';
@@ -147,9 +148,8 @@ FLOATLIT: DIGIT+ ('.' DIGIT*)? EXPONENT? | '.' DIGIT+ EXPONENT?;
 BOOLLIT: 'true' | 'false';
 
 ID: [a-zA-Z_][a-zA-Z0-9_]*; 
-WS : [ \t\r\n]+ -> skip ; 
   
-UNCLOSE_STRING: '"' (~[\n\r\\"] | '\\' [nrbft"\\])*;
+UNCLOSE_STRING: '"' (~[\n\r\b\f\t\\"] | '\\' [nrbft"\\])*('\\')*;
 ILLEGAL_ESCAPE: UNCLOSE_STRING ('\\' ~[nrbft"]);
 STRINGLIT: UNCLOSE_STRING '"' {
     self.text = self.text[1:-1]

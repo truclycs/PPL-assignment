@@ -1,8 +1,37 @@
 
-        // main function is an entry of MC program
-        int main()
-        {
-            printf("Hello, World!\n");
-            return 0;
-        }
-        
+                int timer0, timer1;
+                int threshhold;
+                boolean[] checkTimers(){
+                    if(timer0 == threshhold)
+                        if(timer1 == threshhold)
+                            for(i = 0; timer0 == threshhold; i = i + getCycle())
+                                do
+                                    timer0 = timer1[getCycle * cycle] + checkTimers(timer[timer[timer[checkTimers()]]]);
+                                    timer1 = getCycle(cycle1 && cycle2 - 3 * cycle3 != 0);
+                                while(timer0 != 0);
+                        else
+                            checkTimers();
+                    timer1 = 0;
+                    timer0 = timer1 && checkTimers(checkTimers(timer0[timer1[timer0]]));                        return 0;
+                }
+                int main(){
+                    int main;
+                    break;
+                    continue;
+                    for(-timer; !timer; timer()){
+                        for(i; j; k){
+                            if(timer1 !=- timer2 = timer)
+                                DO(something);
+                        }
+                        do
+                            for(i; j; k){
+                                if(timer1 !=- timer2 == timer)
+                                    DO(something);
+                            do 
+                                makeFile(makeFile[makeFile()]);
+                            while(true);
+                            }
+                        while(true);
+                    }
+                }
+                

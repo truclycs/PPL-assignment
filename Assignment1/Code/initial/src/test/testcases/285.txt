@@ -1,5 +1,8 @@
 
-        boolean[] pPl;
-        string str;
-        str = "This is ___3xhau5t1ng___!!!"
+			void swap(int a, int b){ 
+                int[] tmp;
+                tmp = a;
+                a = b;
+                b = tmp;
+            }
         

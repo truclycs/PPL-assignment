@@ -1,8 +1,8 @@
 
-int[] _5Um(float a, boolean b) 
-{	int t;
-t=a;
-a=b;
-b=t;
-return a+b;  }
-        
+                int life, death;
+                boolean[] amILiving(float people[]){
+                    printf("There is no answer");
+                    return life || death;
+                }
+                return love;
+                

@@ -1,17 +1,17 @@
 
-        float f1;
-        int fac(int n,t,k) {
-            if (n == 0)
-                return 1;
-            else
-                return n*fac(n-1);
-        }
-
-        int main()    
-        {    
-            int n1;
-            n1 == 39 != 45 * 3;
-            
-            return;
-        }    
-        
+                int a;
+                float b;
+                
+                float[] function(int a, string b, boolean c){
+                    if(a == b && b != c[c*c[3*4]]){
+                        createString(a,b,c[3.4e-112]);
+                        do
+                            youAlmostThere = 1;
+                            name = "Phan Gia Anh";
+                        while(true);
+                        for(fun; sad; tear){
+                            A = B = C = D = E % F % G && H && I && J;
+                        }
+                    }
+                } 
+                

@@ -1,8 +1,12 @@
-int[] foo(int b[]) {
-	int a[1];
-	if (!a[0]) 
-		return a;
-	 else 
-		return b;
-} 
-        
+
+                void main(){
+                    int i;
+                    for(i = 3; i < infinity; i = i + 1)
+                        continue;
+                        return (Continue + Break);
+                    break;
+                    for(something; something; something)
+                        do{}
+                        while(something)
+                }
+                

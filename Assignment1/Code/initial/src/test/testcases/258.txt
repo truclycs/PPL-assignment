@@ -1,7 +1,11 @@
-void main() { 
-	do { 
-		print("statement 1");}a = b*25+.0e89;{
-	}
-	while a*b7||airplane; 
-}
-        
+
+                void main(){
+                    for(a < b + c; a >= b; c[3] + 5){
+                        a = b != c == d;
+                    }    
+                    do
+                        makeThis(a*b*c*d/d%e);
+                        makeThat(arr[arr[arr[3]]]);
+                    while(true);
+                }
+                

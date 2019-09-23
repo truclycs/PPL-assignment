@@ -1,1 +1,1 @@
-tfh23,5a\\123,<EOF>
+var,g,=,Array,(,n,,,{,ArrayList,<,Pair,<,Int,,,Int,>,>,(,),},),<EOF>

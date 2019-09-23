@@ -1,10 +1,23 @@
-string[] CTF(string _capture_the_flag_){ 
-	continue ; 
-	{ 
-		goo("hello"); 
-		{
-			sekai == !world;
-		}
-	}
-}
-        
+
+                int isInterrupt;
+                int countNumber;
+                void ISR(int isInterrupt){
+                    interruptEnable(true);
+                    interruptSet(10);
+                    interrupt();
+                }
+                int main(){
+                    int count;
+                    count = 0;
+                    countNumber = 0;
+                    do{
+                        checkInterrupt();
+                        if(countNumber % 3 == 0) return interruptVector[countNumber];
+                        else
+                            for(count; count+count; isInterrupt)
+                                countNumber = checkInterrupt(interruptVector[countNumber[count]]);
+                        noInterrupt();
+                    }
+                    while(true);
+                }    
+                

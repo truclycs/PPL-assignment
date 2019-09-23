@@ -1,4 +1,1 @@
-boolean b;
-        int i = 10;
-        float t;
-        
+int booIean = "I am legal!!";

@@ -1,5 +1,9 @@
-boolean assoc_order() {
-	int xFactor,RM,Jh0pe[10];
-	(a < b) <= (c > d != a);
-} 
-        
+
+                void main(){
+                    int i;
+                    for(;;)
+                        feelingEmpty = true;
+                    int endline;
+                    string line;
+                }
+                

@@ -1,1 +1,1 @@
-,Unclosed String:  
+\n\b\f\r,<EOF>

@@ -1,2 +1,9 @@
-void main( ){ if (a) if(c) a; else arr[0]; else a = 25; }
-        
+
+                void main(){
+                    do
+                        do
+                            do
+                                continue doingSomething;
+                            while("...Yeah no need to check here...");
+                }
+                

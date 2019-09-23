@@ -1,9 +1,10 @@
 
-        float f1,t;i;
-        int main()    
-        {    
-            int n1;
-            "str" = 39 != 45 * 3;
-            return;
-        }    
-        
+                int[] main(){
+                    if(feeling == depression){
+                        printf("Believe in the future and move on");
+                    }
+                    else{
+                        actFromNowOn(now);
+                    }
+                }
+                

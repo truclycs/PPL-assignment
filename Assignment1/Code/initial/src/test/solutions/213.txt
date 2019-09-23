@@ -1,1 +1,1 @@
-Error on line 1 col 44: ;
+Error on line 5 col 23: [

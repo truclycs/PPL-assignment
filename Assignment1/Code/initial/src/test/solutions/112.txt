@@ -1,1 +1,1 @@
-34,Error Token #
+^^ NGUYEN   THI    TRUC    LY ^^,<EOF>

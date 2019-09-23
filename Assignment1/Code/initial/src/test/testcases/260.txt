@@ -1,13 +1,9 @@
-void main() { for(i=0; line[i]!="<EOF>"; i + 1)
-        {
-        if(line[i]=="a" || line[i]=="e" || line[i]=="i")
-        {
-            vowels;
-        }
-        else if((line[i]>="a"&& line[i]<="z") || (line[i]>="A"&& line[i]<="Z"))
-        {
-            consonants+1;
-        }
-        }
-    }
-        
+
+                void main(){
+                    funcall(a, a + 1);
+                    a = funcall(funcall(a[funcall(a[funcall()])]));
+                    !a = (ABC + AB[5)*3;
+                    return 0;
+                }
+                int main;
+                

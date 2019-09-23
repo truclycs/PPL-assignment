@@ -1,5 +1,16 @@
-boolean assoc_order() {
-	int xFactor,RM,Jh0pe[10];
-	bool = a != b && 2 || foo(strings);
-} 
-        
+
+                void main(){
+                    int i;
+                    for(i = 3; i < infinity; i = i + 1)
+                        if(shitHappens)
+                            whoCares();
+                    for(exp; exp; exp){
+                        {
+                            stillWhoCares();
+                        }
+                    }
+                    {
+                        nowThisIsFun();
+                    }
+                }
+                

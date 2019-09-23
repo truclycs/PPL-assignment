@@ -1,5 +1,11 @@
-boolean assoc_order() {
-	int xFactor,RM,Jh0pe[10];
-	bool = a != b == c;
-} 
-        
+
+                void main(){
+                    int i;
+                    for(i = 3; i < infinity; i = i + 1){
+                        for(something; something; something){
+                            {//do nothing
+                        }}
+                    }
+                    break;
+                }
+                

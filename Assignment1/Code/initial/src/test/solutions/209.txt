@@ -1,1 +1,1 @@
-Error on line 1 col 7: for
+Error on line 1 col 9: var2

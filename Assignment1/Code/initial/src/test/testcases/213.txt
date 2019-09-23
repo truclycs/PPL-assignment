@@ -1,2 +1,9 @@
-int foo(int a, float b[]) { i = a + b[3]; } ;
-        
+
+                boolean first;
+                void createPointer(int a, boolean b[]){
+                    int a, b, c;
+                    int[] main(){}
+                }
+                float beHumble(){}
+                int second;
+                

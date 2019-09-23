@@ -1,8 +1,9 @@
 
-int[] num(int b[5]) 
-{	int t;
-t=a;
-a=b;
-b=t;
-return;  }
-        
+                void[] amIEmpty(int a){
+                    if(love == 0) 
+                        printf("Yes you are!");
+                    else
+                        printf("There's still something inside you! Stay strong!");
+                    return Hollow;
+                }
+                

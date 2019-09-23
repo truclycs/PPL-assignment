@@ -1,5 +1,11 @@
-void main() {
-	foo(4)[];
-	return;
-} 
-        
+
+                void main(){
+                    do{
+                        {
+                            printf("Easy testcase");
+                        }
+                    }
+                    while(busy == false);
+
+                }
+                

@@ -1,1 +1,1 @@
-Ans34,==,==,Mon,<EOF>
+cin,>,>,x,[,i,],Error Token .

@@ -1,2 +1,10 @@
-int PPL(string _capture_the_flag_){ return; }
-        
+
+                void main(){
+                    funcall(a, a + 1);
+                    if(char*b+arr[char*char(b)])
+                        for(smt;smt;smt){}
+                    else
+                        return;
+                    arr[arr[arr[]]];
+                }
+                

@@ -1,5 +1,11 @@
-string[] new() {
-	boolean elem1;
-	elem1 = 34e-0-;
-	} 
-        
+
+                void main(){
+                    do{
+                        sitDown;
+                        beHumble;
+                    }while(living);
+                    whiLe(feeling);
+                    whiLe(breathing);
+                    whIle(youStillCan);
+                }
+                

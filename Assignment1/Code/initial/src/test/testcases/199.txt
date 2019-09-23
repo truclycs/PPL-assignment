@@ -1,1 +1,1 @@
- Tks >= 123 || 34 && 47 
+//  assign(output,'out'); rewrite(output);

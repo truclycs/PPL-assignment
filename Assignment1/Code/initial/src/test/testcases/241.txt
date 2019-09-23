@@ -1,5 +1,6 @@
-boolean determine() {
-	int xFactor,a,b[10];
-	a < b <= c;
-} 
+
+            int foo(){
+                do 
+                while (a!=b) ;
+            }
         

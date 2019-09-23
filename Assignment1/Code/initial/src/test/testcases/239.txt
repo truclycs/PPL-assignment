@@ -1,5 +1,11 @@
-float double(int a, float b[]) {
-	float f;
-	double == (2*f)!;
-} 
-        
+
+                void main(){
+                    do{
+                        anythingYouWant();
+                        butNotIllegal();
+                    }
+                    whiLe(doingSomething);
+                    becomeABetterPerson = 1;
+                    while(enjoyLife);
+                }
+                

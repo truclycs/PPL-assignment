@@ -1,27 +1,15 @@
 
-        float f1;
-        int fac(int n) {
-            if (n == 0)
-                return 1;
-            else
-                return n*fac(n-1);
-        }
-
-        int main()    
-        {    
-            int n1;
-            n1 = 39 != 45 * 3;
-            /* make a swap 
-            function // make it right
-            */
-            do 
-                n1 <= 1999;
-                do 
-                continue;
-                for (i;j;k) fac(1);
-                while fac(n1);
-                print("this is not working 1234");
-            while if;
-            return;
-        }    
-        
+                int return_to_easy_testases;
+                float[] function(int a, string b, boolean c){
+                    for(i = 0; i <= 9; i = i * 3){
+                        if(arr[i] == 3) return true;
+                        else continue;
+                        do
+                            A = B + C * D % E == F && G;
+                            return B != -C+D*EF[EF[EF()]];
+                            int a;
+                        while(A == B = C);
+                    }
+                    float string;
+                }
+                

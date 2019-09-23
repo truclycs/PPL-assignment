@@ -1,1 +1,1 @@
- a_b' 
+f[t-(1 shl (b[i]-1))]:=f[t-(1 shl (b[i]-1))]+f[t]*a[b[j],b[i]]/tot;

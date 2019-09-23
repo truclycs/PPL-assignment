@@ -1,15 +1,28 @@
-void main() { 
-	do { 
-		print("statement 1");
-	} 
-	{ 
-		a = b*25+.0e89;
-	} 
-	{
-	} 
-	{
-		break;
-	}  
-	while (true); 
-}
-        
+
+                void main(){
+                    "So this is nearly the last testcase of this section!";
+                    for(test; all; statements)
+                        for(test; all_again; statements)
+                            if(thisTestcase == true)
+                            do
+                                "Yeah you nailed the statements";
+                                break;
+                                return true;
+                                continue;
+                                do
+                                    statement1;
+                                    statement2;
+                                    statement3;
+                                while(stillRunning);
+                            while(stillRunning());
+                            else{
+                                if(yeahHopeYouPassedThis[3000]){
+                                    do
+                                        maybeThisIsEnough;
+                                    while(goodLuck);
+                                }
+                            }
+
+                    printf("Congrats!");
+                }
+                

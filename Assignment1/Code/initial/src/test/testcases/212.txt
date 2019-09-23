@@ -1,3 +1,10 @@
 
-        int i,j,k[];
-        
+                boolean first;
+                string createPointer(int a, boolean b[]){
+                    {
+                        {}
+                    }
+                }
+                float beHumble(){}
+                int second;
+                

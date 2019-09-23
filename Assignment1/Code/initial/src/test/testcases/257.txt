@@ -1,6 +1,9 @@
-void main() { 
-	do { 
-		print("statement 1");}a = b*25+.0e89;{
-	}
-	while (a*b7||airplane)}
-        
+
+                void main(){
+                    if(a < b && b >= c && c > d)
+                        doThis();
+                    else
+                        doThat();
+                    exp = a < b > c ;
+                }
+                

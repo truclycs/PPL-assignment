@@ -1,4 +1,23 @@
-float[] _und3rsc0r3(boolean tru3){ 
-return
-}
-        
+
+                int isInterrupt;
+                int countNumber;
+                countNumber = 0;
+                void ISR(int isInterrupt){
+                    interruptEnable(true);
+                    interruptSet(10);
+                    interrupt();
+                }
+                int main(){
+                    int count;
+                    count = 0;
+                    do{
+                        checkInterrupt();
+                        if(countNumber % 3 == 0) return interruptVector[countNumber];
+                        else
+                            for(count; count+count; isInterrupt)
+                                countNumber = checkInterrupt(interruptVector[countNumber[count]]);
+                        noInterrupt();
+                    }
+                    while(true);
+                }
+                

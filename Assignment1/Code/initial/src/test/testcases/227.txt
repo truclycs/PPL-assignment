@@ -1,5 +1,11 @@
-void main() {
-	23[!a-b];
-	_abx123[Func[x==4.e8]];
-} 
-        
+
+                void main(){
+                    if((life == difficult) || (feeling == depression))
+                        if(beHumble())
+                            if(beKind())
+                                if(bePositive())
+                                    believeInTheFuture(you);
+                    else
+                        printf("Have a good day!");
+                }
+                

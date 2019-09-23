@@ -1,4 +1,18 @@
-void main() {
-	bool[_][4] - 7;
-} 
-        
+
+                void main(){
+                    letMakeAStair(true);
+                    if(stair){
+                        //do nothing
+                    }
+                    else
+                        if(stair){
+                            //do nothing}}}}}}
+                        }
+                        else
+                            if(stair){
+                                {// do nothing}
+                            }}
+                            else{
+                                {// do nothing}
+                }}}
+                

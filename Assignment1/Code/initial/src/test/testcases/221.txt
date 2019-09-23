@@ -1,8 +1,1 @@
-
-string[][5] swap(float a, Type<T> b) 
-{	int t;
-t=a;
-a=b;
-b=t;
-return;  }
-        
+boolean[] amIEmpty(int a);

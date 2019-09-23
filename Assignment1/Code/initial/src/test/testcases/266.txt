@@ -1,3 +1,19 @@
-void main() { for(i=0; line[i]!="<EOF>"; i + 1) {}
-; }
-        
+
+                string[] createString(int b){
+                    for(i = 0; i <= length; i = i + 1){
+                        array[i] = (char)*b;
+                    }
+                }
+                void main(){
+                    makeThisInt(3)[a+"3.2"];
+                    do
+                        job1;
+                        job2();
+                        job3(a[a[a[a[a[job(4)]]]]]);
+                    while(working);
+                    for(job(); job(); job(job())){
+                        if(isJobDone == true)
+                            printf("Partyyyy");
+                    }
+                }
+                

@@ -1,1 +1,1 @@
-0.004,Error Token @
+a,+,b,=,c,=,>,a,=,c,-,b,<EOF>

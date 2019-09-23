@@ -1,2 +1,1 @@
-boolean true;
-        
+int []balance;

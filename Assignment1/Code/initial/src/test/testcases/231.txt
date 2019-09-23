@@ -1,5 +1,13 @@
-void main() {
-	int arr[10];
-	arr[foo(x)]_list;
-} 
-        
+
+                void main(){
+                    if(believe == true)
+                        stronger = yes;
+                        if(kind == true)
+                            better = yes;
+                            if(fear == no)
+                                success = yes;
+                    else{
+                        cout("Keep fighting!");
+                    }
+                }
+                

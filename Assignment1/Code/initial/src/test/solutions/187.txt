@@ -1,1 +1,1 @@
-abd254\"wr,<EOF>
+var,knap,=,BooleanArray,(,sum,+,1,,,{,false,},),<EOF>

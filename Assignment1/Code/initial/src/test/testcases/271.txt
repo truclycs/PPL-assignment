@@ -1,2 +1,10 @@
-string[] CTF(string _capture_the_flag_){ continue ; }
-        
+
+                void main(int number){
+                    int countNumberOfDigit;
+                    while(number != 0){
+                        countNumberOfDigits++;
+                        number = number / 10;
+                    }
+                    return countNUmberOfDigits;
+                }
+                

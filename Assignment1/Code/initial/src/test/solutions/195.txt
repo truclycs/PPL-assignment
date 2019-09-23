@@ -1,1 +1,1 @@
-123,Error Token \
+mp,[,make_pair,(,foo,,,bar,),],+,+,;,<EOF>

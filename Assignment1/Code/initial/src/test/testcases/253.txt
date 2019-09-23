@@ -1,7 +1,13 @@
-void main() { 
-	do { 
-		print("statement 1");
-	} 
-	while (true); 
-}
-        
+
+                void main(){
+                    for(test; all; statements)
+                        if(thisTestcase == true)
+                            do
+                                "Yeah you nailed the statements";
+                                break;
+                                return true;
+                                continue;
+                            while(stillRunning());
+                    printf("Congrats!");
+                }
+                

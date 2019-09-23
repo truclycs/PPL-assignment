@@ -1,12 +1,30 @@
 
-        int main()    
-        {    
-            int n1;
-            /* make a swap 
-            function // make it right
-            */
-            int swap (int a, int b) {
-                swap(a,b);
-            }
-        }    
-        
+                int matrix1, matrix2;
+                int sum;
+                string[] mul(int matrix1, int matrix2){
+                    countMatric = 0;
+                    for(i = 0; i < length(sum(matrix1,matrix2)); i = i * countMatrix){
+                        countMatrix == matrix1[matrix2[matrix1(countMatrix)]];
+                        matrix1 = matrix1 + matrix2 * matrix2(matrix3 * matrix4[matrix(-matrix % matrix5)]);
+                        if(matrix1 + matrix2(matrix2(matrix2(countMatrix)))[matrix1+matrix2+countNumber]){
+                            return true;
+                            break;
+                            continue;
+                        }
+                        else{
+                            crateMatrix(matrix1, matrix2, sumMatrix(matrix1, matrix2));
+                            do{
+                                if(matrix1 * matrix2[matrix2-matrix3[countNumber[_[_[3]]]]]){
+                                    replace(matrix1) = !matrix2 - matrix4 * -matrix5;
+                                }
+                                do
+                                    for(matrix1[matrix2 - matrix3(matrix1)]; matrix1(matrix1(matrix1[matrix2()]); !matrix1 - matrix2*(matrix1 - matrix2*(matrix1 * matrix2))){
+                                        matrix1 = - matrix2;
+                                    }
+                                while(matrix1 != -matrix2);
+                            }
+                            while(matrix1 == matrix2);
+                        }
+                    }
+                }
+                

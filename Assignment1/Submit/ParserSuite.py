@@ -537,24 +537,14 @@ class ParserSuite(unittest.TestCase):
     def test265(self):
         input = """ 
                     int main() {
-                        int s, n;
-                        cin >> s >> n;
-                        pair<int, int> x[n];
-                        for (int i = 0; i < n; i++) {
-                            cin >> x[i].first >> x[i].second;
-                        }
-                        sort(x, x + n);                    
-                        for (int i = 0; i < n; i++) {
-                            if (x[i].first >= s) {
-                                cexpect << "NO";
+                            c("NO");
                                 return 0;
                             }
-                            s += x[i].second;
+                            s += x[i]second;
                         }                    
-                        cexpect << "YES";
                         return 0;
                     }"""
-        expect = "."
+        expect = "Error on line 6 col 28: s"
         self.assertTrue(TestParser.checkParser(input,expect,265))
 
     def test266(self):
@@ -872,20 +862,20 @@ class ParserSuite(unittest.TestCase):
 
     def test281(self):
         input = """  int main() {                
-                    \*abcyz;
+                    /*abcyz;
                     return 0;
                 }"""
-        expect = "\\"
+        expect = "Error on line 2 col 20: /"
         self.assertTrue(TestParser.checkParser(input,expect,281))
 
     def test282(self):
         input = """  int main() {                
-                    if (a=b=c=d=e=f=d=f=e|1){
+                    if (a=b=c=d=e=f=d=f=e||1){
                         break;
                     }
                     return 0;
                 }"""
-        expect = "|"
+        expect = "successful"
         self.assertTrue(TestParser.checkParser(input,expect,282))
 
     def test283(self):

@@ -1,10 +1,8 @@
-int[] __ARMY__(int S, float U, string G[], boolean A) 
-{ int i;
- if (i>0) {
-	ret = S+U+G+A;
-	print(ret>="bias");
-	return ret; }
-}
-string Global_scale;
-void main() {} 
-        
+
+                string[] moreThanICanSay(string toYou){
+                    printf("I love you!");
+                }
+                float[] countNumbers(){}
+                int var, var1, var2[999];
+                boolean var[999], bool[0];
+                

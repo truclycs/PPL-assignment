@@ -1,1 +1,1 @@
- "aB_c+\h" 
+if (t < segs[segs.size() - 2].t + segs.back().t) {

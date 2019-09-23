@@ -1,1 +1,1 @@
-return123,true,<EOF>
+<EOF>

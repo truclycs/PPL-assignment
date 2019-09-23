@@ -1,3 +1,1 @@
-boolean t,_____,t7T[99];
-        boolean f,t;
-        
+string var = "Variable";

@@ -1,3 +1,8 @@
-void main() { for(foo(ar[2==3]); line[i]!="<EOF>"; i + 1) break;
- }
-        
+
+                void main(){
+                    if(a3 == 3 + 2[34]){
+                        a = A <= b && B <= C < D;
+                        main = -!main;
+                    }
+                }
+                

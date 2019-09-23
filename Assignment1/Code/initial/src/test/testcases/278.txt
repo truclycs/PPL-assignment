@@ -1,2 +1,19 @@
-void main() {}
-        
+
+                int timer0, timer1;
+                int threshhold;
+                boolean[] checkTimers(){
+                    if(timer0 == threshhold)
+                        if(timer1 == threshhold)
+                            for(i = 0; timer0 == threshhold; i = i + getCycle())
+                                do
+                                    timer0 = timer1[getCycle * cycle] + checkTimers(timer[timer[timer[checkTimers()]]]);
+                                    timer1 = getCycle(cycle1 && cycle2 - 3 * cycle3 != 0);
+                                while(timer0 != 0);
+                        else
+                            checkTimers();
+                        timer1 = 0;
+                        timer0 = timer1 && checkTimers(checkTimers(timer0[timer1[timer0]]));
+                    else
+                        return 0;
+                }
+                

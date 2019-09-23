@@ -1,27 +1,54 @@
 
-        float f1;
-        int fac(int n) {
-            if (n == 0)
-                return 1;
-            else
-                return n*fac(n-1);
-        }
-        f1 = 00044.03e-005;
-        int main()    
-        {    
-            int n1;
-            n1 = 39 != 45 * 3;
-            /* make a swap 
-            function // make it right
-            */
-            do 
-                n1 <= 1999;
-                do 
-                continue;
-                for (i;j;k) fac(1);
-                while fac(n1);
-                print("this is not working 1234");
-            while if;
-            return;
-        }    
-        
+                int a[99999999];
+                float b[00000000000000000000000];
+                string c[666666666666666];
+                int[] main(){
+                    for(a[a[a[a[a[45]]]]]; fun((((((3)))))); a[fun(a[fun(a[fun()])])]){
+                        for(a*(a*(a*(a*(3)))); a-(a-(a-(a-(4)))); a+(a+(a+(a+(a+(5)))))){
+                            if(a/3/4/5/6/7/8){
+                                createString(a*b[b[b[b[b[3]]]]]-a(a(a(a(3)))));
+                                for( i = a[i=a[i=a[i=a[3]]]]; i >= 0 && b - c * a[2]; i = i + a[i+a[i+a[i+a[3]]]]){
+                                    do
+                                        do
+                                            for(a[a[a[3]]]; foo(foo(foo(3))); a[foo(a[foo()])]) printf("Hope you passed this");
+                                        while(a == b = c = d = e);
+                                    while(a+a+a+a+a+a+a+a+a+a+a+a);
+                                }
+                            }
+                            else{
+                                do
+                                    for(a(((((a))))); b(((((b))))); c[c[c[c[c[c[c]]]]]]){
+                                        do
+                                            if(condition == true || false || notTrueOrFalse && condition[true]){
+                                                //doing something here
+                                            }
+                                            do
+                                                makeThis(makeThis(makeThis()));
+                                                makeThat[makeThat[makeThat[expression]]];
+                                                do
+                                                {
+                                                    for(i - i[i-i[i-i[i-i[]]]]; something; something){
+                                                        return foo(A*A*A*A*A*A*A*A*A*A*A*A);
+                                                    }
+                                                }
+                                                while(true);
+                                            while(true);
+                                    }
+                                    do
+                                        do{}
+                                            // still doing nothing here
+                                        while(true);
+                                    while(true);
+                                while(true);
+                            }
+                        }
+                        if(A=(B=(C=(D=(a))))){
+                            for(something; something; something){
+                                for(something; something; something){
+                                    /* doing nothing here */
+                                }
+                            }
+                        }
+                    }
+                } 
+                

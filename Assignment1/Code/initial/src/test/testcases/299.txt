@@ -1,9 +1,8 @@
 
-        float f1,t,i;
-        int main()    
-        {    
-            "str" = 39 != 45 * 3;
-            int n1;
-            return;
-        }    
-        
+                int main(){
+                    do
+                        enjoyYourLife(true);
+                        makeABetterVersionOfYourSelf(true);
+                    while(lifeIsShort());
+                }
+                

@@ -1,1 +1,1 @@
- x + y=10 
+ vector<vector<int>> a(n, vector<int>(n));

@@ -1,5 +1,7 @@
-boolean amIwr0ng(string a) {
-	boolean t;
-	t = a > b && c <= d;
-} 
-        
+
+                void main(){
+                    do
+                    while(thisIsWrong);
+                    yeah27436itri2ri434635462!$%^!#$@#$@^!$%^#$;
+                }
+                

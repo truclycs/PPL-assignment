@@ -1,2 +1,8 @@
-void main( ){ if () if (b) if (c) a; else a; else }
-        
+
+                void main(){
+                    int i;
+                    if(willIBeBetter)
+                        returnn nothing;
+                    break;
+                }
+                

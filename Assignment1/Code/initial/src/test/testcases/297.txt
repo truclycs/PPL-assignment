@@ -1,13 +1,10 @@
 
-        float f1;
-        int fac(int n) {
-            if (n == 0)
-                return 1;
-            else
-                return n*fac(n-1);
-        }
-
-        void _Army_(int a[], string b = 5) {
-
-        }    
-        
+                int main(){
+                    do
+                        printf("These last 5 testcases outputs are all successful");
+                    while("Hope you will too!");
+                    if(difficult){
+                        printf("Don't be afraid to count on your friend");
+                    }
+                }
+                

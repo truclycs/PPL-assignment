@@ -1,1 +1,1 @@
- 1="ABC"+"abc" 
+/*This is a block comment*/

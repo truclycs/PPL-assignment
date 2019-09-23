@@ -1,2 +1,1 @@
-void _v01D,	 try_V[88];
-        
+string main = "That's a keyword dude!";
