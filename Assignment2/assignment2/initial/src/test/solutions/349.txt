@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main),[],IntType,Block([VarDecl(n,IntType),VarDecl(m,IntType),VarDecl(s,StringType),For(BinaryOp(=,Id(i),IntLiteral(0));BinaryOp(<,Id(i),Id(n));Id(i);Block([ArrayCell(Id(cins),Id(i))])),VarDecl(a,ArrayType(IntType,10)),For(BinaryOp(=,Id(i),IntLiteral(0));BinaryOp(<,Id(i),Id(m));Id(i);Block([ArrayCell(Id(cina),Id(i))]))]))])

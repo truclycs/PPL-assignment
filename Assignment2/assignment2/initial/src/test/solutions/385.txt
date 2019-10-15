@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(foo),[],VoidType,Block([Block([Block([Block([Block([])])])])]))])

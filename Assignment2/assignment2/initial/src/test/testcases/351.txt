@@ -1,0 +1,6 @@
+  int main() {                
+                    if (a=b=c=d=e=f=d=f=e||1){
+                        break;
+                    }
+                    return 0;
+                }

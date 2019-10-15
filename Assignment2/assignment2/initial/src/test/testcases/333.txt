@@ -1,0 +1,7 @@
+
+        int cal(int a, int b, int c) {
+            a = (b + c % a /b - c * a) - e;
+            a = b = c = 10;
+            res =((a * b) / d + (f % 7) - 4);
+        }
+        

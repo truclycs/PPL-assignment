@@ -1,0 +1,13 @@
+
+        int max(string floor, int it)
+        {
+            if (it > (floorsize() - it))
+            {
+                return (it + 1) * 2;
+            }
+            else
+            {
+                return (floorsize() - it) * 2;
+            }
+        }
+        

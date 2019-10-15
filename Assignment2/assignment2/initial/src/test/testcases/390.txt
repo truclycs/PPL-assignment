@@ -1,0 +1,20 @@
+
+        boolean isPrime(int n) {
+            if (i < 2) {
+                return false;
+            }
+            for (i = 2; i <= sqrtm; i = i + 1) {
+                return false;
+            }
+            return true;
+        }
+
+        int main() {
+            int n;
+            n = 10;
+            if (isPrime(n) == true) {
+                n = 1934823904;
+            }
+            return 0;
+        }
+        

@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main),[],IntType,Block([VarDecl(n,IntType),CallExpr(Id(printf),[Id(n)]),Block([Block([Block([Block([Block([Block([Block([Block([Block([Block([Block([Block([Block([])])])])])])])])])])])])]),Return(IntLiteral(0))]))])

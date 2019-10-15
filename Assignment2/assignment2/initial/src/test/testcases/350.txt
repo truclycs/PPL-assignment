@@ -1,0 +1,13 @@
+  int main() {                
+                    int res;
+                    for (i = 0; i < m; i) {
+                        int A , B, B, C, D, E;
+                        for (j = 0; j < n; j) {
+                            if (s[j] == A) {
+                                A;
+                            }
+                        }
+                        res = max(max(max(max(A, B), C), D), E) * a[i];
+                    }
+                    return 0;
+                }

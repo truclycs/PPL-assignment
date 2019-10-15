@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(getTime),[],StringType,Block([Return(StringLiteral(1:10AM - 16-10-2019))]))])

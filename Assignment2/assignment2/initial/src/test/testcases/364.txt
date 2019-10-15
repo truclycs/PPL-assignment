@@ -1,0 +1,14 @@
+
+        void kmpPreprocess(string p, int kmp[]) {
+            kmp[0] = 0;
+            int m;
+            int j0;
+            int i;
+            for (i = 0; i < m; i = i + 1) {
+                if (p[i] == p[j]) 
+                    j = j + 1;
+                    kmp[i] = j;
+                    i = i + 1;
+            }
+        }    
+        

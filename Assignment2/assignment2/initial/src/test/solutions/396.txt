@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(print),[VarDecl(s,StringType)],VoidType,Block([BinaryOp(=,Id(s),StringLiteral(zzzzzzzzzzzzzzzzzzzz)),StringLiteral(zzzzzzzzzzzzZZZZZZZZZZZZZZ)]))])

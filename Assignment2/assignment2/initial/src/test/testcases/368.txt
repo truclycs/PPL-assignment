@@ -1,0 +1,16 @@
+
+        void foo() {
+            for(i = 0; i < n; i = i + 1)
+			if(s[i] == "1"){
+				num_rooms = 2*max(i+1, n-i);
+				mx = max(mx, num_rooms);
+			}
+        }
+        void foo() {
+            for(i = 0; i < n; i = i + 1)
+			if(s[i] == "1"){
+				num_rooms = 2*max(i+1, n-i);
+				mx = max(mx, num_rooms);
+			}
+        }
+        

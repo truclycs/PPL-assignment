@@ -1,0 +1,12 @@
+
+        void process() {
+			if (i < n && p[j] != t[i]) {
+				if (j != 0) {
+					j = kmp[j - 1];
+				}
+				else {
+					i = i + 1;
+				}
+			}
+        }
+        

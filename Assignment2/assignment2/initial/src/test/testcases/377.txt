@@ -1,0 +1,24 @@
+ 
+        void solve()
+        {
+            //cin >> m;
+            if (m == 1)
+            {
+              //  cout << 1;
+                return ;
+            }
+            for (i = 1; i < n; i+1)
+            {
+                x = (i * (i + 1)) / 2;
+        
+                if (x >= m)
+                {
+                    j = i - 1;
+                    x = (j * (j + 1)) / 2;
+               //     cout << m - x;
+                    return ;
+                }
+            }
+        
+        }
+        

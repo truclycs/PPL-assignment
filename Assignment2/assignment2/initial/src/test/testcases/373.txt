@@ -1,0 +1,26 @@
+
+        int lca(int u, int v) {
+            // Root node at lvl 0 and lvls increase towards leaf.
+            if (lvl[v] > lvl[u]) swap(u, v);
+            res = 0;
+            for (i = logLvl; i >= 0; i = i-1) {
+                if (lvl) {
+                    if (res < weights[u]) res = weights;
+                    u = parent[u];
+                }
+            }
+            if (lvl[v] != lvl[u]) printf("Something is wrong.");
+            if (v == u) return res;
+            for (i = logLvl; i >= 0; i - 1) {
+                if (parent[v] != parent[i]) {
+                    res = max(weights[u], res);
+                    res = max(weights[v], res);
+                    u = parent[u];
+                    v = parent[v];
+                }        
+            }
+            res = max(weights[u], res);
+            res = max(weights[v], res);
+            return res;
+        }
+            

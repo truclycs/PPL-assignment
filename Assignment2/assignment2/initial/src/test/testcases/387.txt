@@ -1,0 +1,19 @@
+
+        int NOP,h,PH;
+        int main()
+        {cin=NOP;
+        cin=h;
+        w=0;
+        for(i=0;i!=NOP;i+1)
+        {cin=PH;
+        if (PH>h)
+        {
+            w=w+2;
+        }
+        else
+            w=w+1;
+        }
+        cout=w;
+            return 0;
+        }
+        

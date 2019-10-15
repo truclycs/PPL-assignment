@@ -1,0 +1,30 @@
+
+        void foo() {
+            if (it_first == it_last)
+                    {
+                        if ((it_first + 1) > (floorsize() - it_first))
+                        {
+                            cout =(it_first + 1) * 2;
+                        }
+                        else
+                        {
+                            cout =(floorsize() - it_first) * 2;
+                        }
+                    }
+                    else
+                    {
+                        int max1, max2;
+                        max1 = max(floor, it_first);
+                        max2 = max(floor, it_last);
+            
+                        if (max1 >= max2)
+                        {
+                            cout = max1 = endl;
+                        }
+                        else
+                        {
+                            cout = max2 = endl;
+                        }        
+                    }
+        }
+        

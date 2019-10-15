@@ -1,0 +1,36 @@
+
+        int main(){
+            "ios_base::sync_with_stdio(false);";
+            "cin.tie(0);";
+            "cout.tie(0);"  ;          
+            int n; //cin >> n;            
+            //vector<int> a(n);
+            for(i = 0; i < n; i + 1) { cin = a[i];}
+            
+            //vector<int> ms(n, 1e9 + 7);
+            ms[n - 1] = a[n - 1];
+            
+            for(i = n - 2; i >= 0; i-1){
+                if(ms[i + 1] < a[i]) ms[i] = ms[i + 1];
+                else ms[i] = a[i];
+            }
+            
+            //for(int i = 0; i < n; i++) cout << ms[i] << " ";
+            //cout << endl << endl;            
+            for(i = 0; i < n; i+1){
+                //vector<int>::iterator it = lower_bound(ms.begin() , ms.end(), a[i]);                
+                if(it == msbegin()){
+                  //  "cout << -1 << " ";"
+                    continue;
+                }          
+                
+                ind = it - msbegin();
+                
+                if(ind < i){
+                    //cout << -1 << " ";
+                    continue;
+                }
+                //else cout << ind - i - 1 << " ";
+            }
+        }
+        

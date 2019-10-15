@@ -1,0 +1,14 @@
+
+        int string_sum(string s)
+        {
+            int b;
+            b = 0;
+            int k;
+            k =ssize();
+                for(j=0; j<k; j = j + 1)
+                {
+                    b = b + (s[j]-48);
+                }
+            return b;
+        }
+        

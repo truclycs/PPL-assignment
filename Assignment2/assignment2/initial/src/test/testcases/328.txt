@@ -1,0 +1,8 @@
+
+        int can11 (int TL) {
+            int i;
+            for (i = 0; i < n; i = i + 1) TL = TL + 1;
+            if (TL != oo) can11(TL);
+            else break;
+        }
+        

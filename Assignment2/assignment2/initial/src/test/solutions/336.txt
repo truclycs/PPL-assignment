@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(cal),[VarDecl(a,IntType)],IntType,Block([Return()]))])

@@ -1,0 +1,24 @@
+
+        int main()
+        {
+            int n,m;//cin>>n>>m;
+            day=1;
+            nextDay=m;
+            for(i=1;i<10000;i+1){
+                n-1;
+                if(i==nextDay)
+                {
+                    n+1;
+                    day+1;
+                    nextDay=m*day;
+        
+                }
+                if(n==0)
+                {
+                    //cout<<i;
+                    break;
+                }
+            }
+            return 0;
+        }
+        

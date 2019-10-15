@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(can11),[VarDecl(TL,IntType)],IntType,Block([VarDecl(i,IntType),For(BinaryOp(=,Id(i),IntLiteral(0));BinaryOp(<,Id(i),Id(n));BinaryOp(=,Id(i),BinaryOp(+,Id(i),IntLiteral(1)));BinaryOp(=,Id(TL),BinaryOp(+,Id(TL),IntLiteral(1)))),If(BinaryOp(!=,Id(TL),Id(oo)),CallExpr(Id(can11),[Id(TL)]),Break())]))])

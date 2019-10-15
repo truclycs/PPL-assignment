@@ -1,0 +1,15 @@
+
+        int main() {
+            for(i=1;i<=n;i+1) {
+                if(!vis[i])
+                {
+                    ans[i]=1;
+                    temp+1;
+                    for(j=0;j<size;j+1)
+                    {
+                        //vis[v[i][j]]=true;
+                    }
+                }
+            }
+        }
+        

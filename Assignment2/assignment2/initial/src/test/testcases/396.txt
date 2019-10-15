@@ -1,0 +1,6 @@
+
+        void print(string s) {
+            s = "zzzzzzzzzzzzzzzzzzzz";
+            "zzzzzzzzzzzzZZZZZZZZZZZZZZ";
+        }
+        

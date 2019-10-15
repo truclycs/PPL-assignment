@@ -1,0 +1,4 @@
+ int x; 
+                    int foo() {
+                        a[a[a[a[a[a[a]]]]]];
+                    } 

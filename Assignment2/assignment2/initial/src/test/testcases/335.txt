@@ -1,0 +1,5 @@
+
+        int cal(int a, int b, int c) {
+            res != ((a * b) / d ) && (-f % 7 - 4);
+        }
+        

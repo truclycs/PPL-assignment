@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(process),[],VoidType,Block([If(BinaryOp(&&,BinaryOp(<,Id(i),Id(n)),BinaryOp(!=,ArrayCell(Id(p),Id(j)),ArrayCell(Id(t),Id(i)))),Block([If(BinaryOp(!=,Id(j),IntLiteral(0)),Block([BinaryOp(=,Id(j),ArrayCell(Id(kmp),BinaryOp(-,Id(j),IntLiteral(1))))]),Block([BinaryOp(=,Id(i),BinaryOp(+,Id(i),IntLiteral(1)))]))]))]))])

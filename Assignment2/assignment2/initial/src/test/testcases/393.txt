@@ -1,0 +1,5 @@
+
+        void func(int a, int b[]){
+            float d[4], c[5];{string c[5];}
+        }
+        

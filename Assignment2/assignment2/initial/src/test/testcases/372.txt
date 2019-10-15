@@ -1,0 +1,37 @@
+
+        int dfs(int x1,int fa) {
+            int max1;
+            int sum;
+            for (j=0; j < l; j = j + 1){
+                if(l[x1]!=fa){
+                    sum = dfs(l[j],x1);
+                }
+            }
+            if(l[x1]==1)
+                return 1;
+            else
+                return max1;
+            int max1;
+            int sum;
+            for (j=0; j < l; j = j + 1){
+                if(l[x1]!=fa){
+                    sum = dfs(l[j],x1);
+                }
+            }
+            if(l[x1]==1)
+                return 1;
+            else
+                return max1;
+            int max1;
+            int sum;
+            for (j=0; j < l; j = j + 1){
+                if(l[x1]!=fa){
+                    sum = dfs(l[j],x1);
+                }
+            }
+            if(l[x1]==1)
+                return 1;
+            else
+                return max1;
+        }
+        

@@ -1,0 +1,47 @@
+
+        int solution(){
+            int n,q1;
+            "cin>>n>>q1";
+            int a[10],c[200005],d[200005];
+            
+               if(c[a[i]]==0)
+                {
+                    c[a[i]]=i+1;
+                }
+
+                if(c[a[i]]==i+1)
+                {
+                    vpb(d[a[i]],c[a[i]],m[a[i]]);
+                }      
+            ans=0;
+            sort(all(v));
+            g=sz(v);
+            b=-1;temp=0;
+                j=g-i-1;
+                //cnt=v[j].S.S,f=v[j].S.F,s=v[j].F;
+            
+                if(s<b)
+                {        
+                    ans=temp;
+                    b=f;
+                    temp=cnt;
+                    if(s-f+1==cnt)
+                    {
+                        ans=cnt;
+                        temp=0;
+                        b=-1;
+                    }        
+                }
+                else
+                {
+                    b=min(f,b);
+                    temp=max(temp,cnt);
+                    if(j==0)
+                    {
+                        ans=temp;
+                    }
+                }
+        //    cout<<n-ans;
+        return 0;
+        }
+        

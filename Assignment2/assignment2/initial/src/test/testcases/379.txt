@@ -1,0 +1,10 @@
+
+        int main() {
+            // your code goes here
+            int m,n;
+            mul=m*n;
+            tot=mul/2;
+            //cout<<tot;
+            return 0;
+        }
+        
