@@ -1,13 +1,245 @@
-from MPVisitor import MPVisitor
-from MPParser import MPParser
-from AST import *
+# program: many_declarations EOF;
+
+# many_declarations:
+#     many_declarations declaration
+#     | declaration
+#     ;
+
+# declaration:
+#     variable_declaration
+#     | function_declaration
+#     | procedure_declaration
+#     ;
+
+# // 2.1
+# variable_declaration:
+#     VAR list_declarations
+#     ;
+
+# list_declarations:
+#     list_declarations v_declaration
+#     | v_declaration
+#     ;
+
+# v_declaration:
+#     list_identifiers COLON types SEMI
+#     ;
+
+# list_identifiers:
+#     list_identifiers COMMA IDENTIFIER
+#     | IDENTIFIER
+#     ;
+
+# // 2.2
+# function_declaration:
+#     FUNCTION IDENTIFIER LB list_parameters RB COLON types SEMI variable_declaration? compound_statement
+#     ;
+
+# list_parameters:
+#     not_null_list_parameters
+#     |
+#     ;
+
+# not_null_list_parameters:
+#     not_null_list_parameters SEMI parameter_declaration
+#     | parameter_declaration
+#     ;
+    
+# parameter_declaration:
+#     list_identifiers COLON types
+#     ;
+
+# // 2.3
+
+# procedure_declaration:
+#     PROCEDURE IDENTIFIER LB list_parameters RB SEMI variable_declaration? compound_statement
+# //    | main_procedure
+
+# types:
+#     primitive_type
+#     | compound_type
+#     ;
+
+# primitive_type:
+#     BOOLEAN
+#     | INTEGER
+#     | REAL
+#     | STRING
+#     ;
+
+# compound_type:
+#     array_type
+#     ;
+
+# array_type:
+#     ARRAY LSB SUB? INTEGER_LITERAL DDOT SUB? INTEGER_LITERAL RSB OF primitive_type
+#     ;
+
+# // 5. Expressions
+
+# operand:
+#     literal
+#     | IDENTIFIER
+# //    | arr_element
+#     | func_call
+#     ;
+
+# expression:
+#     expression AND THEN expression_1
+#     | expression OR ELSE expression_1
+# //    expression_1 AND THEN expression
+# //    | expression_1 OR ELSE expression
+#     | expression_1
+# //    | operand
+#     ;
+
+# expression_1:
+#     expression_2 EQUAL expression_2
+#     | expression_2 NOTEQUAL expression_2
+#     | expression_2 LESSTHAN expression_2
+#     | expression_2 GREATERTHAN expression_2
+#     | expression_2 LESSEQUAL expression_2
+#     | expression_2 GREATEREQUAL expression_2
+#     | expression_2
+#     ;
+
+# expression_2:
+#     expression_2 ADD expression_3
+#     | expression_2 SUB expression_3
+#     | expression_2 OR expression_3
+#     | expression_3
+#     ;
+
+# expression_3:
+#     expression_3 DIV_F expression_4
+#     | expression_3 MUL expression_4
+#     | expression_3 DIV expression_4
+#     | expression_3 MOD expression_4
+#     | expression_3 AND expression_4
+#     | expression_4
+#     ;
+
+# expression_4:
+#     SUB expression_4
+#     | NOT expression_4
+#     | expression_5
+#     ;
+
+# expression_5:
+#     expression_5 LSB expression RSB
+#     | expression_6
+#     ;
+    
+# expression_6:
+#     LB expression RB
+#     | operand
+#     ;
+
+
+# // 5.3: Index Expression
+# arr_element:
+#     expression_5 LSB expression RSB
+#     ;
+
+# // 5.4: Invocation Expression
+# func_call:
+#     IDENTIFIER LB list_expression RB
+#     ;
+
+# list_expression:
+#     not_null_list_expression
+#     |
+#     ;
+    
+# not_null_list_expression:
+#     not_null_list_expression COMMA expression
+#     | expression
+#     ;
+
+# // 6. Statements and Control Flow
+
+# statement:
+#     assignment_statement
+#     | if_statement
+#     | while_statement
+#     | for_statement
+#     | break_statement
+#     | continue_statement
+#     | return_statement
+#     | compound_statement
+#     | with_statement
+#     | call_statement
+#     ;
+
+# // 6.1 Assignment Statement
+# assignment_statement:
+#     (IDENTIFIER | arr_element) ASSIGN assignment_statement
+#     | (IDENTIFIER | arr_element) ASSIGN expression SEMI
+#     ;
+
+# list_var_idx_ass:
+#     list_var_idx_ass ASSIGN IDENTIFIER
+#     | list_var_idx_ass ASSIGN arr_element
+#     | IDENTIFIER
+#     | arr_element
+#     ;
+
+# // 6.2 If Statement
+
+# if_statement:
+#     IF expression THEN statement (ELSE statement)?
+#     ;
+
+# // 6.3 While Statement
+# 
+# 
+# 
+# tement:
+#     WHILE expression DO statement
+#     ;
+
+# // 6.4 For Statement
+# for_statement:
+#     FOR IDENTIFIER ASSIGN expression (TO | DOWNTO) expression DO statement
+#     ;
+
+
+# // 6.7 Return Statement
+# return_statement:
+#     RETURN expression? SEMI
+#     ;
+
+# // 6.8 Compound Statement
+# compound_statement:
+#     BEGIN list_statements END
+#     ;
+
+# list_statements:
+#     not_null_list_statements
+#     |
+#     ;
+
+# not_null_list_statements:
+#     not_null_list_statements statement
+#     | statement
+#     ;
+
+# // 6.9 With Statement
+# with_statement:
+#     WITH list_declarations DO statement
+#     ;
+
+# // 6.10 Call Statement
+# call_statement:
+#     func_call SEMI
+#     ;
+
+# // 9. The main function
+# /*main_procedure:
+#     PROCEDURE MAIN LB RB SEMI variable_declaration? compound_statement
+#     ;
 
 class ASTGeneration(MPVisitor):
-
-    def visitProgram(self, ctx:MPParser.ProgramContext):
-        _many_declarations = self.visit(ctx.many_declarations())
-#        print(_many_declarations)
-        return Program(_many_declarations)
     
     def visitMany_declarations(self, ctx:MPParser.Many_declarationsContext):
         if ctx.many_declarations():
@@ -81,39 +313,13 @@ class ASTGeneration(MPVisitor):
             _local = []
         _body = self.visit(ctx.compound_statement())
         return [FuncDecl(_name, _param, _local, _body)]
-        
-    def visitLiteral(self, ctx:MPParser.LiteralContext):
-        if ctx.INTEGER_LITERAL():
-            _value = int(ctx.INTEGER_LITERAL().getText())
-            return IntLiteral(_value)
-        elif ctx.REAL_LITERAL():
-            _value = float(ctx.REAL_LITERAL().getText())
-            return FloatLiteral(_value)
-        elif ctx.TRUE():
-            _value = bool(True)
-            return BooleanLiteral(_value)
-        elif ctx.FALSE():
-            _value = bool(False)
-            return BooleanLiteral(_value)
-        elif ctx.STRING_LITERAL():
-            _value = str(ctx.STRING_LITERAL().getText())
-            return StringLiteral(_value)
+
     
     def visitTypes(self, ctx:MPParser.TypesContext):
         if ctx.primitive_type():
             return self.visit(ctx.primitive_type())
         else:
             return self.visit(ctx.compound_type())
-            
-    def visitPrimitive_type(self, ctx:MPParser.Primitive_typeContext):
-        if ctx.BOOLEAN():
-            return BoolType()
-        if ctx.INTEGER():
-            return IntType()
-        if ctx.REAL():
-            return FloatType()
-        if ctx.STRING():
-            return StringType()
     
     def visitCompound_type(self, ctx:MPParser.Compound_typeContext):
         return self.visit(ctx.array_type())
@@ -128,14 +334,7 @@ class ASTGeneration(MPVisitor):
         _eleType = self.visit(ctx.primitive_type())
         return ArrayType(_lower, _upper, _eleType)
         
-    def visitOperand(self, ctx:MPParser.OperandContext):
-        if ctx.literal():
-            return self.visit(ctx.literal())
-        if ctx.IDENTIFIER():
-            return Id(ctx.IDENTIFIER().getText())
-        if ctx.func_call():
-            return self.visit(ctx.func_call())
-    
+   
     def visitExpression(self, ctx:MPParser.ExpressionContext):
         if ctx.AND():
             _op = "andthen"
@@ -263,10 +462,7 @@ class ASTGeneration(MPVisitor):
         _idx = self.visit(ctx.expression())
         return ArrayCell(_arr, _idx)
         
-    def visitFunc_call(self, ctx:MPParser.Func_callContext):
-        _method = Id(ctx.IDENTIFIER().getText())
-        _param = self.visit(ctx.list_expression())
-        return CallExpr(_method, _param)
+
         
     def visitList_expression(self, ctx:MPParser.List_expressionContext):
         if ctx.not_null_list_expression():
@@ -279,34 +475,12 @@ class ASTGeneration(MPVisitor):
             return self.visit(ctx.not_null_list_expression()) + [self.visit(ctx.expression())]
         else:
             return [self.visit(ctx.expression())]
-        
-    def visitStatement(self, ctx:MPParser.StatementContext):
-        if ctx.assignment_statement():
-            return self.visit(ctx.assignment_statement())
-        if ctx.if_statement():
-            return self.visit(ctx.if_statement())
-        if ctx.while_statement():
-            return self.visit(ctx.while_statement())
-        if ctx.for_statement():
-            return self.visit(ctx.for_statement())
-        if ctx.break_statement():
-            return self.visit(ctx.break_statement())
-        if ctx.continue_statement():
-            return self.visit(ctx.continue_statement())
-        if ctx.return_statement():
-            return self.visit(ctx.return_statement())
-        if ctx.compound_statement():
-            return self.visit(ctx.compound_statement())
-        if ctx.with_statement():
-            return self.visit(ctx.with_statement())
-        if ctx.call_statement():
-            return self.visit(ctx.call_statement())
             
     def visitAssignment_statement(self, ctx:MPParser.Assignment_statementContext):
         if ctx.assignment_statement():
             if ctx.IDENTIFIER():
                 _lhs = Id(ctx.IDENTIFIER().getText())
-            else:
+            else: 
                 _lhs = self.visit(ctx.arr_element())
             _list_assignment = self.visit(ctx.assignment_statement())
             _exp = _list_assignment[-1].lhs
@@ -318,16 +492,7 @@ class ASTGeneration(MPVisitor):
                 _lhs = self.visit(ctx.arr_element())
             _exp = self.visit(ctx.expression())
             return [Assign(_lhs, _exp)]
-            
-    def visitIf_statement(self, ctx:MPParser.If_statementContext):
-        _expr = self.visit(ctx.expression())
-        if ctx.ELSE():
-            _thenStmt = self.visit(ctx.statement(0))
-            _elseStmt = self.visit(ctx.statement(1))
-        else:
-            _thenStmt = self.visit(ctx.statement(0))
-            _elseStmt = []
-        return [If(_expr, _thenStmt, _elseStmt)]
+        
         
     def visitWhile_statement(self, ctx:MPParser.While_statementContext):
         _exp = self.visit(ctx.expression())
@@ -344,19 +509,7 @@ class ASTGeneration(MPVisitor):
         else:
             _up = True
         return [For(_id, _expr1, _expr2, _up, _loop)]
-
-    def visitBreak_statement(self, ctx:MPParser.Break_statementContext):
-        return [Break()]
-        
-    def visitContinue_statement(self, ctx:MPParser.Continue_statementContext):
-        return [Continue()]
-        
-    def visitReturn_statement(self, ctx:MPParser.Return_statementContext):
-        if ctx.expression():
-            _expr = self.visit(ctx.expression())
-            return [Return(_expr)]
-        return [Return()]
-        
+       
     def visitCompound_statement(self, ctx:MPParser.Compound_statementContext):
         return self.visit(ctx.list_statements())
     

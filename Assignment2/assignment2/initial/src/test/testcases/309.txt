@@ -1,5 +1,12 @@
-string str,a2D[4];
-        string arr,brr;
-        string arr2D,arr3D[5];
-        string isTrue,isFact;
-      
+int main()
+		{	
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+		}
+		

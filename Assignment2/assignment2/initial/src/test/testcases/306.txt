@@ -1,4 +1,7 @@
-string str;
-        string arr;
-        string arr2D;
-      
+int main()
+		{
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
+
+		

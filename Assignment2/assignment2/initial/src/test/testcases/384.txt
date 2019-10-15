@@ -1,0 +1,12 @@
+int main()
+		{	
+			for(i = 3; i < infinity; i = i + 1)
+				if(tesserract)
+					whoCares();
+			for(exp; exp; exp){
+				{
+					stillWhoCares();
+				}
+			}
+		}
+		

@@ -1,0 +1,15 @@
+
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+		}
+		

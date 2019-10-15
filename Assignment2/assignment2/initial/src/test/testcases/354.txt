@@ -1,0 +1,6 @@
+int main()
+		{
+            if (number%2) return;
+            else numberToBin(number);
+		}
+		

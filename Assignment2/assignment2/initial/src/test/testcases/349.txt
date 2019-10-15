@@ -1,0 +1,5 @@
+int _mai_n () {
+                                    int a, c[5], d[5], _, _123;
+                                    float asdas; boolean x;
+                            }
+		

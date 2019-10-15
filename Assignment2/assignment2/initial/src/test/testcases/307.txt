@@ -1,5 +1,12 @@
-string str;
-        int arr;
-        float arr2D;
-        boolean isTrue;
-      
+int main(){
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+			int a[321],b,c[34];
+			float x,y,z;
+
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+			int a,b,c;
+			float x,y[43],z,q[32];
+		}
+		

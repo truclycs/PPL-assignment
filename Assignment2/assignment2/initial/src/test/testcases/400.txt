@@ -1,0 +1,10 @@
+
+        int[] test(){
+            int a,b[3];
+        }
+        int a[4], b[3], f, c[2], d[1];
+        string foo(int val[], boolean val){
+            return 4;
+        }
+        float b[10];
+        

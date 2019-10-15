@@ -1,0 +1,188 @@
+
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"Final challenge!";
+				for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+					do
+						do
+							do
+								do
+								{}
+								while true;
+							while false;
+						while (true&&true);
+					while (false || true && false);
+					{{}{}{}{}{}{}{}{}}
+					_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+					_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+			}
+		}
+
+
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"Final challenge!";
+				for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+					do
+						do
+							do
+								do
+								{}
+								while true;
+							while false;
+						while (true&&true);
+					while (false || true && false);
+					{{}{}{}{}{}{}{}{}}
+					_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+					_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+			}
+		}
+
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"Final challenge!";
+				for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+					do
+						do
+							do
+								do
+								{}
+								while true;
+							while false;
+						while (true&&true);
+					while (false || true && false);
+					{{}{}{}{}{}{}{}{}}
+					_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+					_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+			}
+		}
+		

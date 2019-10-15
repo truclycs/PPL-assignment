@@ -1,0 +1,20 @@
+string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+
+			int enter()
+			{	
+				{}{}{}{}{}{}{}{}{}{}{}{}{}
+				{{{{{{{}}}}}}}
+			}	
+
+
+			int main()
+			{
+				int a,b,c;
+				do
+					yolo();
+					haveGirlfriends(_,_,_,_,_);
+					{{}{}{}{}{}{}{{{{{}}}}}{}{}}
+				while (young);
+			}
+		

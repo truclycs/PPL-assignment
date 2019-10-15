@@ -1,0 +1,28 @@
+
+		int main()
+		{
+			foo(foo(foo(foo(foo(foo(foo(foo(foo("a",1,43,1.2,"fdasfq")))))))));
+			if (a==b)
+			{
+				if (PPL="harsh")
+				{
+					{
+						{
+							{
+								{
+									foo(foo(foo(foo(foo(foo(foo(foo(foo("a",1,43,1.2,"fdasfq")))))))));
+									int a[5];
+						            boolean b;
+						            return 1;
+						            function();
+						            for (i = 4; i < 5; i +2 ){
+						                if (a = 5) break;
+						            }
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		

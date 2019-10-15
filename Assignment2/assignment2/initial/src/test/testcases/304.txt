@@ -1,1 +1,2 @@
-float arr,iNum,complex;
+boolean b,c[123],d,e[1234534];
+		

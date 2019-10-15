@@ -33,10 +33,11 @@ options {
                                 PARSER
 ------------------------------------------------------------------*/
 
+
+
 program: (var_decl | func_decl)+ EOF;
 
-var_decl: primitive_type (var | many_var) SEMI;
-many_var: var (COMMA var)*;
+var_decl: primitive_type var (COMMA var)* SEMI;
 var: ID (LSB INTLIT RSB)?;
 
 func_decl: types ID LB para_list? RB block_stmt;

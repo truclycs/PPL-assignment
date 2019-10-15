@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(_mai_n),[],IntType,Block([[<AST.VarDecl object at 0x7f4af907c3c8>, <AST.VarDecl object at 0x7f4af907c828>, <AST.VarDecl object at 0x7f4af907c780>, <AST.VarDecl object at 0x7f4af907c550>, <AST.VarDecl object at 0x7f4af907c438>],[<AST.VarDecl object at 0x7f4af90866d8>],[<AST.VarDecl object at 0x7f4af9086e80>]])),None])

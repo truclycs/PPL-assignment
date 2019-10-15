@@ -1,0 +1,7 @@
+
+		int[] main(int a[],float b[],string c[],boolean d[]){}
+
+		float main(int a[],float b,string c[],boolean d){}
+	
+		int main(int a,float b,string c,boolean d){}
+		

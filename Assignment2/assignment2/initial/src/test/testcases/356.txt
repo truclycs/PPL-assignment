@@ -1,0 +1,12 @@
+int main()
+		{
+			if (abc != cdf) {
+                a = b + 1;
+                b = c + 1;
+                if(a) a = b;
+                {
+                    ah(2);
+                }
+            }
+		}
+		

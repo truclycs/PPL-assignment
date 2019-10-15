@@ -1,0 +1,7 @@
+int main()
+		{
+			if (a > 3 && a < 5) a = 10;
+            else if (a <= 3) a = - a / 2;
+            else a = a[2];
+		}
+		

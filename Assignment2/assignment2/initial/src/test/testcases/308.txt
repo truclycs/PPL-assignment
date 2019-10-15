@@ -1,5 +1,8 @@
-string str,a2D[4];
-        int arr,brr;
-        float arr2D,arr3D[5];
-        boolean isTrue,isFact;
-      
+int main()
+		{
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+			int a,b,c;
+			float x,y,z;
+		}
+		

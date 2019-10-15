@@ -1,0 +1,9 @@
+int main(float q[],string a[],float _[],float _[]){
+			int a,b,c;
+			do
+				yolo();
+				haveGirlfriends(_,_,_,_,_);
+				{{}{}{}{}{}{}{{{{{}}}}}{}{}}
+			while (young);
+		}
+		

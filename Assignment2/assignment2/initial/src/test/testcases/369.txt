@@ -1,0 +1,6 @@
+int main()
+		{
+			for (i;j;t) {
+            }
+		}
+		

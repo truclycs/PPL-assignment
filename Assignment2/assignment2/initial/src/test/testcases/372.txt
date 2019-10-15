@@ -1,0 +1,22 @@
+
+		void enter()
+		{
+			int k;
+			v = 5;
+			for(i=0;i<n-1;i)
+			{
+				for(i=0;i<n-1;i) return;		
+			}
+		}
+
+		void process()
+		{
+			system("pause");
+		}
+
+		int main()
+		{
+			enter();
+			process();
+		}
+		

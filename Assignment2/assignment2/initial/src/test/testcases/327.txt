@@ -1,0 +1,5 @@
+
+		boolean enter(){}
+	
+		int main(){}
+		

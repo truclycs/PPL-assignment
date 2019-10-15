@@ -1,0 +1,12 @@
+
+		int main()
+		{
+			int xyzz,abcc,hcmut;
+			float xyzz[999],abcc[999],hcmut,apple,NHMR;
+			string xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			boolean xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+			_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+			_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+
+		}
+		

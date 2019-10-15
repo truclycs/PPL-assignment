@@ -1,0 +1,10 @@
+
+		float x,y,z;
+
+		int main()
+		{
+			float x,y,z;
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
+		

@@ -1,0 +1,39 @@
+
+		void main(){
+			"So this is the last testcase of this section! Good luck!";
+			for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+
+			printf("Yayyyyyyyyyyyyyyyyyyyyyy!");
+		}
+		

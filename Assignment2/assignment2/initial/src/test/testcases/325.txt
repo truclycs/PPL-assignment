@@ -1,0 +1,6 @@
+
+		void enter()
+		{}
+
+		int main(){}
+		

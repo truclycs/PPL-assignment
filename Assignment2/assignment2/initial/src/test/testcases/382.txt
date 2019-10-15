@@ -1,0 +1,6 @@
+int main(){
+			int a,a,a,a,a,a,a,a,a,a,a;
+			float _,_,_,_,_,_,_;
+			string qqqqqqqqqq,wwwwwwwwwwwwwww,pppppppppppppppp[123],ewqqqewqewqe,_123123;
+		}
+		

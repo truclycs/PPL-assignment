@@ -1,0 +1,5 @@
+int main()
+		{
+            do do do do i = 0; while(9); while(true); while(false); while(1);
+		}
+		

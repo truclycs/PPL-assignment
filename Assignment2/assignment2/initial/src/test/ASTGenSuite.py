@@ -3,1362 +3,1968 @@ from TestUtils import TestAST
 from AST import *
 
 class ASTGenSuite(unittest.TestCase):
-    def test_simple_program(self):
-        """Simple program: int main() {} """
-        input = """int main() {}"""
-        expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(input,expect,300))
+	def test_vardec_0(self):
+		input = """
+		int main()
+		{
+			int a;
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("a",IntType())]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,300))
 
-    def test_more_complex_program(self):
-        """More complex program"""
-        input = """int main () {
-            putIntLn(4);
-        }"""
-        expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([],[CallExpr(Id("putIntLn"),[IntLiteral(4)])]))]))
-        self.assertTrue(TestAST.checkASTGen(input,expect,301))
-    
-    def test_call_without_parameter(self):
-        """More complex program"""
-        input = """int main () {
-            getIntLn();
-        }"""
-        expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([],[CallExpr(Id("getIntLn"),[])]))]))
-        self.assertTrue(TestAST.checkASTGen(input,expect,302))
+	def test_vardec_1(self):
+		input = """float x,y[12],z;
+		"""
+		expect = str(Program([VarDecl("x",FloatType()),VarDecl("y",ArrayType(12,FloatType())),VarDecl("z",FloatType())]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,301))
 
+	def test_vardec_2(self):
+		input = """
+		int a,b,c;
 
-    def test_03(self):
-        inp="""int a;"""
-        out=str(Program([VarDecl(Id("a"),IntType())]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,303))        
-   
-    def test_04(self):
-        inp="""float arr,iNum,complex;"""
-        out=str(Program([\
-            VarDecl(Id("arr"),FloatType()),\
-            VarDecl(Id("iNum"),FloatType()),\
-            VarDecl(Id("complex"),FloatType())]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,304))        
+		int main()
+		{
+			int d,e,f;
+		}
+		"""
+		expect=str(Program([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),FuncDecl(Id("main"),[],IntType(),Block([VarDecl("d",IntType()),VarDecl("e",IntType()),VarDecl("f",IntType())]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,302))
 
-    def test_05(self):
-        inp="""float arr,iNum,str[2];"""
-        out=str(Program([\
-            VarDecl(Id("arr"),FloatType()),\
-            VarDecl(Id("iNum"),FloatType()),\
-            VarDecl(Id("str"), ArrayType(IntLiteral(2),FloatType()))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,305))        
+	def test_vardec_3(self):
+		input = """string b,c[123],d,e[1234534];
+		"""
+		expect = str(Program([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType()))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,303))
 
-    def test_06(self):
-        inp="""string str;
-        string arr;
-        string arr2D;
-      """
-        out=str(Program([\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("arr"),StringType()),\
-            VarDecl(Id("arr2D"),StringType())]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,306))        
+	def test_vardec_4(self):
+		input = """boolean b,c[123],d,e[1234534];
+		"""
+		expect = str(Program([VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,304))
 
-    def test_07(self):
-        inp="""string str;
-        int arr;
-        float arr2D;
-        boolean isTrue;
-      """
-        out=str(Program([\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("arr"),IntType()),\
-            VarDecl(Id("arr2D"),FloatType()),\
-            VarDecl(Id("isTrue"),BoolType())]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,307))        
+	def test_vardec_5(self):
+		input = """
+		string b,c[123],d,e[1234534];
+		boolean b,c[123],d,e[1234534];
+		int a,b,c;
+		float x,y,z;
+		"""
+		expect = str(Program([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType())),VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType())]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,305))
 
-    def test_08(self):
-        inp="""string str,a2D[4];
-        int arr,brr;
-        float arr2D,arr3D[5];
-        boolean isTrue,isFact;
-      """
-        out=str(Program([\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("a2D"),ArrayType(IntLiteral(4),StringType())),\
-            VarDecl(Id("arr"),IntType()),\
-            VarDecl(Id("brr"),IntType()),\
-            VarDecl(Id("arr2D"),FloatType()),\
-            VarDecl(Id("arr3D"),ArrayType(IntLiteral(5),FloatType())),\
-            VarDecl(Id("isTrue"),BoolType()),\
-            VarDecl(Id("isFact"),BoolType())]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,308))        
-    
-    def test_09(self):
-        inp="""string str,a2D[4];
-        string arr,brr;
-        string arr2D,arr3D[5];
-        string isTrue,isFact;
-      """
-        out=str(Program([\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("a2D"),ArrayType(IntLiteral(4),StringType())),\
-            VarDecl(Id("arr"),StringType()),\
-            VarDecl(Id("brr"),StringType()),\
-            VarDecl(Id("arr2D"),StringType()),\
-            VarDecl(Id("arr3D"),ArrayType(IntLiteral(5),StringType())),\
-            VarDecl(Id("isTrue"),StringType()),\
-            VarDecl(Id("isFact"),StringType())]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,309))        
+	def test_vardec_6(self):
+		input = """int main()
+		{
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
 
-    def test_10(self):
-        inp="""boolean foo(){}"""
-        out=str(Program([FuncDecl(Id("foo"),[],BoolType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,310))        
-    
-    def test_11(self):
-        inp="""int main(){}
-                  string getText(){}
-                  boolean isEmptyString(){}
-                  float isRealNumber(){}"""
-        out=str(Program([\
-            FuncDecl(Id("main"),[],IntType(),Block([],[])),\
-            FuncDecl(Id("getText"),[],StringType(),Block([],[])),\
-            FuncDecl(Id("isEmptyString"),[],BoolType(),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[],FloatType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,311))        
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,306))
 
-    def test_12(self):
-        inp="""int getSum(int Sum){}
-                  string getText(string arr){}
-                  boolean isEmptyString(string arr){}
-                  float isRealNumber(float fNum){}"""
-        out=str(Program([\
-            FuncDecl(Id("getSum"),[VarDecl(Id("Sum"),IntType())],IntType(),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),StringType())],StringType(),Block([],[])),\
-            FuncDecl(Id("isEmptyString"),[VarDecl(Id("arr"),StringType())],BoolType(),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),FloatType())],FloatType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,312))   
+	def test_vardec_7(self):
+		input = """int main(){
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+			int a[321],b,c[34];
+			float x,y,z;
 
-    def test_13(self):
-        inp="""int getSum(int Sum, int count){}
-                  string getText(string arr, int length){}
-                  boolean isEmptyString(string arr, boolean isTrue){}
-                  float isRealNumber(float fNum, float dNum, boolean isTrue){}"""
-        out=str(Program([\
-            FuncDecl(Id("getSum"),[VarDecl(Id("Sum"),IntType()),VarDecl(Id("count"),IntType())],IntType(),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),StringType()),VarDecl(Id("length"),IntType())],StringType(),Block([],[])),\
-            FuncDecl(Id("isEmptyString"),[VarDecl(Id("arr"),StringType()),VarDecl(Id("isTrue"),BoolType())],BoolType(),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),FloatType()),VarDecl(Id("dNum"),FloatType()),VarDecl(Id("isTrue"),BoolType())],FloatType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,313))   
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+			int a,b,c;
+			float x,y[43],z,q[32];
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType())),VarDecl("a",ArrayType(321,IntType())),VarDecl("b",IntType()),VarDecl("c",ArrayType(34,IntType())),VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType())),VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),VarDecl("x",FloatType()),VarDecl("y",ArrayType(43,FloatType())),VarDecl("z",FloatType()),VarDecl("q",ArrayType(32,FloatType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,307))
 
-    def test_14(self):
-        inp="""int getSum(int Sum, int count){}
-                  string getText(string arr, int length){}
-                  boolean isEmptyString(string arr, boolean isTrue){}
-                  float isRealNumber(float fNum, float dNum, boolean isTrue){}"""
-        out=str(Program([\
-            FuncDecl(Id("getSum"),[VarDecl(Id("Sum"),IntType()),VarDecl(Id("count"),IntType())],IntType(),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),StringType()),VarDecl(Id("length"),IntType())],StringType(),Block([],[])),\
-            FuncDecl(Id("isEmptyString"),[VarDecl(Id("arr"),StringType()),VarDecl(Id("isTrue"),BoolType())],BoolType(),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),FloatType()),VarDecl(Id("dNum"),FloatType()),VarDecl(Id("isTrue"),BoolType())],FloatType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,314))   
-    
-    def test_15(self):
-        inp="""int getSum(int Sum, int count){}
-                  string getText(string arr, int length){}
-                  boolean isEmptyString(string arr, boolean isTrue){}
-                  float isRealNumber(float fNum, float dNum, boolean isTrue){}"""
-        out=str(Program([\
-            FuncDecl(Id("getSum"),[VarDecl(Id("Sum"),IntType()),VarDecl(Id("count"),IntType())],IntType(),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),StringType()),VarDecl(Id("length"),IntType())],StringType(),Block([],[])),\
-            FuncDecl(Id("isEmptyString"),[VarDecl(Id("arr"),StringType()),VarDecl(Id("isTrue"),BoolType())],BoolType(),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),FloatType()),VarDecl(Id("dNum"),FloatType()),VarDecl(Id("isTrue"),BoolType())],FloatType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,315))   
+	def test_vardec_8(self):
+		input = """int main()
+		{
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+			int a,b,c;
+			float x,y,z;
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType())),VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType())]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,308))
 
-    def test_16(self):
-        inp="""int getSum(int Sum[]){}
-                  string getText(string arr[]){}
-                  boolean isEmptyString(string arr[]){}
-                  float isRealNumber(float fNum[]){}"""
-        out=str(Program([\
-            FuncDecl(Id("getSum"),[VarDecl(Id("Sum"),ArrayPointerType(IntType()))],IntType(),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),ArrayPointerType(StringType()))],StringType(),Block([],[])),\
-            FuncDecl(Id("isEmptyString"),[VarDecl(Id("arr"),ArrayPointerType(StringType()))],BoolType(),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),ArrayPointerType(FloatType()))],FloatType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,316))   
+	def test_vardec_9(self):
+		input = """int main()
+		{	
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,309))
 
-    def test_17(self):
-        inp="""int getSum(int Sum[], int count[]){}
-                   string getText(string arr[], int length[]){}
-                   boolean isEmptyString(string arr[], boolean isTrue[]){}
-                  float isRealNumber(float fNum[], float dNum[], boolean isTrue[]){}"""
-        out=str(Program([\
-            FuncDecl(Id("getSum"),[VarDecl(Id("Sum"),ArrayPointerType(IntType())),VarDecl(Id("count"),ArrayPointerType(IntType()))],IntType(),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),ArrayPointerType(StringType())),VarDecl(Id("length"),ArrayPointerType(IntType()))],StringType(),Block([],[])),\
-            FuncDecl(Id("isEmptyString"),[VarDecl(Id("arr"),ArrayPointerType(StringType())),VarDecl(Id("isTrue"),ArrayPointerType(BoolType()))],BoolType(),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),ArrayPointerType(FloatType())),VarDecl(Id("dNum"),ArrayPointerType(FloatType())),VarDecl(Id("isTrue"),ArrayPointerType(BoolType()))],FloatType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,317))   
+	def test_vardec_10(self):
+		input = """
+		int enter()
+		{	
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+			string b,c[123],d,e[1234534];
+		}	
+	
 
-    def test_18(self):
-        inp="""int getSum(int Sum[], int count){}
-                   string getText(string arr[], int length){}
-                   boolean isEmptyString(string arr[], boolean isTrue){}
-                  float isRealNumber(float fNum[], float dNum, boolean isTrue[]){}"""
-        out=str(Program([\
-            FuncDecl(Id("getSum"),[VarDecl(Id("Sum"),ArrayPointerType(IntType())),VarDecl(Id("count"),IntType())],IntType(),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),ArrayPointerType(StringType())),VarDecl(Id("length"),IntType())],StringType(),Block([],[])),\
-            FuncDecl(Id("isEmptyString"),[VarDecl(Id("arr"),ArrayPointerType(StringType())),VarDecl(Id("isTrue"),BoolType())],BoolType(),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),ArrayPointerType(FloatType())),VarDecl(Id("dNum"),FloatType()),VarDecl(Id("isTrue"),ArrayPointerType(BoolType()))],FloatType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,318))   
+		int main()
+		{
+			int a,b,c;
+			float x,y,z;
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("enter"),[],IntType(),Block([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType()))])),FuncDecl(Id("main"),[],IntType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,310))
 
-    def test_19(self):
-        inp="""int[] foo(){}
-                  string[] getText(){}
-                  float[] isRealNumber(){}"""
-        out=str(Program([\
-            FuncDecl(Id("foo"),[],ArrayPointerType(IntType()),Block([],[])),\
-            FuncDecl(Id("getText"),[],ArrayPointerType(StringType()),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[],ArrayPointerType(FloatType()),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,319))   
+	def test_vardec_11(self):
+		input = """
+		int print()
+		{	
+		}	
+	
 
-    def test_20(self):
-        inp="""int[] foo(int number){}
-                  string[] getText(string arr){}
-                  float[] isRealNumber(float fNum){}"""
-        out=str(Program([\
-            FuncDecl(Id("foo"),[VarDecl(Id("number"),IntType())],ArrayPointerType(IntType()),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),StringType())],ArrayPointerType(StringType()),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),FloatType())],ArrayPointerType(FloatType()),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,320))   
+		void join()
+		{
+		}
 
-    def test_21(self):
-        inp="""int[] foo(int number, int iNum){}
-                  string[] getText(string arr, string length){}
-                  float[] isRealNumber(float fNum, boolean isTrue){}"""
-        out=str(Program([FuncDecl(Id("foo"),[VarDecl(Id("number"),IntType()),VarDecl(Id("iNum"),IntType())],ArrayPointerType(IntType()),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),StringType()),VarDecl(Id("length"),StringType())],ArrayPointerType(StringType()),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),FloatType()),VarDecl(Id("isTrue"),BoolType())],ArrayPointerType(FloatType()),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,321))   
+		int enter()
+		{	
+		}	
+	
 
-    def test_22(self):
-        inp="""int[] foo(int number[]){}
-                  string[] getText(string arr[]){}
-                  float[] isRealNumber(float fNum[]){}"""
-        out=str(Program([\
-            FuncDecl(Id("foo"),[VarDecl(Id("number"),ArrayPointerType(IntType()))],ArrayPointerType(IntType()),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),ArrayPointerType(StringType()))],ArrayPointerType(StringType()),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),ArrayPointerType(FloatType()))],ArrayPointerType(FloatType()),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,322))   
+		int main()
+		{
+			int a,b,c;
+			float x,y,z;
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("print"),[],IntType(),Block([])),FuncDecl(Id("join"),[],VoidType(),Block([])),FuncDecl(Id("enter"),[],IntType(),Block([])),FuncDecl(Id("main"),[],IntType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,311))
 
-    def test_23(self):
-        inp="""int[] foo(int number[], int iNum[]){}
-                  string[] getText(string arr[], string length[]){}
-                  float[] isRealNumber(float fNum[], boolean isTrue[]){}"""
-        out=str(Program([\
-            FuncDecl(Id("foo"),[VarDecl(Id("number"),ArrayPointerType(IntType())),VarDecl(Id("iNum"),ArrayPointerType(IntType()))],ArrayPointerType(IntType()),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),ArrayPointerType(StringType())),VarDecl(Id("length"),ArrayPointerType(StringType()))],ArrayPointerType(StringType()),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),ArrayPointerType(FloatType())),VarDecl(Id("isTrue"),ArrayPointerType(BoolType()))],ArrayPointerType(FloatType()),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,323))   
+	def test_vardec_12(self):
+		input = """
+		int print()
+		{	
+			string b,c[123],d,e[1234534];
+		}	
+	
 
-    def test_24(self):
-        inp="""int[] getSum(int Sum[], int count){}
-                   string[] getText(string arr[], int length){}
-                  float[] isRealNumber(float fNum[], float dNum, boolean isTrue[]){}"""
-        out=str(Program([\
-            FuncDecl(Id("getSum"),[VarDecl(Id("Sum"),ArrayPointerType(IntType())),VarDecl(Id("count"),IntType())],ArrayPointerType(IntType()),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),ArrayPointerType(StringType())),VarDecl(Id("length"),IntType())],ArrayPointerType(StringType()),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),ArrayPointerType(FloatType())),VarDecl(Id("dNum"),FloatType()),VarDecl(Id("isTrue"),ArrayPointerType(BoolType()))],ArrayPointerType(FloatType()),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,324))   
+		void join()
+		{
+			int a,b,c;
+		}
 
-    def test_25(self):
-        inp="""int[] getSum(int Sum){}
-                   string getText(string arr){}
-                  float isRealNumber(float fNum){}"""
-        out=str(Program([\
-            FuncDecl(Id("getSum"),[VarDecl(Id("Sum"),IntType())],ArrayPointerType(IntType()),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),StringType())],StringType(),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),FloatType())],FloatType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,325))   
+		void fit()
+		{
+			int a,b,c;
+		}
 
-    def test_26(self):
-        inp="""int[] getSum(int Sum[]){}
-                   string getText(string arr[]){}
-                   float isRealNumber(float fNum[]){}
-                   boolean[] isFact(boolean isTrue[]){}"""
-        out=str(Program([\
-            FuncDecl(Id("getSum"),[VarDecl(Id("Sum"),ArrayPointerType(IntType()))],ArrayPointerType(IntType()),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),ArrayPointerType(StringType()))],StringType(),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),ArrayPointerType(FloatType()))],FloatType(),Block([],[])),\
-            FuncDecl(Id("isFact"),[VarDecl(Id("isTrue"),ArrayPointerType(BoolType()))],ArrayPointerType(BoolType()),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,326))   
+		int enter()
+		{	
+		}	
+	
 
-    def test_27(self):
-        inp="""int[] getSum(int Sum[], int size){}
-                   string getText(string arr[], int length){}
-                   float isRealNumber(float fNum[], boolean isFalse){}
-                   boolean[] isFact(boolean isTrue[], int size){}"""
-        out=str(Program([\
-            FuncDecl(Id("getSum"),[VarDecl(Id("Sum"),ArrayPointerType(IntType())),VarDecl(Id("size"),IntType())],ArrayPointerType(IntType()),Block([],[])),\
-            FuncDecl(Id("getText"),[VarDecl(Id("arr"),ArrayPointerType(StringType())),VarDecl(Id("length"),IntType())],StringType(),Block([],[])),\
-            FuncDecl(Id("isRealNumber"),[VarDecl(Id("fNum"),ArrayPointerType(FloatType())),VarDecl(Id("isFalse"),BoolType())],FloatType(),Block([],[])),\
-            FuncDecl(Id("isFact"),[VarDecl(Id("isTrue"),ArrayPointerType(BoolType())),VarDecl(Id("size"),IntType())],ArrayPointerType(BoolType()),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,327))   
+		int main()
+		{
+			boolean b,c[123],d,e[1234534];
+		}
 
-    def test_28(self):
-        inp="""int iNum;
-        string str;
-        boolean isTrue;
-        void main(){}
-        int foo(){}
-      """
-        out=str(Program([\
-            VarDecl(Id("iNum"),IntType()),VarDecl(Id("str"),StringType()),VarDecl(Id("isTrue"),BoolType()),\
-            FuncDecl(Id("main"),[],VoidType(),Block([],[])),FuncDecl(Id("foo"),[],IntType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,328))   
+		"""
+		expect = str(Program([FuncDecl(Id("print"),[],IntType(),Block([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType()))])),FuncDecl(Id("join"),[],VoidType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType())])),FuncDecl(Id("fit"),[],VoidType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType())])),FuncDecl(Id("enter"),[],IntType(),Block([])),FuncDecl(Id("main"),[],IntType(),Block([VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,312))
 
-    def test_29(self):
-        inp="""void main(){}
-        int foo(){}
-        int iNum;
-        string str;
-        boolean isTrue;"""
-        out=str(Program([\
-            FuncDecl(Id("main"),[],VoidType(),Block([],[])),\
-            FuncDecl(Id("foo"),[],IntType(),Block([],[])),\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("isTrue"),BoolType())]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,329))   
+	def test_vardec_13(self):
+		input = """int main()
+		{
+			int a,b,c;
+			int a,b,c;
+			int a,b,c;
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType())]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,313))
 
-    def test_30(self):
-        inp="""void main(){}
-         int max_size;
-        int foo(){}
-        int iNum;
-        string str;
-        boolean isTrue;
-        int maxStr(string str){}"""
-        out=str(Program([\
-            FuncDecl(Id("main"),[],VoidType(),Block([],[])),\
-            VarDecl(Id("max_size"),IntType()),\
-            FuncDecl(Id("foo"),[],IntType(),Block([],[])),\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("isTrue"),BoolType()),\
-            FuncDecl(Id("maxStr"),[VarDecl(Id("str"),StringType())],IntType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,330))   
+	def test_vardec_14(self):
+		input = """string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		"""
+		expect = str(Program([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,314))
 
-    def test_31(self):
-        inp="""int full_size;
-         void main(){}
-         int max_size;
-         int foo(){}
-         int iNum;
-         string str;
-         int maxStr(string str){}
-         int min_size;
-         string terminal;"""
-        out=str(Program([\
-            VarDecl(Id("full_size"),IntType()),\
-            FuncDecl(Id("main"),[],VoidType(),Block([],[])),\
-            VarDecl(Id("max_size"),IntType()),\
-            FuncDecl(Id("foo"),[],IntType(),Block([],[])),\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("str"),StringType()),\
-            FuncDecl(Id("maxStr"),[VarDecl(Id("str"),StringType())],IntType(),Block([],[])),\
-            VarDecl(Id("min_size"),IntType()),\
-            VarDecl(Id("terminal"),StringType())]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,331))   
+	def test_vardec_15(self):
+		input = """
+		string b,c[123],d,e[1234534];
+		boolean b,c[123],d,e[1234534];
+		string b,c[123],d,e[1234534];
+		float x,y,z;
+		string b,c[123],d,e[1234534];
+		boolean b,c[123],d,e[1234534];
+		"""
+		expect = str(Program([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType())),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,315))
 
-    def test_32(self):
-        inp="""int iNum, max_level;
-        string str,arr;
-        boolean isTrue, isFact;
-        void main(){}
-        int foo(){}"""
-        out=str(Program([\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("max_level"),IntType()),\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("arr"),StringType()),\
-            VarDecl(Id("isTrue"),BoolType()),\
-            VarDecl(Id("isFact"),BoolType()),\
-            FuncDecl(Id("main"),[],VoidType(),Block([],[])),\
-            FuncDecl(Id("foo"),[],IntType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,332))   
+	def test_vardec_16(self):
+		input = """int main(float q[]){
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[VarDecl("q",ArrayPointerType(FloatType()))],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,316))
 
-    def test_33(self):
-        inp="""int iNum, max_level[5];
-        string str,arr;
-        boolean isTrue, isFact[5];
-        void main(){}
-        int foo(){}"""
-        out=str(Program([\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("max_level"),ArrayType(IntLiteral(5),IntType())),\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("arr"),StringType()),\
-            VarDecl(Id("isTrue"),BoolType()),\
-            VarDecl(Id("isFact"),ArrayType(IntLiteral(5),BoolType())),\
-            FuncDecl(Id("main"),[],VoidType(),Block([],[])),\
-            FuncDecl(Id("foo"),[],IntType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,333))   
+	def test_vardec_17(self):
+		input = """int b(){}
+		"""
+		expect = str(Program([FuncDecl(Id("b"),[],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,317))
 
-    def test_34(self):
-        inp="""int iNum, max_level[5];
-        string str,arr;
-        boolean isTrue, isFact[5];
-        void main(int iNum){}
-        int foo(int number){}"""
-        out=str(Program([\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("max_level"),ArrayType(IntLiteral(5),IntType())),\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("arr"),StringType()),\
-            VarDecl(Id("isTrue"),BoolType()),\
-            VarDecl(Id("isFact"),ArrayType(IntLiteral(5),BoolType())),\
-            FuncDecl(Id("main"),[VarDecl(Id("iNum"),IntType())],VoidType(),Block([],[])),\
-            FuncDecl(Id("foo"),[VarDecl(Id("number"),IntType())],IntType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,334))   
+	def test_vardec_18(self):
+		input = """
+		int main()
+		{
+			float x,y,z;
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,318))
 
-    def test_35(self):
-        inp="""int iNum, max_level[5];
-        string str,arr;
-        boolean isTrue, isFact[5];
-        void main(int iNum[]){}
-        int foo(int number[]){}"""
-        out=str(Program([\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("max_level"),ArrayType(IntLiteral(5),IntType())),\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("arr"),StringType()),\
-            VarDecl(Id("isTrue"),BoolType()),\
-            VarDecl(Id("isFact"),ArrayType(IntLiteral(5),BoolType())),\
-            FuncDecl(Id("main"),[VarDecl(Id("iNum"),ArrayPointerType(IntType()))],VoidType(),Block([],[])),\
-            FuncDecl(Id("foo"),[VarDecl(Id("number"),ArrayPointerType(IntType()))],IntType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,335))   
+	def test_vardec_19(self):
+		input = """
+		float x,y,z;
 
-    def test_36(self):
-        inp="""int iNum, max_level[5];
-        string str,arr;
-        boolean isTrue, isFact[5];
-        void main(int iNum, int size){}
-        int foo(int number, int size){}"""
-        out=str(Program([\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("max_level"),ArrayType(IntLiteral(5),IntType())),\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("arr"),StringType()),\
-            VarDecl(Id("isTrue"),BoolType()),\
-            VarDecl(Id("isFact"),ArrayType(IntLiteral(5),BoolType())),\
-            FuncDecl(Id("main"),[VarDecl(Id("iNum"),IntType()),VarDecl(Id("size"),IntType())],VoidType(),Block([],[])),\
-            FuncDecl(Id("foo"),[VarDecl(Id("number"),IntType()),VarDecl(Id("size"),IntType())],IntType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,336))   
+		int main()
+		{
+			float x,y,z;
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
+		"""
+		expect = str(Program([VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),FuncDecl(Id("main"),[],IntType(),Block([VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,319))
 
-    def test_37(self):
-        inp="""int iNum, max_level[5];
-        string str,arr;
-        boolean isTrue, isFact[5];
-        void main(int iNum[], int size[]){}
-        int foo(int number[], int size[]){}"""
-        out=str(Program([\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("max_level"),ArrayType(IntLiteral(5),IntType())),\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("arr"),StringType()),\
-            VarDecl(Id("isTrue"),BoolType()),\
-            VarDecl(Id("isFact"),ArrayType(IntLiteral(5),BoolType())),\
-            FuncDecl(Id("main"),[VarDecl(Id("iNum"),ArrayPointerType(IntType())),VarDecl(Id("size"),ArrayPointerType(IntType()))],VoidType(),Block([],[])),\
-            FuncDecl(Id("foo"),[VarDecl(Id("number"),ArrayPointerType(IntType())),VarDecl(Id("size"),ArrayPointerType(IntType()))],IntType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,337))   
+	def test_vardec_20(self):
+		input = """
+		boolean c[123],e[1234534];
 
-    def test_38(self):
-        inp="""int iNum, max_level[5];
-        string str,arr;
-        boolean isTrue, isFact[5];
-        void main(int iNum, int size[]){}
-        int foo(int number[], int size){}"""
-        out=str(Program([\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("max_level"),ArrayType(IntLiteral(5),IntType())),\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("arr"),StringType()),\
-            VarDecl(Id("isTrue"),BoolType()),\
-            VarDecl(Id("isFact"),ArrayType(IntLiteral(5),BoolType())),\
-            FuncDecl(Id("main"),[VarDecl(Id("iNum"),IntType()),VarDecl(Id("size"),ArrayPointerType(IntType()))],VoidType(),Block([],[])),\
-            FuncDecl(Id("foo"),[VarDecl(Id("number"),ArrayPointerType(IntType())),VarDecl(Id("size"),IntType())],IntType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,338))   
+		int main()
+		{
+			float x,y,z;
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
+		"""
+		expect = str(Program([VarDecl("c",ArrayType(123,BoolType())),VarDecl("e",ArrayType(1234534,BoolType())),FuncDecl(Id("main"),[],IntType(),Block([VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,320))
 
-    def test_39(self):
-        inp="""int iNum, max_level[5];
-        string str,arr;
-        boolean isTrue, isFact[5];
-        void main(int iNum, int size[]){}
-        int[] foo(int number[], int size){}
-        int[] maxst(int a, int b, int arr[]){}
-      """
-        out=str(Program([\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("max_level"),ArrayType(IntLiteral(5),IntType())),\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("arr"),StringType()),\
-            VarDecl(Id("isTrue"),BoolType()),\
-            VarDecl(Id("isFact"),ArrayType(IntLiteral(5),BoolType())),\
-            FuncDecl(Id("main"),[VarDecl(Id("iNum"),IntType()),VarDecl(Id("size"),ArrayPointerType(IntType()))],VoidType(),Block([],[])),\
-            FuncDecl(Id("foo"),[VarDecl(Id("number"),ArrayPointerType(IntType())),VarDecl(Id("size"),IntType())],ArrayPointerType(IntType()),Block([],[])),\
-            FuncDecl(Id("maxst"),[VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType()),VarDecl(Id("arr"),ArrayPointerType(IntType()))],ArrayPointerType(IntType()),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,339))   
+	def test_vardec_21(self):
+		input = """
+		string b,c[123],d,e[1234534];
 
+		int main()
+		{
+			float x,y,z;
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
+		"""
+		expect = str(Program([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),FuncDecl(Id("main"),[],IntType(),Block([VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,321))
 
-    def test_40(self):
-        inp="""int iNum, max_level[5];
-        string str,arr;
-        boolean isTrue, isFact[5];
-        void main(int iNum){}
-        int[] foo(int number[]){}
-        int[] maxst(int a){}
-        boolean isFalse;
-        int fNumber;
-        int getFloat(float fNumber){}"""
-        out=str(Program([\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("max_level"),ArrayType(IntLiteral(5),IntType())),\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("arr"),StringType()),\
-            VarDecl(Id("isTrue"),BoolType()),\
-            VarDecl(Id("isFact"),ArrayType(IntLiteral(5),BoolType())),\
-            FuncDecl(Id("main"),[VarDecl(Id("iNum"),IntType())],VoidType(),Block([],[])),\
-            FuncDecl(Id("foo"),[VarDecl(Id("number"),ArrayPointerType(IntType()))],ArrayPointerType(IntType()),Block([],[])),\
-            FuncDecl(Id("maxst"),[VarDecl(Id("a"),IntType())],ArrayPointerType(IntType()),Block([],[])),\
-            VarDecl(Id("isFalse"),BoolType()),\
-            VarDecl(Id("fNumber"),IntType()),\
-            FuncDecl(Id("getFloat"),[VarDecl(Id("fNumber"),FloatType())],IntType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,340))   
+	def test_vardec_22(self):
+		input = """
+		int main()
+		{
+			float x,y,z;
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,322))
 
-    def test_41(self):
-        inp="""int iNum, max_level[5];
-        string str,arr;
-        boolean isTrue, isFact[5];
-        void main(int iNum){}
-        int[] foo(int number[], int c, int d){}
-        int[] maxst(int a, int Number){}
-        boolean isFalse;
-        int fNumber;
-        int getFloat(float fNumber, boolean isFact[]){}
-      """
-        out=str(Program([\
-            VarDecl(Id("iNum"),IntType()),\
-            VarDecl(Id("max_level"),ArrayType(IntLiteral(5),IntType())),\
-            VarDecl(Id("str"),StringType()),\
-            VarDecl(Id("arr"),StringType()),\
-            VarDecl(Id("isTrue"),BoolType()),\
-            VarDecl(Id("isFact"),ArrayType(IntLiteral(5),BoolType())),\
-            FuncDecl(Id("main"),[VarDecl(Id("iNum"),IntType())],VoidType(),Block([],[])),\
-            FuncDecl(Id("foo"),[VarDecl(Id("number"),ArrayPointerType(IntType())),VarDecl(Id("c"),IntType()),VarDecl(Id("d"),IntType())],ArrayPointerType(IntType()),Block([],[])),\
-            FuncDecl(Id("maxst"),[VarDecl(Id("a"),IntType()),VarDecl(Id("Number"),IntType())],ArrayPointerType(IntType()),Block([],[])),VarDecl(Id("isFalse"),BoolType()),VarDecl(Id("fNumber"),IntType()),\
-            FuncDecl(Id("getFloat"),[VarDecl(Id("fNumber"),FloatType()),VarDecl(Id("isFact"),ArrayPointerType(BoolType()))],IntType(),Block([],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,341))   
-        
-    def test_42(self):
-        inp="""int main(){
-        int iNum;
-        }"""
-        out=str(Program([\
-            FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("iNum"),IntType())],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,342))   
-        
-    def test_43(self):
-        inp="""int main(){
-        int iNum, size, length;
-        }"""
-        out=str(Program([\
-            FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("iNum"),IntType()),VarDecl(Id("size"),IntType()),VarDecl(Id("length"),IntType())],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,343))   
-        
-    def test_44(self):
-        inp="""int main(){
-        int iNum, size, length;
-        string str;
-        boolean isFact;
-        float fNum;
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("iNum"),IntType()),VarDecl(Id("size"),IntType()),VarDecl(Id("length"),IntType()),VarDecl(Id("str"),StringType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("fNum"),FloatType())],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,344))   
-        
-    def test_45(self):
-        inp="""int main(){
-        int iNum, size, length;
-        string str[10];
-        boolean isFact;
-        float fNum, number[5];
-        int arr[10];
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("iNum"),IntType()),VarDecl(Id("size"),IntType()),VarDecl(Id("length"),IntType()),VarDecl(Id("str"),ArrayType(IntLiteral(10),StringType())),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("fNum"),FloatType()),VarDecl(Id("number"),ArrayType(IntLiteral(5),FloatType())),VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType()))],[]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,345))
-        
-    def test_46(self):
-        inp="void main () {foo();}"
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[CallExpr(Id("foo"),[])]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,346))   
-        
-    def test_47(self):
-        inp="void main () {foo(25);}"
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[CallExpr(Id("foo"),[IntLiteral(25)])]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,347))   
-        
-    def test_48(self):
-        inp="void main () {foo(arr, iNum, max, min);}"
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[CallExpr(Id("foo"),[Id("arr"),Id("iNum"),Id("max"),Id("min")])]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,348))   
-        
-    def test_49(self):
-        inp="""void main () {compare(arr[10]);}"""
-        out=str(Program([\
-            FuncDecl(Id("main"),[],VoidType(),\
-                Block([],[CallExpr(Id("compare"),[ArrayCell(Id("arr"),IntLiteral(10))])]))]))  
-        self.assertTrue(TestAST.checkASTGen(inp,out,349))   
+	def test_vardec_23(self):
+		input = """
+		string b,c[123],d,e[1234534];
 
-    def test_50(self):
-        inp="""void main () {
-          do{
-            int a;
-          } while true;
-         }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[Dowhile([Block([VarDecl(Id("a"),IntType())],[])],BooleanLiteral(True))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,350))   
-        
-    def test_51(self):
-        inp="""void main () {
-        do{
-         int a;
-         string arr[10];
-         int lengthStr, size;
-         } while (a!=b);}"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[Dowhile([Block([VarDecl(Id("a"),IntType()),VarDecl(Id("arr"),ArrayType(IntLiteral(10),StringType())),VarDecl(Id("lengthStr"),IntType()),VarDecl(Id("size"),IntType())],[])],BinaryOp("!=",Id("a"),Id("b")))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,351))   
-        
-    def test_52(self):
-        inp="""void main () {
-        do{
-         a = a + 3;
-         isTrue = 3 > 5;
-         a*(b+5)/15*(9*8*7*arr);
-         } while (a!=b);}"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[Dowhile([Block([],[BinaryOp("=",Id("a"),BinaryOp("+",Id("a"),IntLiteral(3))),BinaryOp("=",Id("isTrue"),BinaryOp(">",IntLiteral(3),IntLiteral(5))),BinaryOp("*",BinaryOp("/",BinaryOp("*",Id("a"),BinaryOp("+",Id("b"),IntLiteral(5))),IntLiteral(15)),BinaryOp("*",BinaryOp("*",BinaryOp("*",IntLiteral(9),IntLiteral(8)),IntLiteral(7)),Id("arr")))])],BinaryOp("!=",Id("a"),Id("b")))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,352))   
-        
-    def test_53(self):
-        inp="""void main () {
-        if(a>5){
-         fNum = 1.e-2;
+		int main()
+		{
+			float x,y,z;
+			string b,c[123],d,e[5413];
+			boolean b,c[123],d,e[1234534];
+		}
+		"""
+		expect = str(Program([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),FuncDecl(Id("main"),[],IntType(),Block([VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(5413,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,323))
+
+	def test_vardec_24(self):
+		input = """
+		int main()
+		{
+			float x,y,z[43];
+			float x,y,z;
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",ArrayType(43,FloatType())),VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,324))
+
+	def test_funcdec_25(self):
+		input = """
+		void enter()
+		{}
+
+		int main(){}
+		"""
+		expect=str(Program([FuncDecl(Id("enter"),[],VoidType(),Block([])),FuncDecl(Id("main"),[],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,325))
+
+	def test_funcdec_26(self):
+		input = """
+		string enter()
+		{}
+
+		int main(){}
+		"""
+		expect=str(Program([FuncDecl(Id("enter"),[],StringType(),Block([])),FuncDecl(Id("main"),[],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,326))
+
+	def test_funcdec_27(self):
+		input = """
+		boolean enter(){}
+	
+		int main(){}
+		"""
+		expect=str(Program([FuncDecl(Id("enter"),[],BoolType(),Block([])),FuncDecl(Id("main"),[],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,327))
+
+	def test_funcdec_28(self):
+		input = """
+		float enter(){}
+
+		int main(){}
+		"""
+		expect=str(Program([FuncDecl(Id("enter"),[],FloatType(),Block([])),FuncDecl(Id("main"),[],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,328))
+
+	def test_funcdec_29(self):
+		input = """
+		string enter(){}
+		boolean enter(){}
+		float enter(){}
+		void enter(){}
+
+		int main(){}
+		"""
+		expect=str(Program([FuncDecl(Id("enter"),[],StringType(),Block([])),FuncDecl(Id("enter"),[],BoolType(),Block([])),FuncDecl(Id("enter"),[],FloatType(),Block([])),FuncDecl(Id("enter"),[],VoidType(),Block([])),FuncDecl(Id("main"),[],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,329))
+
+	def test_funcdec_30(self):
+		input = """
+		int main(int a,int b)
+		{}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",IntType()),VarDecl("b",IntType())],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,330))
+
+	def test_funcdec_31(self):
+		input = """int main(int a,int b[],int c[],int d,int e[]){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",IntType()),VarDecl("b",ArrayPointerType(IntType())),VarDecl("c",ArrayPointerType(IntType())),VarDecl("d",IntType()),VarDecl("e",ArrayPointerType(IntType()))],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,331))
+
+	def test_funcdec_32(self):
+		input = """int main(float a,float b){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",FloatType()),VarDecl("b",FloatType())],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,332))
+
+	def test_funcdec_33(self):
+		input = """int main(float a,float b[],float c[],float d,float e[]){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",FloatType()),VarDecl("b",ArrayPointerType(FloatType())),VarDecl("c",ArrayPointerType(FloatType())),VarDecl("d",FloatType()),VarDecl("e",ArrayPointerType(FloatType()))],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,333))
+
+	def test_funcdec_34(self):
+		input = """int main(string a,string b){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",StringType()),VarDecl("b",StringType())],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,334))
+
+	def test_funcdec_35(self):
+		input = """int main(string a,string b[],string c[],string d,string e[]){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",StringType()),VarDecl("b",ArrayPointerType(StringType())),VarDecl("c",ArrayPointerType(StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayPointerType(StringType()))],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,335))
+
+	def test_funcdec_36(self):
+		input = """int main(boolean a,boolean b){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",BoolType()),VarDecl("b",BoolType())],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,336))
+
+	def test_funcdec_37(self):
+		input = """int main(boolean a,boolean b[],boolean c[],boolean d,boolean e[]){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",BoolType()),VarDecl("b",ArrayPointerType(BoolType())),VarDecl("c",ArrayPointerType(BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayPointerType(BoolType()))],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,337))
+
+	def test_funcdec_38(self):
+		input = """int main(int a,float b,string c,boolean d){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",IntType()),VarDecl("b",FloatType()),VarDecl("c",StringType()),VarDecl("d",BoolType())],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,338))
+
+	def test_funcdec_39(self):
+		input = """int main(int a[],float b[],string c[],boolean d[]){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",ArrayPointerType(IntType())),VarDecl("b",ArrayPointerType(FloatType())),VarDecl("c",ArrayPointerType(StringType())),VarDecl("d",ArrayPointerType(BoolType()))],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,339))
+
+	def test_funcdec_40(self):
+		input = """int main(int a,float b[],string c,boolean d[]){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",IntType()),VarDecl("b",ArrayPointerType(FloatType())),VarDecl("c",StringType()),VarDecl("d",ArrayPointerType(BoolType()))],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,340))
+
+	def test_funcdec_41(self):
+		input = """
+		int main(int a,float b,string c,boolean d){}
+
+		int main(int a,float b[],string c,boolean d[]){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",IntType()),VarDecl("b",FloatType()),VarDecl("c",StringType()),VarDecl("d",BoolType())],IntType(),Block([])),FuncDecl(Id("main"),[VarDecl("a",IntType()),VarDecl("b",ArrayPointerType(FloatType())),VarDecl("c",StringType()),VarDecl("d",ArrayPointerType(BoolType()))],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,341))
+
+	def test_funcdec_42(self):
+		input = """
+		int main(int a[],float b[],string c[],boolean d[]){}
+
+		int main(int a,float b,string c,boolean d){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",ArrayPointerType(IntType())),VarDecl("b",ArrayPointerType(FloatType())),VarDecl("c",ArrayPointerType(StringType())),VarDecl("d",ArrayPointerType(BoolType()))],IntType(),Block([])),FuncDecl(Id("main"),[VarDecl("a",IntType()),VarDecl("b",FloatType()),VarDecl("c",StringType()),VarDecl("d",BoolType())],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,342))
+
+	def test_funcdec_43(self):
+		input = """
+		int[] main(int a[],float b[],string c[],boolean d[]){}
+
+		float main(int a[],float b,string c[],boolean d){}
+	
+		int main(int a,float b,string c,boolean d){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("a",ArrayPointerType(IntType())),VarDecl("b",ArrayPointerType(FloatType())),VarDecl("c",ArrayPointerType(StringType())),VarDecl("d",ArrayPointerType(BoolType()))],ArrayPointerType(IntType()),Block([])),FuncDecl(Id("main"),[VarDecl("a",ArrayPointerType(IntType())),VarDecl("b",FloatType()),VarDecl("c",ArrayPointerType(StringType())),VarDecl("d",BoolType())],FloatType(),Block([])),FuncDecl(Id("main"),[VarDecl("a",IntType()),VarDecl("b",FloatType()),VarDecl("c",StringType()),VarDecl("d",BoolType())],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,343))
+
+	def test_funcdec_44(self):
+		input = """
+		int main(){}
+
+		void main(int a[],float b,string c[],boolean d){}
+	
+		int main(){}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([])),FuncDecl(Id("main"),[VarDecl("a",ArrayPointerType(IntType())),VarDecl("b",FloatType()),VarDecl("c",ArrayPointerType(StringType())),VarDecl("d",BoolType())],VoidType(),Block([])),FuncDecl(Id("main"),[],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,344))
+
+	def test_funcdec_45(self):
+		input = """ void foo(int x, int y, float z, string s, int a[]) {
+            x = y+c+d;
         }
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[If(BinaryOp(">",Id("a"),IntLiteral(5)),Block([],[BinaryOp("=",Id("fNum"),FloatLiteral(float(0.01)))]),None)]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,353))   
-        
-    def test_54(self):
-        inp="""void main () {
-          if(a>5){
-           fNum = 1.e-2;
-           arr[10] = 15+5*2/10;
-           foo(2)[20] = 25+arr[10];
-          }
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[If(BinaryOp(">",Id("a"),IntLiteral(5)),Block([],[BinaryOp("=",Id("fNum"),FloatLiteral(float(0.01))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(10)),BinaryOp("+",IntLiteral(15),BinaryOp("/",BinaryOp("*",IntLiteral(5),IntLiteral(2)),IntLiteral(10)))),BinaryOp("=",ArrayCell(CallExpr(Id("foo"),[IntLiteral(2)]),IntLiteral(20)),BinaryOp("+",IntLiteral(25),ArrayCell(Id("arr"),IntLiteral(10))))]),None)]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,354))   
-        
-    def test_55(self):
-        inp="""void main () {
-          if(a>5){
-           do{
-           a= a+5;
-           foo(2);
-           }while (a!=100);
-          }
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[If(BinaryOp(">",Id("a"),IntLiteral(5)),Block([],[Dowhile([Block([],[BinaryOp("=",Id("a"),BinaryOp("+",Id("a"),IntLiteral(5))),CallExpr(Id("foo"),[IntLiteral(2)])])],BinaryOp("!=",Id("a"),IntLiteral(100)))]),None)]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,355))   
-        
-    def test_56(self):
-        inp="""void main () {
-          if(a>5){
-             int arr[10];
-             string str, charStr;
-             boolean isTrue, isFact, isFalse;
-             float fNum;
-             do{
-               a= a+5;
-               foo(2);
-             }while (a!=100);
-          }
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[If(BinaryOp(">",Id("a"),IntLiteral(5)),Block([VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType())),VarDecl(Id("str"),StringType()),VarDecl(Id("charStr"),StringType()),VarDecl(Id("isTrue"),BoolType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("isFalse"),BoolType()),VarDecl(Id("fNum"),FloatType())],[Dowhile([Block([],[BinaryOp("=",Id("a"),BinaryOp("+",Id("a"),IntLiteral(5))),CallExpr(Id("foo"),[IntLiteral(2)])])],BinaryOp("!=",Id("a"),IntLiteral(100)))]),None)]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,356))   
-        
-    def test_57(self):
-        inp="""void main () {
-        if(a>5){
-         fNum = 1.e-2;
-        }
-        else{
-          fNum = 2.e-2;
-        }
-        }"""
-        out=str(Program([\
-                    FuncDecl(Id("main"),[],VoidType(),Block([]\
-                        ,[If(BinaryOp(">",Id("a"),IntLiteral(5)),\
-                                Block([],[BinaryOp("=",Id("fNum"),FloatLiteral(float(0.01)))])\
-                        ,(Block([],[BinaryOp("=",Id("fNum"),FloatLiteral(float(0.02)))])))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,357))   
-        
-    def test_58(self):
-        inp="""void main () {
-          if(a>5){
-            fNum = 1.e-2;
-            arr[10] = 15+5*2/10;
-            foo(2)[20] = 25+arr[10];
-          }
-          else{
-            fNum = 2.e-2;
-            arr[10] = 0;
-            foo(2)[20] = 25+arr[10];
-          }
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[If(BinaryOp(">",Id("a"),IntLiteral(5)),\
-            Block([],[BinaryOp("=",Id("fNum"),FloatLiteral(float(0.01))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(10)),BinaryOp("+",IntLiteral(15),BinaryOp("/",BinaryOp("*",IntLiteral(5),IntLiteral(2)),IntLiteral(10)))),BinaryOp("=",ArrayCell(CallExpr(Id("foo"),[IntLiteral(2)]),IntLiteral(20)),BinaryOp("+",IntLiteral(25),ArrayCell(Id("arr"),IntLiteral(10))))]),\
-            Block([],[BinaryOp("=",Id("fNum"),FloatLiteral(float(0.02))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(10)),IntLiteral(0)),BinaryOp("=",ArrayCell(CallExpr(Id("foo"),[IntLiteral(2)]),IntLiteral(20)),BinaryOp("+",IntLiteral(25),ArrayCell(Id("arr"),IntLiteral(10))))]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,358))   
-        
-    def test_59(self):
-        inp="""void main () {
-          if(a>5){
-            do{
-              a= a+5;
-              foo(2);
-            }while (a!=100);
-          }
-          else{
-            do{
-              a = a * 2;
-              compare(a,max);
-            }while (a!=144);
-          }
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[If(BinaryOp(">",Id("a"),IntLiteral(5)),Block([],[Dowhile([Block([],[BinaryOp("=",Id("a"),BinaryOp("+",Id("a"),IntLiteral(5))),CallExpr(Id("foo"),[IntLiteral(2)])])],BinaryOp("!=",Id("a"),IntLiteral(100)))]),Block([],[Dowhile([Block([],[BinaryOp("=",Id("a"),BinaryOp("*",Id("a"),IntLiteral(2))),CallExpr(Id("compare"),[Id("a"),Id("max")])])],BinaryOp("!=",Id("a"),IntLiteral(144)))]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,359))   
-        
-    def test_60(self):
-        inp="""void main () {
-          if(a>5){
-             int arr[10];
-             string str, charStr;
-             boolean isTrue, isFact, isFalse;
-             float fNum;
-             do{
-               a= a+5;
-               foo(2);
-             }while (a!=100);
-          }
-          else{
-            int arr[10];
-            string str, charStr;
-            boolean isTrue, isFact, isFalse;
-            do{
-              a= a*2;
-              compare(a, max);
-            }while (a!=144);
-          }
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[If(BinaryOp(">",Id("a"),IntLiteral(5)),Block([VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType())),VarDecl(Id("str"),StringType()),VarDecl(Id("charStr"),StringType()),VarDecl(Id("isTrue"),BoolType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("isFalse"),BoolType()),VarDecl(Id("fNum"),FloatType())],[Dowhile([Block([],[BinaryOp("=",Id("a"),BinaryOp("+",Id("a"),IntLiteral(5))),CallExpr(Id("foo"),[IntLiteral(2)])])],BinaryOp("!=",Id("a"),IntLiteral(100)))]),Block([VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType())),VarDecl(Id("str"),StringType()),VarDecl(Id("charStr"),StringType()),VarDecl(Id("isTrue"),BoolType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("isFalse"),BoolType())],[Dowhile([Block([],[BinaryOp("=",Id("a"),BinaryOp("*",Id("a"),IntLiteral(2))),CallExpr(Id("compare"),[Id("a"),Id("max")])])],BinaryOp("!=",Id("a"),IntLiteral(144)))]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,360))   
-        
-    def test_61(self):
-        inp="""void main () {
-          if(a>5){
-            if(a!=prime){
-              foo(a);
-            }
-          }
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[If(BinaryOp(">",Id("a"),IntLiteral(5)),Block([],[If(BinaryOp("!=",Id("a"),Id("prime")),Block([],[CallExpr(Id("foo"),[Id("a")])]),None)]),None)]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,361))   
-        
-    def test_62(self):
-        inp="""void main () {
-          if(a>5)
-            if(a!=prime)
-              if(a%15==1)
-                if(a<100)
-                  foo(a,max);
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[If(BinaryOp(">",Id("a"),IntLiteral(5)),If(BinaryOp("!=",Id("a"),Id("prime")),If(BinaryOp("==",BinaryOp("%",Id("a"),IntLiteral(15)),IntLiteral(1)),If(BinaryOp("<",Id("a"),IntLiteral(100)),CallExpr(Id("foo"),[Id("a"),Id("max")]),None),None),None),None)]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,362))   
-        
-    def test_63(self):
-        inp="""void main () {
-          if(a>5){
-            if(a!=prime){
-              foo(a);
-            }
-          }
-          else{
-            if(a==fact(10)){
-              foo(fact(10));
-            }
-          }
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[If(BinaryOp(">",Id("a"),IntLiteral(5)),Block([],[If(BinaryOp("!=",Id("a"),Id("prime")),Block([],[CallExpr(Id("foo"),[Id("a")])]),None)]),Block([],[If(BinaryOp("==",Id("a"),CallExpr(Id("fact"),[IntLiteral(10)])),Block([],[CallExpr(Id("foo"),[CallExpr(Id("fact"),[IntLiteral(10)])])]),None)]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,363))   
-        
-    def test_64(self):
-        inp=""" void main () {
-                    if(a>5){
-                        if(a!=prime){
-                            foo(a);
-                        }
-                        else{
-                            foo(5);
-                        }
-                    }
-                    else{
-                        if(a==fact(10)){
-                            foo(fact(10));
-                        }
-                        else{
-                            foo(a*15);
-                        }
-                    }
-                }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[If(BinaryOp(">",Id("a"),IntLiteral(5)),Block([],[If(BinaryOp("!=",Id("a"),Id("prime")),Block([],[CallExpr(Id("foo"),[Id("a")])]),Block([],[CallExpr(Id("foo"),[IntLiteral(5)])]))]),Block([],[If(BinaryOp("==",Id("a"),CallExpr(Id("fact"),[IntLiteral(10)])),Block([],[CallExpr(Id("foo"),[CallExpr(Id("fact"),[IntLiteral(10)])])]),Block([],[CallExpr(Id("foo"),[BinaryOp("*",Id("a"),IntLiteral(15))])]))]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,364))   
-        
-    def test_65(self):
-        inp="""void main () {
-          if(a>5){
-            if(a!=prime){
-              foo(a);
-            }
-            else{
-              foo(5);
-            }
-            if(arr[5]<a){
-              compare(arr[4],a);
-            }
-          }
-          else{
-            if(a==fact(10)){
-              foo(fact(10));
-            }
-            else{
-              foo(a*15);
-            }
-            if(arr[5]>a){
-               compare(arr[0],a);
-            }
-          }
-        }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([],[If(BinaryOp(">",Id("a"),IntLiteral(5)),Block([],[If(BinaryOp("!=",Id("a"),Id("prime")),Block([],[CallExpr(Id("foo"),[Id("a")])]),Block([],[CallExpr(Id("foo"),[IntLiteral(5)])])),If(BinaryOp("<",ArrayCell(Id("arr"),IntLiteral(5)),Id("a")),Block([],[CallExpr(Id("compare"),[ArrayCell(Id("arr"),IntLiteral(4)),Id("a")])]),None)]),Block([],[If(BinaryOp("==",Id("a"),CallExpr(Id("fact"),[IntLiteral(10)])),Block([],[CallExpr(Id("foo"),[CallExpr(Id("fact"),[IntLiteral(10)])])]),Block([],[CallExpr(Id("foo"),[BinaryOp("*",Id("a"),IntLiteral(15))])])),If(BinaryOp(">",ArrayCell(Id("arr"),IntLiteral(5)),Id("a")),Block([],[CallExpr(Id("compare"),[ArrayCell(Id("arr"),IntLiteral(0)),Id("a")])]),None)]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,365))   
-        
-    def test_66(self):
-        inp="""int main(){
-          for(i=0;i<iNum;i=i+2){
+		"""
+		expect=str(Program([FuncDecl(Id("foo"),[VarDecl("x",IntType()),VarDecl("y",IntType()),VarDecl("z",FloatType()),VarDecl("s",StringType()),VarDecl("a",ArrayPointerType(IntType()))],VoidType(),Block([BinaryOp("=",Id("x"),BinaryOp("+",BinaryOp("+",Id("y"),Id("c")),Id("d")))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,345))
 
-          }
-         }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([],[For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),Id("iNum")),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(2))),Block([],[]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,366))   
-        
-    def test_67(self):
-        inp="""int main(){
-          for(i=0;i<iNum;i=i+2){
-            max(i);
-            min(iNum);
-            compare(max(i), min(iNum));
-            foo(max(min(i)));
-          }
-         }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([],[For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),Id("iNum")),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(2))),Block([],[CallExpr(Id("max"),[Id("i")]),CallExpr(Id("min"),[Id("iNum")]),CallExpr(Id("compare"),[CallExpr(Id("max"),[Id("i")]),CallExpr(Id("min"),[Id("iNum")])]),CallExpr(Id("foo"),[CallExpr(Id("max"),[CallExpr(Id("min"),[Id("i")])])])]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,367))   
-        
-    def test_68(self):
-        inp="""int main(){
-          for(i=0;i<iNum;i=i+2){
-            if(i%2==0){
-              println(i);
+	def test_funcdec_46(self):
+		input = """void foo(int x, int y, float z, string s[], int a[]) {
+        }
+		"""
+		expect=str(Program([FuncDecl(Id("foo"),[VarDecl("x",IntType()),VarDecl("y",IntType()),VarDecl("z",FloatType()),VarDecl("s",ArrayPointerType(StringType())),VarDecl("a",ArrayPointerType(IntType()))],VoidType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,346))
+
+	def test_funcdec_47(self):
+		input = """int main () {
+                     int a, b, c;
+                   }
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType())]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,347))
+
+	def test_funcdec_48(self):
+		input = """int main (int b,int c[]) {
+                        int a; float a;
+                             int c;
+                        }
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[VarDecl("b",IntType()),VarDecl("c",ArrayPointerType(IntType()))],IntType(),Block([VarDecl("a",IntType()),VarDecl("a",FloatType()),VarDecl("c",IntType())]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,348))
+
+	def test_funcdec_49(self):
+		input = """int _mai_n () {
+                                    int a, c[5], d[5], _, _123;
+                                    float asdas; boolean x;
+                            }
+		"""
+		expect=str(Program([FuncDecl(Id("_mai_n"),[],IntType(),Block([VarDecl("a",IntType()),VarDecl("c",ArrayType(5,IntType())),VarDecl("d",ArrayType(5,IntType())),VarDecl("_",IntType()),VarDecl("_123",IntType()),VarDecl("asdas",FloatType()),VarDecl("x",BoolType())]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,349))
+
+	def test_stmtdec_50(self):
+		input = """int main()
+		{
+			if (a = 3) a >= 4;
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([If(BinaryOp("=",Id("a"),IntLiteral(3)),BinaryOp(">=",Id("a"),IntLiteral(4)))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,350))
+
+	def test_stmtdec_51(self):
+		input = """int main()
+		{
+			if (a > 3) {
+                a >= 4;
             }
-            else{
-              do{
-                iNum = iNum - i;
-                foo(iNum%i);
-                println(iNum);
-              } while (iNum > pow(i,4));
-            }
-          }
-         }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([],[For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),Id("iNum")),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(2))),Block([],[If(BinaryOp("==",BinaryOp("%",Id("i"),IntLiteral(2)),IntLiteral(0)),Block([],[CallExpr(Id("println"),[Id("i")])]),Block([],[Dowhile([Block([],[BinaryOp("=",Id("iNum"),BinaryOp("-",Id("iNum"),Id("i"))),CallExpr(Id("foo"),[BinaryOp("%",Id("iNum"),Id("i"))]),CallExpr(Id("println"),[Id("iNum")])])],BinaryOp(">",Id("iNum"),CallExpr(Id("pow"),[Id("i"),IntLiteral(4)])))]))]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,368))   
-        
-    def test_69(self):
-        inp="""int main(){
-          for(i=0;i<iNum;i=i+2){
-            for(j=0;j<i;j=j+1){
-              foo(i,j,max(i*j,iNum));
-            }
-          }
-         }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([],[For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),Id("iNum")),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(2))),Block([],[For(BinaryOp("=",Id("j"),IntLiteral(0)),BinaryOp("<",Id("j"),Id("i")),BinaryOp("=",Id("j"),BinaryOp("+",Id("j"),IntLiteral(1))),Block([],[CallExpr(Id("foo"),[Id("i"),Id("j"),CallExpr(Id("max"),[BinaryOp("*",Id("i"),Id("j")),Id("iNum")])])]))]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,369))   
-        
-    def test_70(self):
-        inp="""int main(){
-          for(i=0;i<iNum;i=i+2){
-            for(j=0;j<i;j=j+1){
-              for(k=0;k<j; k= k+1){
-                for(l=0;l<k;l=l+2){
-                  getText(i,j,k,l);
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([If(BinaryOp(">",Id("a"),IntLiteral(3)),Block([BinaryOp(">=",Id("a"),IntLiteral(4))]))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,351))
+
+	def test_stmtdec_52(self):
+		input = """int main()
+		{
+			if (a > 3 && a < 5) a = 10;
+            else if (a <= 3) a = - a / 2;
+            else a = a[2];
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([If(BinaryOp("&&",BinaryOp(">",Id("a"),IntLiteral(3)),BinaryOp("<",Id("a"),IntLiteral(5))),BinaryOp("=",Id("a"),IntLiteral(10)),If(BinaryOp("<=",Id("a"),IntLiteral(3)),BinaryOp("=",Id("a"),BinaryOp("/",UnaryOp("-",Id("a")),IntLiteral(2))),BinaryOp("=",Id("a"),ArrayCell(Id("a"),IntLiteral(2)))))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,352))
+
+	def test_stmtdec_53(self):
+		input = """int main()
+		{
+            if (a < 4) a = 10; else a = foo(3, a[5], !4);
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([If(BinaryOp("<",Id("a"),IntLiteral(4)),BinaryOp("=",Id("a"),IntLiteral(10)),BinaryOp("=",Id("a"),CallExpr(Id("foo"),[IntLiteral(3),ArrayCell(Id("a"),IntLiteral(5)),UnaryOp("!",IntLiteral(4))])))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,353))
+
+	def test_stmtdec_54(self):
+		input = """int main()
+		{
+            if (number%2) return;
+            else numberToBin(number);
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([If(BinaryOp("%",Id("number"),IntLiteral(2)),Return(),CallExpr(Id("numberToBin"),[Id("number")]))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,354))
+
+	def test_stmtdec_55(self):
+		input = """int main()
+		{
+            if (true) a = b;
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([If(BooleanLiteral(True),BinaryOp("=",Id("a"),Id("b")))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,355))
+
+	def test_stmtdec_56(self):
+		input = """int main()
+		{
+			if (abc != cdf) {
+                a = b + 1;
+                b = c + 1;
+                if(a) a = b;
+                {
+                    ah(2);
                 }
-              }
             }
-          }
-         }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([],[For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),Id("iNum")),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(2))),Block([],[For(BinaryOp("=",Id("j"),IntLiteral(0)),BinaryOp("<",Id("j"),Id("i")),BinaryOp("=",Id("j"),BinaryOp("+",Id("j"),IntLiteral(1))),Block([],[For(BinaryOp("=",Id("k"),IntLiteral(0)),BinaryOp("<",Id("k"),Id("j")),BinaryOp("=",Id("k"),BinaryOp("+",Id("k"),IntLiteral(1))),Block([],[For(BinaryOp("=",Id("l"),IntLiteral(0)),BinaryOp("<",Id("l"),Id("k")),BinaryOp("=",Id("l"),BinaryOp("+",Id("l"),IntLiteral(2))),Block([],[CallExpr(Id("getText"),[Id("i"),Id("j"),Id("k"),Id("l")])]))]))]))]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,370))   
-        
-    def test_71(self):
-        inp="""int main(){
-          for(i=0;i<iNum;i=i+2){
-            k = foo(i,pow(i,3));
-            if(k>144){
-              break;
-            }
-            else{
-              continue;
-            }
-            println(k);
-          }
-         }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([],[For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),Id("iNum")),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(2))),Block([],[BinaryOp("=",Id("k"),CallExpr(Id("foo"),[Id("i"),CallExpr(Id("pow"),[Id("i"),IntLiteral(3)])])),If(BinaryOp(">",Id("k"),IntLiteral(144)),Block([],[Break()]),Block([],[Continue()])),CallExpr(Id("println"),[Id("k")])]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,371))   
-        
-    def test_72(self):
-        inp="""int main(){
-          for(i=0;i<iNum;i=i+2){
-            k = foo(i,pow(i,3));
-            if(k>144){
-              break;
-            }
-            else{
-              continue;
-            }
-            if(i==prime){
-              return 0;
-            }
-            println(k);
-          }
-         }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([],[For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),Id("iNum")),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(2))),Block([],[BinaryOp("=",Id("k"),CallExpr(Id("foo"),[Id("i"),CallExpr(Id("pow"),[Id("i"),IntLiteral(3)])])),If(BinaryOp(">",Id("k"),IntLiteral(144)),Block([],[Break()]),Block([],[Continue()])),If(BinaryOp("==",Id("i"),Id("prime")),Block([],[Return(IntLiteral(0))]),None),CallExpr(Id("println"),[Id("k")])]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,372))   
-        
-    def test_73(self):
-        inp="""void main(){
-             int i;
-             ramdon(i);
-             if(i>10){
-               break;
-             }
-             else{
-               println(i);
-               goto(ramdon(i));
-             }
-             return ;
-            }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([VarDecl(Id("i"),IntType())],[CallExpr(Id("ramdon"),[Id("i")]),If(BinaryOp(">",Id("i"),IntLiteral(10)),Block([],[Break()]),Block([],[CallExpr(Id("println"),[Id("i")]),CallExpr(Id("goto"),[CallExpr(Id("ramdon"),[Id("i")])])])),Return(None)]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,373))   
-        
-    def test_74(self):
-        inp="""void main(){
-             int i;
-             ramdon(i);
-             if(i>10){
-               break;
-             }
-             else{
-               println(i);
-               goto(ramdon(i));
-             }
-             return pow(i,i);
-            }"""
-        out=str(Program([FuncDecl(Id("main"),[],VoidType(),Block([VarDecl(Id("i"),IntType())],[CallExpr(Id("ramdon"),[Id("i")]),If(BinaryOp(">",Id("i"),IntLiteral(10)),Block([],[Break()]),Block([],[CallExpr(Id("println"),[Id("i")]),CallExpr(Id("goto"),[CallExpr(Id("ramdon"),[Id("i")])])])),Return(CallExpr(Id("pow"),[Id("i"),Id("i")]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,374))   
-        
-    def test_75(self):
-        inp="""int foo(int arr, int iNum, boolean isTrue){
-          isTrue = iNum %2;
-        }"""
-        out=str(Program([FuncDecl(Id("foo"),[VarDecl(Id("arr"),IntType()),VarDecl(Id("iNum"),IntType()),VarDecl(Id("isTrue"),BoolType())],IntType(),Block([],[BinaryOp("=",Id("isTrue"),BinaryOp("%",Id("iNum"),IntLiteral(2)))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,375))   
-        
-    def test_76(self):
-        inp="""int foo(int arr[], int iNum, boolean isTrue){
-          isTrue = iNum %2;
-          arr[0] = iNum %6;
-          iNum = iNum + 19;
-          arr[1] = arr[0] + iNum;
-          foo(arr, iNum, isTrue);
-          return iNum;
-        }"""
-        out=str(Program([FuncDecl(Id("foo"),[VarDecl(Id("arr"),ArrayPointerType(IntType())),VarDecl(Id("iNum"),IntType()),VarDecl(Id("isTrue"),BoolType())],IntType(),Block([],[BinaryOp("=",Id("isTrue"),BinaryOp("%",Id("iNum"),IntLiteral(2))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(0)),BinaryOp("%",Id("iNum"),IntLiteral(6))),BinaryOp("=",Id("iNum"),BinaryOp("+",Id("iNum"),IntLiteral(19))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(1)),BinaryOp("+",ArrayCell(Id("arr"),IntLiteral(0)),Id("iNum"))),CallExpr(Id("foo"),[Id("arr"),Id("iNum"),Id("isTrue")]),Return(Id("iNum"))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,376))   
-        
-    def test_77(self):
-        inp="""int foo(int arr[], int iNum, boolean isTrue){
-          return isTrue;
-          return arr[0] = iNum %6;
-          return iNum = iNum + 19;
-          return arr[1] = arr[0] + iNum;
-          return foo(arr, iNum, isTrue);
-          return iNum;
-        }"""
-        out=str(Program([FuncDecl(Id("foo"),[VarDecl(Id("arr"),ArrayPointerType(IntType())),VarDecl(Id("iNum"),IntType()),VarDecl(Id("isTrue"),BoolType())],IntType(),Block([],[Return(Id("isTrue")),Return(BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(0)),BinaryOp("%",Id("iNum"),IntLiteral(6)))),Return(BinaryOp("=",Id("iNum"),BinaryOp("+",Id("iNum"),IntLiteral(19)))),Return(BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(1)),BinaryOp("+",ArrayCell(Id("arr"),IntLiteral(0)),Id("iNum")))),Return(CallExpr(Id("foo"),[Id("arr"),Id("iNum"),Id("isTrue")])),Return(Id("iNum"))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,377))   
-        
-    def test_78(self):
-        inp="""int foo(int arr[], int iNum, boolean isTrue){
-          {}
-        }"""
-        out=str(Program([FuncDecl(Id("foo"),[VarDecl(Id("arr"),ArrayPointerType(IntType())),VarDecl(Id("iNum"),IntType()),VarDecl(Id("isTrue"),BoolType())],IntType(),Block([],[Block([],[])]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,378))   
-        
-    def test_79(self):
-        inp="""int foo(int arr[], int iNum, boolean isTrue){
-          {{{{}}}}
-        }"""
-        out=str(Program([FuncDecl(Id("foo"),[VarDecl(Id("arr"),ArrayPointerType(IntType())),VarDecl(Id("iNum"),IntType()),VarDecl(Id("isTrue"),BoolType())],IntType(),Block([],[Block([],[Block([],[Block([],[Block([],[])])])])]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,379))   
-        
-    def test_80(self):
-        inp="""int foo(int arr[], int iNum, boolean isTrue){
-          {{{{int iNum;}}}}
-        }"""
-        out=str(Program([FuncDecl(Id("foo"),[VarDecl(Id("arr"),ArrayPointerType(IntType())),VarDecl(Id("iNum"),IntType()),VarDecl(Id("isTrue"),BoolType())],IntType(),Block([],[Block([],[Block([],[Block([],[Block([VarDecl(Id("iNum"),IntType())],[])])])])]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,380))   
-        
-    def test_81(self):
-        inp="""int foo(int arr[], int iNum, boolean isTrue){
-          {{{{iNum = iNum + 10;}}}}
-        }"""
-        out=str(Program([FuncDecl(Id("foo"),[VarDecl(Id("arr"),ArrayPointerType(IntType())),VarDecl(Id("iNum"),IntType()),VarDecl(Id("isTrue"),BoolType())],IntType(),Block([],[Block([],[Block([],[Block([],[Block([],[BinaryOp("=",Id("iNum"),BinaryOp("+",Id("iNum"),IntLiteral(10)))])])])])]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,381))   
-        
-    def test_82(self):
-        inp="""int i ;
-                  int f ( ) {
-                  return 200;
-                   }
-                   void main ( ) {
-                   int main ;
-                   main = f ( ) ;
-                   putIntLn ( i ) ;
-                   {
-                   int i ;
-                   int main ;
-                   int f ;
-                   main = f = i = 100;
-                   putIntLn ( i ) ;
-                   putIntLn ( main ) ;
-                   putIntLn ( f ) ;
-                   }
-                   putIntLn ( main ) ;
-                   }"""
-        out=str(Program([VarDecl(Id("i"),IntType()),FuncDecl(Id("f"),[],IntType(),Block([],[Return(IntLiteral(200))])),FuncDecl(Id("main"),[],VoidType(),Block([VarDecl(Id("main"),IntType())],[BinaryOp("=",Id("main"),CallExpr(Id("f"),[])),CallExpr(Id("putIntLn"),[Id("i")]),Block([VarDecl(Id("i"),IntType()),VarDecl(Id("main"),IntType()),VarDecl(Id("f"),IntType())],[BinaryOp("=",Id("main"),BinaryOp("=",Id("f"),BinaryOp("=",Id("i"),IntLiteral(100)))),CallExpr(Id("putIntLn"),[Id("i")]),CallExpr(Id("putIntLn"),[Id("main")]),CallExpr(Id("putIntLn"),[Id("f")])]),CallExpr(Id("putIntLn"),[Id("main")])]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,382))   
-        
-    def test_83(self):
-        inp="""int main(){
-        int a, b, arr[10];
-        boolean isTrue, isFact;
-        string str;
-        float fNum;
-        a = b = 10;
-        isTrue = isTrue || isFact;
-        arr[1] = isFact && a;
-        arr[2] = a == b;
-        arr[3] = a != 4;
-      }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType()),VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType())),VarDecl(Id("isTrue"),BoolType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("str"),StringType()),VarDecl(Id("fNum"),FloatType())],[BinaryOp("=",Id("a"),BinaryOp("=",Id("b"),IntLiteral(10))),BinaryOp("=",Id("isTrue"),BinaryOp("||",Id("isTrue"),Id("isFact"))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(1)),BinaryOp("&&",Id("isFact"),Id("a"))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(2)),BinaryOp("==",Id("a"),Id("b"))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(3)),BinaryOp("!=",Id("a"),IntLiteral(4)))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,383))   
-        
-    def test_84(self):
-        inp="""int main(){
-        int a, b, arr[10];
-        boolean isTrue, isFact;
-        string str;
-        float fNum;
-        a = b = 10;
-        isTrue = isTrue >= isFact;
-        arr[1] = isFact > a;
-        arr[2] = a < b;
-        arr[3] = a <= 4;
-      }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType()),VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType())),VarDecl(Id("isTrue"),BoolType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("str"),StringType()),VarDecl(Id("fNum"),FloatType())],[BinaryOp("=",Id("a"),BinaryOp("=",Id("b"),IntLiteral(10))),BinaryOp("=",Id("isTrue"),BinaryOp(">=",Id("isTrue"),Id("isFact"))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(1)),BinaryOp(">",Id("isFact"),Id("a"))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(2)),BinaryOp("<",Id("a"),Id("b"))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(3)),BinaryOp("<=",Id("a"),IntLiteral(4)))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,384))   
-        
-    def test_85(self):
-        inp="""int main(){
-        int a, b, arr[10];
-        boolean isTrue, isFact;
-        string str;
-        float fNum;
-        a = b = 10;
-        str = "phamvanlinh";
-        isTrue = a != 10;
-        arr[1] = a + 10 + b * 15;
-        arr[2] = a - b + b / 25;
-        arr[3] = a / 2 - 10 - str;
-        arr[4] = b*a;
-        arr[5] = (a%10)%2;
-      }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType()),VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType())),VarDecl(Id("isTrue"),BoolType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("str"),StringType()),VarDecl(Id("fNum"),FloatType())],[BinaryOp("=",Id("a"),BinaryOp("=",Id("b"),IntLiteral(10))),BinaryOp("=",Id("str"),StringLiteral("phamvanlinh")),BinaryOp("=",Id("isTrue"),BinaryOp("!=",Id("a"),IntLiteral(10))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(1)),BinaryOp("+",BinaryOp("+",Id("a"),IntLiteral(10)),BinaryOp("*",Id("b"),IntLiteral(15)))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(2)),BinaryOp("+",BinaryOp("-",Id("a"),Id("b")),BinaryOp("/",Id("b"),IntLiteral(25)))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(3)),BinaryOp("-",BinaryOp("-",BinaryOp("/",Id("a"),IntLiteral(2)),IntLiteral(10)),Id("str"))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(4)),BinaryOp("*",Id("b"),Id("a"))),BinaryOp("=",ArrayCell(Id("arr"),IntLiteral(5)),BinaryOp("%",BinaryOp("%",Id("a"),IntLiteral(10)),IntLiteral(2)))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,385))   
-        
-    def test_86(self):
-        inp="""int main(){
-        int a, b, arr[10];
-        boolean isTrue, isFact;
-        string str;
-        float fNum;
-        isFact = -isTrue;
-        isFact = !isFact;
-        isTrue = ----isFact;
-        isTrue = isTrue = !!isTrue = -!-!isTrue;
-      }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType()),VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType())),VarDecl(Id("isTrue"),BoolType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("str"),StringType()),VarDecl(Id("fNum"),FloatType())],[BinaryOp("=",Id("isFact"),UnaryOp("-",Id("isTrue"))),BinaryOp("=",Id("isFact"),UnaryOp("!",Id("isFact"))),BinaryOp("=",Id("isTrue"),UnaryOp("-",UnaryOp("-",UnaryOp("-",UnaryOp("-",Id("isFact")))))),BinaryOp("=",Id("isTrue"),BinaryOp("=",Id("isTrue"),BinaryOp("=",UnaryOp("!",UnaryOp("!",Id("isTrue"))),UnaryOp("-",UnaryOp("!",UnaryOp("-",UnaryOp("!",Id("isTrue"))))))))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,386))   
-        
-    def test_87(self):
-        inp="""int main(){
-        int a, b, arr[10];
-        boolean isTrue, isFact;
-        string str;
-        (arr[0])[10] = arr[5]*2;
-        foo(2)[10] = foo(2) + a + b;
-      }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType()),VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType())),VarDecl(Id("isTrue"),BoolType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("str"),StringType())],[BinaryOp("=",ArrayCell(ArrayCell(Id("arr"),IntLiteral(0)),IntLiteral(10)),BinaryOp("*",ArrayCell(Id("arr"),IntLiteral(5)),IntLiteral(2))),BinaryOp("=",ArrayCell(CallExpr(Id("foo"),[IntLiteral(2)]),IntLiteral(10)),BinaryOp("+",BinaryOp("+",CallExpr(Id("foo"),[IntLiteral(2)]),Id("a")),Id("b")))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,387))   
-        
-    def test_88(self):
-        inp="""int main(){
-        int a, b, arr[10];
-        boolean isTrue, isFact;
-        string str;
-        foo(2)[foo(2)[foo(2)]] = compare(a,b)[arr[foo(2)[15]]];
-        foo(arr, arr)[compare(a,b)[25]+ compare(b,a)[29]] = foo(a,b,c,arrp[1])[2];
-      }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType()),VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType())),VarDecl(Id("isTrue"),BoolType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("str"),StringType())],[BinaryOp("=",ArrayCell(CallExpr(Id("foo"),[IntLiteral(2)]),ArrayCell(CallExpr(Id("foo"),[IntLiteral(2)]),CallExpr(Id("foo"),[IntLiteral(2)]))),ArrayCell(CallExpr(Id("compare"),[Id("a"),Id("b")]),ArrayCell(Id("arr"),ArrayCell(CallExpr(Id("foo"),[IntLiteral(2)]),IntLiteral(15))))),BinaryOp("=",ArrayCell(CallExpr(Id("foo"),[Id("arr"),Id("arr")]),BinaryOp("+",ArrayCell(CallExpr(Id("compare"),[Id("a"),Id("b")]),IntLiteral(25)),ArrayCell(CallExpr(Id("compare"),[Id("b"),Id("a")]),IntLiteral(29)))),ArrayCell(CallExpr(Id("foo"),[Id("a"),Id("b"),Id("c"),ArrayCell(Id("arrp"),IntLiteral(1))]),IntLiteral(2)))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,388))   
-        
-    def test_89(self):
-        inp="""int main(){
-        int a, b, arr[10];
-        boolean isTrue, isFact;
-        string str;
-        fact(a,10);
-        foo(str, isTrue);
-        compare(a,b,isTrue);
-        getChar(str, isFact);
-      }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType()),VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType())),VarDecl(Id("isTrue"),BoolType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("str"),StringType())],[CallExpr(Id("fact"),[Id("a"),IntLiteral(10)]),CallExpr(Id("foo"),[Id("str"),Id("isTrue")]),CallExpr(Id("compare"),[Id("a"),Id("b"),Id("isTrue")]),CallExpr(Id("getChar"),[Id("str"),Id("isFact")])]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,389))   
-        
-    def test_90(self):
-        inp="""int main(){
-        int a, b, arr[10];
-        boolean isTrue, isFact;
-        string str;
-        fact(foo(2) + a + b,10);
-        foo(str, a + 10 + b * 15);
-        compare(a,a + 10 + b * 15,isTrue);
-        getChar(str, a + 10 + b * 15);
-      }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType()),VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType())),VarDecl(Id("isTrue"),BoolType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("str"),StringType())],[CallExpr(Id("fact"),[BinaryOp("+",BinaryOp("+",CallExpr(Id("foo"),[IntLiteral(2)]),Id("a")),Id("b")),IntLiteral(10)]),CallExpr(Id("foo"),[Id("str"),BinaryOp("+",BinaryOp("+",Id("a"),IntLiteral(10)),BinaryOp("*",Id("b"),IntLiteral(15)))]),CallExpr(Id("compare"),[Id("a"),BinaryOp("+",BinaryOp("+",Id("a"),IntLiteral(10)),BinaryOp("*",Id("b"),IntLiteral(15))),Id("isTrue")]),CallExpr(Id("getChar"),[Id("str"),BinaryOp("+",BinaryOp("+",Id("a"),IntLiteral(10)),BinaryOp("*",Id("b"),IntLiteral(15)))])]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,390))   
-        
-    def test_91(self):
-        inp="""int main(){
-        int a, b, arr[10];
-        boolean isTrue, isFact;
-        string str;
-        fact(foo(2)[10] + a + b,10[10]);
-        foo(str[10], a + 10 + b[0] * 15);
-        compare(a[3],a + 10 + b[2] * 15,isTrue);
-        getChar(str[10], a + 10 + b[15] * 15);
-      }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType()),VarDecl(Id("arr"),ArrayType(IntLiteral(10),IntType())),VarDecl(Id("isTrue"),BoolType()),VarDecl(Id("isFact"),BoolType()),VarDecl(Id("str"),StringType())],[CallExpr(Id("fact"),[BinaryOp("+",BinaryOp("+",ArrayCell(CallExpr(Id("foo"),[IntLiteral(2)]),IntLiteral(10)),Id("a")),Id("b")),ArrayCell(IntLiteral(10),IntLiteral(10))]),CallExpr(Id("foo"),[ArrayCell(Id("str"),IntLiteral(10)),BinaryOp("+",BinaryOp("+",Id("a"),IntLiteral(10)),BinaryOp("*",ArrayCell(Id("b"),IntLiteral(0)),IntLiteral(15)))]),CallExpr(Id("compare"),[ArrayCell(Id("a"),IntLiteral(3)),BinaryOp("+",BinaryOp("+",Id("a"),IntLiteral(10)),BinaryOp("*",ArrayCell(Id("b"),IntLiteral(2)),IntLiteral(15))),Id("isTrue")]),CallExpr(Id("getChar"),[ArrayCell(Id("str"),IntLiteral(10)),BinaryOp("+",BinaryOp("+",Id("a"),IntLiteral(10)),BinaryOp("*",ArrayCell(Id("b"),IntLiteral(15)),IntLiteral(15)))])]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,391))   
-        
-    def test_92(self):
-        inp="""int MAX_SIZE;
-      int sum;
-      void swap(int a, int b){
-        int c;
-        c = a;
-        a = b;
-        b = c;  
-      }
-      int main(){
-        int a, b;
-        swap(a,b);
-        println(a,b);
-      }"""
-        out=str(Program([VarDecl(Id("MAX_SIZE"),IntType()),VarDecl(Id("sum"),IntType()),FuncDecl(Id("swap"),[VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType())],VoidType(),Block([VarDecl(Id("c"),IntType())],[BinaryOp("=",Id("c"),Id("a")),BinaryOp("=",Id("a"),Id("b")),BinaryOp("=",Id("b"),Id("c"))])),FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType())],[CallExpr(Id("swap"),[Id("a"),Id("b")]),CallExpr(Id("println"),[Id("a"),Id("b")])]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,392))   
-        
-    def test_93(self):
-        inp="""
-    int compareString(string str1, string str2){
-      int result;
-      if (strlen(str1) >= strlen(str2)){
-        for (i = 0; i < strlen(str2); i)
-          result =abs(str1[i] - str2[i]);
-        for (i = strlen(str2); i < strlen(str1); i)
-          result =str1[i];
-      }
-      else{
-        for(i=0;i<strlen(str1);i)
-          for (i = strlen(str1); i < strlen(str2); i)
-            result = str2[i];
-      }
-      return result;
-    }"""
-        out=str(Program([FuncDecl(Id("compareString"),[VarDecl(Id("str1"),StringType()),VarDecl(Id("str2"),StringType())],IntType(),Block([VarDecl(Id("result"),IntType())],[If(BinaryOp(">=",CallExpr(Id("strlen"),[Id("str1")]),CallExpr(Id("strlen"),[Id("str2")])),Block([],[For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),CallExpr(Id("strlen"),[Id("str2")])),Id("i"),BinaryOp("=",Id("result"),CallExpr(Id("abs"),[BinaryOp("-",ArrayCell(Id("str1"),Id("i")),ArrayCell(Id("str2"),Id("i")))]))),For(BinaryOp("=",Id("i"),CallExpr(Id("strlen"),[Id("str2")])),BinaryOp("<",Id("i"),CallExpr(Id("strlen"),[Id("str1")])),Id("i"),BinaryOp("=",Id("result"),ArrayCell(Id("str1"),Id("i"))))]),Block([],[For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),CallExpr(Id("strlen"),[Id("str1")])),Id("i"),For(BinaryOp("=",Id("i"),CallExpr(Id("strlen"),[Id("str1")])),BinaryOp("<",Id("i"),CallExpr(Id("strlen"),[Id("str2")])),Id("i"),BinaryOp("=",Id("result"),ArrayCell(Id("str2"),Id("i")))))])),Return(Id("result"))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,393))   
-        
-    def test_94(self):
-        inp="""
-    void quickSort(int arr[], int left, int right) {
-      int i,j;
-      int tmp;
-      int pivot; 
-      i = left;
-      j = right;
-      pivot = arr[(left + right) / 2];
-      if((i > j)){
-        continue;
-      }
-      do{
-        if (i <= j) {
-          tmp = arr[i];
-          arr[i] = arr[j];
-          arr[j] = tmp;
-          i = i + 1;
-          j = j - 1;
-        }
-      }while (i <= j);
-      if (left < j)
-            quickSort(arr, left, j);
-      if (i < right)
-            quickSort(arr, i, right);
-    }"""
-        out=str(Program([FuncDecl(Id("quickSort"),[VarDecl(Id("arr"),ArrayPointerType(IntType())),VarDecl(Id("left"),IntType()),VarDecl(Id("right"),IntType())],VoidType(),Block([VarDecl(Id("i"),IntType()),VarDecl(Id("j"),IntType()),VarDecl(Id("tmp"),IntType()),VarDecl(Id("pivot"),IntType())],[BinaryOp("=",Id("i"),Id("left")),BinaryOp("=",Id("j"),Id("right")),BinaryOp("=",Id("pivot"),ArrayCell(Id("arr"),BinaryOp("/",BinaryOp("+",Id("left"),Id("right")),IntLiteral(2)))),If(BinaryOp(">",Id("i"),Id("j")),Block([],[Continue()]),None),Dowhile([Block([],[If(BinaryOp("<=",Id("i"),Id("j")),Block([],[BinaryOp("=",Id("tmp"),ArrayCell(Id("arr"),Id("i"))),BinaryOp("=",ArrayCell(Id("arr"),Id("i")),ArrayCell(Id("arr"),Id("j"))),BinaryOp("=",ArrayCell(Id("arr"),Id("j")),Id("tmp")),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(1))),BinaryOp("=",Id("j"),BinaryOp("-",Id("j"),IntLiteral(1)))]),None)])],BinaryOp("<=",Id("i"),Id("j"))),If(BinaryOp("<",Id("left"),Id("j")),CallExpr(Id("quickSort"),[Id("arr"),Id("left"),Id("j")]),None),If(BinaryOp("<",Id("i"),Id("right")),CallExpr(Id("quickSort"),[Id("arr"),Id("i"),Id("right")]),None)]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,394))   
-        
-    def test_95(self):
-        inp="""
-    int main(){
-    int n, i, flag;
-    flag = 0;
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([If(BinaryOp("!=",Id("abc"),Id("cdf")),Block([BinaryOp("=",Id("a"),BinaryOp("+",Id("b"),IntLiteral(1))),BinaryOp("=",Id("b"),BinaryOp("+",Id("c"),IntLiteral(1))),If(Id("a"),BinaryOp("=",Id("a"),Id("b"))),Block([CallExpr(Id("ah"),[IntLiteral(2)])])]))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,356))
 
-    printf("Enter a positive integer: ");
-    scanf("%d",n);
+	def test_stmtdec_57(self):
+		input = """int main()
+		{
+			do
+			{
+				a=2;
+			}
+			while (a!=2);
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([Dowhile([Block([BinaryOp("=",Id("a"),IntLiteral(2))])],BinaryOp("!=",Id("a"),IntLiteral(2)))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,357))
 
-    for(i=2; i<=n/2; i=i+1){
-      if(n%i==0){
-          flag=1;
-          break;
-      }
-    }
+	def test_stmtdec_58(self):
+		input = """int main()
+		{
+			do
+    		{}{}
+    		while true;
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([Dowhile([Block([]),Block([])],BooleanLiteral(True))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,358))
 
-    if (flag==0)
-        printf("%d is a prime number.",n);
-    else
-        printf("%d is not a prime number.",n);
-    
-    return 0;
-    }
-    """
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("n"),IntType()),VarDecl(Id("i"),IntType()),VarDecl(Id("flag"),IntType())],[BinaryOp("=",Id("flag"),IntLiteral(0)),CallExpr(Id("printf"),[StringLiteral("Enter a positive integer: ")]),CallExpr(Id("scanf"),[StringLiteral("%d"),Id("n")]),For(BinaryOp("=",Id("i"),IntLiteral(2)),BinaryOp("<=",Id("i"),BinaryOp("/",Id("n"),IntLiteral(2))),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(1))),Block([],[If(BinaryOp("==",BinaryOp("%",Id("n"),Id("i")),IntLiteral(0)),Block([],[BinaryOp("=",Id("flag"),IntLiteral(1)),Break()]),None)])),If(BinaryOp("==",Id("flag"),IntLiteral(0)),CallExpr(Id("printf"),[StringLiteral("%d is a prime number."),Id("n")]),CallExpr(Id("printf"),[StringLiteral("%d is not a prime number."),Id("n")])),Return(IntLiteral(0))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,395))   
-        
-    def test_96(self):
-        inp="""
-    void towerOfHanoi(int n, string from_rod, string to_rod, string aux_rod){
-      if (n == 1){
-          printf("n Move disk 1 from rod %c to rod %c", from_rod, to_rod);
-          return;
-      }
-      towerOfHanoi(n-1, from_rod, aux_rod, to_rod);
-      printf("n Move disk %d from rod %c to rod %c", n, from_rod, to_rod);
-      towerOfHanoi(n-1, aux_rod, to_rod, from_rod);
-    }
-    int main(){
-        int n;
-        n=4;
-        towerOfHanoi(n, "A", "B", "C");
-        return 0;
-    }"""
-        out=str(Program([FuncDecl(Id("towerOfHanoi"),[VarDecl(Id("n"),IntType()),VarDecl(Id("from_rod"),StringType()),VarDecl(Id("to_rod"),StringType()),VarDecl(Id("aux_rod"),StringType())],VoidType(),Block([],[If(BinaryOp("==",Id("n"),IntLiteral(1)),Block([],[CallExpr(Id("printf"),[StringLiteral("n Move disk 1 from rod %c to rod %c"),Id("from_rod"),Id("to_rod")]),Return(None)]),None),CallExpr(Id("towerOfHanoi"),[BinaryOp("-",Id("n"),IntLiteral(1)),Id("from_rod"),Id("aux_rod"),Id("to_rod")]),CallExpr(Id("printf"),[StringLiteral("n Move disk %d from rod %c to rod %c"),Id("n"),Id("from_rod"),Id("to_rod")]),CallExpr(Id("towerOfHanoi"),[BinaryOp("-",Id("n"),IntLiteral(1)),Id("aux_rod"),Id("to_rod"),Id("from_rod")])])),FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("n"),IntType())],[BinaryOp("=",Id("n"),IntLiteral(4)),CallExpr(Id("towerOfHanoi"),[Id("n"),StringLiteral("A"),StringLiteral("B"),StringLiteral("C")]),Return(IntLiteral(0))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,396))   
-        
-    def test_97(self):
-        inp="""
-    int[] bouble(int array[], int n){
-      int i, j, swap;
-      for(i=0; i<n-1; i=i+1){
-        for (j=0; j<n-i-1; j=j+1){
-          if (array[j]>array[j+1]){
-            swap=array[j];
-            array[j]=array[j+1];
-            array[j+1]=swap;
-          }
-        }
-      }
-    }"""
-        out=str(Program([FuncDecl(Id("bouble"),[VarDecl(Id("array"),ArrayPointerType(IntType())),VarDecl(Id("n"),IntType())],ArrayPointerType(IntType()),Block([VarDecl(Id("i"),IntType()),VarDecl(Id("j"),IntType()),VarDecl(Id("swap"),IntType())],[For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),BinaryOp("-",Id("n"),IntLiteral(1))),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(1))),Block([],[For(BinaryOp("=",Id("j"),IntLiteral(0)),BinaryOp("<",Id("j"),BinaryOp("-",BinaryOp("-",Id("n"),Id("i")),IntLiteral(1))),BinaryOp("=",Id("j"),BinaryOp("+",Id("j"),IntLiteral(1))),Block([],[If(BinaryOp(">",ArrayCell(Id("array"),Id("j")),ArrayCell(Id("array"),BinaryOp("+",Id("j"),IntLiteral(1)))),Block([],[BinaryOp("=",Id("swap"),ArrayCell(Id("array"),Id("j"))),BinaryOp("=",ArrayCell(Id("array"),Id("j")),ArrayCell(Id("array"),BinaryOp("+",Id("j"),IntLiteral(1)))),BinaryOp("=",ArrayCell(Id("array"),BinaryOp("+",Id("j"),IntLiteral(1))),Id("swap"))]),None)]))]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,397))   
-        
-    def test_98(self):
-        inp="""
-    int fibo(int n){
-      if(n==0) return 0;
-      if(n==1) return 1;
-      else return fibo(n-1)+fibo(n-2);
-    }
-    int main(){
-      int i;
-      for(i=0;i<10;i=i+1) print(fibo(i));
-    }"""
-        out=str(Program([FuncDecl(Id("fibo"),[VarDecl(Id("n"),IntType())],IntType(),Block([],[If(BinaryOp("==",Id("n"),IntLiteral(0)),Return(IntLiteral(0)),None),If(BinaryOp("==",Id("n"),IntLiteral(1)),Return(IntLiteral(1)),Return(BinaryOp("+",CallExpr(Id("fibo"),[BinaryOp("-",Id("n"),IntLiteral(1))]),CallExpr(Id("fibo"),[BinaryOp("-",Id("n"),IntLiteral(2))]))))])),FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("i"),IntType())],[For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),IntLiteral(10)),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(1))),CallExpr(Id("print"),[CallExpr(Id("fibo"),[Id("i")])]))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,398))   
-        
-    def test_99(self):
-        inp="""
-    int main (){
-    int bin, gray;
-    printf("Enter a binary number: ");
-    scanf("%d", bin);
-    gray = bintogray(bin);
-    printf("The gray code of %d is %d", bin, gray);
-    return 0;
-    }
-    int bintogray(int bin){
-      int a, b, result, i;
-      result=0;i=0;
-      do{
-        a = bin % 10;
-        bin = bin / 10;
-        b = bin % 10;
-        if ((a && !b) || (!a && b)){
-          result = result + pow(10, i);
-        }
-        i=i+1;
-      }while (bin != 0);
-      return result;
-    }"""
-        out=str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl(Id("bin"),IntType()),VarDecl(Id("gray"),IntType())],[CallExpr(Id("printf"),[StringLiteral("Enter a binary number: ")]),CallExpr(Id("scanf"),[StringLiteral("%d"),Id("bin")]),BinaryOp("=",Id("gray"),CallExpr(Id("bintogray"),[Id("bin")])),CallExpr(Id("printf"),[StringLiteral("The gray code of %d is %d"),Id("bin"),Id("gray")]),Return(IntLiteral(0))])),FuncDecl(Id("bintogray"),[VarDecl(Id("bin"),IntType())],IntType(),Block([VarDecl(Id("a"),IntType()),VarDecl(Id("b"),IntType()),VarDecl(Id("result"),IntType()),VarDecl(Id("i"),IntType())],[BinaryOp("=",Id("result"),IntLiteral(0)),BinaryOp("=",Id("i"),IntLiteral(0)),Dowhile([Block([],[BinaryOp("=",Id("a"),BinaryOp("%",Id("bin"),IntLiteral(10))),BinaryOp("=",Id("bin"),BinaryOp("/",Id("bin"),IntLiteral(10))),BinaryOp("=",Id("b"),BinaryOp("%",Id("bin"),IntLiteral(10))),If(BinaryOp("||",BinaryOp("&&",Id("a"),UnaryOp("!",Id("b"))),BinaryOp("&&",UnaryOp("!",Id("a")),Id("b"))),Block([],[BinaryOp("=",Id("result"),BinaryOp("+",Id("result"),CallExpr(Id("pow"),[IntLiteral(10),Id("i")])))]),None),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(1)))])],BinaryOp("!=",Id("bin"),IntLiteral(0))),Return(Id("result"))]))]))
-        self.assertTrue(TestAST.checkASTGen(inp,out,399))   
+	def test_stmtdec_59(self):
+		input = """int main()
+		{
+            do do do do i = 0; while(9); while(true); while(false); while(1);
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([Dowhile([Dowhile([Dowhile([Dowhile([BinaryOp("=",Id("i"),IntLiteral(0))],IntLiteral(9))],BooleanLiteral(True))],BooleanLiteral(False))],IntLiteral(1))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,359))
+
+	def test_stmtdec_60(self):
+		input = """int main()
+		{
+			do 
+			{}{}{}{}{}
+			while (a==2);
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([Dowhile([Block([]),Block([]),Block([]),Block([]),Block([])],BinaryOp("==",Id("a"),IntLiteral(2)))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,360))
+
+	def test_stmtdec_61(self):
+		input = """int main()
+		{
+			do 
+			{}
+			{
+				a=2;
+				b=3;
+			}
+			while (a==2);
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([Dowhile([Block([]),Block([BinaryOp("=",Id("a"),IntLiteral(2)),BinaryOp("=",Id("b"),IntLiteral(3))])],BinaryOp("==",Id("a"),IntLiteral(2)))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,361))
+
+	def test_stmtdec_62(self):
+		input = """int main()
+		{
+			do (3*4); (a==4);
+             if (x%2) x = 2; else x = 3;
+             {
+                for (i = 4; i <5; i = i+2) a=2;
+             }
+            while (!2);
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([Dowhile([BinaryOp("*",IntLiteral(3),IntLiteral(4)),BinaryOp("==",Id("a"),IntLiteral(4)),If(BinaryOp("%",Id("x"),IntLiteral(2)),BinaryOp("=",Id("x"),IntLiteral(2)),BinaryOp("=",Id("x"),IntLiteral(3))),Block([For(BinaryOp("=",Id("i"),IntLiteral(4)),BinaryOp("<",Id("i"),IntLiteral(5)),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(2))),BinaryOp("=",Id("a"),IntLiteral(2)))])],UnaryOp("!",IntLiteral(2)))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,362))
+
+	def test_stmtdec_63(self):
+		input = """int main()
+		{
+			do a=1; a=3; a=4; {}{} a=2;
+            while (foo());
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([Dowhile([BinaryOp("=",Id("a"),IntLiteral(1)),BinaryOp("=",Id("a"),IntLiteral(3)),BinaryOp("=",Id("a"),IntLiteral(4)),Block([]),Block([]),BinaryOp("=",Id("a"),IntLiteral(2))],CallExpr(Id("foo"),[]))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,363))
+
+	def test_stmtdec_64(self):
+		input = """int main()
+		{
+			for (i=1;i<=5;i=i%2) getPrimeNumber(i);
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([For(BinaryOp("=",Id("i"),IntLiteral(1)),BinaryOp("<=",Id("i"),IntLiteral(5)),BinaryOp("=",Id("i"),BinaryOp("%",Id("i"),IntLiteral(2))),CallExpr(Id("getPrimeNumber"),[Id("i")]))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,364))
+
+	def test_stmtdec_65(self):
+		input = """int main()
+		{
+           	for (i = 4; i <5; i = i+2) if (x == 2) x= 3;
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([For(BinaryOp("=",Id("i"),IntLiteral(4)),BinaryOp("<",Id("i"),IntLiteral(5)),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(2))),If(BinaryOp("==",Id("x"),IntLiteral(2)),BinaryOp("=",Id("x"),IntLiteral(3))))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,365))
+
+	def test_stmtdec_66(self):
+		input = """int main()
+		{
+			for (i = 5; i < 6; i == 5) x +2 ;
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([For(BinaryOp("=",Id("i"),IntLiteral(5)),BinaryOp("<",Id("i"),IntLiteral(6)),BinaryOp("==",Id("i"),IntLiteral(5)),BinaryOp("+",Id("x"),IntLiteral(2)))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,366))
+
+	def test_stmtdec_67(self):
+		input = """int main()
+		{
+			for (i = 4; i < 5; i +2 ){
+                if (a = 5) false;
+            }
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([For(BinaryOp("=",Id("i"),IntLiteral(4)),BinaryOp("<",Id("i"),IntLiteral(5)),BinaryOp("+",Id("i"),IntLiteral(2)),Block([If(BinaryOp("=",Id("a"),IntLiteral(5)),BooleanLiteral(False))]))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,367))
+
+	def test_stmtdec_68(self):
+		input = """int main()
+		{
+			for(a[2]; i < 2; i = a[2] + 1) 
+            {
+                b = a + 1;
+                foo(3);
+                for(t; true; abc) ahihi(21);
+            }
+
+            for(i + 3 + a[2]; bcd < 2; a[b] = a[foo(2)]) {
+                bcd = bcd + 1;
+            }
+
+            for(true;true;false) a = 6 <= b;
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([For(ArrayCell(Id("a"),IntLiteral(2)),BinaryOp("<",Id("i"),IntLiteral(2)),BinaryOp("=",Id("i"),BinaryOp("+",ArrayCell(Id("a"),IntLiteral(2)),IntLiteral(1))),Block([BinaryOp("=",Id("b"),BinaryOp("+",Id("a"),IntLiteral(1))),CallExpr(Id("foo"),[IntLiteral(3)]),For(Id("t"),BooleanLiteral(True),Id("abc"),CallExpr(Id("ahihi"),[IntLiteral(21)]))])),For(BinaryOp("+",BinaryOp("+",Id("i"),IntLiteral(3)),ArrayCell(Id("a"),IntLiteral(2))),BinaryOp("<",Id("bcd"),IntLiteral(2)),BinaryOp("=",ArrayCell(Id("a"),Id("b")),ArrayCell(Id("a"),CallExpr(Id("foo"),[IntLiteral(2)]))),Block([BinaryOp("=",Id("bcd"),BinaryOp("+",Id("bcd"),IntLiteral(1)))])),For(BooleanLiteral(True),BooleanLiteral(True),BooleanLiteral(False),BinaryOp("=",Id("a"),BinaryOp("<=",IntLiteral(6),Id("b"))))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,368))
+
+	def test_stmtdec_69(self):
+		input = """int main()
+		{
+			for (i;j;t) {
+            }
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([For(Id("i"),Id("j"),Id("t"),Block([]))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,369))
+
+	def test_stmtdec_70(self):
+		input = """int main()
+		{
+			for(i=4;i<=10;i=i+1) break;
+			for(i=4;i<=10;i=i+1) continue;
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([For(BinaryOp("=",Id("i"),IntLiteral(4)),BinaryOp("<=",Id("i"),IntLiteral(10)),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(1))),Break()),For(BinaryOp("=",Id("i"),IntLiteral(4)),BinaryOp("<=",Id("i"),IntLiteral(10)),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(1))),Continue())]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,370))
+
+	def test_stmtdec_71(self):
+		input = """
+		float cmp(int a,int b)
+		{
+			if (a>b) return 1;
+			if (a<b) return -1;
+			return 0;
+			i+2;
+			100;
+			{
+				int a,b,c;
+				a=b=c=5;
+				float f[5];
+				if (a==b) f[0]=1.0;
+			}
+		}
+
+		int main(){}
+		"""
+		expect=str(Program([FuncDecl(Id("cmp"),[VarDecl("a",IntType()),VarDecl("b",IntType())],FloatType(),Block([If(BinaryOp(">",Id("a"),Id("b")),Return(IntLiteral(1))),If(BinaryOp("<",Id("a"),Id("b")),Return(UnaryOp("-",IntLiteral(1)))),Return(IntLiteral(0)),BinaryOp("+",Id("i"),IntLiteral(2)),IntLiteral(100),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),BinaryOp("=",Id("a"),BinaryOp("=",Id("b"),BinaryOp("=",Id("c"),IntLiteral(5)))),VarDecl("f",ArrayType(5,FloatType())),If(BinaryOp("==",Id("a"),Id("b")),BinaryOp("=",ArrayCell(Id("f"),IntLiteral(0)),FloatLiteral(1.0)))])])),FuncDecl(Id("main"),[],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,371))
+
+	def test_stmtdec_72(self):
+		input = """
+		void enter()
+		{
+			int k;
+			v = 5;
+			for(i=0;i<n-1;i)
+			{
+				for(i=0;i<n-1;i) return;		
+			}
+		}
+
+		void process()
+		{
+			system("pause");
+		}
+
+		int main()
+		{
+			enter();
+			process();
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("enter"),[],VoidType(),Block([VarDecl("k",IntType()),BinaryOp("=",Id("v"),IntLiteral(5)),For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),BinaryOp("-",Id("n"),IntLiteral(1))),Id("i"),Block([For(BinaryOp("=",Id("i"),IntLiteral(0)),BinaryOp("<",Id("i"),BinaryOp("-",Id("n"),IntLiteral(1))),Id("i"),Return())]))])),FuncDecl(Id("process"),[],VoidType(),Block([CallExpr(Id("system"),[StringLiteral("pause")])])),FuncDecl(Id("main"),[],IntType(),Block([CallExpr(Id("enter"),[]),CallExpr(Id("process"),[])]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,372))
+
+	def test_stmtdec_73(self):
+		input = """
+		int main()
+		{
+			for(2;a==2||b=4&&c==true;p=p*2)
+			{
+				{}{}{}{}{}{}{}
+				{
+					{
+						{
+							a=3;
+						}
+					}
+				}
+             	do do do do i = 0; while(9); while(true); while(false); while(1);
+             	foo(foo(foo(foo(foo(foo())))));
+			}
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([For(IntLiteral(2),BinaryOp("=",BinaryOp("||",BinaryOp("==",Id("a"),IntLiteral(2)),Id("b")),BinaryOp("&&",IntLiteral(4),BinaryOp("==",Id("c"),BooleanLiteral(True)))),BinaryOp("=",Id("p"),BinaryOp("*",Id("p"),IntLiteral(2))),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([Block([Block([BinaryOp("=",Id("a"),IntLiteral(3))])])]),Dowhile([Dowhile([Dowhile([Dowhile([BinaryOp("=",Id("i"),IntLiteral(0))],IntLiteral(9))],BooleanLiteral(True))],BooleanLiteral(False))],IntLiteral(1)),CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[])])])])])])]))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,373))
+
+	def test_stmtdec_74(self):
+		input = """
+		int main()
+		{
+			foo(foo(foo(foo(foo(foo(foo(foo(foo("a",1,43,1.2,"fdasfq")))))))));
+			if (a==b)
+			{
+				if (PPL="harsh")
+				{
+					{
+						{
+							{
+								{
+									foo(foo(foo(foo(foo(foo(foo(foo(foo("a",1,43,1.2,"fdasfq")))))))));
+									int a[5];
+						            boolean b;
+						            return 1;
+						            function();
+						            for (i = 4; i < 5; i +2 ){
+						                if (a = 5) break;
+						            }
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[StringLiteral("a"),IntLiteral(1),IntLiteral(43),FloatLiteral(1.2),StringLiteral("fdasfq")])])])])])])])])]),If(BinaryOp("==",Id("a"),Id("b")),Block([If(BinaryOp("=",Id("PPL"),StringLiteral("harsh")),Block([Block([Block([Block([Block([CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[StringLiteral("a"),IntLiteral(1),IntLiteral(43),FloatLiteral(1.2),StringLiteral("fdasfq")])])])])])])])])]),VarDecl("a",ArrayType(5,IntType())),VarDecl("b",BoolType()),Return(IntLiteral(1)),CallExpr(Id("function"),[]),For(BinaryOp("=",Id("i"),IntLiteral(4)),BinaryOp("<",Id("i"),IntLiteral(5)),BinaryOp("+",Id("i"),IntLiteral(2)),Block([If(BinaryOp("=",Id("a"),IntLiteral(5)),Break())]))])])])])]))]))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,374))
+
+	def test_all_75(self):
+		input = """
+		int main()
+		{
+			int xyzz,abcc,hcmut;
+			float xyzz[999],abcc[999],hcmut,apple,NHMR;
+			string xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			boolean xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+			_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+			_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("xyzz",IntType()),VarDecl("abcc",IntType()),VarDecl("hcmut",IntType()),VarDecl("xyzz",ArrayType(999,FloatType())),VarDecl("abcc",ArrayType(999,FloatType())),VarDecl("hcmut",FloatType()),VarDecl("apple",FloatType()),VarDecl("NHMR",FloatType()),VarDecl("xyzz",ArrayType(999,StringType())),VarDecl("abcc",ArrayType(999,StringType())),VarDecl("hcmut",ArrayType(999,StringType())),VarDecl("apple",ArrayType(999,StringType())),VarDecl("NHMR",ArrayType(999,StringType())),VarDecl("xyzz",BoolType()),VarDecl("xyzz",ArrayType(999,BoolType())),VarDecl("abcc",BoolType()),VarDecl("abcc",ArrayType(999,BoolType())),VarDecl("hcmut",BoolType()),VarDecl("hcmut",ArrayType(999,BoolType())),VarDecl("apple",BoolType()),VarDecl("apple",ArrayType(999,BoolType())),VarDecl("NHMR",BoolType()),VarDecl("NHMR",ArrayType(999,BoolType())),BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_"))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,375))
+
+	def test_all_76(self):
+		input = """
+		float xyzz()
+		{   
+			float xyzz,abcc,hcmut;
+			int xyzz[999],abcc[999],hcmut,apple,NHMR;
+			boolean xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			string xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+			float xyzz,abcc,hcmut;
+			int xyzz[999],abcc[999],hcmut,apple,NHMR;
+			boolean xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			string xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+			float xyzz,abcc,hcmut;
+			int xyzz[999],abcc[999],hcmut,apple,NHMR;
+			boolean xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			string xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("xyzz"),[],FloatType(),Block([VarDecl("xyzz",FloatType()),VarDecl("abcc",FloatType()),VarDecl("hcmut",FloatType()),VarDecl("xyzz",ArrayType(999,IntType())),VarDecl("abcc",ArrayType(999,IntType())),VarDecl("hcmut",IntType()),VarDecl("apple",IntType()),VarDecl("NHMR",IntType()),VarDecl("xyzz",ArrayType(999,BoolType())),VarDecl("abcc",ArrayType(999,BoolType())),VarDecl("hcmut",ArrayType(999,BoolType())),VarDecl("apple",ArrayType(999,BoolType())),VarDecl("NHMR",ArrayType(999,BoolType())),VarDecl("xyzz",StringType()),VarDecl("xyzz",ArrayType(999,StringType())),VarDecl("abcc",StringType()),VarDecl("abcc",ArrayType(999,StringType())),VarDecl("hcmut",StringType()),VarDecl("hcmut",ArrayType(999,StringType())),VarDecl("apple",StringType()),VarDecl("apple",ArrayType(999,StringType())),VarDecl("NHMR",StringType()),VarDecl("NHMR",ArrayType(999,StringType())),VarDecl("xyzz",FloatType()),VarDecl("abcc",FloatType()),VarDecl("hcmut",FloatType()),VarDecl("xyzz",ArrayType(999,IntType())),VarDecl("abcc",ArrayType(999,IntType())),VarDecl("hcmut",IntType()),VarDecl("apple",IntType()),VarDecl("NHMR",IntType()),VarDecl("xyzz",ArrayType(999,BoolType())),VarDecl("abcc",ArrayType(999,BoolType())),VarDecl("hcmut",ArrayType(999,BoolType())),VarDecl("apple",ArrayType(999,BoolType())),VarDecl("NHMR",ArrayType(999,BoolType())),VarDecl("xyzz",StringType()),VarDecl("xyzz",ArrayType(999,StringType())),VarDecl("abcc",StringType()),VarDecl("abcc",ArrayType(999,StringType())),VarDecl("hcmut",StringType()),VarDecl("hcmut",ArrayType(999,StringType())),VarDecl("apple",StringType()),VarDecl("apple",ArrayType(999,StringType())),VarDecl("NHMR",StringType()),VarDecl("NHMR",ArrayType(999,StringType())),VarDecl("xyzz",FloatType()),VarDecl("abcc",FloatType()),VarDecl("hcmut",FloatType()),VarDecl("xyzz",ArrayType(999,IntType())),VarDecl("abcc",ArrayType(999,IntType())),VarDecl("hcmut",IntType()),VarDecl("apple",IntType()),VarDecl("NHMR",IntType()),VarDecl("xyzz",ArrayType(999,BoolType())),VarDecl("abcc",ArrayType(999,BoolType())),VarDecl("hcmut",ArrayType(999,BoolType())),VarDecl("apple",ArrayType(999,BoolType())),VarDecl("NHMR",ArrayType(999,BoolType())),VarDecl("xyzz",StringType()),VarDecl("xyzz",ArrayType(999,StringType())),VarDecl("abcc",StringType()),VarDecl("abcc",ArrayType(999,StringType())),VarDecl("hcmut",StringType()),VarDecl("hcmut",ArrayType(999,StringType())),VarDecl("apple",StringType()),VarDecl("apple",ArrayType(999,StringType())),VarDecl("NHMR",StringType()),VarDecl("NHMR",ArrayType(999,StringType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,376))
+
+	def test_all_77(self):
+		input = """
+		boolean xyzz()
+		{   
+			float xyzz,abcc,hcmut;
+			int xyzz[999],abcc[999],hcmut,apple,NHMR;
+			boolean xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			string xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+			float xyzz,abcc,hcmut;
+			int xyzz[999],abcc[999],hcmut,apple,NHMR;
+			boolean xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			string xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+		}   
+
+
+		boolean[] xyzz()
+		{
+			float xyzz,abcc,hcmut;
+			int xyzz[999],abcc[999],hcmut,apple,NHMR;
+			boolean xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			string xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+			float xyzz,abcc,hcmut;
+			int xyzz[999],abcc[999],hcmut,apple,NHMR;
+			boolean xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			string xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("xyzz"),[],BoolType(),Block([VarDecl("xyzz",FloatType()),VarDecl("abcc",FloatType()),VarDecl("hcmut",FloatType()),VarDecl("xyzz",ArrayType(999,IntType())),VarDecl("abcc",ArrayType(999,IntType())),VarDecl("hcmut",IntType()),VarDecl("apple",IntType()),VarDecl("NHMR",IntType()),VarDecl("xyzz",ArrayType(999,BoolType())),VarDecl("abcc",ArrayType(999,BoolType())),VarDecl("hcmut",ArrayType(999,BoolType())),VarDecl("apple",ArrayType(999,BoolType())),VarDecl("NHMR",ArrayType(999,BoolType())),VarDecl("xyzz",StringType()),VarDecl("xyzz",ArrayType(999,StringType())),VarDecl("abcc",StringType()),VarDecl("abcc",ArrayType(999,StringType())),VarDecl("hcmut",StringType()),VarDecl("hcmut",ArrayType(999,StringType())),VarDecl("apple",StringType()),VarDecl("apple",ArrayType(999,StringType())),VarDecl("NHMR",StringType()),VarDecl("NHMR",ArrayType(999,StringType())),VarDecl("xyzz",FloatType()),VarDecl("abcc",FloatType()),VarDecl("hcmut",FloatType()),VarDecl("xyzz",ArrayType(999,IntType())),VarDecl("abcc",ArrayType(999,IntType())),VarDecl("hcmut",IntType()),VarDecl("apple",IntType()),VarDecl("NHMR",IntType()),VarDecl("xyzz",ArrayType(999,BoolType())),VarDecl("abcc",ArrayType(999,BoolType())),VarDecl("hcmut",ArrayType(999,BoolType())),VarDecl("apple",ArrayType(999,BoolType())),VarDecl("NHMR",ArrayType(999,BoolType())),VarDecl("xyzz",StringType()),VarDecl("xyzz",ArrayType(999,StringType())),VarDecl("abcc",StringType()),VarDecl("abcc",ArrayType(999,StringType())),VarDecl("hcmut",StringType()),VarDecl("hcmut",ArrayType(999,StringType())),VarDecl("apple",StringType()),VarDecl("apple",ArrayType(999,StringType())),VarDecl("NHMR",StringType()),VarDecl("NHMR",ArrayType(999,StringType()))])),FuncDecl(Id("xyzz"),[],ArrayPointerType(BoolType()),Block([VarDecl("xyzz",FloatType()),VarDecl("abcc",FloatType()),VarDecl("hcmut",FloatType()),VarDecl("xyzz",ArrayType(999,IntType())),VarDecl("abcc",ArrayType(999,IntType())),VarDecl("hcmut",IntType()),VarDecl("apple",IntType()),VarDecl("NHMR",IntType()),VarDecl("xyzz",ArrayType(999,BoolType())),VarDecl("abcc",ArrayType(999,BoolType())),VarDecl("hcmut",ArrayType(999,BoolType())),VarDecl("apple",ArrayType(999,BoolType())),VarDecl("NHMR",ArrayType(999,BoolType())),VarDecl("xyzz",StringType()),VarDecl("xyzz",ArrayType(999,StringType())),VarDecl("abcc",StringType()),VarDecl("abcc",ArrayType(999,StringType())),VarDecl("hcmut",StringType()),VarDecl("hcmut",ArrayType(999,StringType())),VarDecl("apple",StringType()),VarDecl("apple",ArrayType(999,StringType())),VarDecl("NHMR",StringType()),VarDecl("NHMR",ArrayType(999,StringType())),VarDecl("xyzz",FloatType()),VarDecl("abcc",FloatType()),VarDecl("hcmut",FloatType()),VarDecl("xyzz",ArrayType(999,IntType())),VarDecl("abcc",ArrayType(999,IntType())),VarDecl("hcmut",IntType()),VarDecl("apple",IntType()),VarDecl("NHMR",IntType()),VarDecl("xyzz",ArrayType(999,BoolType())),VarDecl("abcc",ArrayType(999,BoolType())),VarDecl("hcmut",ArrayType(999,BoolType())),VarDecl("apple",ArrayType(999,BoolType())),VarDecl("NHMR",ArrayType(999,BoolType())),VarDecl("xyzz",StringType()),VarDecl("xyzz",ArrayType(999,StringType())),VarDecl("abcc",StringType()),VarDecl("abcc",ArrayType(999,StringType())),VarDecl("hcmut",StringType()),VarDecl("hcmut",ArrayType(999,StringType())),VarDecl("apple",StringType()),VarDecl("apple",ArrayType(999,StringType())),VarDecl("NHMR",StringType()),VarDecl("NHMR",ArrayType(999,StringType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,377))
+
+	def test_all_78(self):
+		input = """
+		int xyzz()
+		{   
+			float xyzz,abcc,hcmut;
+			int xyzz[999],abcc[999],hcmut,apple,NHMR;
+			boolean xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			string xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+		}   
+
+
+		void abcc()
+		{
+			float xyzz,abcc,hcmut;
+			int xyzz[999],abcc[999],hcmut,apple,NHMR;
+			boolean xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			string xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+		}
+
+		float hcmut()
+		{   
+			float xyzz,abcc,hcmut;
+			int xyzz[999],abcc[999],hcmut,apple,NHMR;
+			boolean xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			string xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+		}   
+
+
+		string apple()
+		{
+			float xyzz,abcc,hcmut;
+			int xyzz[999],abcc[999],hcmut,apple,NHMR;
+			boolean xyzz[999],abcc[999],hcmut[999],apple[999],NHMR[999];
+			string xyzz,xyzz[999],abcc,abcc[999],hcmut,hcmut[999],apple,apple[999],NHMR,NHMR[999];
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("xyzz"),[],IntType(),Block([VarDecl("xyzz",FloatType()),VarDecl("abcc",FloatType()),VarDecl("hcmut",FloatType()),VarDecl("xyzz",ArrayType(999,IntType())),VarDecl("abcc",ArrayType(999,IntType())),VarDecl("hcmut",IntType()),VarDecl("apple",IntType()),VarDecl("NHMR",IntType()),VarDecl("xyzz",ArrayType(999,BoolType())),VarDecl("abcc",ArrayType(999,BoolType())),VarDecl("hcmut",ArrayType(999,BoolType())),VarDecl("apple",ArrayType(999,BoolType())),VarDecl("NHMR",ArrayType(999,BoolType())),VarDecl("xyzz",StringType()),VarDecl("xyzz",ArrayType(999,StringType())),VarDecl("abcc",StringType()),VarDecl("abcc",ArrayType(999,StringType())),VarDecl("hcmut",StringType()),VarDecl("hcmut",ArrayType(999,StringType())),VarDecl("apple",StringType()),VarDecl("apple",ArrayType(999,StringType())),VarDecl("NHMR",StringType()),VarDecl("NHMR",ArrayType(999,StringType()))])),FuncDecl(Id("abcc"),[],VoidType(),Block([VarDecl("xyzz",FloatType()),VarDecl("abcc",FloatType()),VarDecl("hcmut",FloatType()),VarDecl("xyzz",ArrayType(999,IntType())),VarDecl("abcc",ArrayType(999,IntType())),VarDecl("hcmut",IntType()),VarDecl("apple",IntType()),VarDecl("NHMR",IntType()),VarDecl("xyzz",ArrayType(999,BoolType())),VarDecl("abcc",ArrayType(999,BoolType())),VarDecl("hcmut",ArrayType(999,BoolType())),VarDecl("apple",ArrayType(999,BoolType())),VarDecl("NHMR",ArrayType(999,BoolType())),VarDecl("xyzz",StringType()),VarDecl("xyzz",ArrayType(999,StringType())),VarDecl("abcc",StringType()),VarDecl("abcc",ArrayType(999,StringType())),VarDecl("hcmut",StringType()),VarDecl("hcmut",ArrayType(999,StringType())),VarDecl("apple",StringType()),VarDecl("apple",ArrayType(999,StringType())),VarDecl("NHMR",StringType()),VarDecl("NHMR",ArrayType(999,StringType()))])),FuncDecl(Id("hcmut"),[],FloatType(),Block([VarDecl("xyzz",FloatType()),VarDecl("abcc",FloatType()),VarDecl("hcmut",FloatType()),VarDecl("xyzz",ArrayType(999,IntType())),VarDecl("abcc",ArrayType(999,IntType())),VarDecl("hcmut",IntType()),VarDecl("apple",IntType()),VarDecl("NHMR",IntType()),VarDecl("xyzz",ArrayType(999,BoolType())),VarDecl("abcc",ArrayType(999,BoolType())),VarDecl("hcmut",ArrayType(999,BoolType())),VarDecl("apple",ArrayType(999,BoolType())),VarDecl("NHMR",ArrayType(999,BoolType())),VarDecl("xyzz",StringType()),VarDecl("xyzz",ArrayType(999,StringType())),VarDecl("abcc",StringType()),VarDecl("abcc",ArrayType(999,StringType())),VarDecl("hcmut",StringType()),VarDecl("hcmut",ArrayType(999,StringType())),VarDecl("apple",StringType()),VarDecl("apple",ArrayType(999,StringType())),VarDecl("NHMR",StringType()),VarDecl("NHMR",ArrayType(999,StringType()))])),FuncDecl(Id("apple"),[],StringType(),Block([VarDecl("xyzz",FloatType()),VarDecl("abcc",FloatType()),VarDecl("hcmut",FloatType()),VarDecl("xyzz",ArrayType(999,IntType())),VarDecl("abcc",ArrayType(999,IntType())),VarDecl("hcmut",IntType()),VarDecl("apple",IntType()),VarDecl("NHMR",IntType()),VarDecl("xyzz",ArrayType(999,BoolType())),VarDecl("abcc",ArrayType(999,BoolType())),VarDecl("hcmut",ArrayType(999,BoolType())),VarDecl("apple",ArrayType(999,BoolType())),VarDecl("NHMR",ArrayType(999,BoolType())),VarDecl("xyzz",StringType()),VarDecl("xyzz",ArrayType(999,StringType())),VarDecl("abcc",StringType()),VarDecl("abcc",ArrayType(999,StringType())),VarDecl("hcmut",StringType()),VarDecl("hcmut",ArrayType(999,StringType())),VarDecl("apple",StringType()),VarDecl("apple",ArrayType(999,StringType())),VarDecl("NHMR",StringType()),VarDecl("NHMR",ArrayType(999,StringType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,378))
+
+	def test_all_79(self):
+		input = """
+		float main(){
+			if(sky)
+				if(sea){}
+			else{earth;}
+			else{rain;}
+			if(light){}
+			else{dark;}
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],FloatType(),Block([If(Id("sky"),If(Id("sea"),Block([]),Block([Id("earth")])),Block([Id("rain")])),If(Id("light"),Block([]),Block([Id("dark")]))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,379))
+
+	def test_all_80(self):
+		input = """
+		void main()
+		{
+			do
+				do
+					do
+						do
+						{
+						
+						}
+						while true;
+					while false;
+				while (true&&true);
+			while (false || true && false);
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],VoidType(),Block([Dowhile([Dowhile([Dowhile([Dowhile([Block([])],BooleanLiteral(True))],BooleanLiteral(False))],BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(True)))],BinaryOp("||",BooleanLiteral(False),BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(False))))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,380))
+
+	def test_all_81(self):
+		input = """int main()
+		{
+			if (earth)
+				do
+				{
+					taylorSwift;
+				}
+				while edSheeran;
+			else
+				MTP;
+		}
+
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([If(Id("earth"),Dowhile([Block([Id("taylorSwift")])],Id("edSheeran")),Id("MTP"))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,381))
+
+	def test_all_82(self):
+		input = """int main(){
+			int a,a,a,a,a,a,a,a,a,a,a;
+			float _,_,_,_,_,_,_;
+			string qqqqqqqqqq,wwwwwwwwwwwwwww,pppppppppppppppp[123],ewqqqewqewqe,_123123;
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("_",FloatType()),VarDecl("_",FloatType()),VarDecl("_",FloatType()),VarDecl("_",FloatType()),VarDecl("_",FloatType()),VarDecl("_",FloatType()),VarDecl("_",FloatType()),VarDecl("qqqqqqqqqq",StringType()),VarDecl("wwwwwwwwwwwwwww",StringType()),VarDecl("pppppppppppppppp",ArrayType(123,StringType())),VarDecl("ewqqqewqewqe",StringType()),VarDecl("_123123",StringType())]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,382))
+
+	def test_all_83(self):
+		input = """int main()
+		{
+			(((((a)))));
+		}
+		"""
+		expect=str(Program([FuncDecl(Id("main"),[],IntType(),Block([Id("a")]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,383))
+
+	def test_all_84(self):
+		input = """int main()
+		{	
+			for(i = 3; i < infinity; i = i + 1)
+				if(tesserract)
+					whoCares();
+			for(exp; exp; exp){
+				{
+					stillWhoCares();
+				}
+			}
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([For(BinaryOp("=",Id("i"),IntLiteral(3)),BinaryOp("<",Id("i"),Id("infinity")),BinaryOp("=",Id("i"),BinaryOp("+",Id("i"),IntLiteral(1))),If(Id("tesserract"),CallExpr(Id("whoCares"),[]))),For(Id("exp"),Id("exp"),Id("exp"),Block([Block([CallExpr(Id("stillWhoCares"),[])])]))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,384))
+
+	def test_all_85(self):
+		input = """
+		int enter()
+		{	
+			if (m)
+			{
+				break;
+				continue;
+				break;
+				return 1;
+				return abcc;
+				if(a)
+				{
+					if(b)
+					{
+
+					}
+				}
+			}
+		}	
+	
+
+		int main()
+		{
+			int a,b,c;
+			float x,y,z;
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("enter"),[],IntType(),Block([If(Id("m"),Block([Break(),Continue(),Break(),Return(IntLiteral(1)),Return(Id("abcc")),If(Id("a"),Block([If(Id("b"),Block([]))]))]))])),FuncDecl(Id("main"),[],IntType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,385))
+
+	def test_all_86(self):
+		input = """
+		int print()
+		{	
+		}	
+	
+
+		void join()
+		{
+		}
+
+		int enter()
+		{	
+		}	
+	
+
+		int main()
+		{
+			for(thanos;captainAmerica;ironMan) 
+			{
+				sherlock(watson);
+				do
+				{
+					for(exp;exp;exp)
+					{
+						for(exp;exp;exp)
+						{
+							sherlock(watson);
+						}
+						{{{}}{{}}{{}}{{}}{{}}{{}}{{}}}
+					}
+				}
+				while (spiderman);
+			}
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("print"),[],IntType(),Block([])),FuncDecl(Id("join"),[],VoidType(),Block([])),FuncDecl(Id("enter"),[],IntType(),Block([])),FuncDecl(Id("main"),[],IntType(),Block([For(Id("thanos"),Id("captainAmerica"),Id("ironMan"),Block([CallExpr(Id("sherlock"),[Id("watson")]),Dowhile([Block([For(Id("exp"),Id("exp"),Id("exp"),Block([For(Id("exp"),Id("exp"),Id("exp"),Block([CallExpr(Id("sherlock"),[Id("watson")])])),Block([Block([Block([])]),Block([Block([])]),Block([Block([])]),Block([Block([])]),Block([Block([])]),Block([Block([])]),Block([Block([])])])]))])],Id("spiderman"))]))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,386))
+
+	def test_all_87(self):
+		input = """
+		int print()
+		{	
+			string b,c[123],d,e[1234534];
+		}	
+	
+
+		void join()
+		{
+			int a,b,c;
+		}
+
+		void fit()
+		{
+			int a,b,c;
+		}
+
+		int enter()
+		{	
+			{}{}{}{}{}{}{}{}{}{}{}{}{}
+			{{{{{{{}}}}}}}
+		}	
+	
+
+		int main()
+		{
+			boolean b,c[123],d,e[1234534];
+		}
+
+		"""
+		expect = str(Program([FuncDecl(Id("print"),[],IntType(),Block([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType()))])),FuncDecl(Id("join"),[],VoidType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType())])),FuncDecl(Id("fit"),[],VoidType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType())])),FuncDecl(Id("enter"),[],IntType(),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([Block([Block([Block([Block([Block([Block([])])])])])])])])),FuncDecl(Id("main"),[],IntType(),Block([VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,387))
+
+	def test_all_88(self):
+		input = """int main()
+		{
+			int a,b,c;
+			do
+				yolo();
+				haveGirlfriends(_,_,_,_,_);
+				{{}{}{}{}{}{}{{{{{}}}}}{}{}}
+			while (young);
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),Dowhile([CallExpr(Id("yolo"),[]),CallExpr(Id("haveGirlfriends"),[Id("_"),Id("_"),Id("_"),Id("_"),Id("_")]),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([Block([Block([Block([Block([])])])])]),Block([]),Block([])])],Id("young"))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,388))
+
+	def test_all_89(self):
+		input = """string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+
+			int enter()
+			{	
+				{}{}{}{}{}{}{}{}{}{}{}{}{}
+				{{{{{{{}}}}}}}
+			}	
+
+
+			int main()
+			{
+				int a,b,c;
+				do
+					yolo();
+					haveGirlfriends(_,_,_,_,_);
+					{{}{}{}{}{}{}{{{{{}}}}}{}{}}
+				while (young);
+			}
+		"""
+		expect = str(Program([VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType())),FuncDecl(Id("enter"),[],IntType(),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([Block([Block([Block([Block([Block([Block([])])])])])])])])),FuncDecl(Id("main"),[],IntType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),Dowhile([CallExpr(Id("yolo"),[]),CallExpr(Id("haveGirlfriends"),[Id("_"),Id("_"),Id("_"),Id("_"),Id("_")]),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([Block([Block([Block([Block([])])])])]),Block([]),Block([])])],Id("young"))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,389))
+
+	def test_all_90(self):
+		input = """
+		int a,a,a,a,a,a,a,a,a,a,a;
+		float _,_,_,_,_,_,_;
+
+		int enter()
+		{	
+			{}{}{}{}{}{}{}{}{}{}{}{}{}
+			{{{{{{{}}}}}}}
+		}	
+
+
+		int main()
+		{
+			int a,b,c;
+			do
+				yolo();
+				haveGirlfriends(_,_,_,_,_);
+				{{}{}{}{}{}{}{{{{{}}}}}{}{}}
+			while (young);
+		}
+
+		string qqqqqqqqqq,wwwwwwwwwwwwwww,pppppppppppppppp[123],ewqqqewqewqe,_123123;
+		"""
+		expect = str(Program([VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("a",IntType()),VarDecl("_",FloatType()),VarDecl("_",FloatType()),VarDecl("_",FloatType()),VarDecl("_",FloatType()),VarDecl("_",FloatType()),VarDecl("_",FloatType()),VarDecl("_",FloatType()),FuncDecl(Id("enter"),[],IntType(),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([Block([Block([Block([Block([Block([Block([])])])])])])])])),FuncDecl(Id("main"),[],IntType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),Dowhile([CallExpr(Id("yolo"),[]),CallExpr(Id("haveGirlfriends"),[Id("_"),Id("_"),Id("_"),Id("_"),Id("_")]),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([Block([Block([Block([Block([])])])])]),Block([]),Block([])])],Id("young"))])),VarDecl("qqqqqqqqqq",StringType()),VarDecl("wwwwwwwwwwwwwww",StringType()),VarDecl("pppppppppppppppp",ArrayType(123,StringType())),VarDecl("ewqqqewqewqe",StringType()),VarDecl("_123123",StringType())]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,390))
+
+	def test_all_91(self):
+		input = """int main(float q[],string a[],float _[],float _[]){
+			int a,b,c;
+			do
+				yolo();
+				haveGirlfriends(_,_,_,_,_);
+				{{}{}{}{}{}{}{{{{{}}}}}{}{}}
+			while (young);
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[VarDecl("q",ArrayPointerType(FloatType())),VarDecl("a",ArrayPointerType(StringType())),VarDecl("_",ArrayPointerType(FloatType())),VarDecl("_",ArrayPointerType(FloatType()))],IntType(),Block([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType()),Dowhile([CallExpr(Id("yolo"),[]),CallExpr(Id("haveGirlfriends"),[Id("_"),Id("_"),Id("_"),Id("_"),Id("_")]),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([Block([Block([Block([Block([])])])])]),Block([]),Block([])])],Id("young"))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,391))
+
+	def test_all_92(self):
+		input = """int b()
+		{
+			do
+			{
+				_();
+				_();
+				_();
+				_();
+			}
+			{
+				_();_();_();_();_();
+			}
+			{
+				{
+				
+				}
+				{
+
+				}
+			}
+			while (1+2+3+4+5+6+7*8*9*10/11/12/13%14%15%16);
+		}
+		float x,y,z;
+		"""
+		expect = str(Program([FuncDecl(Id("b"),[],IntType(),Block([Dowhile([Block([CallExpr(Id("_"),[]),CallExpr(Id("_"),[]),CallExpr(Id("_"),[]),CallExpr(Id("_"),[])]),Block([CallExpr(Id("_"),[]),CallExpr(Id("_"),[]),CallExpr(Id("_"),[]),CallExpr(Id("_"),[]),CallExpr(Id("_"),[])]),Block([Block([]),Block([])])],BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",IntLiteral(1),IntLiteral(2)),IntLiteral(3)),IntLiteral(4)),IntLiteral(5)),IntLiteral(6)),BinaryOp("%",BinaryOp("%",BinaryOp("%",BinaryOp("/",BinaryOp("/",BinaryOp("/",BinaryOp("*",BinaryOp("*",BinaryOp("*",IntLiteral(7),IntLiteral(8)),IntLiteral(9)),IntLiteral(10)),IntLiteral(11)),IntLiteral(12)),IntLiteral(13)),IntLiteral(14)),IntLiteral(15)),IntLiteral(16))))])),VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType())]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,392))
+
+	def test_all_93(self):
+		input = """
+		int main()
+		{
+			float x,y,z;
+			_();
+			_();
+			_();
+			_();
+			string b,c[123],d,e[1234534];
+			boolean b,c[123],d,e[1234534];
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl("x",FloatType()),VarDecl("y",FloatType()),VarDecl("z",FloatType()),CallExpr(Id("_"),[]),CallExpr(Id("_"),[]),CallExpr(Id("_"),[]),CallExpr(Id("_"),[]),VarDecl("b",StringType()),VarDecl("c",ArrayType(123,StringType())),VarDecl("d",StringType()),VarDecl("e",ArrayType(1234534,StringType())),VarDecl("b",BoolType()),VarDecl("c",ArrayType(123,BoolType())),VarDecl("d",BoolType()),VarDecl("e",ArrayType(1234534,BoolType()))]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,393))
+
+	def test_all_94(self):
+		input = """
+		void main(){
+			"So this is the last testcase of this section! Good luck!";
+			for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+
+			printf("Yayyyyyyyyyyyyyyyyyyyyyy!");
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("main"),[],VoidType(),Block([StringLiteral("So this is the last testcase of this section! Good luck!"),For(Id("test"),Id("all"),Id("statements"),For(Id("test"),Id("all_again"),Id("statements"),If(BinaryOp("==",Id("thisTestcase"),BooleanLiteral(True)),Dowhile([StringLiteral("Yeah you nailed the statements"),Break(),Return(BooleanLiteral(True)),Continue(),Dowhile([Id("statement1"),If(Id("youCanPassedThis"),BinaryOp("=",Id("yourStatement"),Id("good")),CallExpr(Id("needToCheck"),[]))],Id("stillRunning"))],CallExpr(Id("stillRunning"),[])),Block([If(ArrayCell(Id("fuckingShitIDareYouToPassThisFuckingStuff"),IntLiteral(3000)),Block([Dowhile([Dowhile([Dowhile([For(IntLiteral(1),IntLiteral(2),IntLiteral(3),Block([BinaryOp("=",Id("what"),Id("doesnot")),BinaryOp("=",Id("kill"),Id("you")),BinaryOp("=",Id("makes"),Id("youStronger"))])),BinaryOp("=",Id("passed"),Id("stronger"))],Id("thisIsGoingToEnd"))],CallExpr(Id("butThereAreStillManyToCome"),[]))],Id("goodLuck"))]))])))),CallExpr(Id("printf"),[StringLiteral("Yayyyyyyyyyyyyyyyyyyyyyy!")])]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,394))
+
+	def test_all_95(self):
+		input = """
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+
+			}
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("execution"),[],VoidType(),Block([StringLiteral("Five final tests!!!!!!"),Block([])]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,395))
+
+	def test_all_96(self):
+		input = """
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("execution"),[],VoidType(),Block([StringLiteral("Five final tests!!!!!!"),Block([StringLiteral("Hi hi, are you scared right now??????????")])]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,396))
+
+	def test_all_97(self):
+		input = """
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"Final challenge!";
+				for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+					do
+						do
+							do
+								do
+								{}
+								while true;
+							while false;
+						while (true&&true);
+					while (false || true && false);
+					{{}{}{}{}{}{}{}{}}
+					_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+						_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+			}
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("execution"),[],VoidType(),Block([StringLiteral("Five final tests!!!!!!"),Block([StringLiteral("Hi hi, are you scared right now??????????")]),Block([StringLiteral("Final challenge!"),For(Id("test"),Id("all"),Id("statements"),For(Id("test"),Id("all_again"),Id("statements"),If(BinaryOp("==",Id("thisTestcase"),BooleanLiteral(True)),Dowhile([StringLiteral("Yeah you nailed the statements"),Break(),Return(BooleanLiteral(True)),Continue(),Dowhile([Id("statement1"),If(Id("youCanPassedThis"),BinaryOp("=",Id("yourStatement"),Id("good")),CallExpr(Id("needToCheck"),[]))],Id("stillRunning"))],CallExpr(Id("stillRunning"),[])),Block([If(ArrayCell(Id("fuckingShitIDareYouToPassThisFuckingStuff"),IntLiteral(3000)),Block([Dowhile([Dowhile([Dowhile([For(IntLiteral(1),IntLiteral(2),IntLiteral(3),Block([BinaryOp("=",Id("what"),Id("doesnot")),BinaryOp("=",Id("kill"),Id("you")),BinaryOp("=",Id("makes"),Id("youStronger"))])),BinaryOp("=",Id("passed"),Id("stronger"))],Id("thisIsGoingToEnd"))],CallExpr(Id("butThereAreStillManyToCome"),[]))],Id("goodLuck"))]))])))),Dowhile([Dowhile([Dowhile([Dowhile([Block([])],BooleanLiteral(True))],BooleanLiteral(False))],BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(True)))],BinaryOp("||",BooleanLiteral(False),BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(False)))),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([])]),BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_"))])]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,397))
+
+	def test_all_98(self):
+		input = """
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"Final challenge!";
+				for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+					do
+						do
+							do
+								do
+								{}
+								while true;
+							while false;
+						while (true&&true);
+					while (false || true && false);
+					{{}{}{}{}{}{}{}{}}
+					_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+					_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+			}
+		}
+
+
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"Final challenge!";
+				for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+					do
+						do
+							do
+								do
+								{}
+								while true;
+							while false;
+						while (true&&true);
+					while (false || true && false);
+					{{}{}{}{}{}{}{}{}}
+					_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+					_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+			}
+		}
+
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"Final challenge!";
+				for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+					do
+						do
+							do
+								do
+								{}
+								while true;
+							while false;
+						while (true&&true);
+					while (false || true && false);
+					{{}{}{}{}{}{}{}{}}
+					_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+					_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+			}
+		}
+		"""
+		expect = str(Program([FuncDecl(Id("execution"),[],VoidType(),Block([StringLiteral("Five final tests!!!!!!"),Block([StringLiteral("Hi hi, are you scared right now??????????")]),Block([StringLiteral("Final challenge!"),For(Id("test"),Id("all"),Id("statements"),For(Id("test"),Id("all_again"),Id("statements"),If(BinaryOp("==",Id("thisTestcase"),BooleanLiteral(True)),Dowhile([StringLiteral("Yeah you nailed the statements"),Break(),Return(BooleanLiteral(True)),Continue(),Dowhile([Id("statement1"),If(Id("youCanPassedThis"),BinaryOp("=",Id("yourStatement"),Id("good")),CallExpr(Id("needToCheck"),[]))],Id("stillRunning"))],CallExpr(Id("stillRunning"),[])),Block([If(ArrayCell(Id("fuckingShitIDareYouToPassThisFuckingStuff"),IntLiteral(3000)),Block([Dowhile([Dowhile([Dowhile([For(IntLiteral(1),IntLiteral(2),IntLiteral(3),Block([BinaryOp("=",Id("what"),Id("doesnot")),BinaryOp("=",Id("kill"),Id("you")),BinaryOp("=",Id("makes"),Id("youStronger"))])),BinaryOp("=",Id("passed"),Id("stronger"))],Id("thisIsGoingToEnd"))],CallExpr(Id("butThereAreStillManyToCome"),[]))],Id("goodLuck"))]))])))),Dowhile([Dowhile([Dowhile([Dowhile([Block([])],BooleanLiteral(True))],BooleanLiteral(False))],BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(True)))],BinaryOp("||",BooleanLiteral(False),BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(False)))),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([])]),BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_"))])])),FuncDecl(Id("execution"),[],VoidType(),Block([StringLiteral("Five final tests!!!!!!"),Block([StringLiteral("Hi hi, are you scared right now??????????")]),Block([StringLiteral("Final challenge!"),For(Id("test"),Id("all"),Id("statements"),For(Id("test"),Id("all_again"),Id("statements"),If(BinaryOp("==",Id("thisTestcase"),BooleanLiteral(True)),Dowhile([StringLiteral("Yeah you nailed the statements"),Break(),Return(BooleanLiteral(True)),Continue(),Dowhile([Id("statement1"),If(Id("youCanPassedThis"),BinaryOp("=",Id("yourStatement"),Id("good")),CallExpr(Id("needToCheck"),[]))],Id("stillRunning"))],CallExpr(Id("stillRunning"),[])),Block([If(ArrayCell(Id("fuckingShitIDareYouToPassThisFuckingStuff"),IntLiteral(3000)),Block([Dowhile([Dowhile([Dowhile([For(IntLiteral(1),IntLiteral(2),IntLiteral(3),Block([BinaryOp("=",Id("what"),Id("doesnot")),BinaryOp("=",Id("kill"),Id("you")),BinaryOp("=",Id("makes"),Id("youStronger"))])),BinaryOp("=",Id("passed"),Id("stronger"))],Id("thisIsGoingToEnd"))],CallExpr(Id("butThereAreStillManyToCome"),[]))],Id("goodLuck"))]))])))),Dowhile([Dowhile([Dowhile([Dowhile([Block([])],BooleanLiteral(True))],BooleanLiteral(False))],BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(True)))],BinaryOp("||",BooleanLiteral(False),BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(False)))),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([])]),BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_"))])])),FuncDecl(Id("execution"),[],VoidType(),Block([StringLiteral("Five final tests!!!!!!"),Block([StringLiteral("Hi hi, are you scared right now??????????")]),Block([StringLiteral("Final challenge!"),For(Id("test"),Id("all"),Id("statements"),For(Id("test"),Id("all_again"),Id("statements"),If(BinaryOp("==",Id("thisTestcase"),BooleanLiteral(True)),Dowhile([StringLiteral("Yeah you nailed the statements"),Break(),Return(BooleanLiteral(True)),Continue(),Dowhile([Id("statement1"),If(Id("youCanPassedThis"),BinaryOp("=",Id("yourStatement"),Id("good")),CallExpr(Id("needToCheck"),[]))],Id("stillRunning"))],CallExpr(Id("stillRunning"),[])),Block([If(ArrayCell(Id("fuckingShitIDareYouToPassThisFuckingStuff"),IntLiteral(3000)),Block([Dowhile([Dowhile([Dowhile([For(IntLiteral(1),IntLiteral(2),IntLiteral(3),Block([BinaryOp("=",Id("what"),Id("doesnot")),BinaryOp("=",Id("kill"),Id("you")),BinaryOp("=",Id("makes"),Id("youStronger"))])),BinaryOp("=",Id("passed"),Id("stronger"))],Id("thisIsGoingToEnd"))],CallExpr(Id("butThereAreStillManyToCome"),[]))],Id("goodLuck"))]))])))),Dowhile([Dowhile([Dowhile([Dowhile([Block([])],BooleanLiteral(True))],BooleanLiteral(False))],BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(True)))],BinaryOp("||",BooleanLiteral(False),BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(False)))),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([])]),BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_"))])]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,398))
+
+	def test_funcdec_99(self):
+		input = """
+		void enter()
+		{
+			// Oh you're so good. I can't give you any more stress.
+
+			"Please remember me as a tester friend of yours. Hic hic huhu";
+		}
+
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"Final challenge!";
+				for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+					do
+						do
+							do
+								do
+								{}
+								while true;
+							while false;
+						while (true&&true);
+					while (false || true && false);
+					{{}{}{}{}{}{}{}{}}
+					_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+					_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+			}
+		}
+
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"Final challenge!";
+				for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+					do
+						do
+							do
+								do
+								{}
+								while true;
+							while false;
+						while (true&&true);
+					while (false || true && false);
+					{{}{}{}{}{}{}{}{}}
+					_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+					_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+			}
+		}
+
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"Final challenge!";
+				for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+					do
+						do
+							do
+								do
+								{}
+								while true;
+							while false;
+						while (true&&true);
+					while (false || true && false);
+					{{}{}{}{}{}{}{}{}}
+					_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+					_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+			}
+		}
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"Final challenge!";
+				for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+					do
+						do
+							do
+								do
+								{}
+								while true;
+							while false;
+						while (true&&true);
+					while (false || true && false);
+					{{}{}{}{}{}{}{}{}}
+					_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+					_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+			}
+		}
+
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"Final challenge!";
+				for(test; all; statements)
+				for(test; all_again; statements)
+					if(thisTestcase == true)
+					do
+						"Yeah you nailed the statements";
+						break;
+						return true;
+						continue;
+						do
+							statement1;
+							if(youCanPassedThis)
+								yourStatement = good;
+							else
+								needToCheck();
+						while(stillRunning);
+					while(stillRunning());
+					else{
+						if(fuckingShitIDareYouToPassThisFuckingStuff[3000]){
+							do
+								do
+									do
+										for(1;2;3){
+											what = doesnot;
+											kill = you;
+											makes = youStronger;
+										}
+										passed = stronger;
+									while(thisIsGoingToEnd);
+								while(butThereAreStillManyToCome());
+							while(goodLuck);
+						}
+					}
+					do
+						do
+							do
+								do
+								{}
+								while true;
+							while false;
+						while (true&&true);
+					while (false || true && false);
+					{{}{}{}{}{}{}{}{}}
+					_+_+_+_+_+_+_+_+_+_+_+_+_+_+_;
+					_-_-_-_-_-_-_-_-_-_-_-_-_-_;
+			}
+		}
+
+		void execution()
+		{
+			"Five final tests!!!!!!";
+			//Pass or die;
+			/*
+			{
+				"You will be sentenced to death if you treat me as a block!";
+			}
+			*/
+			{
+				"Hi hi, are you scared right now??????????";
+			}
+
+			{
+				"HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA";
+				{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
+				foo(foo(foo(foo(foo(foo(foo(foo(foo()))))))));
+			}
+		}
+
+		int main(){}
+		"""
+		expect=str(Program([FuncDecl(Id("enter"),[],VoidType(),Block([StringLiteral("Please remember me as a tester friend of yours. Hic hic huhu")])),FuncDecl(Id("execution"),[],VoidType(),Block([StringLiteral("Five final tests!!!!!!"),Block([StringLiteral("Hi hi, are you scared right now??????????")]),Block([StringLiteral("Final challenge!"),For(Id("test"),Id("all"),Id("statements"),For(Id("test"),Id("all_again"),Id("statements"),If(BinaryOp("==",Id("thisTestcase"),BooleanLiteral(True)),Dowhile([StringLiteral("Yeah you nailed the statements"),Break(),Return(BooleanLiteral(True)),Continue(),Dowhile([Id("statement1"),If(Id("youCanPassedThis"),BinaryOp("=",Id("yourStatement"),Id("good")),CallExpr(Id("needToCheck"),[]))],Id("stillRunning"))],CallExpr(Id("stillRunning"),[])),Block([If(ArrayCell(Id("fuckingShitIDareYouToPassThisFuckingStuff"),IntLiteral(3000)),Block([Dowhile([Dowhile([Dowhile([For(IntLiteral(1),IntLiteral(2),IntLiteral(3),Block([BinaryOp("=",Id("what"),Id("doesnot")),BinaryOp("=",Id("kill"),Id("you")),BinaryOp("=",Id("makes"),Id("youStronger"))])),BinaryOp("=",Id("passed"),Id("stronger"))],Id("thisIsGoingToEnd"))],CallExpr(Id("butThereAreStillManyToCome"),[]))],Id("goodLuck"))]))])))),Dowhile([Dowhile([Dowhile([Dowhile([Block([])],BooleanLiteral(True))],BooleanLiteral(False))],BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(True)))],BinaryOp("||",BooleanLiteral(False),BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(False)))),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([])]),BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_"))])])),FuncDecl(Id("execution"),[],VoidType(),Block([StringLiteral("Five final tests!!!!!!"),Block([StringLiteral("Hi hi, are you scared right now??????????")]),Block([StringLiteral("Final challenge!"),For(Id("test"),Id("all"),Id("statements"),For(Id("test"),Id("all_again"),Id("statements"),If(BinaryOp("==",Id("thisTestcase"),BooleanLiteral(True)),Dowhile([StringLiteral("Yeah you nailed the statements"),Break(),Return(BooleanLiteral(True)),Continue(),Dowhile([Id("statement1"),If(Id("youCanPassedThis"),BinaryOp("=",Id("yourStatement"),Id("good")),CallExpr(Id("needToCheck"),[]))],Id("stillRunning"))],CallExpr(Id("stillRunning"),[])),Block([If(ArrayCell(Id("fuckingShitIDareYouToPassThisFuckingStuff"),IntLiteral(3000)),Block([Dowhile([Dowhile([Dowhile([For(IntLiteral(1),IntLiteral(2),IntLiteral(3),Block([BinaryOp("=",Id("what"),Id("doesnot")),BinaryOp("=",Id("kill"),Id("you")),BinaryOp("=",Id("makes"),Id("youStronger"))])),BinaryOp("=",Id("passed"),Id("stronger"))],Id("thisIsGoingToEnd"))],CallExpr(Id("butThereAreStillManyToCome"),[]))],Id("goodLuck"))]))])))),Dowhile([Dowhile([Dowhile([Dowhile([Block([])],BooleanLiteral(True))],BooleanLiteral(False))],BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(True)))],BinaryOp("||",BooleanLiteral(False),BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(False)))),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([])]),BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_"))])])),FuncDecl(Id("execution"),[],VoidType(),Block([StringLiteral("Five final tests!!!!!!"),Block([StringLiteral("Hi hi, are you scared right now??????????")]),Block([StringLiteral("Final challenge!"),For(Id("test"),Id("all"),Id("statements"),For(Id("test"),Id("all_again"),Id("statements"),If(BinaryOp("==",Id("thisTestcase"),BooleanLiteral(True)),Dowhile([StringLiteral("Yeah you nailed the statements"),Break(),Return(BooleanLiteral(True)),Continue(),Dowhile([Id("statement1"),If(Id("youCanPassedThis"),BinaryOp("=",Id("yourStatement"),Id("good")),CallExpr(Id("needToCheck"),[]))],Id("stillRunning"))],CallExpr(Id("stillRunning"),[])),Block([If(ArrayCell(Id("fuckingShitIDareYouToPassThisFuckingStuff"),IntLiteral(3000)),Block([Dowhile([Dowhile([Dowhile([For(IntLiteral(1),IntLiteral(2),IntLiteral(3),Block([BinaryOp("=",Id("what"),Id("doesnot")),BinaryOp("=",Id("kill"),Id("you")),BinaryOp("=",Id("makes"),Id("youStronger"))])),BinaryOp("=",Id("passed"),Id("stronger"))],Id("thisIsGoingToEnd"))],CallExpr(Id("butThereAreStillManyToCome"),[]))],Id("goodLuck"))]))])))),Dowhile([Dowhile([Dowhile([Dowhile([Block([])],BooleanLiteral(True))],BooleanLiteral(False))],BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(True)))],BinaryOp("||",BooleanLiteral(False),BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(False)))),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([])]),BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_"))])])),FuncDecl(Id("execution"),[],VoidType(),Block([StringLiteral("Five final tests!!!!!!"),Block([StringLiteral("Hi hi, are you scared right now??????????")]),Block([StringLiteral("Final challenge!"),For(Id("test"),Id("all"),Id("statements"),For(Id("test"),Id("all_again"),Id("statements"),If(BinaryOp("==",Id("thisTestcase"),BooleanLiteral(True)),Dowhile([StringLiteral("Yeah you nailed the statements"),Break(),Return(BooleanLiteral(True)),Continue(),Dowhile([Id("statement1"),If(Id("youCanPassedThis"),BinaryOp("=",Id("yourStatement"),Id("good")),CallExpr(Id("needToCheck"),[]))],Id("stillRunning"))],CallExpr(Id("stillRunning"),[])),Block([If(ArrayCell(Id("fuckingShitIDareYouToPassThisFuckingStuff"),IntLiteral(3000)),Block([Dowhile([Dowhile([Dowhile([For(IntLiteral(1),IntLiteral(2),IntLiteral(3),Block([BinaryOp("=",Id("what"),Id("doesnot")),BinaryOp("=",Id("kill"),Id("you")),BinaryOp("=",Id("makes"),Id("youStronger"))])),BinaryOp("=",Id("passed"),Id("stronger"))],Id("thisIsGoingToEnd"))],CallExpr(Id("butThereAreStillManyToCome"),[]))],Id("goodLuck"))]))])))),Dowhile([Dowhile([Dowhile([Dowhile([Block([])],BooleanLiteral(True))],BooleanLiteral(False))],BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(True)))],BinaryOp("||",BooleanLiteral(False),BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(False)))),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([])]),BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_"))])])),FuncDecl(Id("execution"),[],VoidType(),Block([StringLiteral("Five final tests!!!!!!"),Block([StringLiteral("Hi hi, are you scared right now??????????")]),Block([StringLiteral("Final challenge!"),For(Id("test"),Id("all"),Id("statements"),For(Id("test"),Id("all_again"),Id("statements"),If(BinaryOp("==",Id("thisTestcase"),BooleanLiteral(True)),Dowhile([StringLiteral("Yeah you nailed the statements"),Break(),Return(BooleanLiteral(True)),Continue(),Dowhile([Id("statement1"),If(Id("youCanPassedThis"),BinaryOp("=",Id("yourStatement"),Id("good")),CallExpr(Id("needToCheck"),[]))],Id("stillRunning"))],CallExpr(Id("stillRunning"),[])),Block([If(ArrayCell(Id("fuckingShitIDareYouToPassThisFuckingStuff"),IntLiteral(3000)),Block([Dowhile([Dowhile([Dowhile([For(IntLiteral(1),IntLiteral(2),IntLiteral(3),Block([BinaryOp("=",Id("what"),Id("doesnot")),BinaryOp("=",Id("kill"),Id("you")),BinaryOp("=",Id("makes"),Id("youStronger"))])),BinaryOp("=",Id("passed"),Id("stronger"))],Id("thisIsGoingToEnd"))],CallExpr(Id("butThereAreStillManyToCome"),[]))],Id("goodLuck"))]))])))),Dowhile([Dowhile([Dowhile([Dowhile([Block([])],BooleanLiteral(True))],BooleanLiteral(False))],BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(True)))],BinaryOp("||",BooleanLiteral(False),BinaryOp("&&",BooleanLiteral(True),BooleanLiteral(False)))),Block([Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([])]),BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",BinaryOp("+",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",BinaryOp("-",Id("_"),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_")),Id("_"))])])),FuncDecl(Id("execution"),[],VoidType(),Block([StringLiteral("Five final tests!!!!!!"),Block([StringLiteral("Hi hi, are you scared right now??????????")]),Block([StringLiteral("HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA"),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),Block([]),CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[CallExpr(Id("foo"),[])])])])])])])])])])])),FuncDecl(Id("main"),[],IntType(),Block([]))]))
+		self.assertTrue(TestAST.checkASTGen(input,expect,399))

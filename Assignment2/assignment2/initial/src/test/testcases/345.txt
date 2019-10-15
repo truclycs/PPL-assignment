@@ -1,0 +1,4 @@
+ void foo(int x, int y, float z, string s, int a[]) {
+            x = y+c+d;
+        }
+		

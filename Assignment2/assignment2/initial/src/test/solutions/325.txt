@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(enter),[],VoidType,Block([])),FuncDecl(Id(main),[],IntType,Block([])),None])

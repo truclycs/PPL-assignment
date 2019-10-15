@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main),[],IntType,Block([[<AST.VarDecl object at 0x7f4af908d3c8>, <AST.VarDecl object at 0x7f4af908d470>, <AST.VarDecl object at 0x7f4af908d518>]])),None])

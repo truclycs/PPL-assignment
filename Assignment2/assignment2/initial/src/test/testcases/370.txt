@@ -1,0 +1,6 @@
+int main()
+		{
+			for(i=4;i<=10;i=i+1) break;
+			for(i=4;i<=10;i=i+1) continue;
+		}
+		

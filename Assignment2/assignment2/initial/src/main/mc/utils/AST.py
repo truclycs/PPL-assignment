@@ -30,7 +30,7 @@ class BlockMember(AST):
     pass
     
 class VarDecl(Decl,BlockMember):
-    #variable:string
+    #variable: string
     #varType: Type
     def __init__(self, variable, varType):
         self.variable = variable
@@ -116,7 +116,7 @@ class ArrayPointerType(Type):
     def __init__(self, eleType):
         self.eleType = eleType
         
-    def __str__(self):
+    def __str__(self):  
         return "ArrayTypePointer(" + str(self.eleType) + ")"
 
     def accept(self, v, param):

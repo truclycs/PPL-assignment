@@ -1,3 +1,2 @@
-int main () {
-            putIntLn(4);
-        }
+float x,y[12],z;
+		
