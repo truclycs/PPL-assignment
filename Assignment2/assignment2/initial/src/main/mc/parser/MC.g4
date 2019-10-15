@@ -31,11 +31,9 @@ options {
 
 /*----------------------------------------------------------------
                                 PARSER
-------------------------------------------------------------------*/
-
-
-
-program: (var_decl | func_decl)+ EOF;
+------------------------------------------------------------------*/    
+program: decls EOF;
+decls: (var_decl | func_decl)+;
 
 var_decl: primitive_type var (COMMA var)* SEMI;
 var: ID (LSB INTLIT RSB)?;
@@ -93,7 +91,8 @@ break_stmt: BREAK SEMI;
 continue_stmt: CONTINUE SEMI;
 return_stmt: RETURN exp? SEMI;
 exp_stmt: exp SEMI;
-block_stmt: LP (var_decl | stmt)* RP;
+block_stmt: LP body_block RP;
+body_block: (var_decl | stmt)*;
 
 /*----------------------------------------------------------------
                                 LEXER

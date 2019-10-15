@@ -1,43 +1,50 @@
+#    **************************************
+#    * Student name: Nguyen Thi Truc Ly   *
+#    * Student ID: 1710187                *
+#    ************************************** 
+
 from MCVisitor import MCVisitor
 from MCParser import MCParser
 from AST import *
 
 class ASTGeneration(MCVisitor):
-# program: (var_decl | func_decl)+ EOF;
-    def visitProgram(self, ctx:MCParser.ProgramContext):
-        # if ctx.var_decl():
-        #     decl = [self.visit(x) for x in ctx.var_decl()]
-        # if ctx.func_decl():
-        #     decl += [self.visit(x) for x in ctx.func_decl()]
-        decl = [self.visit(x) for x in ctx.getChildren()]
-        return Program(decl)
-                
+# program: decls EOF;
+    def visitProgram(self, ctx:MCParser.ProgramContext):       
+        return Program(self.visit(ctx.decls())) 
+
+# decls: (var_decl | func_decl)+;
+    def visitDecls(self, ctx:MCParser.DeclsContext):
+        decl = []        
+        for x in ctx.getChildren():
+            decl += self.visit(x)
+        return decl
+
 # var_decl: primitive_type var (COMMA var)* SEMI;
 # var: ID (LSB INTLIT RSB)?;
     def visitVar_decl(self, ctx:MCParser.Var_declContext):
         res = []
         for x in ctx.var():
             if x.INTLIT():
-                res.append(VarDecl(Id(str(x.ID().getText())), ArrayType(IntLiteral(int(x.INTLIT().getText())), self.visit(ctx.primitive_type()))))
+                res.append(VarDecl(x.ID().getText(), ArrayType(int(x.INTLIT().getText()), self.visit(ctx.primitive_type()))))
             else:
-                res.append(VarDecl(Id(str(x.ID().getText())), self.visit(ctx.primitive_type())))
+                res.append(VarDecl(x.ID().getText(), self.visit(ctx.primitive_type())))
         return res
 
 # func_decl: types ID LB para_list? RB block_stmt;
 # para_list: para_decl (COMMA para_decl)*;
     def visitFunc_decl(self, ctx:MCParser.Func_declContext): 
-        name = str(ctx.ID().getText())
+        name = ctx.ID().getText()
         para = ([self.visit(x) for x in ctx.para_list().para_decl()] if ctx.para_list() else [])
         return_type = self.visit(ctx.types())
         body = self.visit(ctx.block_stmt())
-        return FuncDecl(Id(name), para, return_type, body)
+        return [FuncDecl(Id(name), para, return_type, body)]
 
 # para_decl: primitive_type ID (LSB RSB)?;
     def visitPara_decl(self, ctx:MCParser.Para_declContext): 
         if ctx.LSB():
-            return VarDecl(Id(str(ctx.ID().getText())), ArrayPointerType(self.visit(ctx.primitive_type())))
+            return VarDecl(ctx.ID().getText(), ArrayPointerType(self.visit(ctx.primitive_type())))
         else:
-            return VarDecl(Id(str(ctx.ID().getText())), self.visit(ctx.primitive_type()))
+            return VarDecl(ctx.ID().getText(), self.visit(ctx.primitive_type()))
 
 # types   : primitive_type | array_pointer_type | VOID; 
     def visitTypes(self, ctx:MCParser.TypesContext):
@@ -61,7 +68,6 @@ class ASTGeneration(MCVisitor):
 
 # array_pointer_type: primitive_type ID? LSB RSB;
     def visitArray_pointer_type(self, ctx:MCParser.Array_pointer_typeContext): pass
-
 
 # exp : exp1 ASSIGN exp | exp1;
     def visitExp(self, ctx:MCParser.ExpContext): 
@@ -101,7 +107,7 @@ class ASTGeneration(MCVisitor):
             return BinaryOp(">", self.visit(ctx.exp5(0)), self.visit(ctx.exp5(1)))
         elif ctx.LESS_EQUAL():
             return BinaryOp("<=", self.visit(ctx.exp5(0)), self.visit(ctx.exp5(1)))
-        elif GREATER_EQUAL():
+        elif ctx.GREATER_EQUAL():
             return BinaryOp(">=", self.visit(ctx.exp5(0)), self.visit(ctx.exp5(1)))
         else:
             return self.visit(ctx.exp5(0))
@@ -146,29 +152,27 @@ class ASTGeneration(MCVisitor):
 
 # operand : INTLIT | FLOATLIT | BOOLLIT | STRINGLIT | LB exp RB | func_call | ID;
     def visitOperand(self, ctx:MCParser.OperandContext): 
-        if ctx.INLIT():
-            return IntLiteral(int(ctx.INLIT().getText()))
+        if ctx.INTLIT():
+            return IntLiteral(int(ctx.INTLIT().getText()))
         elif ctx.FLOATLIT():
             return FloatLiteral(float(ctx.FLOATLIT().getText()))
         elif ctx.BOOLLIT():
             return BooleanLiteral(bool(True) if ctx.BOOLLIT().getText() == "true" else bool(False))
         elif ctx.STRINGLIT():
-            return StringLiteral(ctx.STRINGLIT().getText())
+            return StringLiteral(str(ctx.STRINGLIT().getText()))
         elif ctx.exp():
             return self.visit(ctx.exp())
         elif ctx.func_call():
             return self.visit(ctx.func_call())
         else:
-            return Id(str(ctx.ID().getText()))
+            return Id(ctx.ID().getText())
  
 # func_call: ID LB list_exp? RB;
-    def visitFunc_call(self, ctx:MCParser.Func_callContext): 
-        method = Id(str(ctx.ID().getText()))
-        param = [self.visit(x) for x in ctx.list_exp()] if ctx.list_exp() else []
-        return CallExpr(method, param)
-
 # list_exp : exp (COMMA exp)*;
-    def visitList_exp(self, ctx:MCParser.List_expContext): pass
+    def visitFunc_call(self, ctx:MCParser.Func_callContext): 
+        method = Id(ctx.ID().getText())
+        param = [self.visit(x) for x in ctx.list_exp().exp()] if ctx.list_exp() else []
+        return CallExpr(method, param)
 
 # stmt: if_stmt | for_stmt | while_stmt | break_stmt | continue_stmt | return_stmt | exp_stmt | block_stmt;
     def visitStmt(self, ctx:MCParser.StmtContext):
@@ -196,19 +200,19 @@ class ASTGeneration(MCVisitor):
         else_stmt = None
         if ctx.stmt(1):
             else_stmt = self.visit(ctx.stmt(1))
-        return If(expr, then_stmt, else_stmt)
+        return [If(expr, then_stmt, else_stmt)]
 
 # while_stmt: DO stmt+ WHILE exp SEMI;
     def visitWhile_stmt(self, ctx:MCParser.While_stmtContext): 
         sl  = [self.visit(x) for x in ctx.stmt()]
         exp = self.visit(ctx.exp())
-        return Dowhile(sl, exp) 
+        return [Dowhile(sl, exp)]
 
 # for_stmt: FOR LB exp SEMI exp SEMI exp RB stmt;
     def visitFor_stmt(self, ctx:MCParser.For_stmtContext): 
         e1, e2, e3 = [self.visit(x) for x in ctx.exp()]
         loop = self.visit(ctx.stmt())
-        return For(e1, e2, e3, loop)
+        return [For(e1, e2, e3, loop)]
 
 # break_stmt: BREAK SEMI;
     def visitBreak_stmt(self, ctx:MCParser.Break_stmtContext): 
@@ -221,16 +225,22 @@ class ASTGeneration(MCVisitor):
 # return_stmt: RETURN exp? SEMI;
     def visitReturn_stmt(self, ctx:MCParser.Return_stmtContext):
         if ctx.exp():
-            return Return(self.visit(ctx.exp()))
-        return Return()
+            return [Return(self.visit(ctx.exp()))]
+        return [Return()]
 
 # exp_stmt: exp SEMI;
     def visitExp_stmt(self, ctx:MCParser.Exp_stmtContext): 
         return self.visit(ctx.exp())
 
-# block_stmt: LP (var_decl | stmt)* RP;
+# block_stmt: LP body_block RP;
     def visitBlock_stmt(self, ctx:MCParser.Block_stmtContext): 
+        if ctx.body_block():
+            return Block(self.visit(ctx.body_block()))
+
+# body_block: (var_decl | stmt)*;
+    def visitBody_block(self, ctx:MCParser.Body_blockContext): 
         member = []
-        member = ([self.visit(x) for x in ctx.var_decl()] if ctx.var_decl() else [])
-        member += ([self.visit(x) for x in ctx.stmt()] if ctx.stmt() else [])
-        return Block(member)
+        if ctx.getChildren():      
+            for x in ctx.getChildren():
+                member += self.visit(x)
+        return member

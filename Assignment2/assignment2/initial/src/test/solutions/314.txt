@@ -1,1 +1,0 @@
-Program([[<AST.VarDecl object at 0x7f4af915f160>, <AST.VarDecl object at 0x7f4af915f278>, <AST.VarDecl object at 0x7f4af915f320>, <AST.VarDecl object at 0x7f4af915f438>],[<AST.VarDecl object at 0x7f4af915f4e0>, <AST.VarDecl object at 0x7f4af915f5f8>, <AST.VarDecl object at 0x7f4af915f6a0>, <AST.VarDecl object at 0x7f4af915f7b8>],None])

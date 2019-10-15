@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[VarDecl(Id(a),IntType),VarDecl(Id(b),IntType)],IntType,Block([])),None])

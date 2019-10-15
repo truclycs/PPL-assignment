@@ -37,7 +37,7 @@ class VarDecl(Decl,BlockMember):
         self.varType = varType
 
     def __str__(self):
-        return "VarDecl(" + str(self.variable) + "," + str(self.varType) + ")"
+        return "VarDecl(" + str(self.variable) +  "," + str(self.varType) + ")"
 
     def accept(self, v, param):
         return v.visitVarDecl(self, param)
