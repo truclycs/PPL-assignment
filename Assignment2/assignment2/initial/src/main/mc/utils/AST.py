@@ -117,7 +117,7 @@ class ArrayPointerType(Type):
         self.eleType = eleType
         
     def __str__(self):  
-        return "ArrayTypePointer(" + str(self.eleType) + ")"
+        return "ArrayPointerType(" + str(self.eleType) + ")"
 
     def accept(self, v, param):
         return v.visitArrayPointerType(self, param)

@@ -1,8 +1,0 @@
-
-		string enter(){}
-		boolean enter(){}
-		float enter(){}
-		void enter(){}
-
-		int main(){}
-		

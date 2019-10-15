@@ -1,7 +1,0 @@
-
-		int main(){}
-
-		void main(int a[],float b,string c[],boolean d){}
-	
-		int main(){}
-		

@@ -1,2 +1,0 @@
-int main(float a,float b){}
-		

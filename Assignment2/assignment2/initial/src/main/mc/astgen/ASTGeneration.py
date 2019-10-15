@@ -67,12 +67,14 @@ class ASTGeneration(MCVisitor):
             return StringType()        
 
 # array_pointer_type: primitive_type ID? LSB RSB;
-    def visitArray_pointer_type(self, ctx:MCParser.Array_pointer_typeContext): pass
+    def visitArray_pointer_type(self, ctx:MCParser.Array_pointer_typeContext):
+        if ctx.LSB():
+            return ArrayPointerType(self.visit(ctx.primitive_type()))
 
 # exp : exp1 ASSIGN exp | exp1;
     def visitExp(self, ctx:MCParser.ExpContext): 
         if ctx.ASSIGN():
-            return BinaryOp("=", self.visit(ctx.exp1()), self.visit(ctx.exp()))
+            return BinaryOp('=', self.visit(ctx.exp1()), self.visit(ctx.exp()))
         else:
             return self.visit(ctx.exp1())
 
@@ -88,7 +90,7 @@ class ASTGeneration(MCVisitor):
         if ctx.AND():
             return BinaryOp("&&", self.visit(ctx.exp2()), self.visit(ctx.exp3()))
         else:
-            self.visit(ctx.exp3())
+            return self.visit(ctx.exp3())
 
 # exp3: exp4 (EQUAL | NOT_EQUAL) exp4 | exp4;
     def visitExp3(self, ctx:MCParser.Exp3Context): 
@@ -200,33 +202,33 @@ class ASTGeneration(MCVisitor):
         else_stmt = None
         if ctx.stmt(1):
             else_stmt = self.visit(ctx.stmt(1))
-        return [If(expr, then_stmt, else_stmt)]
+        return If(expr, then_stmt, else_stmt)
 
 # while_stmt: DO stmt+ WHILE exp SEMI;
     def visitWhile_stmt(self, ctx:MCParser.While_stmtContext): 
         sl  = [self.visit(x) for x in ctx.stmt()]
         exp = self.visit(ctx.exp())
-        return [Dowhile(sl, exp)]
+        return Dowhile(sl, exp)
 
 # for_stmt: FOR LB exp SEMI exp SEMI exp RB stmt;
     def visitFor_stmt(self, ctx:MCParser.For_stmtContext): 
         e1, e2, e3 = [self.visit(x) for x in ctx.exp()]
         loop = self.visit(ctx.stmt())
-        return [For(e1, e2, e3, loop)]
+        return For(e1, e2, e3, loop)
 
 # break_stmt: BREAK SEMI;
     def visitBreak_stmt(self, ctx:MCParser.Break_stmtContext): 
-        return [Break()]
+        return Break()
 
 # continue_stmt: CONTINUE SEMI;
     def visitContinue_stmt(self, ctx:MCParser.Continue_stmtContext): 
-        return [Continue()]
+        return Continue()
 
 # return_stmt: RETURN exp? SEMI;
     def visitReturn_stmt(self, ctx:MCParser.Return_stmtContext):
         if ctx.exp():
-            return [Return(self.visit(ctx.exp()))]
-        return [Return()]
+            return Return(self.visit(ctx.exp()))
+        return Return()
 
 # exp_stmt: exp SEMI;
     def visitExp_stmt(self, ctx:MCParser.Exp_stmtContext): 
@@ -242,5 +244,8 @@ class ASTGeneration(MCVisitor):
         member = []
         if ctx.getChildren():      
             for x in ctx.getChildren():
-                member += self.visit(x)
+                if x.getChildCount() == 1:
+                    member.append(self.visit(x))
+                else:
+                    member += self.visit(x)
         return member

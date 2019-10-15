@@ -1,2 +1,0 @@
-int main(boolean a,boolean b){}
-		

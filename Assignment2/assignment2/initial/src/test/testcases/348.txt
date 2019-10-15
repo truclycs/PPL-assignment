@@ -1,5 +1,0 @@
-int main (int b,int c[]) {
-                        int a; float a;
-                             int c;
-                        }
-		

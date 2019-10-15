@@ -1,1 +1,0 @@
-Program([VarDecl(b,StringType),VarDecl(c,ArrayType(StringType,123)),VarDecl(d,StringType),VarDecl(e,ArrayType(StringType,1234534)),VarDecl(b,BoolType),VarDecl(c,ArrayType(BoolType,123)),VarDecl(d,BoolType),VarDecl(e,ArrayType(BoolType,1234534)),VarDecl(a,IntType),VarDecl(b,IntType),VarDecl(c,IntType),VarDecl(x,FloatType),VarDecl(y,FloatType),VarDecl(z,FloatType)])

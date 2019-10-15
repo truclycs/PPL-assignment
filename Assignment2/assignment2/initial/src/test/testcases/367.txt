@@ -1,7 +1,0 @@
-int main()
-		{
-			for (i = 4; i < 5; i +2 ){
-                if (a = 5) false;
-            }
-		}
-		

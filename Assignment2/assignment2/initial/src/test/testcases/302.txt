@@ -1,8 +1,0 @@
-
-		int a,b,c;
-
-		int main()
-		{
-			int d,e,f;
-		}
-		

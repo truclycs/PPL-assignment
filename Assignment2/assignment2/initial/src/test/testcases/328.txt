@@ -1,5 +1,0 @@
-
-		float enter(){}
-
-		int main(){}
-		
