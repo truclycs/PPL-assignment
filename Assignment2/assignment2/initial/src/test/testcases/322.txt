@@ -1,0 +1,13 @@
+
+        void foo (int i) {
+            int i,j,k[5];
+            // ABC XYZ
+        }
+
+        void main() {
+            /*nntl*/
+            int abc;
+            continue;
+            res(i);
+        }
+        

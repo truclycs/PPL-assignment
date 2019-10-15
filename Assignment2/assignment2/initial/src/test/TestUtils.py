@@ -1,3 +1,6 @@
+#
+# Last modified by: Bui Ngoc Thanh Son
+#
 import sys,os
 from antlr4 import *
 from antlr4.error.ErrorListener import ConsoleErrorListener,ErrorListener
@@ -9,6 +12,7 @@ from MCLexer import MCLexer
 from MCParser import MCParser
 from lexererr import *
 from ASTGeneration import ASTGeneration
+import re
 
 class TestUtil:
     @staticmethod
@@ -95,6 +99,17 @@ class TestAST:
         tree = parser.program()
         asttree = ASTGeneration().visit(tree)
         dest.write(str(asttree))
+
+        #expectGen
+        testFile = open("./test/ASTGenSuite.py", "r")
+        testStream = testFile.read()
+        testFile.close()
+        testStream = re.sub(re.compile(r"(?:(expect[\s\t]*?=[\s\t]*?str[\s\t]*?\()([^\n]*?)\)[\s\t]*?\n)(?=(?:\t\t| {8})self\.assertTrue\(TestAST\.checkASTGen\(input,expect," + str(num) +r"\))", re.MULTILINE | re.DOTALL), r"\1" + asttree.expect().replace("\\", "\\\\\\\\") + r")\n", testStream)
+        testFile = open("./test/ASTGenSuite.py", "w")
+        testFile.write(testStream)
+        testFile.close()
+        #expectGen
+
         dest.close()
         dest = open("./test/solutions/" + str(num) + ".txt","r")
         line = dest.read()

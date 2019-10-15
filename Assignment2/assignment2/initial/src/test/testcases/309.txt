@@ -1,0 +1,6 @@
+
+        int[] foo() {
+            int x;
+            int a, b, c, d[1000];
+        }
+        

@@ -1,0 +1,6 @@
+
+        int func(int a) {
+            do a; while a;
+            return a = 1;
+        }
+        

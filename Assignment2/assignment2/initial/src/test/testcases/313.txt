@@ -1,0 +1,6 @@
+
+        int main() {
+            if (a == b) c = d;
+            else c = e;
+        }
+        

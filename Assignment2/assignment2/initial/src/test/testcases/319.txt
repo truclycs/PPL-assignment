@@ -1,0 +1,6 @@
+
+        int x;
+        int main() {}
+        float y;
+        float solve() {}
+        

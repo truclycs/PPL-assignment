@@ -1,0 +1,10 @@
+
+        string s;
+        boolean flag, d[100000];
+        int a[18], b[2], c[1999];
+        float foo() {
+            float aa, bb, cc, dd[10000];
+            int xx, yy, zz[10000];
+            string ss, pp;
+        }        
+        

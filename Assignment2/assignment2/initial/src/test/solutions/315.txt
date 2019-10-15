@@ -1,0 +1,1 @@
+Program([VarDecl(h,IntType),VarDecl(c,IntType),VarDecl(m,IntType),FuncDecl(Id(foo),[VarDecl(x,IntType),VarDecl(y,IntType),VarDecl(z,FloatType),VarDecl(s,StringType),VarDecl(a,ArrayTypePointer(IntType))],VoidType,Block([VarDecl(f,ArrayType(IntType,100)),VarDecl(l,ArrayType(IntType,999999)),VarDecl(p,ArrayType(IntType,100000))]))])

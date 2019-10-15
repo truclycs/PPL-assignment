@@ -1,0 +1,1 @@
+Program([VarDecl(x,IntType),VarDecl(y,IntType),VarDecl(z,IntType),VarDecl(d,IntType),FuncDecl(Id(foo),[VarDecl(a,IntType),VarDecl(b,IntType)],FloatType,Block([If(BinaryOp(==,Id(a),Id(b)),If(BinaryOp(==,Id(a),Id(x)),BinaryOp(=,Id(b),Id(y)),BinaryOp(=,Id(c),Id(z))),BinaryOp(=,Id(c),Id(d)))]))])
