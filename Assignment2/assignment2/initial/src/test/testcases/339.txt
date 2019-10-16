@@ -1,4 +1,15 @@
-int cal(int a) {
-                        cal((a + 3) % 2 * 8);
-                    }
-        
+void main() {
+		{
+			int a[5], b[5], c[5];
+			{
+				boolean flag, q[2];
+			}
+			{
+				string t[5];
+				t = foo(a);
+				{
+					t[0] = "2019.12.08 - 20th Anniversary"; 
+				}
+			}
+		}
+		}

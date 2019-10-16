@@ -1,12 +1,8 @@
-
-        void process() {
-			if (i < n && p[j] != t[i]) {
-				if (j != 0) {
-					j = kmp[j - 1];
-				}
-				else {
-					i = i + 1;
-				}
+void main(){
+			a = b = c = foo(.5e-2, 10, b[12*c[1]]) + 10 * what;
+			for (a; b <= 100; c) {
+				do a = d();
+				while (a == goo(a));
+				for (true; 1; 1) really();
 			}
-        }
-        
+		}

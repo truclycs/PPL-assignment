@@ -1,40 +1,21 @@
 
-        int main(){
-            "ios_base::sync_with_stdio(false)";
-            "cin.tie(NULL)";
-            "cout.tie(NULL)";
-            int t;
-            //cin>>t;
-            int n;
-            for (T = 0; T < t; T = T + 1)
-            {
-                //cin>>n;
-                string s;
-                //cin>>s;
-                //ll left=-1,right=-1;
-                for(i=0;i<n;i+1)
-                {
-                    if(s[i]=="1")
-                    {
-                        left=i;
-                        break;	
-                    }
-                }
-                for(i=n-1;i>=0;i-1)
-                {
-                    if(s[i]=="1")
-                    {
-                        right=i;
-                        break;
-                    }
-                }
-                maxm=n;
-                if(left!=-1 && right!=-1) 
-                {
-                    temp=max(right+1,n-left);
-                    maxm=max(maxm,2*temp);
-                }
-                //cout<<maxm<<endl;
-            }
+		int i ;
+        int f(){
+            return 200;
         }
-        
+        void main(){
+            int main;
+            main = f();
+            putIntLn(main);
+            {
+                int i;
+                int main;
+                int f;
+                main = f = i = 100;
+                putIntLn(i);
+                putIntLn(main);
+                putIntLn(f);
+            }
+            putIntLn(main);
+        }
+		

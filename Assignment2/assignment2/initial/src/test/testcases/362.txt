@@ -1,4 +1,8 @@
-int foo() {
-                    (-1+2*3+4/5%6)[2];
-                    }
-        
+int main(){
+			if (!!!!a != b)
+				for (true; true; 1)
+					do printf("I have no idea what to write. -_-\n");
+					printf("100 testcases - too much!");
+					while exhausted();
+			else process(next);
+		}

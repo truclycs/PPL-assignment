@@ -1,6 +1,4 @@
-
-        void foo(int x, int y, float z, string s, int a[]) {
-            x = y + c;
-            a[5] = z + x;
-        }
-        
+void main(){
+			i = j = .77e-3;
+            i = j + foo()[2]*i;
+		}

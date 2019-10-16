@@ -1,4 +1,5 @@
- int x; 
-                    int foo() {
-                        a[a[a[a[a[a[a]]]]]];
-                    } 
+int find_gcd(int n1, int n2){
+            if (n2 != 0)
+            	return find_gcd(n2, n1%n2);
+            else return n1;
+        }

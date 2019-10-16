@@ -1,11 +1,4 @@
- 
-                    int main() {
-                        int s, n;
-                        for (i = 0; i < n; i) sort(x, x + n);                    
-                        for (i = 0; i < n; i) {
-                            if (x[i] >= s) {
-                                return 0;
-                            }
-                        }                    
-                        return 0;
-                    }
+int _dosomething() {
+			create(something);
+			return something;
+		}

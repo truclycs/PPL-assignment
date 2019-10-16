@@ -1,20 +1,16 @@
 
-        boolean isPrime(int n) {
-            if (i < 2) {
-                return false;
-            }
-            for (i = 2; i <= sqrtm; i = i + 1) {
-                return false;
-            }
-            return true;
-        }
-
-        int main() {
-            int n;
-            n = 10;
-            if (isPrime(n) == true) {
-                n = 1934823904;
-            }
-            return 0;
-        }
-        
+		int main()
+		{
+    		int n, count;
+			count = 0;
+    		printf("Enter an integer: ");
+    		scanf("%d", n);
+			do {
+        		n = n / 10;
+        		count = count + 1;
+    		}
+    		while (n != 0);
+    
+    		printf("Number of digits: %d", count);
+			return 0;
+		}

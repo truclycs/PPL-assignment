@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(abc),[],BoolType,Block([Return(),Id(coninue),Break(),Return(IntLiteral(8))]))])
+Program([FuncDecl(Id(main),[],IntType,Block([If(BinaryOp(&&,Id(f1),Id(f2)),CallExpr(Id(swap),[Id(a),Id(b)]),If(BinaryOp(==,Id(f1),BooleanLiteral(true)),BinaryOp(=,Id(c),BinaryOp(+,Id(a),Id(b))),If(BinaryOp(==,Id(f2),BooleanLiteral(true)),BinaryOp(=,Id(c),BinaryOp(-,Id(a),Id(b))),BinaryOp(=,Id(a),BinaryOp(=,Id(b),IntLiteral(0))))))]))])

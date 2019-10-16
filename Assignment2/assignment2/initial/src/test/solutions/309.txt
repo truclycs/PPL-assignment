@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(foo),[],ArrayTypePointer(IntType),Block([VarDecl(x,IntType),VarDecl(a,IntType),VarDecl(b,IntType),VarDecl(c,IntType),VarDecl(d,ArrayType(IntType,1000))]))])
+Program([VarDecl(a,ArrayType(IntType,10)),VarDecl(b,IntType),VarDecl(c,ArrayType(IntType,12)),VarDecl(d,IntType),FuncDecl(Id(__nothing),[VarDecl(a,ArrayTypePointer(IntType)),VarDecl(b,ArrayTypePointer(IntType)),VarDecl(c,ArrayTypePointer(IntType)),VarDecl(d,IntType)],ArrayTypePointer(IntType),Block([])),FuncDecl(Id(_sum),[VarDecl(a,ArrayTypePointer(FloatType))],FloatType,Block([]))])

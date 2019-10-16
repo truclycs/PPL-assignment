@@ -1,4 +1,12 @@
-int cal(int a) {
-                        do res = 1 + 1; while 1 + 1 == 2;
-                    }
-        
+void main() {
+		a = -foo(a)[5] + 8 * goo(a); 
+		{
+			a = newValue = 9.5e-3;
+			{
+				a = true;
+				{
+					a = "I'm trying!";
+				}
+			}
+		}
+		}

@@ -1,6 +1,5 @@
-
-        int main() {
-            if (a == b) c = d;
-            else c = e;
-        }
-        
+void __Sherlock(){
+			str1 = "The" + " Sign" + " Of" + " Three";
+			str2 = "Crossroad in the Ancient" + " Capital";
+			APTX = 48*100 + 69;
+		}

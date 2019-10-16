@@ -1,13 +1,9 @@
-
-        int max(string floor, int it)
+//Print entered number program
+		int main()
         {
-            if (it > (floorsize() - it))
-            {
-                return (it + 1) * 2;
-            }
-            else
-            {
-                return (floorsize() - it) * 2;
-            }
+            int number;
+            printf("Enter an integer: ");
+            scanf("%d", number);
+            printf("You entered: %d", number);
+            return 0;
         }
-        

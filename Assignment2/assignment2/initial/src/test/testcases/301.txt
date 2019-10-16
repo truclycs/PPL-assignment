@@ -1,3 +1,2 @@
-
-        int a, b[10], c;
-        
+float a, b, c;
+					boolean flag[5], t; 

@@ -1,6 +1,6 @@
-float foo(){
-                i=2;
-                foo(1.2);
-                foo(3*4);
-                100;
-            }
+int main(){
+			if (-a > -100 + b)
+				for (i = 0; i = i + 4; i < b)
+					if (i < a) printf(i*a);
+			else return;
+		}

@@ -8,7 +8,7 @@ class ASTGenSuite(unittest.TestCase):
         int a, b, c;
         """
         expect = str(Program([VarDecl("a",IntType()),VarDecl("b",IntType()),VarDecl("c",IntType())]))
-        self.assertTrue(TestAST.checkASTGen(input,expect,300))
+        self.assertTrue(TestAST.checkASTGen(input,expect,400))
 
     def test_2(self):
         input = """

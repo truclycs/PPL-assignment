@@ -1,47 +1,23 @@
 
-        int solution(){
-            int n,q1;
-            "cin>>n>>q1";
-            int a[10],c[200005],d[200005];
-            
-               if(c[a[i]]==0)
-                {
-                    c[a[i]]=i+1;
-                }
-
-                if(c[a[i]]==i+1)
-                {
-                    vpb(d[a[i]],c[a[i]],m[a[i]]);
-                }      
-            ans=0;
-            sort(all(v));
-            g=sz(v);
-            b=-1;temp=0;
-                j=g-i-1;
-                //cnt=v[j].S.S,f=v[j].S.F,s=v[j].F;
-            
-                if(s<b)
-                {        
-                    ans=temp;
-                    b=f;
-                    temp=cnt;
-                    if(s-f+1==cnt)
-                    {
-                        ans=cnt;
-                        temp=0;
-                        b=-1;
-                    }        
-                }
-                else
-                {
-                    b=min(f,b);
-                    temp=max(temp,cnt);
-                    if(j==0)
-                    {
-                        ans=temp;
-                    }
-                }
-        //    cout<<n-ans;
-        return 0;
-        }
-        
+		int main()
+		{
+    		int i, n;
+    		float arr[100];
+    		printf("Enter total number of elements(1 to 100): ");
+    		scanf("%d", n);
+    		printf("\n");
+    		//Stores number entered by the user
+    		for (i = 0; i < n; i = i + 1)
+    		{
+       			printf("Enter Number %d: ", i+1);
+       			scanf("%f", arr[i]);
+    		}
+    		//Loop to store largest number to arr[0]
+    		for (i = 1; i < n; i = i + 1)
+    		{
+       			if (arr[0] < arr[i])					//Change < to > if you want to find the smallest element
+           			arr[0] = arr[i];
+    		}
+    		printf("Largest element = %.2f", arr[0]);
+    		return 0;
+		}

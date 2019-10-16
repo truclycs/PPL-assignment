@@ -1,16 +1,8 @@
-
-        void foo() {
-            for(i = 0; i < n; i = i + 1)
-			if(s[i] == "1"){
-				num_rooms = 2*max(i+1, n-i);
-				mx = max(mx, num_rooms);
-			}
-        }
-        void foo() {
-            for(i = 0; i < n; i = i + 1)
-			if(s[i] == "1"){
-				num_rooms = 2*max(i+1, n-i);
-				mx = max(mx, num_rooms);
-			}
-        }
-        
+int main(){
+			if (1 || 2 && 3 * 4 <= (5 + 6) * 7 && 8 == foo(9))
+				{
+					a = func1(arr[2] * arr[3], arr[0] / arr[1]);
+				}
+					if (10) do 11; while 13;
+			else func2(14);
+		}

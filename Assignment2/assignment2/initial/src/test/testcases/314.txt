@@ -1,4 +1,4 @@
-
-        void foo(int x, int y, float z, string s, int a[]) {
-        }
-        
+void _hoo(){
+			flag = (a + b >= 12 + c) && (a > b);
+			boo = flag || ((a <= 100 - c) && (b < 10)); 
+		}

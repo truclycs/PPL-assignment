@@ -1,14 +1,11 @@
 
-        int string_sum(string s)
-        {
-            int b;
-            b = 0;
-            int k;
-            k =ssize();
-                for(j=0; j<k; j = j + 1)
-                {
-                    b = b + (s[j]-48);
-                }
-            return b;
-        }
-        
+		int main()
+		{
+    		int a;
+    		float b;
+    		boolean c;
+    		printf("Size of int = %ld bytes \n", sizeof(a));
+    		printf("Size of float = %ld bytes\n", sizeof(b));
+    		printf("Size of boolean = %ld bytes\n", sizeof(c));
+    		return 0;
+		}

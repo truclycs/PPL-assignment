@@ -1,14 +1,9 @@
-
-        void kmpPreprocess(string p, int kmp[]) {
-            kmp[0] = 0;
-            int m;
-            int j0;
-            int i;
-            for (i = 0; i < m; i = i + 1) {
-                if (p[i] == p[j]) 
-                    j = j + 1;
-                    kmp[i] = j;
-                    i = i + 1;
-            }
-        }    
-        
+int _anomynous(){
+			break;
+			continue;
+			{
+				continue;
+				break;
+			}
+			return (foo(a[5] * 9)[2019])[100] + (a[a[a[2]]] != .5e-2) * "kai" - true / 10e2 * false;
+		}

@@ -1,9 +1,24 @@
 
-        int main(){
-            do{
-                abc = 456;
-                if (x || y || z) return 0;
-                else if (1 + 2 + 3 == m) return 0;
-            } while (flag = true);
+		//Check if a number is prime number
+
+		boolean isPrime(int n)
+        {
+            int j, flag;
+            for (j = 2; j <= n/2; j = j + 1)
+            {
+                if (n % j == 0)
+                {
+                    flag = 0;
+                    break;
+                }
+            }
+            return flag;
         }
-        
+
+		int main() {
+			int n;
+			scanf("%d", n);
+			if (isPrime(n)) printf("%d is a prime number.", n);
+			else printf("%d is not a prime number.", n);
+			return 0;
+		}

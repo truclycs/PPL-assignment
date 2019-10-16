@@ -1,17 +1,8 @@
-
-        int main ()  {
-            int n, x1, x2, x3, x4, x5;
-            scanf(n);
-            if (n <= 5)
-                printf ("1");
-            else {
-                x1 = n / 5;
-                x2 = n % 5 / 4;
-                x3 = n % 5 % 4 / 3;
-                x4 = n % 5 % 4 % 3 / 2;
-                x5 = n % 5 % 4 % 3 % 2 / 1;
-                printf(x1 + x2 + x3 + x4 + x5);
-            }
-            return 0;
-        }
-        
+int[] foo(int a[], int b, boolean flag) {
+			{
+				float c, d, e[100];
+				string str;
+			}
+			if (a[1]) a[2] = toString(a[2])[a[3]];
+		}
+		int a[10], b[20], c;

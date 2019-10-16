@@ -1,15 +1,14 @@
-
-        int main() {
-            for(i=1;i<=n;i+1) {
-                if(!vis[i])
-                {
-                    ans[i]=1;
-                    temp+1;
-                    for(j=0;j<size;j+1)
-                    {
-                        //vis[v[i][j]]=true;
-                    }
-                }
-            }
-        }
-        
+int a, b, c[2];
+		void main(){
+			int a, b[2];
+			{
+				int b, c[3];
+				{
+					int c, a[4];
+					for (c; c < 3E2; c = c + 2)
+						do if (c / 2 > 100) c = foo(b[b[2]]*3)[10*5e2*foo(1)[a[2]]];
+						while true;
+				}
+			}
+			releaseMutex();
+		}

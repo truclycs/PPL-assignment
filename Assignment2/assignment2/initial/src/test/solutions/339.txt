@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(cal),[VarDecl(a,IntType)],IntType,Block([CallExpr(Id(cal),[BinaryOp(*,BinaryOp(%,BinaryOp(+,Id(a),IntLiteral(3)),IntLiteral(2)),IntLiteral(8))])]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([Block([VarDecl(a,ArrayType(IntType,5)),VarDecl(b,ArrayType(IntType,5)),VarDecl(c,ArrayType(IntType,5)),Block([VarDecl(flag,BoolType),VarDecl(q,ArrayType(BoolType,2))]),Block([VarDecl(t,ArrayType(StringType,5)),BinaryOp(=,Id(t),CallExpr(Id(foo),[Id(a)])),Block([BinaryOp(=,ArrayCell(Id(t),IntLiteral(0)),StringLiteral(2019.12.08 - 20th Anniversary))])])])]))])

@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(OK),[VarDecl(a,IntType)],BoolType,Block([Return(BooleanLiteral(true))]))])
+Program([FuncDecl(Id(main),[],IntType,Block([If(Id(flag),BinaryOp(=,Id(a),BinaryOp(+,Id(a),IntLiteral(1))),BinaryOp(=,Id(a),BinaryOp(-,Id(a),IntLiteral(1))))]))])

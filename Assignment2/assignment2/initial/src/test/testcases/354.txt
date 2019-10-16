@@ -1,12 +1,5 @@
-int [ ] foo ( int b [ ] ) {
-                    if (ABC ) return a ;
-                    else return b ;
-            }
-            void main() {
-            for( abc = 1; xyz == true; abc = abc + 1)
-                if(abc == 1)
-                    abc = 0;
-                else
-                    do abc = abc + 1;
-                    while xyz != false;
-            }
+string compare(float a, float b){
+		if (a < b) return "<";
+		if (a > b) return ">";
+		return "=";
+		}

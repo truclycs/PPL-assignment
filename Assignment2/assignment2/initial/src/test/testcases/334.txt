@@ -1,5 +1,6 @@
- 
-        int cal(int a, int b, int c) {
-            res = !((a * b) / d + (-f % 7 - 4));
+int a[10];
+        int sum(int a[]) {
+            int i, sum;
+            for (i = 0; i < 10; i = i+1) sum = sum + a[i];
+            return sum;
         }
-        

@@ -1,4 +1,4 @@
-float foo(){
-                foo(x);
-                return x;
-            }
+int main(){
+			do for (true; x < random(1,100); true) if (isSad()) printf("Waratte hoshii!");
+			while true;
+		}

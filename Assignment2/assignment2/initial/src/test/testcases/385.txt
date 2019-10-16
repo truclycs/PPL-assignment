@@ -1,5 +1,17 @@
 
-        void foo() {
-            {{{{}}}}
+		int i, a[10];
+        int[] foo() {
+			{
+				int a[10], i;
+				for (i = 0; i < 10; i = i + 1) a[i] = random(1, 100);
+				return a;
+			}
+		}
+
+        void main(){
+            i = 9;
+            a = foo();
+			i = i + foo()[2];
+            if (i < 9 && i > a[1]) print("True");				//check if i < 9 and i > a[1]
+            else print("False");
         }
-        

@@ -1,12 +1,5 @@
-int[] func() {
-                        int a, b, c, x[10];
-                        if (flag == true) a = x[1];
-                        else break;
-                        continue;
-                        do (x[2] = 1); while a = b;
-                        x[3] = a * b - c + d / f % g;
-                        return a[1];
-                        return x;
-                        return;     
-                }   
-        
+int main(){
+			if (1) for (2; 3; 4) for (5; 6; 7) {}
+			else if (8) do 9; 10; while 11;
+			else return 12;
+		}

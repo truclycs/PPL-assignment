@@ -1,5 +1,3 @@
-
-        void foo() {}
-        int main() {}
-        boolean check() {}
-        
+void main(){
+			_a = goo(5-b) - foo(5.e-5,4-b)*b/8;
+		}

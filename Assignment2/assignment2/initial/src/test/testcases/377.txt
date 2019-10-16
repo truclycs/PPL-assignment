@@ -1,24 +1,12 @@
- 
-        void solve()
-        {
-            //cin >> m;
-            if (m == 1)
-            {
-              //  cout << 1;
-                return ;
-            }
-            for (i = 1; i < n; i+1)
-            {
-                x = (i * (i + 1)) / 2;
-        
-                if (x >= m)
-                {
-                    j = i - 1;
-                    x = (j * (j + 1)) / 2;
-               //     cout << m - x;
-                    return ;
-                }
-            }
-        
-        }
-        
+boolean flag[100], f;
+		int main() {
+			{
+				int flag;
+				flag = false || true || flag[flag[2]];
+				if (flag) f = decode("00010110110001111");
+			}
+			int g, h, k;
+			k = decode("9713","97139","1739","14863","1739") == "CONAN";
+			print(k);
+			return;
+		}

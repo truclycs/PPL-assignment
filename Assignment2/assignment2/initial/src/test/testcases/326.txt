@@ -1,9 +1,4 @@
-
-        int foo() {
-            x = 1;
-            y = x + 2;
-            if (a < b && b > c || d >= e || e <= f) a = e;
-            else a = c;
-            return foo();
-        }
-        
+void main(){
+			flag = false;
+			if (foo(a)[0] > b - c) flag = true;
+		}

@@ -1,6 +1,2 @@
-       
-        string a;
-        int b;
-        float c;  
-        boolean d;
-        
+void swap(int a, int b){}
+				int a[10], b[12], c[16];

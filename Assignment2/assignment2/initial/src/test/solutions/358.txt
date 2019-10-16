@@ -1,1 +1,1 @@
-Program([VarDecl(x,IntType),FuncDecl(Id(foo),[],IntType,Block([ArrayCell(Id(a),ArrayCell(Id(a),ArrayCell(Id(a),ArrayCell(Id(a),ArrayCell(Id(a),ArrayCell(Id(a),Id(a)))))))]))])
+Program([FuncDecl(Id(find_gcd),[VarDecl(n1,IntType),VarDecl(n2,IntType)],IntType,Block([If(BinaryOp(!=,Id(n2),IntLiteral(0)),Return(CallExpr(Id(find_gcd),[Id(n2),BinaryOp(%,Id(n1),Id(n2))])),Return(Id(n1)))]))])

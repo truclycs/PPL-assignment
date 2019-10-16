@@ -1,6 +1,8 @@
- void main() {
-                        i = 1;
-                        foo (1 ,2);
-                        i + 2;
-                        100;
-                    }
+void main() {
+			int x, a[99];
+			do x = x + 3;
+            printf(x);
+            a[i] = x;
+            i = i + 1;
+            while (i < 99);
+		}

@@ -1,5 +1,30 @@
 
-        string getTime() {
-            return "1:10AM - 16-10-2019";
-        }
-        
+		int a[10], b;
+		string[] generate() {
+			string list[10];
+			insert("YESTERDAY LOVE", 0, list);
+			insert("Togetsukyou ~Kimi Omou~", 0, list);
+			insert("always", 0, list);
+			insert("Growing of my heart", 0, list);
+			insert("Secret of my heart", 0, list);
+			insert("Your Best Friend", 0, list);
+			insert("TRY AGAIN", 0, list);
+			insert("Barairo no Jinsei", 0, list);
+			insert("Time after time ~Hana Mau Machi de~", 0, list);
+			insert("Kimi to Koi no Mama de Owarenai Itsumo no Yume no Mama ja Irarenai", 0, list);
+			return list;
+		}
+
+		int main() {
+			int i;
+			{
+				string listMaiKxConanCollaboration;
+				listMaiKxConanCollaboration = generate();
+				for (i = 0; i < 10; i = i + 1) {
+					printf("%s", listMaiKxConanCollaboration[i]);
+					if (true) printf("This song is so good! \n");
+				}
+			}
+			return 0;
+		}
+		

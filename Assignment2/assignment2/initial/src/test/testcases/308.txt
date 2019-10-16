@@ -1,8 +1,13 @@
-
-        string foo() {
-            int a[10], b[10];
-            string s;
-            boolean flag;
-            float f[10], fl;
-        }
-        
+int main(){
+					{
+						{
+							{
+								int i, j, k;
+								float c[10];
+							}
+						}
+					}
+					{
+						string d;
+					}
+				}

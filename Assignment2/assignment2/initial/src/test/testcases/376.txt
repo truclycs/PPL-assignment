@@ -1,8 +1,13 @@
-
-        int gcd(int a, int b) 
-        { 
-            if (a == 0) 
-                return b; 
-            return gcd(b % a, a); 
-        } 
-        
+/* func1 implementation */
+		int[] func1(int a, int b[]) {
+			func2(a, b, b[b[3]]);						//call func2 
+			a = b[0] * 1e-3 + 9;
+			return b;
+		}
+		/*
+		func2 implementation
+		*/
+		void func2(int a, int b[], int n) {
+			func1(b[b[1]] + a, b);						//call func1
+			return;
+		}

@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(cal),[VarDecl(a,IntType),VarDecl(b,IntType),VarDecl(c,IntType)],IntType,Block([BinaryOp(=,Id(a),BinaryOp(-,BinaryOp(-,BinaryOp(+,Id(b),BinaryOp(/,BinaryOp(%,Id(c),Id(a)),Id(b))),BinaryOp(*,Id(c),Id(a))),Id(e)))]))])
+Program([FuncDecl(Id(main),[],IntType,Block([For(BinaryOp(=,Id(i),IntLiteral(0));BinaryOp(<,Id(i),IntLiteral(100));BinaryOp(=,Id(i),BinaryOp(+,Id(i),IntLiteral(1)));BinaryOp(=,Id(sum),BinaryOp(+,Id(sum),Id(i))))]))])

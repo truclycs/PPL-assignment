@@ -1,8 +1,8 @@
-float foo(){
-                return x;
-            }
-            float foo(){
-                y = y * 13.7878;
-                return y;
-            }
-            
+int main(){
+			int a[100], sum;
+			a = random(1, 100, 100);
+			for (i = 0; i = i + 1; i < 100) {
+					if (a[i] % 2 == 0) continue;
+					sum = sum + a[i];
+			}
+		}

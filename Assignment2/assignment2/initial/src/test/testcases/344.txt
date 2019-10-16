@@ -1,6 +1,13 @@
-int func(int a, float b){
-                for(a = 10; a < 20; a = a + 1 )
-                    i = i + 1;
-                continue;
-                }
-                void main() {}
+void main() {
+			//Variable declaration
+			float s[2], k;
+			boolean flag;
+			/*
+			Dowhile statement
+			*/
+			do {double(x);}
+			x = x + 1;
+			{triple(x);}
+			x = x + 2;
+			while x < 1e3;
+		}

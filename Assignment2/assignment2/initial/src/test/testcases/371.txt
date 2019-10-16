@@ -1,47 +1,9 @@
-
-                int main ()  {
-            int n, x1, x2, x3, x4, x5;
-            scanf(n);
-            if (n <= 5)
-                printf ("1");
-            else {
-                x1 = n / 5;
-                x2 = n % 5 / 4;
-                x3 = n % 5 % 4 / 3;
-                x4 = n % 5 % 4 % 3 / 2;
-                x5 = n % 5 % 4 % 3 % 2 / 1;
-                printf(x1 + x2 + x3 + x4 + x5);
-            }
-            return 0;
-        }
-        int main ()  {
-            int n, x1, x2, x3, x4, x5;
-            scanf(n);
-            if (n <= 5)
-                printf ("1");
-            else {
-                x1 = n / 5;
-                x2 = n % 5 / 4;
-                x3 = n % 5 % 4 / 3;
-                x4 = n % 5 % 4 % 3 / 2;
-                x5 = n % 5 % 4 % 3 % 2 / 1;
-                printf(x1 + x2 + x3 + x4 + x5);
-            }
-            return 0;
-        }
-        int main ()  {
-            int n, x1, x2, x3, x4, x5;
-            scanf(n);
-            if (n <= 5)
-                printf ("1");
-            else {
-                x1 = n / 5;
-                x2 = n % 5 / 4;
-                x3 = n % 5 % 4 / 3;
-                x4 = n % 5 % 4 % 3 / 2;
-                x5 = n % 5 % 4 % 3 % 2 / 1;
-                printf(x1 + x2 + x3 + x4 + x5);
-            }
-            return 0;
-        }
-        
+float a, b[0009], c[00012];
+		boolean func(int _[], int d) {
+			if (_[00] + .6e3 < _[01] * d) return func(_, d + 10);
+			for (i; i >= 0010; i = i - 2) {
+				do _[00] = _[001];
+				while !!!!___;
+				if (_[0]) break;
+			}
+		}

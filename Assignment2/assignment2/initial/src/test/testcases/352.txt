@@ -1,9 +1,7 @@
-  int main() {                
-                    if (a=b=c=d=e=f=d=f=e||1){
-                        break;
-                    }
-                    else {
-                        continue;
-                    }
-                    return 0;
-                }
+float mul(float a[], int n) {
+		for (i = 0; true; true) {
+			result = result * a[i];
+			i = i + 1;
+			if (i == n) break;
+		}
+		}

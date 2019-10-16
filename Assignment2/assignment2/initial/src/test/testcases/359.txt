@@ -1,3 +1,9 @@
- int foo() {
-                    a[((((0.0))))];
-                    } 
+int main(){
+			a = (func(4)[arr[0] * 5] + 6) * 5 + .3;
+			do {
+				a = a - 3;
+				if (!flag) a = a/2;
+				else a = a + 2; 
+			}
+			while a > 0;
+		}

@@ -1,34 +1,10 @@
 
-        int main() {
-        int n,i,j,k; pos1=0;pos=-1;
-        cin  = n;
-        string s;
-        sclear();
-        for(i=0;i<n;i+1)
+		boolean flag[2], q;
+        int main()
         {
-            if(s[i]=="1" && pos==-1)
-            {
-                pos=i;
-                pos1=i;
-            }
-            if(s[i]=="1")
-            {
-                pos1=i;
-            }
+            q = true;
+			string str;
+			str = "It's over!";
+            if (flag[0]) if (flag[1]) printf(str);
+            return 0;
         }
-       // cout<<pos<<" --"<<pos1<<endl;
-        if(pos1==0 && pos==-1)
-        {
-            "cout<<n<<endl;";
-        }
-        else if(pos==pos1)
-        {
-            k=max(pos+1,n-pos);
-            //cout<<2*k<<endl;
-        }
-        else
-        {
-            cout==max(2*(pos1+1),2*(n-pos));
-        }
-        }
-        

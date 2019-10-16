@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(cal),[VarDecl(a,IntType)],IntType,Block([If(Id(a),CallExpr(Id(print),[StringLiteral(OK)]))]))])
+Program([FuncDecl(Id(__testSomeBlocks),[],BoolType,Block([Block([BinaryOp(=,BinaryOp(*,Id(a),Id(b)),BinaryOp(=,BinaryOp(*,Id(b),Id(c)),BinaryOp(*,Id(c),Id(d))))]),Block([BinaryOp(=,Id(str),StringLiteral(There's always only one truth!)),CallExpr(Id(printf),[Id(str)]),CallExpr(Id(toJapanese),[Id(str)]),Block([Return(BinaryOp(==,Id(str),StringLiteral(Shinjitsu wa itsumo hitotsu!)))])])]))])

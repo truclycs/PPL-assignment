@@ -1,3 +1,10 @@
- int foo() {
-                        return (-1+2*3+4/5%6)[2];
-                    } 
+void main(){
+			for (count = 0; count < 100; 1) {
+				for (i = 0; i < foo(count)[10]; 1) {
+					do goo(i);
+					while i < count;
+					if (i >= count) break;
+					else continue;
+				}
+			}
+		}

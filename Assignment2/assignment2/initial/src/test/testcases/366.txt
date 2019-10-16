@@ -1,20 +1,7 @@
-
-        int main() {
-            int x;
-            cin(x);
-            n = x % 4;
-            if (n == 1) {
-                cout("0 A");
-            }
-            else {
-                cout("1 B");
-            }
-            if (n == 3) {
-                cout ("2 A");
-            }
-            else {
-                cout = "1 A";
-            }
-            return 0;
-        }
-        
+int __noname(){
+			str = "Sissy Sky" + "+"/"|" + date(11/6);
+			if (inConanSongsList(str)) printf("This song is wonderful!");
+			{
+				gaugau = meomeo(10e1 - 10, 10)[10] + (true || false) * "true";
+			}
+		}

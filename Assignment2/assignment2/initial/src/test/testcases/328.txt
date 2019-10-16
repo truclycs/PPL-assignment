@@ -1,8 +1,5 @@
-
-        int can11 (int TL) {
-            int i;
-            for (i = 0; i < n; i = i + 1) TL = TL + 1;
-            if (TL != oo) can11(TL);
-            else break;
-        }
-        
+void isPerson(int height, string str){ //height in cm
+			if (height >= 160) str = "true";
+			else str = "NaP"; //Not a Person
+		} 
+		

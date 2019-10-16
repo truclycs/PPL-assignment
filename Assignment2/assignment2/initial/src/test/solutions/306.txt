@@ -1,1 +1,1 @@
-Program([VarDecl(x,IntType),VarDecl(y,IntType),VarDecl(z,ArrayType(IntType,10)),FuncDecl(Id(foo),[],VoidType,Block([VarDecl(a,ArrayType(IntType,10)),VarDecl(b,ArrayType(IntType,10)),VarDecl(c,ArrayType(IntType,10))]))])
+Program([FuncDecl(Id(goo),[],IntType,Block([Block([VarDecl(a,ArrayType(FloatType,10)),VarDecl(b,FloatType),Block([VarDecl(str,StringType),VarDecl(p,ArrayType(BoolType,3)),VarDecl(q,BoolType)])])]))])

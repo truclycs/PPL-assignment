@@ -1,3 +1,9 @@
-int foo() {
-                    a(-1+2*3+4/5%6)[2];
-                    } 
+int main(){
+			do nothing();
+			something();
+			{
+				anything();
+				if (false) nothing();
+			}
+			while true;
+		}

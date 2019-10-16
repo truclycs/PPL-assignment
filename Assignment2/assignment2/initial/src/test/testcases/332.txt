@@ -1,4 +1,4 @@
-
-        int tl;
-        /*NGUYEN THI TRUC LY*/// truclybk.cs@gmail.com
-        
+void main() {
+			for (i = 4; i < 100; i = i + 8)
+				for (j = 6; j < 100; j = j + 9) {}
+		}
