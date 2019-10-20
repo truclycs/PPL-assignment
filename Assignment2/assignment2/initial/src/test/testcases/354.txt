@@ -1,5 +1,13 @@
-string compare(float a, float b){
-		if (a < b) return "<";
-		if (a > b) return ">";
-		return "=";
-		}
+
+            void main(){
+                do 
+                    do 
+                        do 
+                            do 
+                                x = x + 1;
+                            while (x < 3);
+                        while (x < 5);
+                    while (x < 7);
+                while (x < 9);
+            }
+        

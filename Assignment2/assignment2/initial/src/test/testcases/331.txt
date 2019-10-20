@@ -1,6 +1,13 @@
-int main() {
-			for (1; i < 100; 1) {
-				sum = sum + i;
-				i = i + 1;
-			}
-		}
+
+            void main(){
+                int x;
+                x = 3;
+                if (x < 5){
+                    x = x -10;
+                    foo(x);
+                } else {
+                    x = x * 1.3e-3;
+                    foo(x);
+                }
+            }
+        

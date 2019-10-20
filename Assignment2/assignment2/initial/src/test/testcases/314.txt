@@ -1,4 +1,6 @@
-void _hoo(){
-			flag = (a + b >= 12 + c) && (a > b);
-			boo = flag || ((a <= 100 - c) && (b < 10)); 
-		}
+
+            void main(){
+                foo("x","y",a[3],test);
+                _test_not_a_test(1,3e3);   
+            }
+        

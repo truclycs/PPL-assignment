@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([For(BinaryOp(=,Id(count),IntLiteral(0));BinaryOp(<,Id(count),IntLiteral(100));IntLiteral(1);Block([For(BinaryOp(=,Id(i),IntLiteral(0));BinaryOp(<,Id(i),ArrayCell(CallExpr(Id(foo),[Id(count)]),IntLiteral(10)));IntLiteral(1);Block([Dowhile([CallExpr(Id(goo),[Id(i)])],BinaryOp(<,Id(i),Id(count))),If(BinaryOp(>=,Id(i),Id(count)),Break(),Continue())]))]))]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([Break(),Break(),Break()]))])

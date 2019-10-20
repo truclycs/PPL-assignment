@@ -1,11 +1,29 @@
-
-		//Check whether an integer is odd or even
-        int main()
-        {
-            int n, m[10];
-            printf("Enter an integer: ");
-            scanf("%d", n);
-            if (n%2 == 0) printf("%d is an even integer.",n);
-            else printf("%d is an odd integer.",n);
-            return 0;
-        }
+         
+            int A[8],X[8],Y[8], dem, n;
+            void xuat() {
+                int i,j;
+                for (i = 0; i < n; i = i + 1) {
+                    for (j = 0; j < n; j = j + 1)
+                        printf("%2d ", A[i]);
+                }
+            }
+ 
+            void diChuyen(int x, int y) {
+                int u,v;
+                dem = dem + 1;
+                A[x] = dem;
+                for (i = 0; i < 8; i = i + 1)    {
+                    if (dem == n * n) {
+                        printf("Cac buoc di la: \n");
+                    xuat();
+                    exit(0);
+                }
+                u = x + X[i];
+                v = y + Y[i];
+                if (u >= 0 && u < n&&v >= 0 && v < n&& A[u] == 0)
+                    diChuyen(u, v);
+                }
+                dem = dem - 1;
+                A[x] = 0;
+            }   
+        

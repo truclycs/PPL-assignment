@@ -1,3 +1,8 @@
-int main(){
-			a = b + c - d + 5.5;
-		}
+
+            void main(){
+                the_id;
+                id;
+                _std21_;
+                _sddas_[3];
+            }
+        

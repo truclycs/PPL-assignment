@@ -1,5 +1,13 @@
-void __Sherlock(){
-			str1 = "The" + " Sign" + " Of" + " Three";
-			str2 = "Crossroad in the Ancient" + " Capital";
-			APTX = 48*100 + 69;
-		}
+
+            void main(){
+                "^ What are words";
+                "@ Anywhere you are, I am near";
+                "# Anywhere you go, Ill be there";
+                "$ Anytime you whisper my name, youll see";
+                "% How every single promise Ill keep";
+                "^ Cause what kind of guy would I be";
+                "& If I was to leave when you need me most";
+                true;
+                false;
+            }
+        

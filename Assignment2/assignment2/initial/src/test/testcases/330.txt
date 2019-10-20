@@ -1,3 +1,10 @@
-int main() {
-			for (i = 0; i < 100; i = i + 1) sum = sum + i;
-		}
+
+            void main(){
+                int b;
+                b = 0;
+                if (5 == 6)
+                    b = b -3;
+                else 
+                    b = b /5;
+            }
+        

@@ -1,4 +1,5 @@
-void main(){
-			i = j = .77e-3;
-            i = j + foo()[2]*i;
-		}
+
+            void main(){
+                a = b = c = d;
+            }
+        

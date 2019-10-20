@@ -1,8 +1,20 @@
-int main(){
-			int a[100], sum;
-			a = random(1, 100, 100);
-			for (i = 0; i = i + 1; i < 100) {
-					if (a[i] % 2 == 0) continue;
-					sum = sum + a[i];
-			}
-		}
+
+            void main(){
+                int a, c[10];
+                int i;
+                i = 1;
+                a = c[0];
+                if (c[1] > a)
+                    do 
+                        a = a + 5;
+                        { int z;}
+                        //This is a test
+                    while a == 10;
+                else {
+                    do 
+                        {game = 10;}
+                        {game = true;}
+                    while a != 5;
+                }
+            }
+        

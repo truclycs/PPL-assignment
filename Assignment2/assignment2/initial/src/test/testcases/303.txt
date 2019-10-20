@@ -1,2 +1,6 @@
-int a, b[7];
-				float[] foo(int a, float b[], boolean f){}
+
+            int x,y[10],_z5;
+            float y,m[11];
+            string t[100],m,_k_;
+            boolean not_true;
+        

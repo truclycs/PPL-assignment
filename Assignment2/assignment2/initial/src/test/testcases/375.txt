@@ -1,12 +1,7 @@
-float a, b, c[10];
-		void main() {
-			for (true; double(i) < 110; a + b <= c + d) {
-				{
-					boolean a[10], b, c;
-					string str;
-					str = str + toString(i) + " ";
-				}
-				if (triple(i) < 100) continue;
-				else break;
-			}
-		}
+
+            void main(){
+                return x;
+                return y;
+                return z;
+            }
+        

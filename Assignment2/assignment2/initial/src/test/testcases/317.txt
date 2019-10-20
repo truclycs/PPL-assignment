@@ -1,3 +1,6 @@
-void main(){
-			flag = (a == b + c) || (flag != true + false);
-		}
+
+            void main(){
+                a || b || c;
+                a && b && c;
+            }
+        

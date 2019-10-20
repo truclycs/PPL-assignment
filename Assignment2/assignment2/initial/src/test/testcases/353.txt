@@ -1,4 +1,14 @@
-void life(string e){
-		if (happy(e)) continue;
-		if (unhappy(e)) life("happy");
-		}
+
+            void main(){
+                do
+                    if ( x = 4)
+                        do 
+                            x = 5;
+                        while (x < 10);
+                    for (x;x;x)
+                        do 
+                            x = 5;
+                        while (x < 10);
+                while (x < 10); 
+            }
+        

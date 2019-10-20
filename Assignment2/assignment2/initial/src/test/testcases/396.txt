@@ -1,20 +1,21 @@
 
-		/*Enter and print an array of integers*/
-		int a[10], b;
-		void enter(int a[], int n) {
-			int i, j[2];
-			for (i = 0; i < n; i = i + 1) {
-				printf("Enter an integer: ");
-            	scanf("%d", a[i]);
-			}
-		}
-		void print(int a[], int n) {
-			int i;
-			for (i = 0; i < n; i = i + 1) print("%d, ", a[i]);
-		}
-		int main() {
-			enter(a, 10);
-			print(a, 10);
-			return 0;
-		}
-		
+            int i; 
+            int f() {
+                return 200; 
+            }
+            void main() {  
+                int main;
+                main = f();
+                putIntLn(main); 
+                {
+                    int i;
+                    int main;
+                    int f;
+                    main = f = i = 100; 
+                    putIntLn(i); 
+                    putIntLn(main); 
+                    putIntLn(f);
+                }
+                putIntLn(main); 
+            }
+        

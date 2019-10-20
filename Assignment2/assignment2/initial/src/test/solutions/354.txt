@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(compare),[VarDecl(a,FloatType),VarDecl(b,FloatType)],StringType,Block([If(BinaryOp(<,Id(a),Id(b)),Return(StringLiteral(<))),If(BinaryOp(>,Id(a),Id(b)),Return(StringLiteral(>))),Return(StringLiteral(=))]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([Dowhile([Dowhile([Dowhile([Dowhile([BinaryOp(=,Id(x),BinaryOp(+,Id(x),IntLiteral(1)))],BinaryOp(<,Id(x),IntLiteral(3)))],BinaryOp(<,Id(x),IntLiteral(5)))],BinaryOp(<,Id(x),IntLiteral(7)))],BinaryOp(<,Id(x),IntLiteral(9)))]))])

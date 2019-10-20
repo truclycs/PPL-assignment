@@ -1,6 +1,22 @@
-void main(){
-			a = random(0, 48);
-			b = random(0, 69);
-			sum = sum(a, b);
-			printf("sum = ", sum);
-		}
+
+            void main(){
+                a == b;
+                a != b;
+                a && b;
+                a || b;
+                a =  b;
+                a >= b;
+                a <= b;
+                a >  b;
+                a <  b;
+                a[b];
+                -a;
+                !b;
+                a *  b;
+                a /  b;
+                a %  b;
+                a +  b;
+                a -  b;
+                foo(a,b,c);
+            }
+        

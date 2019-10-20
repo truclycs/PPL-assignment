@@ -1,4 +1,5 @@
-void main(){
-			flag = false;
-			if (foo(a)[0] > b - c) flag = true;
-		}
+
+            void main(){
+                print(a = b + c * foo(a/d) % a[1000],"Test" + str(isEqual(1000,100) == true));
+            }
+        

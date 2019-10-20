@@ -1,12 +1,5 @@
-float sum(float a, float b){
-			return a + b;
-		} //sum func
-		float mul(float a, float b){
-			return a * b;
-		}
-		/*
-		create andThen func
-		*/
-		float sumAndThenmul(float a[]){
-			return mul(sum(a[0], a[1]), a[2]);
-		}
+
+            void main(){
+                a[b + c - d[ 7 * 2 ] - e[4]] = 1;
+            }
+        

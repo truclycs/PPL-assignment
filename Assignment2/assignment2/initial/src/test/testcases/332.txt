@@ -1,4 +1,9 @@
-void main() {
-			for (i = 4; i < 100; i = i + 8)
-				for (j = 6; j < 100; j = j + 9) {}
-		}
+
+            void main(){
+                if (6 < 7)
+                    if ( 8 < 9)
+                        print("True");
+                    else
+                        print("False");
+            }
+        

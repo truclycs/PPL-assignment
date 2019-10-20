@@ -1,2 +1,6 @@
-int main(){}
-				
+
+                int x[10];
+                float x[10];
+                string x[10];
+                boolean x[10];
+        

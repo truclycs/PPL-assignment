@@ -1,13 +1,20 @@
-void main() {
-			//Variable declaration
-			float s[2], k;
-			boolean flag;
-			/*
-			Dowhile statement
-			*/
-			do {double(x);}
-			x = x + 1;
-			{triple(x);}
-			x = x + 2;
-			while x < 1e3;
-		}
+
+            void main(){
+                if (x == 10){
+                    for (x = 10; x < 100; x = x + 1)
+                        if (x % 3 == 0)
+                            print(x);
+                        else 
+                            if (x % 5 == 0)
+                                print(x - 10);
+                    for (y = x; y < 2 * x; y = y + 3){
+                        int z;
+                        z = 1;
+                        for (i = 1; i < y; i = i + 1){
+                            z = z * i;
+                        }
+                        print(z);
+                    }
+                }
+            }       
+        

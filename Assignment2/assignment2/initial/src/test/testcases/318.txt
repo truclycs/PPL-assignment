@@ -1,3 +1,6 @@
-void main(){
-			_a = goo(5-b) - foo(5.e-5,4-b)*b/8;
-		}
+
+            void main(){
+                a == b > c;
+                a != b < c;
+            }
+        

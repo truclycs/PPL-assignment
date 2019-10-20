@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(life),[VarDecl(e,StringType)],VoidType,Block([If(CallExpr(Id(happy),[Id(e)]),Continue()),If(CallExpr(Id(unhappy),[Id(e)]),CallExpr(Id(life),[StringLiteral(happy)]))]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([Dowhile([If(BinaryOp(=,Id(x),IntLiteral(4)),Dowhile([BinaryOp(=,Id(x),IntLiteral(5))],BinaryOp(<,Id(x),IntLiteral(10)))),For(Id(x);Id(x);Id(x);Dowhile([BinaryOp(=,Id(x),IntLiteral(5))],BinaryOp(<,Id(x),IntLiteral(10))))],BinaryOp(<,Id(x),IntLiteral(10)))]))])

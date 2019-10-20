@@ -1,3 +1,12 @@
 
-        int a, b, c;
+        void main()
+        {
+            float C;C = 0;
+            float F;
+            printf("Nhap vao nhiet do F = ");
+            scanf("%f", F);
+            C = 5*(F - 32)/9.0;
+            printf("Nhieu do Celcius = %f oC", C);
+            getch();
+        }
         

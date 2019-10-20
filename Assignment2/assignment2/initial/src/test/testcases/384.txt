@@ -1,10 +1,6 @@
 
-		boolean flag[2], q;
-        int main()
-        {
-            q = true;
-			string str;
-			str = "It's over!";
-            if (flag[0]) if (flag[1]) printf(str);
-            return 0;
-        }
+            void main(){
+                return foo("x","y",a[3],test);
+                return _test_not_a_test(1,3e3);   
+            }
+        

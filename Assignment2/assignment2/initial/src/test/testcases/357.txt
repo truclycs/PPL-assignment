@@ -1,4 +1,17 @@
-int main(){
-			do for (true; x < random(1,100); true) if (isSad()) printf("Waratte hoshii!");
-			while true;
-		}
+
+            void main(){
+                int a, c[10];
+                int i;
+                i = 1;
+                a = c[0];
+                do 
+                    if (a < c[i]) {
+                        int b;
+                        b = a;
+                        a = c[i];
+                        c[i] = b;
+                    }
+                    i = i + 1;
+                while i < 10;
+            }
+        

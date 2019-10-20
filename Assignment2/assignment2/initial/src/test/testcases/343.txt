@@ -1,3 +1,9 @@
-void main() {
-			do do do do do x(); while y(); while z(); while t(); while u(); while v();
-		}
+
+            void main(){
+                for (x;y;z)               
+                    for (x;y;z)           
+                        for (x;y;z)       
+                            for (x;y;z)   
+                                foo(x,y,z);
+            }
+        

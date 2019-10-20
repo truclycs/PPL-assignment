@@ -1,2 +1,4 @@
-void swap(int a, int b){}
-				int a[10], b[12], c[16];
+
+            void what_the_test(int x, string y){}
+            string _test_the_code_by_a_code(boolean y){}
+        

@@ -1,9 +1,11 @@
-float a, b[0009], c[00012];
-		boolean func(int _[], int d) {
-			if (_[00] + .6e3 < _[01] * d) return func(_, d + 10);
-			for (i; i >= 0010; i = i - 2) {
-				do _[00] = _[001];
-				while !!!!___;
-				if (_[0]) break;
-			}
-		}
+                                                                                                                                                                                                                                                                                                                                                                      
+            void main(){                                                                                                                                                                                                                                                                                                                                                                 
+                do                                                                                                                                                                                                                                                                                                                                                                       
+                    x = -2e-3;                                                                                                                                                                                                                                                                                                                                                           
+                    do                                                                                                                                                                                                                                                                                                                                                                   
+                        if (x < 9.9) continue;                                                                                                                                                                                                                                                                                                                                              
+                        else x = x + 0.1;                                                                                                                                                                                                                                                                                                                                                
+                    while ( x < 10);                                                                                                                                                                                                                                                                                                                                                     
+                while !( x != - false);                                                                                                                                                                                                                                                                                                                                                  
+            }                                                                                                                                                                                                                                                                                                                                                                            
+        

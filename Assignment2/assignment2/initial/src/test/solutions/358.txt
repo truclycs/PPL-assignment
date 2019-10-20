@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(find_gcd),[VarDecl(n1,IntType),VarDecl(n2,IntType)],IntType,Block([If(BinaryOp(!=,Id(n2),IntLiteral(0)),Return(CallExpr(Id(find_gcd),[Id(n2),BinaryOp(%,Id(n1),Id(n2))])),Return(Id(n1)))]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([Dowhile([If(BinaryOp(==,Id(a),Id(b)),Block([]),Block([]))],BinaryOp(!=,Id(a),Id(b)))]))])

@@ -1,2 +1,3 @@
-float f1[9];
-				string merge(string a, string b){}
+
+            int x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x; 
+        

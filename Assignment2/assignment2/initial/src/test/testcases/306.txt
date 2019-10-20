@@ -1,9 +1,6 @@
-int goo(){
-			{
-				float a[10], b;
-				{
-					string str;
-					boolean p[3], q; 
-				} 
-			}
-		}
+
+            int[] test_1(){}
+            float[] test_2(){}
+            string[] test_3(){}
+            boolean[] test_4(){}
+        

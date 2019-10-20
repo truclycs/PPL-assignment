@@ -1,8 +1,8 @@
-void main(){
-			a = b = c = foo(.5e-2, 10, b[12*c[1]]) + 10 * what;
-			for (a; b <= 100; c) {
-				do a = d();
-				while (a == goo(a));
-				for (true; 1; 1) really();
-			}
-		}
+
+            float foo(){
+                do {
+                    if (a % 3 == 0) break;
+                    a = a + 1;
+                } while (a < 100);
+            }
+        

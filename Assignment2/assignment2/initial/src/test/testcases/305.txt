@@ -1,7 +1,11 @@
-int i;
-				//main function here!
-				void main(){
-					{
-						float j;
-					}
-				}
+
+            void main(){ /* Nothing here */}
+            int main(){
+                // Your code here
+            }
+            string main(){
+                // This is just a test
+                // Test the code 
+            }
+            boolean main(){}
+        

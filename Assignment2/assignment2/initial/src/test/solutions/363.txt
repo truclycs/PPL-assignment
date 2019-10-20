@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],IntType,Block([If(IntLiteral(1),For(IntLiteral(2);IntLiteral(3);IntLiteral(4);For(IntLiteral(5);IntLiteral(6);IntLiteral(7);Block([]))),If(IntLiteral(8),Dowhile([IntLiteral(9),IntLiteral(10)],IntLiteral(11)),Return(IntLiteral(12))))]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([Dowhile([Break(),Break()],BinaryOp(=,Id(x),IntLiteral(10)))]))])

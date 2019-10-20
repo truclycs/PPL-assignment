@@ -1,1 +1,1 @@
-Program([VarDecl(a,IntType),VarDecl(b,IntType),VarDecl(c,IntType)])
+Program([FuncDecl(Id(main),[],VoidType,Block([VarDecl(C,FloatType),BinaryOp(=,Id(C),IntLiteral(0)),VarDecl(F,FloatType),CallExpr(Id(printf),[StringLiteral(Nhap vao nhiet do F = )]),CallExpr(Id(scanf),[StringLiteral(%f),Id(F)]),BinaryOp(=,Id(C),BinaryOp(/,BinaryOp(*,IntLiteral(5),BinaryOp(-,Id(F),IntLiteral(32))),FloatLiteral(9.0))),CallExpr(Id(printf),[StringLiteral(Nhieu do Celcius = %f oC),Id(C)]),CallExpr(Id(getch),[])]))])

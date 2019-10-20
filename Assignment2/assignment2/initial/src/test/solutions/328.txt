@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(isPerson),[VarDecl(height,IntType),VarDecl(str,StringType)],VoidType,Block([If(BinaryOp(>=,Id(height),IntLiteral(160)),BinaryOp(=,Id(str),StringLiteral(true)),BinaryOp(=,Id(str),StringLiteral(NaP)))]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([BinaryOp(=,Id(a),BinaryOp(*,BinaryOp(>,Id(b),ArrayCell(Id(c),IntLiteral(3))),BinaryOp(-,Id(d),ArrayCell(Id(e),BinaryOp(*,BinaryOp(-,IntLiteral(10),IntLiteral(5)),IntLiteral(4))))))]))])

@@ -1,8 +1,6 @@
-int main(){
-			if (1 || 2 && 3 * 4 <= (5 + 6) * 7 && 8 == foo(9))
-				{
-					a = func1(arr[2] * arr[3], arr[0] / arr[1]);
-				}
-					if (10) do 11; while 13;
-			else func2(14);
-		}
+
+            void main(){
+                if (a == 5) continue;
+                else continue;
+            }
+        

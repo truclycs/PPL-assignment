@@ -1,10 +1,7 @@
-void main(){
-			for (count = 0; count < 100; 1) {
-				for (i = 0; i < foo(count)[10]; 1) {
-					do goo(i);
-					while i < count;
-					if (i >= count) break;
-					else continue;
-				}
-			}
-		}
+
+            void main(){
+                break;
+                break;
+                break;
+            }
+        

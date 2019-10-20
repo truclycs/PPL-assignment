@@ -1,7 +1,9 @@
-void main() {
-			/*
-			Play with some blocks
-			*/
-			{{{}}}
-			{{}}
-		}
+
+            void main(){
+                if ( a != b ){
+                    if( 3.E5 )
+                        a = b + true ;
+                } else 
+                    j || -7;
+            }
+        

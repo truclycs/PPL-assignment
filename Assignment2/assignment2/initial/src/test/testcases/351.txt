@@ -1,5 +1,12 @@
-void foo() {
-		break;
-		continue;
-		return;
-		}
+
+            void main(){
+                do
+                    {
+                        x = x + 3;
+                    }
+                    {
+                        x = x - 10;
+                    }
+                while (x < 3);
+            }
+        

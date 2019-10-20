@@ -1,1 +1,1 @@
-Program([VarDecl(flag,ArrayType(BoolType,2)),VarDecl(q,BoolType),FuncDecl(Id(main),[],IntType,Block([BinaryOp(=,Id(q),BooleanLiteral(true)),VarDecl(str,StringType),BinaryOp(=,Id(str),StringLiteral(It's over!)),If(ArrayCell(Id(flag),IntLiteral(0)),If(ArrayCell(Id(flag),IntLiteral(1)),CallExpr(Id(printf),[Id(str)]))),Return(IntLiteral(0))]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([Return(CallExpr(Id(foo),[StringLiteral(x),StringLiteral(y),ArrayCell(Id(a),IntLiteral(3)),Id(test)])),Return(CallExpr(Id(_test_not_a_test),[IntLiteral(1),FloatLiteral(3000.0)]))]))])

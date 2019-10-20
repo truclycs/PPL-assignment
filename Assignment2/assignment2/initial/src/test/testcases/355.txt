@@ -1,6 +1,14 @@
-int main(){
-			if (-a > -100 + b)
-				for (i = 0; i = i + 4; i < b)
-					if (i < a) printf(i*a);
-			else return;
-		}
+
+            void main(){
+                int a, c[10];
+                int i;
+                i = 1;
+                a = c[0];
+                if (c[1] > a)
+                    do 
+                        a = a + 5;
+                        { int z;}
+                        //This is a test
+                    while (a == 10) && (b + c >= d);
+            }
+        

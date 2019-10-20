@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(__),[],FloatType,Block([Break(),Block([Continue(),Return()]),For(Id(_);Id(_);Id(_);If(Id(_),Id(_),If(Id(__),Id(__),Dowhile([Id(_),Id(__),Id(___)],Id(_))))),Return(BinaryOp(*,UnaryOp(-,FloatLiteral(0.052)),CallExpr(Id(toFloat),[Id(___)])))]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([For(Id(x);Id(y);Id(z);Continue())]))])

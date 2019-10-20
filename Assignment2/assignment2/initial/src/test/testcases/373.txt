@@ -1,12 +1,11 @@
-string str[00009], char;
-		int main() {
-			for (FALSE; TRUE; false) {
-				if (TRUE == true) break;
-				else do falseTrueTrueFalse(TRUE, false);
-				while (true >= false);
-			}
-			{{
-				a = b = c = str[007] + 777;
-			}}
-		}
-		
+
+            float foo(){
+                 continue;
+                 if (a == 10){
+                    continue;
+                    continue;
+                 }
+                 continue;
+                 //continue
+            }
+        

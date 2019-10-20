@@ -1,3 +1,9 @@
-int main() {
-            for (1; i < 100; i = i * 3) print("Everything'll be okay!");
-        }
+
+            void main(){
+                if (6<7){
+                    if (8 < 9)
+                        print("True");
+                } else 
+                    print("False");
+            }
+        

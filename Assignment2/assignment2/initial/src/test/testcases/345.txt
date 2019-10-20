@@ -1,3 +1,10 @@
-void _donothing() {
-			return;
-		}
+
+            int main(){
+                for ( i = 0; i < alpha; i = i + 1){
+                    // This is just a comment 
+                    /* Don't have code here
+                    */ 
+                }
+                for ( i; j; k) {}
+            }
+        

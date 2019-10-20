@@ -1,14 +1,11 @@
-string str[00001111], s1, s2;
-		int a, b, c[2];
-		int main(string argv) {
-			for (1; i < 1e4; i = i * 2) {
-				if (i % 3 * 4 == 0 + 5) break;
-				else if (foo(i)[i * 2] < 2E3) continue;
-				do a = double(b[b[2]]);
-				while a < 2e2;
-			}
-			a[2] = str[a[001]] = "Meitantei" + " " + "Conan";
-			a[002] = a[2] + "\n" + "I love U!";
-			printf("Thank u so much!");
-			return 0;
-		}
+
+            void main(){
+                do
+                    a = random();
+                    if ( a < 10 ) 
+                        continue;
+                    else 
+                        return a * 3 - 100;
+                while true;
+            }
+        

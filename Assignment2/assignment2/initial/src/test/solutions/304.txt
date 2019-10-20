@@ -1,1 +1,1 @@
-Program([VarDecl(f1,ArrayType(FloatType,9)),FuncDecl(Id(merge),[VarDecl(a,StringType),VarDecl(b,StringType)],StringType,Block([]))])
+Program([VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType)])

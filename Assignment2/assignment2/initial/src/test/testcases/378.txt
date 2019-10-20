@@ -1,14 +1,8 @@
-int a, b, c[2];
-		void main(){
-			int a, b[2];
-			{
-				int b, c[3];
-				{
-					int c, a[4];
-					for (c; c < 3E2; c = c + 2)
-						do if (c / 2 > 100) c = foo(b[b[2]]*3)[10*5e2*foo(1)[a[2]]];
-						while true;
-				}
-			}
-			releaseMutex();
-		}
+
+            void main(){
+                do
+                    return a_p_t_x_4_8_6_9;
+                    return this_is_just_a_test_for_the_return_statement;
+                while (yes_this_is_true);
+            }
+        

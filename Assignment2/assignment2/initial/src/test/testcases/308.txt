@@ -1,13 +1,3 @@
-int main(){
-					{
-						{
-							{
-								int i, j, k;
-								float c[10];
-							}
-						}
-					}
-					{
-						string d;
-					}
-				}
+
+            int trichomobas_hominis(int a_varaiable[]){ /* Nothing to do */}
+        

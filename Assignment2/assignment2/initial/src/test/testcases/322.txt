@@ -1,3 +1,6 @@
-void main(){
-			f = a + 5.5e-10 + 4.4e-1*arr[10*arr[5] - 8*f(g(a))];
-		}
+
+            void main(){
+                a + b + c + d;
+                a - b - c - d;
+            }
+        

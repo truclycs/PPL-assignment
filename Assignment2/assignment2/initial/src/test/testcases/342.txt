@@ -1,8 +1,13 @@
-void main() {
-			int x, a[99];
-			do x = x + 3;
-            printf(x);
-            a[i] = x;
-            i = i + 1;
-            while (i < 99);
-		}
+
+            void main(){
+                if (x < 10){
+                    for (x = false;True;x = foo(3)){
+                        x = x + 1;
+                    }
+                } else {
+                    for (x;y;z){
+                        foo(x,y,z,t);
+                    }
+                }
+            }
+        

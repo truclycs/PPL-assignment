@@ -1,11 +1,9 @@
-boolean __testSomeBlocks() {
-		{ a * b = b * c = c * d; }
-		{ 
-			str = "There's always only one truth!";
-			printf(str);
-			toJapanese(str);
-			{
-				return str == "Shinjitsu wa itsumo hitotsu!";
-			}
-		}
-		}
+
+            void main(){
+                if ( a != b )
+                    a && 9 = 6;
+                else 
+                    if (a = 5)
+                        a >= 7;
+            }
+        

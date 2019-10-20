@@ -1,4 +1,5 @@
-int main(){
-			if (flag) a = a + 1;
-			else a = a - 1;
-		}
+
+            void main(){
+                print(foo(foo(a)));
+            }
+        

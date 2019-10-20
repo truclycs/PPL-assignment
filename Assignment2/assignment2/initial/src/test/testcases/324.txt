@@ -1,3 +1,5 @@
-void main(){
-			n = (func(func(arr[0], 1 - b*2)[arr[3] + 4], -- (b*5 + 6)) - h[arr[7]]*foo(!!!a[8] >= 10))[a[9] - 10];
-		}
+
+            void main(){
+                a * (b - c) / (d + e);
+            }
+        

@@ -1,9 +1,5 @@
-float __(){
-			break;
-			{
-				continue;
-				return;
-			}
-			for (_;_;_) if (_) _; else if (__) __; else do _; __; ___; while _;
-			return -5.2e-2 * toFloat(___);
-		}
+
+            void main(){
+                for (x;y;z) continue;
+            }
+        

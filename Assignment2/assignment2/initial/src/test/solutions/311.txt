@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(sub),[],IntType,Block([BinaryOp(=,Id(result),BinaryOp(-,BinaryOp(*,Id(this),Id(that)),BinaryOp(%,BinaryOp(/,Id(that),Id(this)),Id(thatthis))))]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([IntLiteral(1),IntLiteral(2),IntLiteral(3),IntLiteral(4),IntLiteral(5),IntLiteral(6),IntLiteral(7),IntLiteral(8),IntLiteral(9),IntLiteral(10),IntLiteral(11),IntLiteral(12345567890)]))])

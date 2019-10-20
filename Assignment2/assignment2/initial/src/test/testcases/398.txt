@@ -1,21 +1,15 @@
 
-		int i ;
-        int f(){
-            return 200;
-        }
-        void main(){
-            int main;
-            main = f();
-            putIntLn(main);
-            {
+            // Check prime number
+            boolean checkPrime(int n) {
                 int i;
-                int main;
-                int f;
-                main = f = i = 100;
-                putIntLn(i);
-                putIntLn(main);
-                putIntLn(f);
+                boolean isPrime; 
+                isPrime = true;
+                for(i = 2; i <= n/2; i = i + 1) {
+                    if(n % i == 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                return isPrime;
             }
-            putIntLn(main);
-        }
-		
+        

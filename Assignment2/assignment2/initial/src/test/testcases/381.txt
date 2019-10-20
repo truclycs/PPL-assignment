@@ -1,9 +1,16 @@
-//Print entered number program
-		int main()
-        {
-            int number;
-            printf("Enter an integer: ");
-            scanf("%d", number);
-            printf("You entered: %d", number);
-            return 0;
-        }
+
+            void main(){
+                return 1;
+                return 2;
+                return 3;
+                return 4;
+                return 5;
+                return 6;
+                return 7;
+                return 8;
+                return 9;
+                return 10;
+                return 11;
+                return 12345567890;
+            }
+        

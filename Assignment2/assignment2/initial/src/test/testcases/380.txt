@@ -1,9 +1,8 @@
 
-		/*
-		Hello World Program!
-		*/
-		int main()
-        {
-            printf("Hello, World!\n");
-            return 0;
-        }
+            void main(){
+                return the_id;
+                return id;
+                return _std21_;
+                return _sddas_[3];
+            }
+        

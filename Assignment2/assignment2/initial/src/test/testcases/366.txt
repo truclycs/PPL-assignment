@@ -1,7 +1,11 @@
-int __noname(){
-			str = "Sissy Sky" + "+"/"|" + date(11/6);
-			if (inConanSongsList(str)) printf("This song is wonderful!");
-			{
-				gaugau = meomeo(10e1 - 10, 10)[10] + (true || false) * "true";
-			}
-		}
+
+            float foo(){
+                 break;
+                 if (a == 10){
+                    break;
+                    break;
+                 }
+                 break;
+                 //break
+            }
+        

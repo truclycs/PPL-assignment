@@ -1,8 +1,5 @@
-int main(){
-			if (!!!!a != b)
-				for (true; true; 1)
-					do printf("I have no idea what to write. -_-\n");
-					printf("100 testcases - too much!");
-					while exhausted();
-			else process(next);
-		}
+
+            void main(){
+                for (x;y;z) break;
+            }
+        

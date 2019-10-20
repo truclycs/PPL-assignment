@@ -1,14 +1,15 @@
 
-		boolean flag;
-        int round(float a) {/*???!!!*/}
-        void main() {
-            float number;
-            flag = true;
-            do {
-                number = random(1, 200) / 10;
-                if (number == round(number)) flag = false;
-            } 
-            while (flag);
-            printf("%d", number);
-			return;
-        }
+            int main() {
+                printf("Enter a sentence: ");
+                reverseSentence();
+                return 0;
+            }
+            void reverseSentence() {
+                string c;
+                scanf("%c", c);
+                if( c != "\n") {
+                    reverseSentence();
+                    printf("%c",c);
+                }
+            }
+        

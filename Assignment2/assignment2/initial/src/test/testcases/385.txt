@@ -1,17 +1,12 @@
 
-		int i, a[10];
-        int[] foo() {
-			{
-				int a[10], i;
-				for (i = 0; i < 10; i = i + 1) a[i] = random(1, 100);
-				return a;
-			}
-		}
-
-        void main(){
-            i = 9;
-            a = foo();
-			i = i + foo()[2];
-            if (i < 9 && i > a[1]) print("True");				//check if i < 9 and i > a[1]
-            else print("False");
-        }
+            int main(){
+                string c;
+                printf("Enter a character: ");
+                scanf("%c",c);
+                if (( c >= "a" && c <= "z") || (c >= "A" && c <= "Z"))
+                    printf("%c is an alphabet.",c);
+                else
+                    printf("%c is not an alphabet.",c);
+                return 0;
+            }
+        

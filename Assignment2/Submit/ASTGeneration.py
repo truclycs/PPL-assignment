@@ -2,6 +2,8 @@
 #    * Student name: Nguyen Thi Truc Ly   *
 #    * Student ID: 1710187                *
 #    ************************************** 
+import sys
+sys.setrecursionlimit(10**6)
 
 from MCVisitor import MCVisitor
 from MCParser import MCParser

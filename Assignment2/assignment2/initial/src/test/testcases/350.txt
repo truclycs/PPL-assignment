@@ -1,4 +1,8 @@
-int main() {
-        if (flag) continue;
-        else break;
-        }
+
+            void main(){
+                do
+                    x = x + 3;
+                    x = x - 10;
+                while (x < 3);
+            }
+        

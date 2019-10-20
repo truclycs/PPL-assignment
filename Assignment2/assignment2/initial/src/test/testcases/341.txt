@@ -1,6 +1,11 @@
-void main() {
-			do {
-				x = exp(x, 2);
-				sum = sum + x;
-			} while x < 2e10;
-		}
+
+            void main(){
+                for (x < 100; x >= x + 1; x = x * foo(x)[100]){
+                    int x;
+                    print(x);
+                    if (x == 10){
+                        x = x + 1;
+                    }
+                }
+            }
+        

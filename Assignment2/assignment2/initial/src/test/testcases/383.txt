@@ -1,16 +1,13 @@
 
-		void swap(int a, int b)
-        {
-            int temp;
-            temp = a;
-            a = b;
-            b = temp;
-        }
-
-		void main() {
-			int a[2];
-			a[0] = 1;
-			a[1] = 2e2;
-			swap(a[0], a[1]);
-			return;
-		}
+            void main(){
+                return "^ What are words";
+                return "@ Anywhere you are, I am near";
+                return "# Anywhere you go, Ill be there";
+                return "$ Anytime you whisper my name, youll see";
+                return "% How every single promise Ill keep";
+                return "^ Cause what kind of guy would I be";
+                return "& If I was to leave when you need me most";
+                return true;
+                return false;
+            }
+        

@@ -1,7 +1,10 @@
-float mul(float a[], int n) {
-		for (i = 0; true; true) {
-			result = result * a[i];
-			i = i + 1;
-			if (i == n) break;
-		}
-		}
+
+            void main(){
+                do 
+                    {
+                        x = x + 3;
+                    }
+                    x = x - 10;
+                while (x < 3);
+            }
+        

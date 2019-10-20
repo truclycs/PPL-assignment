@@ -1,6 +1,14 @@
-int a[10];
-        int sum(int a[]) {
-            int i, sum;
-            for (i = 0; i < 10; i = i+1) sum = sum + a[i];
-            return sum;
-        }
+
+            void main(){
+                if ((a == b - d + c) && (4 < d - e)){
+                    int x,y;
+                    x = y + foo(x,y);
+                    if (x = a){
+                        e = f;
+                    } else {
+                        print(10);
+                        a && b - f;
+                    }
+                }
+            }
+        

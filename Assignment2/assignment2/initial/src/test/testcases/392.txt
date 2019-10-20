@@ -1,22 +1,19 @@
 
-		/*Function convert binary to Octal */
-		int convertBinarytoOctal(int binaryNumber)
-		{
-    		int octalNumber, decimalNumber, i;
-			octalNumber = decimalNumber = i = 0;
-			do {
-        		decimalNumber = decimalNumber + (binaryNumber%10) * pow(2,i);
-        		i = i + 1;
-        		binaryNumber = binaryNumber / 10;
-    		}
-    		while (binaryNumber != 0);
-    		i = 1;
-			do {
-        		octalNumber = octalNumber + (decimalNumber % 8) * i;
-        		decimalNumber = decimalNumber / 8;
-        		i = i * 10;
-    		}
-    		while (decimalNumber != 0);
-    
-    		return octalNumber;
-		}
+            int main(int argc, string argv){
+                string input;
+                print("Hello, This is Chat Bot made by Ryan \n") ;
+                print("say hi");
+                do {
+                    scanf("%s",input);
+                    for (i=0; i<length(input); i = i + 1)
+                        input[i] = tolower(input[i],loc);
+                    if (input == "hi")
+                        print("hello there \n");
+                    else if (input == "hi")
+                        print("Hey, what's up?\n");
+                    else
+                        print("Well i didn't understand. I hope i will be able to, soon! \n");
+                } while (input != "exit");
+                return 0;
+            }
+        

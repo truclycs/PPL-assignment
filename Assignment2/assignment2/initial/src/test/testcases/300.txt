@@ -1,1 +1,6 @@
-int a[10];
+
+                int x;
+                float y;
+                string z;
+                boolean m;
+        

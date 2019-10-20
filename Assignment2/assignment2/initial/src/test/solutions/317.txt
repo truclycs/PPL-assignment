@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([BinaryOp(=,Id(flag),BinaryOp(||,BinaryOp(==,Id(a),BinaryOp(+,Id(b),Id(c))),BinaryOp(!=,Id(flag),BinaryOp(+,BooleanLiteral(true),BooleanLiteral(false)))))]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([BinaryOp(||,BinaryOp(||,Id(a),Id(b)),Id(c)),BinaryOp(&&,BinaryOp(&&,Id(a),Id(b)),Id(c))]))])

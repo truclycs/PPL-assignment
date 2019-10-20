@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(swap),[VarDecl(a,IntType),VarDecl(b,IntType)],VoidType,Block([])),VarDecl(a,ArrayType(IntType,10)),VarDecl(b,ArrayType(IntType,12)),VarDecl(c,ArrayType(IntType,16))])
+Program([FuncDecl(Id(what_the_test),[VarDecl(x,IntType),VarDecl(y,StringType)],VoidType,Block([])),FuncDecl(Id(_test_the_code_by_a_code),[VarDecl(y,BoolType)],StringType,Block([]))])

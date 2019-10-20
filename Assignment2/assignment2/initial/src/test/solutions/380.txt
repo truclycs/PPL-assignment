@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],IntType,Block([CallExpr(Id(printf),[StringLiteral(Hello, World!\n)]),Return(IntLiteral(0))]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([Return(Id(the_id)),Return(Id(id)),Return(Id(_std21_)),Return(ArrayCell(Id(_sddas_),IntLiteral(3)))]))])

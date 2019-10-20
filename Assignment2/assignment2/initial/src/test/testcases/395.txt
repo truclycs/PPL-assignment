@@ -1,24 +1,3 @@
 
-		//Check if a number is prime number
-
-		boolean isPrime(int n)
-        {
-            int j, flag;
-            for (j = 2; j <= n/2; j = j + 1)
-            {
-                if (n % j == 0)
-                {
-                    flag = 0;
-                    break;
-                }
-            }
-            return flag;
-        }
-
-		int main() {
-			int n;
-			scanf("%d", n);
-			if (isPrime(n)) printf("%d is a prime number.", n);
-			else printf("%d is not a prime number.", n);
-			return 0;
-		}
+            int[] foo(int a, float b[]) {int c[3]; if (a>0) foo(a-1,b); return c; }
+        

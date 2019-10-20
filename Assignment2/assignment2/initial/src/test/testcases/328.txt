@@ -1,5 +1,5 @@
-void isPerson(int height, string str){ //height in cm
-			if (height >= 160) str = "true";
-			else str = "NaP"; //Not a Person
-		} 
-		
+
+            void main(){
+                a = (b > c[3]) * (d - e[(10 - 5) * 4]);
+            }
+        

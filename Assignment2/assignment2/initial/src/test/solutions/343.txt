@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([Dowhile([Dowhile([Dowhile([Dowhile([Dowhile([CallExpr(Id(x),[])],CallExpr(Id(y),[]))],CallExpr(Id(z),[]))],CallExpr(Id(t),[]))],CallExpr(Id(u),[]))],CallExpr(Id(v),[]))]))])
+Program([FuncDecl(Id(main),[],VoidType,Block([For(Id(x);Id(y);Id(z);For(Id(x);Id(y);Id(z);For(Id(x);Id(y);Id(z);For(Id(x);Id(y);Id(z);CallExpr(Id(foo),[Id(x),Id(y),Id(z)])))))]))])

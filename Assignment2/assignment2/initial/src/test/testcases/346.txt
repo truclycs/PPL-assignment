@@ -1,4 +1,10 @@
-int _dosomething() {
-			create(something);
-			return something;
-		}
+
+            string main(){
+                for ( i = 0; i < 3E5; i = i + 1) 
+                    if (a == 10) 
+                        a = a + 5;
+                    else {
+                        a = a -5;
+                    }
+            }
+        

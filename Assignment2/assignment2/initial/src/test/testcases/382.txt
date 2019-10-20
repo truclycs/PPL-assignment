@@ -1,8 +1,10 @@
-//Simple expression
-		int main()
-        {
-            int a[2], b;
-            a[0] = 2 * b + func(a[1])[2];
-            a[1] = 0012 * 2e2;
-            return 0;
-        }
+
+            void main(){
+                return 1.23445;
+                return 1.3e2;
+                return 1.45e-100;
+                return .456;
+                return .456e3;
+                return 1e3;
+            }
+        

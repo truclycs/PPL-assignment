@@ -1,9 +1,6 @@
-int main(){
-			do nothing();
-			something();
-			{
-				anything();
-				if (false) nothing();
-			}
-			while true;
-		}
+
+            void main(){
+                if (a == 5) break;
+                else break;
+            }
+        
