@@ -66,7 +66,7 @@ def printUsage():
     print("python3 run.py test CheckSuite")
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+    main(sys.argv[1:])
 
 
 # source lyenv3/bin/activate
