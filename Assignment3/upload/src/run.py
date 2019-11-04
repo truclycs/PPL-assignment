@@ -1,5 +1,4 @@
 import sys,os
-
 import platform
 import subprocess
 import unittest
@@ -68,3 +67,6 @@ def printUsage():
 
 if __name__ == "__main__":
    main(sys.argv[1:])
+
+
+# source lyenv3/bin/activate

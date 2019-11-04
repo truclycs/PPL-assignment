@@ -202,7 +202,7 @@ class Block(Stmt):
 class If(Stmt):
     expr:Expr
     thenStmt:Stmt
-    elseStmt:Stmt
+    elseStmt:None
 
     def __str__(self):
         return "If(" + str(self.expr) + "," + str(self.thenStmt) + ("" if (self.elseStmt is None) else "," + str(self.elseStmt)) + ")"
@@ -239,7 +239,7 @@ class Continue(Stmt):
 
 @dataclass
 class Return(Stmt):
-    expr:Expr
+    expr:None
 
     def __str__(self):
         return "Return(" + ("" if (self.expr is None) else str(self.expr)) + ")"

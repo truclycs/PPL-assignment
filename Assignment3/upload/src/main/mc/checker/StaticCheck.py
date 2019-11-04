@@ -36,7 +36,7 @@ class StaticChecker(BaseVisitor,Utils):
     
     def check(self):
         return self.visit(self.ast,StaticChecker.global_envi)
-
+    
     def visitProgram(self,ast, c): 
         return [self.visit(x,c) for x in ast.decl]
 
