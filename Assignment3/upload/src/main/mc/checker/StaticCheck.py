@@ -23,78 +23,28 @@ class Symbol:
    
 def checkRedeclared(list_decl, decl, kind):
     if type(kind) in [Variable, Parameter]:
-        if any(x.name == decl.variable.name for x in list_decl):
+        if any(decl.variable.name == x.name for x in list_decl):
             raise Redeclared(kind, decl.variable.name)
         return Symbol(decl.variable.name, decl.varType)
-    if any(x.name == decl.name.name for x in list_decl):
+    if any(decl.name.name == x.name for x in list_decl):
         raise Redeclared(kind, decl.name.name)
     return Symbol(decl.name.name, MType([x.varType for x in decl.param], decl.returnType))
 
 def getType(x):
-    return Variable() if type(x) is VarDecl else Procedure() if type(x.returnType) is VoidType else Function()
+    return Variable() if type(x) is VarDecl else VoidType() if type(x.returnType) is VoidType else Function()
 
-# def BinOpType(l,r):
-#     if (type(l),type(r)) == (IntType,IntType):
-#         return IntType()
-#     elif ((type(l),type(r)) == (FloatType,FloatType)) or\
-#          ((type(l),type(r)) == (FloatType,IntType)) or\
-#          ((type(l),type(r)) == (IntType,FloatType)): 
-#         return FloatType()
-#     return None
+def checkAssign(left, right):
+    if type(left) == VoidType or type(Right) == VoidType:
+        return False
+    if type(left) == ArrayType or type(right) == ArrayType:
+        return 
+    if type(left) == StringType or type(right) == StringType:
+        return False
 
-
-# def AssignmentRule(l,r):
-#     if type(l) == VoidType or type(l) == ArrayType:
-#         return False
-#     elif ((type(l) == ArrayPointerType and type(r) == ArrayType)) or\
-#          ((type(l) == ArrayPointerType and type(r) == ArrayPointerType)):
-#         return assE(l.eleType,r.eleType)
-#     elif (type(l), type(r)) == (FloatType,IntType):
-#         return True 
-#     else:
-#         return type(l)==type(r)
-
-
-# def assE(l,r):
-#     if ((type(l),type(r)) == (BoolType,BoolType)) or\
-#        ((type(l),type(r)) == (StringType,StringType)) or\
-#        ((type(l),type(r)) == (FloatType,FloatType)) or\
-#        ((type(l),type(r)) == (IntType,IntType)):
-#         return True
-#     else:
-#         return False
-
-
-# def assignExplicitType(l,r):
-#     if ((type(l),type(r)) == (BoolType,BoolType)) or\
-#        ((type(l),type(r)) == (StringType,StringType)) or\
-#        ((type(l),type(r)) == (FloatType,FloatType)) or\
-#        ((type(l),type(r)) == (IntType,IntType)) or\
-#        ((type(l),type(r)) == (FloatType,IntType)):
-#         return True
-#     else: 
-#         return False
-
-
-# def findandkillit(env,rmId):
-#     [env.remove(it) for it in env if it.name == rmId]
-
-
-
-
-# def checkValidAssign(left, right):
-#     if type(left) is VoidType or type(right) is VoidType:
-#         return False
+    valid_assign = [(BoolType, BoolType), (FloatType, FloatTyoe), (FloatType, IntType), (IntType, IntType)]
     
-#     if type(left) is ArrayType or type(right) is ArrayType:
-#         return False
-        
-#     if type(left) is StringType or type(right) is StringType:
-#         return False
-        
-#     _validAssign = [(BoolType, BoolType), (FloatType, FloatType), (FloatType, IntType), (IntType, IntType)]
+    return (type(left), type(right)) in valid_assign
 
-#     return (type(left), type(right)) in _validAssign
 
 # def checkValidParse(left, right):
 #     if type(left) is VoidType or type(right) is VoidType:
@@ -181,48 +131,93 @@ class StaticChecker(BaseVisitor,Utils):
     #     overrideDeclaration(_refenv, ast.variable.name)
     #     return None
 
-#     def visitFuncDecl(self, ast, c):
-#         _refenv = c[0].copy()
-#         _returnType = ast.returnType
-#         _isMainCall = ast.name.name
-#         _isEnd = 0
+#     def visitFuncDecl(self,ast, c): 
+#         # env: list global_envi
+#         # par: list param
+#         env = c[0].copy()
+#         par = []
         
-#         _local = []
-#         [self.visit(param, (_local, Parameter(), _refenv)) for param in ast.param]
-#         [self.visit(local, (_local, Variable(), _refenv)) for local in ast.local]
+#         for p in ast.param:
+#             par.append(checkIfExist(par,p,"Parameter"))
         
-#         _refenv += _local
-        
-#         _isEnd = self.visitBlockStmt(ast.body, (_refenv, _returnType, c[2], c[3], _isMainCall))
-        
-#         if _isEnd != 1 and not type(_returnType) is VoidType:
+#         isReturn = self.visit(ast.body, (env, ast.returnType, False, par,c[4],ast.name.name))
+#         if isReturn is False and type(ast.returnType) is not VoidType:
 #             raise FunctionNotReturn(ast.name.name)
-            
-#         return None
-        
-#     def visitBlockStmt(self, ls, c):
-#         _isEnd = 0
-        
-#         for stmt in ls:
-#             if _isEnd:
-#                 raise UnreachableStatement(stmt)
-#             _isEnd = self.visit(stmt, c)
-        
-#         return _isEnd
-        
-#     def visitAssign(self, ast, c):
-#         _refenv = c[0].copy()
 
-#         if not type(ast.lhs) in [Id, ArrayCell]:
-#             raise TypeMismatchInStatement(ast)
+    def visitFuncDecl(self, ast, c):
+        environment = c[0].copy()
+        return_type = ast.returnType
+        main_call = ast.name.name
+        is_end = 0
         
-#         _lhsType = self.visit(ast.lhs, (_refenv, c[1], c[2], c[3], c[4]))
-#         _rhsType = self.visit(ast.exp, (_refenv, c[1], c[2], c[3], c[4]))
+        par = []
+        [self.visit(param, (par, Parameter(), environment)) for param in ast.param]
+        [self.visit(local, (par, Varibale(), environment)) for local in ast.local]
+
+        environment += par 
+
+        is_end = self.visitBlockStmt(ast.body, (environment, return_type, c[2], c[3], main_call))
+
+        if is_end != 1 and not type(return_type) if VoidType:
+            raise FunctionNotReturn(ast.name.name)
+
+        return None
+
+    def visitBlockStmt(self, ls, c):
+        is_end = 0
+        for stmt in ls:
+            if is_end:
+                raise UnreachableStatement(stmt)
+            is_end = self.visit(stmt, c)
+        return is_end        
+
+#     def visitBlock(self,ast,c):
         
-#         if not checkValidAssign(_lhsType, _rhsType):
+#         env = c[0].copy()
+#         # c[3]: list param
+#         lsP = c[3] if c[3] else []
+#         isRet = []
+#         isEnd = False 
+
+#         # find and override all vardecl
+#         for vd in ast.decl:
+#             lsP.append(checkIfExist(lsP,vd,"Variable"))
+#             findandkillit(env,vd.variable.name)
+#         env += lsP
+
+#         # visit each stmt (env,reT,B/C)
+#         for st in ast.stmt:
+#             if isEnd is True or isEnd is "BC":
+#                 raise UnreachableStatement(st)
+#             isEnd = self.visit(st,(env,c[1],c[2],[],c[4],c[5]))
+#             isRet.append(isEnd)
+        
+#         return isEnd if isEnd is True or isEnd is "BC" else False
+        
+
+#     def visitIf(self,ast,c):
+#         env = c[0].copy()
+
+#         if type(self.visit(ast.expr,(env,c[1],c[2],None,c[4],c[5]))) != BoolType:
 #             raise TypeMismatchInStatement(ast)
 
-#         return 0
+#         ts = self.visit(ast.thenStmt,(env,c[1],c[2],[],c[4],c[5]))
+#         es = self.visit(ast.elseStmt,(env,c[1],c[2],[],c[4],c[5])) if ast.elseStmt else None
+        
+#         if ts is True and es is True:
+#             return True
+#         elif ts is "BC" and es is "BC" or\
+#              ts is "BC" and es is True or\
+#              ts is True and es is "BC":
+#             return "BC"
+    def visitIf(self, ast, c):
+        environment = c[0].copy()
+
+        exp = self.visit(ast.expr, (environment, c[1], c[2], None, c[4], c[5]))
+        if exp != BoolType:
+            raise TypeMismachtInStatement(ast)
+
+
 
 #     def visitIf(self, ast, c):
 #         _refenv = c[0].copy()
@@ -239,6 +234,22 @@ class StaticChecker(BaseVisitor,Utils):
 #         if _isEndT != 0 and _isEndE != 0:
 #             return 2
 #         return 0
+
+#     def visitAssign(self, ast, c):
+#         _refenv = c[0].copy()
+
+#         if not type(ast.lhs) in [Id, ArrayCell]:
+#             raise TypeMismatchInStatement(ast)
+        
+#         _lhsType = self.visit(ast.lhs, (_refenv, c[1], c[2], c[3], c[4]))
+#         _rhsType = self.visit(ast.exp, (_refenv, c[1], c[2], c[3], c[4]))
+        
+#         if not checkValidAssign(_lhsType, _rhsType):
+#             raise TypeMismatchInStatement(ast)
+
+#         return 0
+
+
         
 #     def visitWhile(self, ast, c):
 #         _refenv = c[0].copy()
@@ -440,36 +451,37 @@ class StaticChecker(BaseVisitor,Utils):
         
 #         return _arr.mtype.eleType
         
-    def visitIntType(self,ast,c):
-        return IntType()
 
-    def visitFloatType(self,ast,c):
-        return FloatType()
-
-    def visitBoolType(self,ast,c):
-        return BoolType()
-
-    def visitStringType(self,ast,c):
-        return StringType()
-
-    def visitVoidType(self,ast,c):
-        return VoidType()
-
-    def visitArrayType(self,ast,c):
-        return ast.eleType 
-
-    def visitArrayPointerType(self,ast,c):
-        return ast.eleType
-
-    def visitIntLiteral(self,ast, c): 
+    def visitIntType(self, ast, c):
         return IntType()
     
-    def visitFloatLiteral(self,ast, c): 
+    def visitFloatType(self, ast, c):
         return FloatType()
 
-    def visitStringLiteral(self,ast, c): 
+    def visitBoolType(self, ast, c):
+        return BoolType()
+
+    def visitStringType(self, ast, c):
         return StringType()
 
-    def visitBooleanLiteral(self,ast, c): 
-        return BoolType()
+    def visitVoidType(self, ast, c):
+        return VoidType()
+
+    # def visitArrayType(self,ast,c):
+    #     return ast.eleType 
+
+    # def visitArrayPointerType(self,ast,c):
+    #     return ast.eleType
+
+    # def visitIntLiteral(self,ast, c): 
+    #     return IntType()
+    
+    # def visitFloatLiteral(self,ast, c): 
+    #     return FloatType()
+
+    # def visitStringLiteral(self,ast, c): 
+    #     return StringType()
+
+    # def visitBooleanLiteral(self,ast, c): 
+    #     return BoolType()
    
