@@ -30,6 +30,9 @@ def checkRedeclared(list_decl, decl, kind):
         raise Redeclared(kind, decl.name.name)
     return Symbol(decl.name.name, MType([x.varType for x in decl.param], decl.returnType))
 
+def getType(x):
+    return Variable() if type(x) is VarDecl else Procedure() if type(x.returnType) is VoidType else Function()
+
 # def BinOpType(l,r):
 #     if (type(l),type(r)) == (IntType,IntType):
 #         return IntType()
@@ -77,8 +80,7 @@ def checkRedeclared(list_decl, decl, kind):
 #     [env.remove(it) for it in env if it.name == rmId]
 
 
-# def getType(sym):
-#     return Variable() if type(sym) is VarDecl else Procedure() if type(sym.returnType) is VoidType else Function()
+
 
 # def checkValidAssign(left, right):
 #     if type(left) is VoidType or type(right) is VoidType:
@@ -138,44 +140,46 @@ class StaticChecker(BaseVisitor,Utils):
     def check(self):
         return self.visit(self.ast, StaticChecker.global_envi)
                         
-#     def visitProgram(self,ast, c):
-#         _referenceEnvironment = c.copy()
-#         _returnType = None
-#         _isLoop = False
-#         _reachableFunctions = {}
-#         _isMainCall = None
-        
-#         _entryPoint = False
-        
-#         for decl in ast.decl:
-#             _referenceEnvironment.append(checkRedeclared(_referenceEnvironment, decl, getType(decl)))
-#             if type(decl) is FuncDecl:
-#                 if not _entryPoint:
-#                     _entryPoint = (decl.name.name.lower() == "main" and type(decl.returnType) is VoidType and decl.param == [])
-#                 _reachableFunctions[decl.name.name.lower()] = decl.name.name.lower() == "main"
+    def visitProgram(self, ast, c):
+        environment = c.copy()
+        reachable_func = {}
+        main_call = None
+        entry_point = False
+        is_loop = False
+        return_type = None
 
-#         if not _entryPoint:
-#             raise NoEntryPoint()
-        
+        for decl in ast.decl:
+            environment.append(checkRedeclared(environment, decl, getType(decl)))
+            if type(decl) is FuncDecl:
+                entry_point = decl if decl.name.name == 'main' else entry_point
+#if not entry_point   entryPoint = (decl.name.name.lower() == "main" and type(decl.returnType) is VoidType and decl.param == [])
+                reachable_func[decl.name.name] = decl.name.name == 'main'
+
+        if not entry_point:
+            raise NoEntryPoint()
+
+        list(map(lambda x: self.visit(x, (environment, return_type, is_loop, reachable_func, main_call)), ast.decl))
+
 #         for decl in ast.decl:
 #             if not type(decl) is VarDecl:
 #                 self.visit(decl, (_referenceEnvironment, _returnType, _isLoop, _reachableFunctions, _isMainCall))
-                
-#         for func in _reachableFunctions:
-#             if not _reachableFunctions[func]:
+
+        for func in reachable_func:
+            if not reachable_func[func]:
 #                 _func = self.lookup(func.lower(), _referenceEnvironment, lambda x: x.name)
 #                 ftype = Procedure() if type(_func.mtype.rettype) is VoidType else Function()
 #                 raise Unreachable(ftype, func)
+                raise Unreachable(func)
+
+        return None
         
-#         return None
-        
-#     def visitVarDecl(self, ast, c):
-#         _local = c[0]
-#         _type = c[1]
-#         _refenv = c[2]
-#         _local.append(checkRedeclared(_local, ast, c[1]))
-#         overrideDeclaration(_refenv, ast.variable.name)
-#         return None
+    # def visitVarDecl(self, ast, c):
+    #     _local = c[0]
+    #     _type = c[1]
+    #     _refenv = c[2]
+    #     _local.append(checkRedeclared(_local, ast, c[1]))
+    #     overrideDeclaration(_refenv, ast.variable.name)
+    #     return None
 
 #     def visitFuncDecl(self, ast, c):
 #         _refenv = c[0].copy()
@@ -436,14 +440,36 @@ class StaticChecker(BaseVisitor,Utils):
         
 #         return _arr.mtype.eleType
         
-#     def visitIntLiteral(self,ast, c):
-#         return IntType()
+    def visitIntType(self,ast,c):
+        return IntType()
 
-#     def visitFloatLiteral(self, ast, c):
-#         return FloatType()
+    def visitFloatType(self,ast,c):
+        return FloatType()
 
-#     def visitStringLiteral(self, ast, c):
-#         return StringType()
+    def visitBoolType(self,ast,c):
+        return BoolType()
 
-#     def visitBooleanLiteral(self, ast, c):
-#         return BoolType()
+    def visitStringType(self,ast,c):
+        return StringType()
+
+    def visitVoidType(self,ast,c):
+        return VoidType()
+
+    def visitArrayType(self,ast,c):
+        return ast.eleType 
+
+    def visitArrayPointerType(self,ast,c):
+        return ast.eleType
+
+    def visitIntLiteral(self,ast, c): 
+        return IntType()
+    
+    def visitFloatLiteral(self,ast, c): 
+        return FloatType()
+
+    def visitStringLiteral(self,ast, c): 
+        return StringType()
+
+    def visitBooleanLiteral(self,ast, c): 
+        return BoolType()
+   
