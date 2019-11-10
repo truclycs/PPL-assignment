@@ -1,1 +1,1 @@
-Undeclared Function: foo
+No Entry Point

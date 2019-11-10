@@ -1,3 +1,3 @@
-int main () {
+void main () {
             putIntLn(getInt(4));
         }
