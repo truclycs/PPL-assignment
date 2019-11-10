@@ -3,6 +3,7 @@ from TestUtils import TestChecker
 from AST import *
 
 class CheckSuite(unittest.TestCase):
+    
     def test_undeclared_function(self):
         """Simple program: int main() {} """
         input = """void main() {foo();}"""

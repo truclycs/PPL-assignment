@@ -20,468 +20,61 @@ class Symbol:
         self.name = name
         self.mtype = mtype
         self.value = value
-   
+
 def checkRedeclared(list_decl, decl, kind):
-    if type(kind) in [Variable, Parameter]:
+    if type(kind) in ["Variable", "Parameter"]:
         if any(decl.variable.name == x.name for x in list_decl):
             raise Redeclared(kind, decl.variable.name)
         return Symbol(decl.variable.name, decl.varType)
+    
     if any(decl.name.name == x.name for x in list_decl):
         raise Redeclared(kind, decl.name.name)
     return Symbol(decl.name.name, MType([x.varType for x in decl.param], decl.returnType))
 
 def getType(x):
-    return Variable() if type(x) is VarDecl else VoidType() if type(x.returnType) is VoidType else Function()
+    return Variable(x) if type(x) == VarDecl else Function(x)
 
-def checkAssign(left, right):
-    if type(left) == VoidType or type(Right) == VoidType:
-        return False
-    if type(left) == ArrayType or type(right) == ArrayType:
-        return 
-    if type(left) == StringType or type(right) == StringType:
-        return False
+class StaticChecker(BaseVisitor, Utils):
+    global_envi =   [Symbol("getInt",MType([],IntType())),
+                    Symbol("putInt",MType([IntType()],VoidType())),
+                    Symbol("putIntLn",MType([IntType()],VoidType())),
+                    Symbol("getFloat",MType([],FloatType())),
+                    Symbol("putFloat",MType([FloatType()],VoidType())),
+                    Symbol("putFloatLn",MType([FloatType()],VoidType())),
+                    Symbol("putBool",MType([BoolType()],VoidType())),
+                    Symbol("putBoolLn",MType([BoolType()],VoidType())),
+                    Symbol("putString",MType([StringType()],VoidType())),
+                    Symbol("putStringLn",MType([StringType()],VoidType())),
+                    Symbol("putLn",MType([StringType()],VoidType()))]
 
-    valid_assign = [(BoolType, BoolType), (FloatType, FloatTyoe), (FloatType, IntType), (IntType, IntType)]
-    
-    return (type(left), type(right)) in valid_assign
-
-
-# def checkValidParse(left, right):
-#     if type(left) is VoidType or type(right) is VoidType:
-#         return False
-        
-#     if type(left) is ArrayType and type(right) is ArrayType:
-#         if left.lower != right.lower or\
-#            left.upper != right.upper or\
-#            type(left.eleType) != type(right.eleType):
-#             return False
-#         return True
-        
-#     _validParse = [(StringType, StringType), (BoolType, BoolType), (FloatType, FloatType), (FloatType, IntType), (IntType, IntType)]
-    
-#     return (type(left), type(right)) in _validParse
-
-# def checkValidOperation(left, right):
-#     if (type(left), type(right)) == (IntType, IntType):
-#         return IntType()
-#     if (type(left), type(right)) in [(IntType, FloatType), (FloatType, IntType), (FloatType, FloatType)]:
-#         return FloatType()
-#     return None
-    
-# def overrideDeclaration(refenv, name):
-#     [refenv.remove(id) for id in refenv if id.name == name.lower()]
-    
-class StaticChecker(BaseVisitor,Utils):
-    global_envi =   [Symbol("getInt",FuncType([],IntType())),
-                    Symbol("putInt",FuncType([IntType()],VoidType())),
-                    Symbol("putIntLn",FuncType([IntType()],VoidType())),
-                    Symbol("getFloat",FuncType([],FloatType())),
-                    Symbol("putFloat",FuncType([FloatType()],VoidType())),
-                    Symbol("putFloatLn",FuncType([FloatType()],VoidType())),
-                    Symbol("putBool",FuncType([BoolType()],VoidType())),
-                    Symbol("putBoolLn",FuncType([BoolType()],VoidType())),
-                    Symbol("putString",FuncType([StringType()],VoidType())),
-                    Symbol("putStringLn",FuncType([StringType()],VoidType())),
-                    Symbol("putLn",FuncType([StringType()],VoidType()))]
-    
     def __init__(self, ast):
         self.ast = ast
 
     def check(self):
         return self.visit(self.ast, StaticChecker.global_envi)
-                        
+
     def visitProgram(self, ast, c):
         environment = c.copy()
+        entry_point = None
         reachable_func = {}
-        main_call = None
-        entry_point = False
-        is_loop = False
-        return_type = None
-
+        
         for decl in ast.decl:
             environment.append(checkRedeclared(environment, decl, getType(decl)))
-            if type(decl) is FuncDecl:
+            if type(decl) == FuncDecl:
                 entry_point = decl if decl.name.name == 'main' else entry_point
-#if not entry_point   entryPoint = (decl.name.name.lower() == "main" and type(decl.returnType) is VoidType and decl.param == [])
                 reachable_func[decl.name.name] = decl.name.name == 'main'
 
         if not entry_point:
             raise NoEntryPoint()
 
-        list(map(lambda x: self.visit(x, (environment, return_type, is_loop, reachable_func, main_call)), ast.decl))
-
-#         for decl in ast.decl:
-#             if not type(decl) is VarDecl:
-#                 self.visit(decl, (_referenceEnvironment, _returnType, _isLoop, _reachableFunctions, _isMainCall))
+        list(map(lambda x: self.visit(x, (environment, None, False, reachable_func, None)), ast.decl))
 
         for func in reachable_func:
             if not reachable_func[func]:
-#                 _func = self.lookup(func.lower(), _referenceEnvironment, lambda x: x.name)
-#                 ftype = Procedure() if type(_func.mtype.rettype) is VoidType else Function()
-#                 raise Unreachable(ftype, func)
                 raise Unreachable(func)
 
         return None
-        
-    # def visitVarDecl(self, ast, c):
-    #     _local = c[0]
-    #     _type = c[1]
-    #     _refenv = c[2]
-    #     _local.append(checkRedeclared(_local, ast, c[1]))
-    #     overrideDeclaration(_refenv, ast.variable.name)
-    #     return None
-
-#     def visitFuncDecl(self,ast, c): 
-#         # env: list global_envi
-#         # par: list param
-#         env = c[0].copy()
-#         par = []
-        
-#         for p in ast.param:
-#             par.append(checkIfExist(par,p,"Parameter"))
-        
-#         isReturn = self.visit(ast.body, (env, ast.returnType, False, par,c[4],ast.name.name))
-#         if isReturn is False and type(ast.returnType) is not VoidType:
-#             raise FunctionNotReturn(ast.name.name)
-
-    def visitFuncDecl(self, ast, c):
-        environment = c[0].copy()
-        return_type = ast.returnType
-        main_call = ast.name.name
-        is_end = 0
-        
-        par = []
-        [self.visit(param, (par, Parameter(), environment)) for param in ast.param]
-        [self.visit(local, (par, Varibale(), environment)) for local in ast.local]
-
-        environment += par 
-
-        is_end = self.visitBlockStmt(ast.body, (environment, return_type, c[2], c[3], main_call))
-
-        if is_end != 1 and not type(return_type) if VoidType:
-            raise FunctionNotReturn(ast.name.name)
-
-        return None
-
-    def visitBlockStmt(self, ls, c):
-        is_end = 0
-        for stmt in ls:
-            if is_end:
-                raise UnreachableStatement(stmt)
-            is_end = self.visit(stmt, c)
-        return is_end        
-
-#     def visitBlock(self,ast,c):
-        
-#         env = c[0].copy()
-#         # c[3]: list param
-#         lsP = c[3] if c[3] else []
-#         isRet = []
-#         isEnd = False 
-
-#         # find and override all vardecl
-#         for vd in ast.decl:
-#             lsP.append(checkIfExist(lsP,vd,"Variable"))
-#             findandkillit(env,vd.variable.name)
-#         env += lsP
-
-#         # visit each stmt (env,reT,B/C)
-#         for st in ast.stmt:
-#             if isEnd is True or isEnd is "BC":
-#                 raise UnreachableStatement(st)
-#             isEnd = self.visit(st,(env,c[1],c[2],[],c[4],c[5]))
-#             isRet.append(isEnd)
-        
-#         return isEnd if isEnd is True or isEnd is "BC" else False
-        
-
-#     def visitIf(self,ast,c):
-#         env = c[0].copy()
-
-#         if type(self.visit(ast.expr,(env,c[1],c[2],None,c[4],c[5]))) != BoolType:
-#             raise TypeMismatchInStatement(ast)
-
-#         ts = self.visit(ast.thenStmt,(env,c[1],c[2],[],c[4],c[5]))
-#         es = self.visit(ast.elseStmt,(env,c[1],c[2],[],c[4],c[5])) if ast.elseStmt else None
-        
-#         if ts is True and es is True:
-#             return True
-#         elif ts is "BC" and es is "BC" or\
-#              ts is "BC" and es is True or\
-#              ts is True and es is "BC":
-#             return "BC"
-    def visitIf(self, ast, c):
-        environment = c[0].copy()
-
-        exp = self.visit(ast.expr, (environment, c[1], c[2], None, c[4], c[5]))
-        if exp != BoolType:
-            raise TypeMismachtInStatement(ast)
 
 
 
-#     def visitIf(self, ast, c):
-#         _refenv = c[0].copy()
-        
-#         _exp = self.visit(ast.expr, (_refenv, c[1], c[2], c[3], c[4]))
-#         if not type(_exp) is BoolType:
-#             raise TypeMismatchInStatement(ast)
 
-#         _isEndT = self.visitBlockStmt(ast.thenStmt, (_refenv, c[1], c[2], c[3], c[4]))
-#         _isEndE = self.visitBlockStmt(ast.elseStmt, (_refenv, c[1], c[2], c[3], c[4]))
-        
-#         if _isEndT == 1 and _isEndE == 1:
-#             return 1
-#         if _isEndT != 0 and _isEndE != 0:
-#             return 2
-#         return 0
-
-#     def visitAssign(self, ast, c):
-#         _refenv = c[0].copy()
-
-#         if not type(ast.lhs) in [Id, ArrayCell]:
-#             raise TypeMismatchInStatement(ast)
-        
-#         _lhsType = self.visit(ast.lhs, (_refenv, c[1], c[2], c[3], c[4]))
-#         _rhsType = self.visit(ast.exp, (_refenv, c[1], c[2], c[3], c[4]))
-        
-#         if not checkValidAssign(_lhsType, _rhsType):
-#             raise TypeMismatchInStatement(ast)
-
-#         return 0
-
-
-        
-#     def visitWhile(self, ast, c):
-#         _refenv = c[0].copy()
-#         _exp = self.visit(ast.exp, (_refenv, c[1], True, c[3], c[4]))
-#         if not type(_exp) is BoolType:
-#             raise TypeMismatchInStatement(ast)
-            
-#         _isEnd = self.visitBlockStmt(ast.sl, (_refenv, c[1], True, c[3], c[4]))
-        
-#         return 0
-        
-#     def visitFor(self, ast, c):
-#         _refenv = c[0].copy()
-
-#         _id = self.visit(ast.id, (_refenv, c[1], c[2], c[3], c[4]))
-#         if not type(_id) is IntType:
-#             raise TypeMismatchInStatement(ast)
-
-#         _exp1 = self.visit(ast.expr1, (_refenv, c[1], c[2], c[3], c[4]))
-#         if not type(_exp1) is IntType:
-#             raise TypeMismatchInStatement(ast)
-
-#         _exp2 = self.visit(ast.expr2, (_refenv, c[1], c[2], c[3], c[4]))
-#         if not type(_exp2) is IntType:
-#             raise TypeMismatchInStatement(ast)
-
-#         _isEnd = self.visitBlockStmt(ast.loop, (_refenv, c[1], True, c[3], c[4]))
-        
-#         return 0
-        
-#     def visitBreak(self, ast, c):
-#         _isLoop = c[2]
-        
-#         if not _isLoop:
-#             raise BreakNotInLoop()
-            
-#         return 2
-        
-#     def visitContinue(self, ast, c):
-#         _isLoop = c[2]
-        
-#         if not _isLoop:
-#             raise ContinueNotInLoop()
-        
-#         return 2
-        
-#     def visitReturn(self, ast, c):
-#         _refenv = c[0].copy()
-#         _returnType = c[1]
-        
-#         if ast.expr is None:
-#             if type(_returnType) is VoidType:
-#                 return 1
-#             raise TypeMismatchInStatement(ast)
-        
-#         if checkValidParse(_returnType, self.visit(ast.expr, (_refenv, c[1], c[2], c[3], c[4]))):
-#             return 1
-#         raise TypeMismatchInStatement(ast)
-        
-#     def visitWith(self, ast, c):
-#         _refenv = c[0].copy()
-        
-#         _local = []
-#         for decl in ast.decl:
-#             _local.append(checkRedeclared(_local, decl, Variable()))
-#             overrideDeclaration(_refenv, decl.variable.name)
-#         _refenv += _local
-        
-#         _isEnd = 0
-#         for stmt in ast.stmt:
-#             if _isEnd != 0:
-#                 raise UnreachableStatement(stmt)
-#             _isEnd = self.visit(stmt, (_refenv, c[1], c[2], c[3], c[4]))
-#         return _isEnd
-        
-#     def visitCallBody(self, ast, c):
-#         _refenv = c[0].copy()
-#         _isMainCall = c[4]
-#         _type = c[5]
-        
-#         _param = [self.visit(x, (_refenv, c[1], c[2], c[3], c[4])) for x in ast.param]
-#         _func = self.lookup(ast.method.name.lower(), _refenv, lambda x: x.name)
-
-#         if _func is None or not type(_func.mtype) is MType:
-#             raise Undeclared(c[5], ast.method.name)
-
-#         if (not type(_func.mtype.rettype) is VoidType and type(c[5]) is Procedure) or (type(_func.mtype.rettype) is VoidType and type(c[5]) is Function):
-#             raise Undeclared(c[5], ast.method.name)
-
-#         if len(_func.mtype.partype) != len(_param):
-#             if type(c[5]) is Procedure:
-#                 raise TypeMismatchInStatement(ast)
-#             raise TypeMismatchInExpression(ast)
-        
-#         if not all([checkValidParse(_func.mtype.partype[i], _param[i]) for i in range(len(_param))]):
-#             if type(c[5]) is Procedure:
-#                 raise TypeMismatchInStatement(ast)
-#             raise TypeMismatchInExpression(ast)
-            
-        
-#         if _isMainCall.lower() != ast.method.name.lower():
-#             c[3][ast.method.name.lower()] = True
-        
-#         return _func.mtype.rettype
-        
-#     def visitCallStmt(self, ast, c):
-#         self.visitCallBody(ast, (c[0], c[1], c[2], c[3], c[4], Procedure()))
-#         return 0
-
-#     def visitBinaryOp(self, ast, c):
-#         _refenv = c[0].copy()
-
-#         leftType = self.visit(ast.left, (_refenv, c[1], c[2], c[3], c[4]))
-#         rightType = self.visit(ast.right, (_refenv, c[1], c[2], c[3], c[4]))
-#         op = ast.op
-        
-#         if op in ["+", "-", "*"]:
-#             rtype = checkValidOperation(leftType, rightType)
-#             if rtype is None:
-#                 raise TypeMismatchInExpression(ast)
-#             return rtype
-            
-#         if op == "/":
-#             rtype = checkValidOperation(leftType, rightType)
-#             if rtype is None:
-#                 raise TypeMismatchInExpression(ast)
-#             return FloatType()
-            
-#         if op in ["<", ">", "<=", ">=", "=", "<>"]:
-#             rtype = checkValidOperation(leftType, rightType)
-#             if rtype is None:
-#                 raise TypeMismatchInExpression(ast)
-#             return BoolType()
-            
-#         if op.lower() in ["and", "or", "andthen", "orelse"]:
-#             if (type(leftType), type(rightType)) == (BoolType, BoolType):
-#                 return BoolType()
-#             raise TypeMismatchInExpression(ast)
-            
-#         if op.lower() in ["div", "mod"]:
-#             if (type(leftType), type(rightType)) == (IntType, IntType):
-#                 return IntType()
-#             raise TypeMismatchInExpression(ast)
-            
-#         raise TypeMismatchInExpression(ast)
-        
-#     def visitUnaryOp(self, ast, c):
-#         _refenv = c[0].copy()
-#         expType = self.visit(ast.body, (_refenv, c[1], c[2], c[3], c[4]))
-#         op = ast.op
-#         if op == "-":
-#             if type(expType) in [IntType, FloatType]:
-#                 return expType
-#             raise TypeMismatchInExpression(ast)
-#         if op.lower() == "not":
-#             if type(expType) is BoolType:
-#                 return BoolType()
-#             raise TypeMismatchInExpression(ast)
-        
-#         raise TypeMismatchInExpression(ast)
-
-#     def visitCallExpr(self, ast, c):
-#         ret = self.visitCallBody(ast, (c[0], c[1], c[2], c[3], c[4], Function()))
-#         return ret
-
-#     def visitId(self, ast, c):
-#         _refenv = c[0].copy()
-#         id = self.lookup(ast.name.lower(), _refenv, lambda x: x.name)
-#         if id is None or type(id.mtype) is MType:
-#             raise Undeclared(Identifier(), ast.name)
-#         return id.mtype
-        
-#     def visitArrayCell(self, ast, c):
-
-#         _refenv = c[0].copy()
-        
-#         if not type(ast.arr) is Id and not type(ast.arr) is CallExpr:
-#             raise TypeMismatchInExpression(ast)
-
-#         if type(ast.arr) is CallExpr:
-#             self.visit(ast.arr, c)
-#         _arr = self.lookup(ast.arr.name.lower() if type(ast.arr) is Id else ast.arr.method.name.lower(), _refenv, lambda x: x.name.lower())
-#         if _arr is None:
-#             if type(ast.arr) is Id:
-#                 raise Undeclared(Identifier(), ast.arr.name)
-#             else:
-#                 raise Undeclared(Function(), ast.arr.method.name)
-
-#         _idx = self.visit(ast.idx, (_refenv, c[1], c[2], c[3], c[4]))
-
-#         if not type(_idx) is IntType:
-#             raise TypeMismatchInExpression(ast)
-        
-#         if type(_arr.mtype) is MType:
-#             return _arr.mtype.rettype.eleType
-        
-#         if not type(_arr.mtype) is ArrayType:
-#             raise TypeMismatchInExpression(ast)
-        
-#         return _arr.mtype.eleType
-        
-
-    def visitIntType(self, ast, c):
-        return IntType()
-    
-    def visitFloatType(self, ast, c):
-        return FloatType()
-
-    def visitBoolType(self, ast, c):
-        return BoolType()
-
-    def visitStringType(self, ast, c):
-        return StringType()
-
-    def visitVoidType(self, ast, c):
-        return VoidType()
-
-    # def visitArrayType(self,ast,c):
-    #     return ast.eleType 
-
-    # def visitArrayPointerType(self,ast,c):
-    #     return ast.eleType
-
-    # def visitIntLiteral(self,ast, c): 
-    #     return IntType()
-    
-    # def visitFloatLiteral(self,ast, c): 
-    #     return FloatType()
-
-    # def visitStringLiteral(self,ast, c): 
-    #     return StringType()
-
-    # def visitBooleanLiteral(self,ast, c): 
-    #     return BoolType()
-   
