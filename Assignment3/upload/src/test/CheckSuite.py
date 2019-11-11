@@ -3,20 +3,20 @@ from TestUtils import TestChecker
 from AST import *
 
 class CheckSuite(unittest.TestCase):
-    
+
     def test_undeclared_function(self):
         """Simple program: int main() {} """
         input = """void main() {foo();}"""
         expect = "Undeclared Function: foo"
         self.assertTrue(TestChecker.test(input,expect,400))
 
-    # def test_diff_numofparam_stmt(self):
-    #     """More complex program"""
-    #     input = """void main () {
-    #         putIntLn();
-    #     }"""
-    #     expect = "Type Mismatch In Statement: CallExpr(Id(putIntLn),[])"
-    #     self.assertTrue(TestChecker.test(input,expect,401))
+    def test_diff_numofparam_stmt(self):
+        """More complex program"""
+        input = """void main () {
+            putIntLn();
+        }"""
+        expect = "Type Mismatch In Statement: CallExpr(Id(putIntLn),[])"
+        self.assertTrue(TestChecker.test(input,expect,401))
     
     # def test_diff_numofparam_expr(self):
     #     """More complex program"""

@@ -22,14 +22,9 @@ class Symbol:
         self.value = value
 
 def checkRedeclared(list_decl, decl, kind):
-    if kind == "Variable":
+    if kind == "Variable" or kind == "Parameter":
         if any(decl.variable.name == x.name for x in list_decl):
-            raise Redeclared(Variable(), decl.variable.name)    
-        return Symbol(decl.variable.name, decl.varType)
-
-    elif kind == "Parameter":
-        if any(decl.variable.name == x.name for x in list_decl):
-            raise Redeclared(Parameter(), decl.variable.name)
+            raise Redeclared(kind, decl.variable.name)    
         return Symbol(decl.variable.name, decl.varType)
 
     else:
@@ -119,8 +114,11 @@ class StaticChecker(BaseVisitor, Utils):
         return self.visit(self.ast, StaticChecker.global_envi)
 
     def visitProgram(self, ast, c):
-        environment = c.copy()
+        environment = c.copy()  
         entry_point = None
+        return_type = None
+        is_loop = False
+        main_call = None
         reachable_func = {}
         
         for decl in ast.decl:
@@ -132,50 +130,48 @@ class StaticChecker(BaseVisitor, Utils):
         if not entry_point:
             raise NoEntryPoint()
 
-
+        for decl in ast.decl:
+            if not type(decl) is VarDecl:
+                self.visit(decl, (environment, return_type, is_loop, reachable_func, main_call))
+                
         # list(map(lambda x: self.visit(x, (environment, None, False, reachable_func, None)), ast.decl))
 
-        for func in reachable_func:
-            if not reachable_func[func]:
-                raise Unreachable(func)
-
+        # for func in reachable_func:
+        #     if not reachable_func[func]:
+        #         raise Unreachable(func)
         return None
 
-    # def visitFuncDecl(self,ast, c): 
-    #     # environment: list global_envi
-    #     # par: list param
-    #     environment = c[0].copy()
-    #     par = []
+    def visitFuncDecl(self, ast, c): 
+        environment = c[0].copy()
+        para = []
+    
+        for p in ast.param:
+            para.append(checkRedeclared(para, p, "Parameter"))
         
-    #     for p in ast.param:
-    #         par.append(checkRedeclared(par,p,"Parameter"))
-        
-    #     isReturn = self.visit(ast.body, (environment, ast.returnType, False, par,c[4],ast.name.name))
-    #     if isReturn is False and type(ast.returnType) is not VoidType:
-    #         raise FunctionNotReturn(ast.name.name)
+        is_return = self.visitBlock(ast.body, (environment, ast.returnType, False, para, c[4], ast.name.name))
+        if is_return is False and type(ast.returnType) != VoidType:
+            raise FunctionNotReturn(ast.name.name)
 
-    # def visitBlock(self,ast,c):
-        
-    #     environment = c[0].copy()
-    #     # c[3]: list param
-    #     lsP = c[3] if c[3] else []
-    #     isRet = []
-    #     isEnd = False 
+    def visitBlock(self, ast, c):        
+        environment = c[0].copy()
+        # c[3]: list param
+        lsP = c[3] if c[3] else []
+        isRet = []
+        isEnd = False     
 
-    #     # find and override all vardecl
-    #     for vd in ast.member:
-    #         lsP.append(checkRedeclared(lsP,vd,"Variable"))
-    #         overrideDeclaration(environment,vd.variable.name)
-    #     environment += lsP
+        # find and override all vardecl
+        for vd in ast.member:
+            if vd is VarDecl:
+                lsP.append(checkRedeclared(lsP,vd,"Variable"))
+                overrideDeclaration(environment,vd.variable.name)
+            else:
+                if isEnd is True or isEnd is "BC":
+                    raise UnreachableStatement(st)
+                isEnd = self.visit(vd,(environment,c[1],c[2],[],c[4],c[5]))
+                isRet.append(isEnd)
 
-    #     # visit each stmt (environment,reT,B/C)
-    #     for st in ast.member.stmt:
-    #         if isEnd is True or isEnd is "BC":
-    #             raise UnreachableStatement(st)
-    #         isEnd = self.visit(st,(environment,c[1],c[2],[],c[4],c[5]))
-    #         isRet.append(isEnd)
-        
-    #     return isEnd if isEnd is True or isEnd is "BC" else False
+        environment += lsP
+        return isEnd if isEnd is True or isEnd is "BC" else False
 
 
 
@@ -320,7 +316,7 @@ class StaticChecker(BaseVisitor, Utils):
         res = self.lookup(ast.method.name,environment, lambda x: x.name) #x.name
         lsp = [self.visit(x,(environment,c[1],c[2],[],c[4],c[5])) for x in ast.param]
       
-        if res is None or not type(res.MType) is MType:
+        if res is None or not type(res.mtype) is MType:
             raise Undeclared(Function(),ast.method.name)
         elif len(res.mtype.partype) != len(lsp):
             raise TypeMismatchInExpression(ast)

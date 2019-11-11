@@ -8,7 +8,7 @@ class AST(ABC):
         return self.__dict__ == other.__dict__
 
     @abstractmethod
-    def accept(self, v, param):
+    def accept(self, v, param): 
         return v.visit(self, param)
 
 class Decl(AST):
