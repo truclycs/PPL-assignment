@@ -38,20 +38,6 @@ def getType(decl):
 def overrideDeclaration(environment, name):
     [environment.remove(id) for id in environment if id.name == name]
 
-def checkValidAssign(left, right):
-    if type(left) is VoidType or type(right) is VoidType:
-        return False
-    
-    if type(left) is ArrayType or type(right) is ArrayType:
-        return False
-        
-    if type(left) is StringType or type(right) is StringType:
-        return False
-        
-    _validAssign = [(BoolType, BoolType), (FloatType, FloatType), (FloatType, IntType), (IntType, IntType)]
-
-    return (type(left), type(right)) in _validAssign
-
 def BinOpType(l,r):
     if (type(l),type(r)) == (IntType,IntType):
         return IntType()
@@ -308,12 +294,8 @@ class StaticChecker(BaseVisitor, Utils):
             raise Undeclared(Identifier(),ast.name)     
 
     def visitCallExpr(self, ast, c): 
-        """
-        method: Id
-        param: list(Expr)
-        """
         environment = c[0].copy() 
-        res = self.lookup(ast.method.name,environment, lambda x: x.name) #x.name
+        res = self.lookup(ast.method.name,environment, lambda x: x.name)
         lsp = [self.visit(x,(environment,c[1],c[2],[],c[4],c[5])) for x in ast.param]
       
         if res is None or not type(res.mtype) is MType:
@@ -332,10 +314,6 @@ class StaticChecker(BaseVisitor, Utils):
 
 
     def visitArrayCell(self,ast,c):
-        """
-        arr: Expr
-        idx: Expr
-        """
         environment = c[0].copy()
         if type(self.visit(ast.idx,(environment,c[1],c[2],[],c[4],c[5]))) is not IntType:
             raise TypeMismatchInExpression(ast)
