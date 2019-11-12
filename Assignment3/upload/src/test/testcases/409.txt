@@ -1,4 +1,6 @@
 
-        int a, b, c, d, a;
-        void main() {}
-        
+                int someone;
+                string anyone;
+                boolean main;
+                float something;
+                

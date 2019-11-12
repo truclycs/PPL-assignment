@@ -1,8 +1,11 @@
 
-        int main() {
-            int a;
-            string b;
-            float c;
-            boolean b[10];
-        }
-        
+                string str;
+                boolean bool[99];
+                void main(int para){
+                    {
+                        {
+                            return para;
+                        }
+                    }
+                }
+                

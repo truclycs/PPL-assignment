@@ -1,3 +1,6 @@
-void main () {
-            putIntLn();
-        }
+
+                int something;
+                float anything;
+                void main(){return;}
+                boolean main;
+                

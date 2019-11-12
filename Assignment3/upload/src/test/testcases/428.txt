@@ -1,0 +1,8 @@
+ 
+        float foo() {
+            n = 1;
+            x = n;
+        }
+        int n;
+        int main() {}
+        

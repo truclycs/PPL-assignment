@@ -243,25 +243,54 @@ class CheckSuite(unittest.TestCase):
         expect = "Undeclared Identifier: b"
         self.assertTrue(TestChecker.test(input,expect,425))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,426))
+    def testUndeclaredID3(self):
+        input = """ 
+        float foo() {
+            int b;
+            a = 1;
+            b = 2;
+        }
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,427))
+        int main() {}
+        """
+        expect = "Undeclared Identifier: a"
+        self.assertTrue(TestChecker.test(input,expect,426))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,428))
+    def testUndeclaredID4(self):
+        input = """ 
+        int n;
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,429))
+        float foo() {
+            n = 1;
+            m = 2;
+        }
+
+        int main() {}
+        """
+        expect = "Undeclared Identifier: m"
+        self.assertTrue(TestChecker.test(input,expect,427))
+
+    def testUndeclaredID5(self):
+        input = """ 
+        float foo() {
+            n = 1;
+            x = n;
+        }
+        int n;
+        int main() {}
+        """
+        expect = "Undeclared Identifier: x"
+        self.assertTrue(TestChecker.test(input,expect,428))
+
+    def testUndeclaredIDinScope(self):
+        input = """ 
+        int main() {
+            n = 1;
+            int n;
+        }
+        """
+        expect = "Undeclared Identifier: n"
+        self.assertTrue(TestChecker.test(input,expect,429))
 
     # def test(self):
     #     input = """ """

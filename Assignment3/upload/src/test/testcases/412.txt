@@ -1,7 +1,17 @@
 
-        string foo(){}
-        int main() {
-            foo();
-        }
-        float foo(){}
-        
+                int many[99];
+                boolean condition[99];
+                int main(int argc){
+                    if(true){
+                        if((many[98] <= 3) && (argc == argc + 1)){
+                            // Just empty
+                            return argc;
+                        }
+                    }else{
+                        if(many[99] = 3){
+                            // We have a exception
+                            return argc;
+                        }
+                    }
+                }
+                

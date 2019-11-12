@@ -1,1 +1,16 @@
-Program([FuncDecl(Id(main),[],IntType,Block([CallExpr(Id(putIntLn),[])]))])
+
+                int something[999];
+                float anything[999];
+                void main(string main[]){
+                    int scope;
+                    float scope1;
+                    {
+                        string scope;
+                        {
+                            boolean scope;
+                        }
+                    }
+                    boolean scope1;
+                }
+                boolean notMain;
+                

@@ -1,5 +1,15 @@
 
-        int main() {
-            boolean x, x;
-        }
-        
+                string str;
+                boolean bool[99];
+                float main(int para){
+                    if(true){
+                        return para;
+                    }
+                    else{
+                        if(false){
+                            return 3.;
+                        }
+                    }
+                    return str;
+                }
+                

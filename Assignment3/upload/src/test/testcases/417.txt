@@ -1,6 +1,17 @@
 
-        int main() {
-            int a;
-            string a[10];
-        }
-        
+                string str;
+                boolean bool[99];
+                boolean[] main(boolean input[]){
+                    do
+                        do 
+                        {
+                            return input;
+                        }
+                        while(bool[0] && true || false);
+                    while(str);
+                }
+
+                boolean wrong(){
+                    return false;
+                }
+                

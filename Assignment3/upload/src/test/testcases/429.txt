@@ -1,0 +1,6 @@
+ 
+        int main() {
+            n = 1;
+            int n;
+        }
+        

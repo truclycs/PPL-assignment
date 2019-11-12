@@ -1,1 +1,1 @@
-Redeclared Function: foo
+Type Mismatch In Statement: If(BinaryOp(=,ArrayCell(Id(many),IntLiteral(99)),IntLiteral(3)),Block([Return(Id(argc))]))

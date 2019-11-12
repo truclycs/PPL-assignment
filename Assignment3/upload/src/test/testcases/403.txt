@@ -1,1 +1,8 @@
-Program([FuncDecl(Id(main),[],IntType,Block([CallExpr(Id(foo),[])]))])
+
+                int something;
+                float anything;
+                void main(int same[]){
+                    float same;
+                }
+                boolean notMain;
+                

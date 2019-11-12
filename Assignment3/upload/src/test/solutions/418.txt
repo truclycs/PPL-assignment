@@ -1,1 +1,1 @@
-Redeclared Variable: b
+Type Mismatch In Statement: Return(Id(para))
