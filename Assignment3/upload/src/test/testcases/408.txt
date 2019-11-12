@@ -1,0 +1,5 @@
+
+        int c;
+        void main() {}
+        string c;
+        

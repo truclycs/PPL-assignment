@@ -23,9 +23,9 @@ class Symbol:
 
 def checkRedeclared(list_decl, decl, kind):
     if kind == "Variable" or kind == "Parameter":
-        if any(decl.variable.name == x.name for x in list_decl):
-            raise Redeclared(kind, decl.variable.name)    
-        return Symbol(decl.variable.name, decl.varType)
+        if any(decl.variable == x.name for x in list_decl):
+            raise Redeclared(kind, decl.variable)    
+        return Symbol(decl.variable, decl.varType)
     else:
         if any(decl.name.name == x.name for x in list_decl):
             raise Redeclared(Function(), decl.name.name)    
@@ -113,7 +113,7 @@ class StaticChecker(BaseVisitor, Utils):
             raise NoEntryPoint()
 
         for decl in ast.decl:
-            if not type(decl) is VarDecl:
+            if type(decl) != VarDecl:
                 self.visit(decl, (environment, return_type, is_loop, reachable_func, main_call))
 
         for func in reachable_func:
@@ -129,7 +129,7 @@ class StaticChecker(BaseVisitor, Utils):
             para.append(checkRedeclared(para, p, "Parameter"))
         
         is_return = self.visitBlock(ast.body, (environment, ast.returnType, False, para, c[4], ast.name.name))
-        if is_return is False and type(ast.returnType) != VoidType:
+        if not is_return and type(ast.returnType) != VoidType:
             raise FunctionNotReturn(ast.name.name)
 
     def visitBlock(self, ast, c):        
@@ -138,14 +138,14 @@ class StaticChecker(BaseVisitor, Utils):
         is_return = []
         end = False     
 
-        for vd in ast.member:
-            if vd == VarDecl:
-                list_para.append(checkRedeclared(list_para,vd,"Variable"))
-                overrideDeclaration(environment,vd.variable.name)
+        for mem in ast.member:
+            if mem == VarDecl:
+                list_para.append(checkRedeclared(list_para, mem, "Variable"))
+                overrideDeclaration(environment, mem.variable.name)
             else:
-                if end is True or end is "BC":
-                    raise UnreachableStatement(st)
-                end = self.visit(vd,(environment,c[1],c[2],[],c[4],c[5]))
+                if end or end is "BC":
+                    raise UnreachableStatemenmet(st)
+                end = self.visit(mem,(environment,c[1],c[2],[],c[4],c[5]))
                 is_return.append(end)
 
         environment += list_para
@@ -176,7 +176,6 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitFor(self,ast,c):
         environment = c[0].copy()
-
         ex1 = self.visit(ast.expr1,(environment,c[1],False,[],c[4],c[5]))
         ex2 = self.visit(ast.expr2,(environment,c[1],False,[],c[4],c[5]))
         ex3 = self.visit(ast.expr3,(environment,c[1],False,[],c[4],c[5]))
@@ -276,7 +275,6 @@ class StaticChecker(BaseVisitor, Utils):
 
             return res.mtype.rettype
 
-
     def visitArrayCell(self,ast,c):
         environment = c[0].copy()
         if type(self.visit(ast.idx,(environment,c[1],c[2],[],c[4],c[5]))) is not IntType:
@@ -310,7 +308,7 @@ class StaticChecker(BaseVisitor, Utils):
             raise TypeMismatchInStatement(ast)
 
         return True 
-
+      
     def visitIntType(self, ast, c):
         return IntType()
 
