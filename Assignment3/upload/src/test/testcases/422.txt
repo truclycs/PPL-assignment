@@ -1,0 +1,12 @@
+
+        int foo() {
+            int a;
+            {
+                int a;
+                {
+                    int c, c;
+                }
+            }
+        }
+        int main() {}
+        

@@ -1,0 +1,4 @@
+
+        int a, b, c, d, a;
+        void main() {}
+        

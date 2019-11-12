@@ -66,99 +66,182 @@ class CheckSuite(unittest.TestCase):
         input = """
         int c;
         void main() {}
-        string c;
+        string c[10];
         """
         expect = "Redeclared Variable: c"
         self.assertTrue(TestChecker.test(input,expect,408))
 
-    def testRedeclaredVariable3(self):  
+    def testRedeclaredVariable4(self):  
         input = """
-        int c;
+        int a, b, c, d, a;
         void main() {}
-        string c;
         """
-        expect = "Redeclared Variable: c"
+        expect = "Redeclared Variable: a"
         self.assertTrue(TestChecker.test(input,expect,409))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,410))
+    def testRedeclaredFunction1(self):  
+        input = """
+        int foo(){}
+        float foo(){}
+        int main() {
+            foo();
+        }
+        """
+        expect = "Redeclared Function: foo"
+        self.assertTrue(TestChecker.test(input,expect,410))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,411))
+    def testRedeclaredFunction2(self):  
+        input = """
+        string foo(){}
+        string foo(){}
+        int main() {
+            foo();
+        }
+        """
+        expect = "Redeclared Function: foo"
+        self.assertTrue(TestChecker.test(input,expect,411))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,412))
+    def testRedeclaredFunction3(self):  
+        input = """
+        string foo(){}
+        int main() {
+            foo();
+        }
+        float foo(){}
+        """
+        expect = "Redeclared Function: foo"
+        self.assertTrue(TestChecker.test(input,expect,412))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,413))
+    def testRedeclaredParameter1(self):
+        input = """int main(int a, int a){} """
+        expect = "Redeclared Parameter: a"
+        self.assertTrue(TestChecker.test(input,expect,413))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,414))
+    def testRedeclaredParameter2(self):
+        input = """int main(string x, int a[], float a[]){} """
+        expect = "Redeclared Parameter: a"
+        self.assertTrue(TestChecker.test(input,expect,414))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,415))
+    def testRedeclaredParameter3(self):
+        input = """int main(string x, boolean x, int a, float a){} """
+        expect = "Redeclared Parameter: x"
+        self.assertTrue(TestChecker.test(input,expect,415))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,416))
+    def testRedeclaredVarInFunc1(self):
+        input = """
+        int main() {
+            int a;
+            int a;
+        }
+        """
+        expect = "Redeclared Variable: a"
+        self.assertTrue(TestChecker.test(input,expect,416))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,417))
+    def testRedeclaredVarInFunc2(self):
+        input = """
+        int main() {
+            int a;
+            string a[10];
+        }
+        """
+        expect = "Redeclared Variable: a"
+        self.assertTrue(TestChecker.test(input,expect,417))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,418))
+    def testRedeclaredVarInFunc3(self):
+        input = """
+        int main() {
+            int a;
+            string b;
+            float c;
+            boolean b[10];
+        }
+        """
+        expect = "Redeclared Variable: b"
+        self.assertTrue(TestChecker.test(input,expect,418))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,419))
+    def testRedeclaredVarInFunc4(self):
+        input = """
+        int main() {
+            boolean x, x;
+        }
+        """
+        expect = "Redeclared Variable: x"
+        self.assertTrue(TestChecker.test(input,expect,419))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,420))
+    def testRedeclaredVarInFunc5(self):
+        input = """
+        int foo() {
+            int a, a;
+        }
+        int main() {}
+        """
+        expect = "Redeclared Variable: a"
+        self.assertTrue(TestChecker.test(input,expect,420))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,421))
+    def testRedeclaredVarInFunc6(self):
+        input = """
+        int foo() {
+            string arr[10];
+            boolean arr[10];
+        }
+        int main() {}
+        """
+        expect = "Redeclared Variable: arr"
+        self.assertTrue(TestChecker.test(input,expect,421))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,422))
+    def testRedeclaredVarInScope1(self):
+        input = """
+        int foo() {
+            int a;
+            {
+                int a;
+                {
+                    int c, c;
+                }
+            }
+        }
+        int main() {}
+        """
+        expect = "Redeclared Variable: c"
+        self.assertTrue(TestChecker.test(input,expect,422))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,423))
+    def testRedeclaredVarInScope2(self):
+        input = """
+        int foo() {
+            int a;
+            {
+                int here;
+                {
+                    int scope; 
+                }
+                float here;
+            }
+        }
+        int main() {}
+        """
+        expect = "Redeclared Variable: here"
+        self.assertTrue(TestChecker.test(input,expect,423))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,424))
+    def testUndeclaredID1(self):
+        input = """ 
+        int main() {
+            a = 1;
+        }
+        """
+        expect = "Undeclared Identifier: a"
+        self.assertTrue(TestChecker.test(input,expect,424))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,425))
+    def testUndeclaredID2(self):
+        input = """ 
+        float foo(int a) {
+            a = 1;
+            b = 2;
+        }
+
+        int main() {}
+        """
+        expect = "Undeclared Identifier: b"
+        self.assertTrue(TestChecker.test(input,expect,425))
 
     # def test(self):
     #     input = """ """

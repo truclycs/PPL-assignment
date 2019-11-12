@@ -1,0 +1,13 @@
+
+        int foo() {
+            int a;
+            {
+                int here;
+                {
+                    int scope; 
+                }
+                float here;
+            }
+        }
+        int main() {}
+        

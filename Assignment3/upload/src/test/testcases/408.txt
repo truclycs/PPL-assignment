@@ -1,5 +1,5 @@
 
         int c;
         void main() {}
-        string c;
+        string c[10];
         

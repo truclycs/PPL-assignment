@@ -1,0 +1,7 @@
+
+        string foo(){}
+        int main() {
+            foo();
+        }
+        float foo(){}
+        

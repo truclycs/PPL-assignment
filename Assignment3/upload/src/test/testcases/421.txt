@@ -1,0 +1,7 @@
+
+        int foo() {
+            string arr[10];
+            boolean arr[10];
+        }
+        int main() {}
+        
