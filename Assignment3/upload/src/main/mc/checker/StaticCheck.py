@@ -17,7 +17,7 @@ class MType:
 
 class Symbol:
     def __init__(self, name, mtype, value = None):
-        self.name = name
+        self.name  = name
         self.mtype = mtype
         self.value = value
 
@@ -26,7 +26,6 @@ def checkRedeclared(list_decl, decl, kind):
         if any(decl.variable.name == x.name for x in list_decl):
             raise Redeclared(kind, decl.variable.name)    
         return Symbol(decl.variable.name, decl.varType)
-
     else:
         if any(decl.name.name == x.name for x in list_decl):
             raise Redeclared(Function(), decl.name.name)    
@@ -38,44 +37,41 @@ def getType(decl):
 def overrideDeclaration(environment, name):
     [environment.remove(id) for id in environment if id.name == name]
 
-def BinOpType(l,r):
-    if (type(l),type(r)) == (IntType,IntType):
+def BinOpType(left, right):
+    if (type(left), type(right)) == (IntType, IntType):
         return IntType()
-    elif ((type(l),type(r)) == (FloatType,FloatType)) or\
-         ((type(l),type(r)) == (FloatType,IntType)) or\
-         ((type(l),type(r)) == (IntType,FloatType)): 
+    elif ((type(left), type(right)) == (FloatType, FloatType)) or\
+         ((type(left), type(right)) == (FloatType, IntType)) or\
+         ((type(left), type(right)) == (IntType, FloatType)): 
         return FloatType()
     return None
 
-
-def AssignmentRule(l,r):
-    if type(l) == VoidType or type(l) == ArrayType:
+def AssignmentRule(left,right):
+    if type(left) == VoidType or type(left) == ArrayType:
         return False
-    elif ((type(l) == ArrayPointerType and type(r) == ArrayType)) or\
-         ((type(l) == ArrayPointerType and type(r) == ArrayPointerType)):
-        return assE(l.eleType,r.eleType)
-    elif (type(l), type(r)) == (FloatType,IntType):
+    elif ((type(left) == ArrayPointerType and type(right) == ArrayType)) or\
+         ((type(left) == ArrayPointerType and type(right) == ArrayPointerType)):
+        return assE(left.eleType, right.eleType)
+    elif (type(left), type(right)) == (FloatType,IntType):
         return True 
     else:
-        return type(l)==type(r)
+        return type(left)==type(right)
 
-
-def assE(l,r):
-    if ((type(l),type(r)) == (BoolType,BoolType)) or\
-       ((type(l),type(r)) == (StringType,StringType)) or\
-       ((type(l),type(r)) == (FloatType,FloatType)) or\
-       ((type(l),type(r)) == (IntType,IntType)):
+def assE(left, right):
+    if ((type(left), type(right)) == (BoolType, BoolType)) or\
+       ((type(left), type(right)) == (StringType, StringType)) or\
+       ((type(left), type(right)) == (FloatType, FloatType)) or\
+       ((type(left), type(right)) == (IntType, IntType)):
         return True
     else:
         return False
 
-
-def assignExplicitType(l,r):
-    if ((type(l),type(r)) == (BoolType,BoolType)) or\
-       ((type(l),type(r)) == (StringType,StringType)) or\
-       ((type(l),type(r)) == (FloatType,FloatType)) or\
-       ((type(l),type(r)) == (IntType,IntType)) or\
-       ((type(l),type(r)) == (FloatType,IntType)):
+def assignExplicitType(left,right):
+    if ((type(left), type(right)) == (BoolType, BoolType)) or\
+       ((type(left), type(right)) == (StringType, StringType)) or\
+       ((type(left), type(right)) == (FloatType, FloatType)) or\
+       ((type(left), type(right)) == (IntType, IntType)) or\
+       ((type(left), type(right)) == (FloatType, IntType)):
         return True
     else: 
         return False
@@ -119,12 +115,10 @@ class StaticChecker(BaseVisitor, Utils):
         for decl in ast.decl:
             if not type(decl) is VarDecl:
                 self.visit(decl, (environment, return_type, is_loop, reachable_func, main_call))
-                
-        # list(map(lambda x: self.visit(x, (environment, None, False, reachable_func, None)), ast.decl))
 
-        # for func in reachable_func:
-        #     if not reachable_func[func]:
-        #         raise Unreachable(func)
+        for func in reachable_func:
+            if not reachable_func[func]:
+                raise UnreachableFunction(func)
         return None
 
     def visitFuncDecl(self, ast, c): 
@@ -140,26 +134,22 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitBlock(self, ast, c):        
         environment = c[0].copy()
-        # c[3]: list param
-        lsP = c[3] if c[3] else []
-        isRet = []
-        isEnd = False     
+        list_para = c[3] if c[3] else []
+        is_return = []
+        end = False     
 
-        # find and override all vardecl
         for vd in ast.member:
-            if vd is VarDecl:
-                lsP.append(checkRedeclared(lsP,vd,"Variable"))
+            if vd == VarDecl:
+                list_para.append(checkRedeclared(list_para,vd,"Variable"))
                 overrideDeclaration(environment,vd.variable.name)
             else:
-                if isEnd is True or isEnd is "BC":
+                if end is True or end is "BC":
                     raise UnreachableStatement(st)
-                isEnd = self.visit(vd,(environment,c[1],c[2],[],c[4],c[5]))
-                isRet.append(isEnd)
+                end = self.visit(vd,(environment,c[1],c[2],[],c[4],c[5]))
+                is_return.append(end)
 
-        environment += lsP
-        return isEnd if isEnd is True or isEnd is "BC" else False
-
-
+        environment += list_para
+        return end if end is True or end is "BC" else False
 
     def visitVarDecl(self, ast, c):
         local = c[0]
@@ -169,11 +159,6 @@ class StaticChecker(BaseVisitor, Utils):
         overrideDeclaration(environment, ast.variable.name)
 
     def visitIf(self,ast,c):
-        """
-        #expr:Expr
-        #thenStmt:Stmt
-        #elseStmt:Stmt
-        """
         environment = c[0].copy()
 
         if type(self.visit(ast.expr,(environment,c[1],c[2],None,c[4],c[5]))) != BoolType:
@@ -190,10 +175,6 @@ class StaticChecker(BaseVisitor, Utils):
             return "BC"
 
     def visitFor(self,ast,c):
-        """
-        expr1,expr2,expr3: Expr
-        loop: Stmt
-        """
         environment = c[0].copy()
 
         ex1 = self.visit(ast.expr1,(environment,c[1],False,[],c[4],c[5]))
@@ -206,69 +187,55 @@ class StaticChecker(BaseVisitor, Utils):
         # visit all block 
         self.visit(ast.loop,(environment,c[1],True,[],c[4],c[5]))
         
-
-    def visitDowhile(self,ast,c):
-        """
-        sl:  list(Stmt)
-        exp: Expr
-        """
+    def visitDowhile(self, ast, c):
         environment = c[0].copy()
-        isEnd = False 
+        end = False 
         for st in ast.sl:
-            if isEnd is True or isEnd is "BC":
+            if end is True or end is "BC":
                 raise UnreachableStatement(st)
-            isEnd = self.visit(st,(environment,c[1],True,[],c[4],c[5]))
+            end = self.visit(st,(environment,c[1],True,[],c[4],c[5]))
         if type(self.visit(ast.exp,(environment,c[1],False,[],c[4],c[5]))) is not BoolType:
             raise TypeMismatchInStatement(ast)
-        return True if isEnd is True else None
+        return True if end is True else None
 
 
-    def visitBinaryOp(self,ast,c):
-        """
-        #op:string
-        #left:Expr
-        #right:Expr
-        """
+    def visitBinaryOp(self, ast, c):
         environment = c[0].copy() if c[0] is not None else []
-        le  = self.visit(ast.left,(environment,c[1],c[2],[],c[4],c[5]))
-        ri  = self.visit(ast.right,(environment,c[1],c[2],[],c[4],c[5]))
+        left  = self.visit(ast.left,(environment,c[1],c[2],[],c[4],c[5]))
+        right  = self.visit(ast.right,(environment,c[1],c[2],[],c[4],c[5]))
         op  = ast.op
 
         if op == "+" or op == "-" or op == "*" or op == "/":
-            rtype = BinOpType(le,ri)
+            rtype = BinOpType(left,right)
             if rtype is not None:
                 return rtype
             raise TypeMismatchInExpression(ast)
         elif op == "<" or op == "<=" or op == ">" or op ==">=":
-            rtype = BinOpType(le,ri)
+            rtype = BinOpType(left,right)
             if rtype is not None:
                 return BoolType()
             raise TypeMismatchInExpression(ast)
         elif op == "==" or op == "!=":
-            if (type(le),type(ri)) == (IntType,IntType):
+            if (type(left),type(right)) == (IntType,IntType):
                 return BoolType()
-            elif (type(le),type(ri)) == (BoolType,BoolType):
+            elif (type(left),type(right)) == (BoolType,BoolType):
                 return BoolType()
             raise TypeMismatchInExpression(ast)
         elif op == "%":
-            if (type(le),type(ri)) == (IntType,IntType):
+            if (type(left),type(right)) == (IntType,IntType):
                 return IntType()
             raise TypeMismatchInExpression(ast)
         elif op == "&&" or op == "||":
-            if (type(le),type(ri)) == (BoolType,BoolType):
+            if (type(left),type(right)) == (BoolType,BoolType):
                 return BoolType()
             raise TypeMismatchInExpression(ast)
         elif op == "=":
-            if assignExplicitType(le,ri): 
-                return le
+            if assignExplicitType(left,right): 
+                return left
             raise TypeMismatchInExpression(ast)
         raise TypeMismatchInExpression(ast)
 
     def visitUnaryOp(self,ast,c):
-        """
-        op: String
-        body: Expr  
-        """
         environment = c[0].copy()
         rtype  = self.visit(ast.body,(environment,c[1],c[2],[],c[4],c[5]))
         if ast.op is "!":
@@ -281,9 +248,6 @@ class StaticChecker(BaseVisitor, Utils):
 
 
     def visitId(self,ast,c):
-        """ 
-        name:string 
-        """
         environment = c[0].copy() if c[0] is not None else []
         res = self.lookup(ast.name, environment, lambda x:x.name)
         if res is None or type(res.MType) is MType :
@@ -335,11 +299,8 @@ class StaticChecker(BaseVisitor, Utils):
             raise ContinueNotInLoop()
         return "BC"
 
-    def visitReturn(self,ast,c):
-        """
-        expr: Expr
-        """
-        environment   = c[0].copy()
+    def visitReturn(self, ast, c):
+        environment = c[0].copy()
         rtype = c[1]
         if ast.expr is None and type(rtype) is not VoidType:
             raise TypeMismatchInStatement(ast)
@@ -350,36 +311,35 @@ class StaticChecker(BaseVisitor, Utils):
 
         return True 
 
-    def visitIntType(self,ast,c):
+    def visitIntType(self, ast, c):
         return IntType()
 
-    def visitFloatType(self,ast,c):
+    def visitFloatType(self, ast, c):
         return FloatType()
 
-    def visitBoolType(self,ast,c):
+    def visitBoolType(self, ast, c):
         return BoolType()
 
-    def visitStringType(self,ast,c):
+    def visitStringType(self, ast, c):
         return StringType()
 
-    def visitVoidType(self,ast,c):
+    def visitVoidType(self, ast, c):
         return VoidType()
 
-    def visitArrayType(self,ast,c):
+    def visitArrayType(self, ast, c):
         return ast.eleType 
 
-    def visitArrayPointerType(self,ast,c):
+    def visitArrayPointerType(self, ast, c):
         return ast.eleType
 
-    def visitIntLiteral(self,ast, c): 
+    def visitIntLiteral(self, ast, c): 
         return IntType()
     
-    def visitFloatLiteral(self,ast, c): 
+    def visitFloatLiteral(self, ast, c): 
         return FloatType()
 
-    def visitStringLiteral(self,ast, c): 
+    def visitStringLiteral(self, ast, c): 
         return StringType()
 
-    def visitBooleanLiteral(self,ast, c): 
+    def visitBooleanLiteral(self, ast, c): 
         return BoolType()
-   

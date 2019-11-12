@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[],IntType,Block([CallExpr(Id(putIntLn),[CallExpr(Id(getInt),[IntLiteral(4)])])]))])
