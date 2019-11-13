@@ -1,1 +1,1 @@
-Redeclared Function: main
+Redeclared Variable: b

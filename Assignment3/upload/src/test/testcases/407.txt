@@ -1,8 +1,5 @@
 
-                int someone;
-                float anyone;
-                boolean same;
-                void main(){}
-
-                int main(string d[]){}
-                
+        int b;
+        float b;
+        void main() {}
+        

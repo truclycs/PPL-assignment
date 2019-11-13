@@ -292,25 +292,53 @@ class CheckSuite(unittest.TestCase):
         expect = "Undeclared Identifier: n"
         self.assertTrue(TestChecker.test(input,expect,429))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,430))
+    def testUndeclaredIDinScope1(self):
+        input = """ 
+        int n;
+        int main() {
+            n = 1;
+            int n;
+            why = 2;
+        }
+        """
+        expect = "Undeclared Identifier: why"
+        self.assertTrue(TestChecker.test(input,expect,430))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,431))
+    def testUndeclaredIDinScope2(self):
+        input = """ 
+        int n;
+        int main() {
+            n = 1;
+            yeah = 2;
+        }
+        """
+        expect = "Undeclared Identifier: yeah"
+        self.assertTrue(TestChecker.test(input,expect,431))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,432))
+    def testUndeclaredFunction(self):
+        input = """ 
+        int main() {
+            int func;
+            func();
+        }
+        """
+        expect = "Undeclared Function: func"
+        self.assertTrue(TestChecker.test(input,expect,432))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,433))
+    def testUndeclaredFunctionMore(self):
+        input = """ 
+        int func() {
+            return 0;
+        }
+
+        int main() {
+            int func;
+            func();
+            abc();
+        }
+        """
+        expect = "Undeclared Function: abc"
+        self.assertTrue(TestChecker.test(input,expect,433))
 
     # def test(self):
     #     input = """ """

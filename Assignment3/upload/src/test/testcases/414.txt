@@ -1,15 +1,1 @@
-
-                float many;
-                string main(int man){
-                    for(man = 0; many <= man; man = man + 1){
-                        for(true; true; true){
-                            print("Upin Ipin >.<");
-                        }
-                    }
-                    return "Nothing";
-                }
-
-                void print(string str){
-                    print(str);
-                }
-                
+int main(string x, int a[], float a[]){} 

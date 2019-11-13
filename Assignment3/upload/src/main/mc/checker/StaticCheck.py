@@ -131,6 +131,7 @@ class StaticChecker(BaseVisitor, Utils):
         environment += para
         
         is_return = self.visitBlock(ast.body, (environment, ast.returnType, False, para, c[4], ast.name.name))
+       
         if not is_return and type(ast.returnType) is not VoidType:
             raise FunctionNotReturn(ast.name.name)
 
@@ -143,16 +144,16 @@ class StaticChecker(BaseVisitor, Utils):
         for mem in ast.member:
             if type(mem) is VarDecl:    
                 list_para.append(checkRedeclared(list_para, mem, "Variable"))
-                overrideDeclaration(environment, mem.variable)
-
-        environment += list_para
-
+                # overrideDeclaration(environment, mem.variable)
+        #environment += list_para
         for mem in ast.member:
             if type(mem) is not VarDecl:
                 if end is True or end is "BC":
                     raise UnreachableStatement(mem)
                 end = self.visit(mem, (environment, c[1], c[2], [], c[4], c[5]))
                 is_return.append(end)
+        
+        environment += list_para
         return end if end is True or end is "BC" else False   
 
     def visitVarDecl(self, ast, c): pass
@@ -263,8 +264,8 @@ class StaticChecker(BaseVisitor, Utils):
                 if assignRule(res.mtype.partype[i],list_para[i]) is False:
                     raise TypeMismatchInExpression(ast)
     
-            if ast.method.name != c[5]:
-                c[4][ast.method.name] += 1
+            # if ast.method.name != c[5]:
+            #     c[4][ast.method.name] += 1
 
             return res.mtype.rettype
 

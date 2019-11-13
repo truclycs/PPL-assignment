@@ -1,20 +1,6 @@
 
-                string str;
-                boolean bool[99];
-                boolean[] main(){
-                    for(3; wrong(); 3){
-                        do
-                            str = "ABC";
-                            print(str);
-                        while(bool);
-                        return bool;
-                    }
-                }
-                void print(string str){
-                    print(str);
-                }
-
-                boolean wrong(){
-                    return false;
-                }
-                
+        int main() {
+            int a;
+            int a;
+        }
+        

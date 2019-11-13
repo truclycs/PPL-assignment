@@ -1,8 +1,1 @@
-
-                int something;
-                float anything;
-                void main(int same[]){
-                    float same;
-                }
-                boolean notMain;
-                
+Program([FuncDecl(Id(main),[],IntType,Block([CallExpr(Id(foo),[])]))])

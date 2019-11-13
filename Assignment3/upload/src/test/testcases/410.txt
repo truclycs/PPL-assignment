@@ -1,6 +1,7 @@
 
-                int someone;
-                string anyone;
-                boolean main[999];
-                float something;
-                
+        int foo(){}
+        float foo(){}
+        int main() {
+            foo();
+        }
+        

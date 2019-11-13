@@ -1,1 +1,1 @@
-Redeclared Variable: scope1
+Type Mismatch In Expression: CallExpr(Id(putIntLn),[])

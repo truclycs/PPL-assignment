@@ -1,8 +1,3 @@
-
-                int anything[999];
-                float anything;
-                void main(string main[]){
-                    // Nothing
-                }
-                boolean notMain;
-                
+void main () {
+            putIntLn(getInt(4));
+        }

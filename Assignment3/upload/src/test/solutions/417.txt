@@ -1,1 +1,1 @@
-Type Mismatch In Statement: Dowhile([Dowhile([Block([Return(Id(input))])],BinaryOp(||,BinaryOp(&&,ArrayCell(Id(bool),IntLiteral(0)),BooleanLiteral(true)),BooleanLiteral(false)))],Id(str))
+Redeclared Variable: a

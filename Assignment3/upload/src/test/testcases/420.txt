@@ -1,17 +1,6 @@
 
-                string str[999];
-                boolean bool[99];
-                string[] main(string char[]){
-                    if(false){
-                        return str;
-                    }
-                    else{
-                        if(bool[98]){
-                            return char;
-                        }
-                        else{
-                            return bool[98];
-                        }
-                    }
-                }
-                
+        int foo() {
+            int a, a;
+        }
+        int main() {}
+        

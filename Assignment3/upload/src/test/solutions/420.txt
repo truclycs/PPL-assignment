@@ -1,1 +1,1 @@
-Type Mismatch In Statement: Return(ArrayCell(Id(bool),IntLiteral(98)))
+Redeclared Variable: a

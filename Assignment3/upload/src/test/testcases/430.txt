@@ -1,0 +1,8 @@
+ 
+        int n;
+        int main() {
+            n = 1;
+            int n;
+            why = 2;
+        }
+        

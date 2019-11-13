@@ -1,17 +1,7 @@
 
-                float many[99];
-                boolean condition[99];
-                int main(int argc){
-                    if(true){
-                        if(condition[0]){
-                            // Just empty
-                            return argc;
-                        }
-                    }else{
-                        if(many[98] + 3){
-                            // We have a exception
-                            return argc + 3;
-                        }
-                    }
-                }
-                
+        string foo(){}
+        string foo(){}
+        int main() {
+            foo();
+        }
+        
