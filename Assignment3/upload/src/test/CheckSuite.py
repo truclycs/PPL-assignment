@@ -340,15 +340,42 @@ class CheckSuite(unittest.TestCase):
         expect = "Undeclared Function: abc"
         self.assertTrue(TestChecker.test(input,expect,433))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,434))
+    def testCorrectDeclared(self):
+        input = """ 
+        float foo(float a, float b) {
+            a = b + 1;
+            return a;
+        }
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,435))
+        int main() {
+            float a, b;
+            foo(a, b);
+            return 0;
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,434))
+
+    def testTypeMismatchInStatementIf1(self):
+        input = """
+                int many[99];
+                boolean condition[99];
+                int main(int argc){
+                    if(BooleanFunction()){
+                        if((many[98] <= 3) && (argc == argc + 1)){
+                            return argc;
+                        }
+                    }else{
+                        if(ArrayFunction()){
+                            return argc + 3;
+                        }
+                    }
+                }
+                boolean BooleanFunction(){return true;}
+                void ArrayFunction(){return;}
+                """
+        expect = "Type Mismatch In Statement: If(CallExpr(Id(ArrayFunction),[]),Block([Return(BinaryOp(+,Id(argc),IntLiteral(3)))]))"
+        self.assertTrue(TestChecker.test(input,expect,435))
 
     # def test(self):
     #     input = """ """

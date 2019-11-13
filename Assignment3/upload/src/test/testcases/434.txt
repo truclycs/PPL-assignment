@@ -1,0 +1,12 @@
+ 
+        float foo(float a, float b) {
+            a = b + 1;
+            return a;
+        }
+
+        int main() {
+            float a, b;
+            foo(a, b);
+            return 0;
+        }
+        

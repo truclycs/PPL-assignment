@@ -107,19 +107,20 @@ class StaticChecker(BaseVisitor, Utils):
             environment.append(checkRedeclared(environment, decl, getType(decl)))
             if type(decl) is FuncDecl:
                 entry_point = decl if decl.name.name == 'main' else entry_point
-                reachable_func[decl.name.name] = decl.name.name == 'main'
+                reachable_func[decl.name.name] =  decl.name.name == 'main'
 
         if not entry_point:
             raise NoEntryPoint()
 
         for decl in ast.decl:
             if not type(decl) is VarDecl:
-                self.visit(decl, (environment, return_type, is_loop, reachable_func, main_call))
-    
+                self.visit(decl, (environment, return_type, is_loop, None, reachable_func, main_call))
+
         for func in reachable_func:
-            if not reachable_func[func]:
+            if reachable_func[func] == 0:
+                # _func = self.lookup(func, environment, lambda x: x.name)
                 raise UnreachableFunction(func)
-        return None
+        return []#None
 
     def visitFuncDecl(self, ast, c): 
         environment = c[0].copy()
@@ -136,22 +137,34 @@ class StaticChecker(BaseVisitor, Utils):
             raise FunctionNotReturn(ast.name.name)
 
     def visitBlock(self, ast, c):        
-        environment = c[0].copy()
+        environment = c[0].copy() 
         list_para = c[3]
         is_return = []  
-        end = False     
+        end = False   
+  
 
         for mem in ast.member:
             if type(mem) is VarDecl:    
                 list_para.append(checkRedeclared(list_para, mem, "Variable"))
                 # overrideDeclaration(environment, mem.variable)
-        #environment += list_para
-        for mem in ast.member:
-            if type(mem) is not VarDecl:
+            else:
+                environment += list_para
                 if end is True or end is "BC":
                     raise UnreachableStatement(mem)
                 end = self.visit(mem, (environment, c[1], c[2], [], c[4], c[5]))
                 is_return.append(end)
+
+        # for mem in ast.member:
+        #     if type(mem) is VarDecl:    
+        #         list_para.append(checkRedeclared(list_para, mem, "Variable"))
+        #         # overrideDeclaration(environment, mem.variable)
+        # #environment += list_para
+        # for mem in ast.member:
+        #     if type(mem) is not VarDecl:
+        #         if end is True or end is "BC":
+        #             raise UnreachableStatement(mem)
+        #         end = self.visit(mem, (environment, c[1], c[2], [], c[4], c[5]))
+        #         is_return.append(end)
         
         environment += list_para
         return end if end is True or end is "BC" else False   
@@ -264,8 +277,8 @@ class StaticChecker(BaseVisitor, Utils):
                 if assignRule(res.mtype.partype[i],list_para[i]) is False:
                     raise TypeMismatchInExpression(ast)
     
-            # if ast.method.name != c[5]:
-            #     c[4][ast.method.name] += 1
+            if ast.method.name != c[5]:
+                c[4][ast.method.name] += 1
 
             return res.mtype.rettype
 

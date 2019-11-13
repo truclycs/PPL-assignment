@@ -1,0 +1,17 @@
+
+                int many[99];
+                boolean condition[99];
+                int main(int argc){
+                    if(BooleanFunction()){
+                        if((many[98] <= 3) && (argc == argc + 1)){
+                            return argc;
+                        }
+                    }else{
+                        if(ArrayFunction()){
+                            return argc + 3;
+                        }
+                    }
+                }
+                boolean BooleanFunction(){return true;}
+                void ArrayFunction(){return;}
+                
