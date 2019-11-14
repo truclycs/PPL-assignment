@@ -1,8 +1,7 @@
-"""
- * @author nhphung
- * @StudentName: Nguyen Thi Truc Ly 
- * @StudentID 1710187
-"""
+#    **************************************
+#    * Student name: Nguyen Thi Truc Ly   *
+#    * Student ID: 1710187                *
+#    ************************************** 
 
 from AST import * 
 from Visitor import *
@@ -109,7 +108,7 @@ class StaticChecker(BaseVisitor, Utils):
                 entry_point = decl if decl.name.name == 'main' else entry_point
                 reachable_func[decl.name.name] =  decl.name.name == 'main'
 
-        if not entry_point:
+        if not entry_point: 
             raise NoEntryPoint()
 
         for decl in ast.decl:
@@ -131,15 +130,15 @@ class StaticChecker(BaseVisitor, Utils):
 
         environment += para
         
-        is_return = self.visitBlock(ast.body, (environment, ast.returnType, False, para, c[4], ast.name.name))
+        is_return = self.visit(ast.body, (environment, ast.returnType, False, para, c[4], ast.name.name))
        
         if not is_return and type(ast.returnType) is not VoidType:
             raise FunctionNotReturn(ast.name.name)
 
     def visitBlock(self, ast, c):        
         environment = c[0].copy() 
-        list_para = c[3]
-        is_return = []  
+        list_para = c[3] if c[3] else []
+        #is_return = []  
         end = False   
   
 
@@ -152,13 +151,13 @@ class StaticChecker(BaseVisitor, Utils):
                 if end is True or end is "BC":
                     raise UnreachableStatement(mem)
                 end = self.visit(mem, (environment, c[1], c[2], [], c[4], c[5]))
-                is_return.append(end)
+                #is_return.append(end)
 
         # for mem in ast.member:
         #     if type(mem) is VarDecl:    
         #         list_para.append(checkRedeclared(list_para, mem, "Variable"))
-        #         # overrideDeclaration(environment, mem.variable)
-        # #environment += list_para
+        #         overrideDeclaration(environment, mem.variable)
+        # environment += list_para
         # for mem in ast.member:
         #     if type(mem) is not VarDecl:
         #         if end is True or end is "BC":
@@ -176,7 +175,7 @@ class StaticChecker(BaseVisitor, Utils):
         # local.append(checkRedeclared(local, ast, c[1]))
         # overrideDeclaration(environment, ast.variable)
 
-    def visitIf(self,ast,c):
+    def visitIf(self, ast, c):
         environment = c[0].copy()
 
         if type(self.visit(ast.expr,(environment,c[1],c[2],None,c[4],c[5]))) != BoolType:
@@ -214,7 +213,6 @@ class StaticChecker(BaseVisitor, Utils):
         if type(self.visit(ast.exp,(environment,c[1],False,[],c[4],c[5]))) is not BoolType:
             raise TypeMismatchInStatement(ast)
         return True if end is True else None
-
 
     def visitBinaryOp(self, ast, c):
         environment = c[0].copy() if c[0] is not None else []
@@ -310,14 +308,15 @@ class StaticChecker(BaseVisitor, Utils):
             raise ContinueNotInLoop()
         return "BC"
 
-    def visitReturn(self, ast, c):
+    def visitReturn(self, ast, c):        
         environment = c[0].copy()
         rtype = c[1]
+        print(type(rtype))
         if ast.expr is None and type(rtype) is not VoidType:
             raise TypeMismatchInStatement(ast)
         elif ast.expr is None and type(rtype) is VoidType:
             return True
-        elif assignRule(rtype,self.visit(ast.expr,(environment,None, False,[],c[4],c[5]))) is False:
+        elif assignRule(rtype, self.visit(ast.expr,(environment,None, False,[],c[4],c[5]))) is False:
             raise TypeMismatchInStatement(ast)
 
         return True 
