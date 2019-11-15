@@ -565,10 +565,39 @@ class CheckSuite(unittest.TestCase):
         expect = "Type Mismatch In Statement: Return(IntLiteral(0))"
         self.assertTrue(TestChecker.test(input,expect,449))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,450))
+    def testFuntionNotReturn0(self):
+        input = """ 
+        int x;
+
+        void funcVoid() {
+            int a, b;
+            x = a + b;
+        }
+
+        int getSum(int a, int b) {
+            return a + b;
+        }
+
+        boolean check(int a, int b) {
+            if (getSum(a, b) == 10) {
+                return true;
+            }
+        }
+
+        float getRes(int a, int b) {
+            funcVoid();
+            x = getSum(a, b) / x;
+            check(a, b);
+            // must return in this Block
+        }
+
+        void main() {
+            int a, b;
+            getRes(a, b);
+        }
+        """
+        expect = "Function check Not Return "
+        self.assertTrue(TestChecker.test(input,expect,450))
 
     def testNotFailFunctionNotReturn(self):
         input = """
@@ -595,50 +624,177 @@ class CheckSuite(unittest.TestCase):
         expect = "Function foo Not Return "
         self.assertTrue(TestChecker.test(input,expect,452))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,453))
+    def testBreakNotInLoop(self):
+        input = """ 
+        int main() {
+            int i, n;
+            for (i = 0; i < n; i = i + 1) {
+                if (n % i == 0) {
+                    break;
+                }
+                else {
+                    {
+                        break;
+                    }
+                }
+            }
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,454))
+            do {
+                i = i + 1;
+                break;
+            } while (i <= n);
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,455))
+            break; //Here
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,456))
+            return 0;
+        }
+        """
+        expect = "Break Not In Loop"
+        self.assertTrue(TestChecker.test(input,expect,453))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,457))
+    def testContinueNotInLoop(self):
+        input = """ 
+        int main() {
+            int i, n;
+            for (i = 0; i < n; i = i + 1) {
+                if (n % i == 0) {
+                    continue;
+                }
+                else {
+                    {
+                        continue;
+                    }
+                }
+            }
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,458))
+            do {
+                i = i + 1;
+                continue;
+            } while (i <= n);
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,459))
+            continue; //Here
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,460))
+            return 0;
+        }
+        """
+        expect = "Continue Not In Loop"
+        self.assertTrue(TestChecker.test(input,expect,454))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,461))
+    def testNoEntryPoint(self):
+        input = """ 
+        int x;
+
+        void funcVoid() {
+            int a, b;
+            x = a + b;
+        }
+
+        int getSum(int a, int b) {
+            return a + b;
+        }
+
+        boolean check(int a, int b) {
+            if (getSum(a, b) == 10) {
+                return true;
+            }
+        }
+
+        float getRes(int a, int b) {
+            funcVoid();
+            x = getSum(a, b) / x;
+            check(a, b);
+            return 10.0;
+        }
+        """
+        expect = "No Entry Point"
+        self.assertTrue(TestChecker.test(input,expect,455))
+
+    def testNoEntryPoint1(self):
+        input = """ 
+        int getMax(int n, int a[]) {
+            int i;
+            int main;
+            main = a[0];
+            for (i = 0; i < n; i = i + 1) {
+                if (a[i] > main) {
+                    main = a[i];
+                }
+            }
+            return main;
+        }
+        """
+        expect = "No Entry Point"
+        self.assertTrue(TestChecker.test(input,expect,456))
+
+    def testUnreachableFunction(self):
+        input = """ 
+        int getMax(int n) {
+            int i, a[10];
+            int max;
+            max = a[0];
+            for (i = 0; i < n; i = i + 1) {
+                if (a[i] > max) {
+                    max = a[i];
+                }
+            }
+            return max;
+        }
+
+        void main() {
+            int n;
+            n = 10;
+        }
+        """
+        expect = "Unreachable Function: getMax"
+        self.assertTrue(TestChecker.test(input,expect,457))
+
+    def testBreakNotInLoop1(self):
+        input = """ 
+        int main() {
+            int x;
+            if (x > 10) {
+                break;
+            }
+            return 0;
+        }
+        """
+        expect = "Break Not In Loop"
+        self.assertTrue(TestChecker.test(input,expect,458))
+
+    def testContinueNotInLoop1(self):
+        input = """ 
+        void main() {
+            int check_con;
+            check_con = 10000;
+            if (check_con < 100) {
+                check_con = 10;
+            }
+            else {
+                continue;
+            }
+            return;
+        }
+        """
+        expect = "Continue Not In Loop"
+        self.assertTrue(TestChecker.test(input,expect,459))
+
+    def testUnreachableFunction1(self):
+        input = """ 
+        void foo(){}
+        void main(){}
+        """
+        expect = "Unreachable Function: foo"
+        self.assertTrue(TestChecker.test(input,expect,460))
+
+    def testUnreachableFunction2(self):
+        input = """ 
+        void foo() {
+            foo();
+        }
+        void main(){}
+        """
+        expect = "Unreachable Function: foo"
+        self.assertTrue(TestChecker.test(input,expect,461))
 
     # def test(self):
     #     input = """ """

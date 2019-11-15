@@ -3,21 +3,21 @@
             int i, n;
             for (i = 0; i < n; i = i + 1) {
                 if (n % i == 0) {
-                    break;
+                    continue;
                 }
                 else {
                     {
-                        break;
+                        continue;
                     }
                 }
             }
 
             do {
                 i = i + 1;
-                break;
+                continue;
             } while (i <= n);
 
-            break; //Here
+            continue; //Here
 
             return 0;
         }
