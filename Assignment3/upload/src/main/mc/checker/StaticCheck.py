@@ -152,18 +152,6 @@ class StaticChecker(BaseVisitor, Utils):
                     raise UnreachableStatement(mem)
                 end = self.visit(mem, (environment, c[1], c[2], [], c[4], c[5]))
                 #is_return.append(end)
-
-        # for mem in ast.member:
-        #     if type(mem) is VarDecl:    
-        #         list_para.append(checkRedeclared(list_para, mem, "Variable"))
-        #         overrideDeclaration(environment, mem.variable)
-        # environment += list_para
-        # for mem in ast.member:
-        #     if type(mem) is not VarDecl:
-        #         if end is True or end is "BC":
-        #             raise UnreachableStatement(mem)
-        #         end = self.visit(mem, (environment, c[1], c[2], [], c[4], c[5]))
-        #         is_return.append(end)
         
         environment += list_para
         return end if end is True or end is "BC" else False   
@@ -311,14 +299,13 @@ class StaticChecker(BaseVisitor, Utils):
     def visitReturn(self, ast, c):        
         environment = c[0].copy()
         rtype = c[1]
-        print(type(rtype))
-        if ast.expr is None and type(rtype) is not VoidType:
-            raise TypeMismatchInStatement(ast)
-        elif ast.expr is None and type(rtype) is VoidType:
-            return True
+        if ast.expr is None:
+            if type(rtype) is VoidType:
+                return True
+            else:
+                raise TypeMismatchInStatement(ast)
         elif assignRule(rtype, self.visit(ast.expr,(environment,None, False,[],c[4],c[5]))) is False:
             raise TypeMismatchInStatement(ast)
-
         return True 
       
     def visitIntType(self, ast, c):

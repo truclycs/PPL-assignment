@@ -1,5 +1,7 @@
  
         void main() {
-            return;
+            string s;
+            s = "checkReturn";
+            return ;
         }
         

@@ -3,12 +3,13 @@ from dataclasses import dataclass
 from typing import List
 from Visitor import Visitor
 
+
 class AST(ABC):
     def __eq__(self, other): 
         return self.__dict__ == other.__dict__
 
     @abstractmethod
-    def accept(self, v, param): 
+    def accept(self, v, param):
         return v.visit(self, param)
 
 class Decl(AST):
@@ -148,7 +149,6 @@ class CallExpr(Expr):
 class Literal(Expr):
     __metaclass__ = ABCMeta
     pass
-
 @dataclass
 class IntLiteral(Literal):
     value:int
@@ -158,7 +158,6 @@ class IntLiteral(Literal):
 
     def accept(self, v, param):
         return v.visitIntLiteral(self, param)
-
 @dataclass
 class FloatLiteral(Literal):
     value:float
@@ -201,7 +200,7 @@ class Block(Stmt):
 class If(Stmt):
     expr:Expr
     thenStmt:Stmt
-    elseStmt:None
+    elseStmt:Stmt=None
 
     def __str__(self):
         return "If(" + str(self.expr) + "," + str(self.thenStmt) + ("" if (self.elseStmt is None) else "," + str(self.elseStmt)) + ")"
@@ -238,7 +237,7 @@ class Continue(Stmt):
 
 @dataclass
 class Return(Stmt):
-    expr:None
+    expr: Expr = None
 
     def __str__(self):
         return "Return(" + ("" if (self.expr is None) else str(self.expr)) + ")"
@@ -290,3 +289,4 @@ class Program(AST):
     
     def accept(self, v: Visitor, param):
         return v.visitProgram(self, param)
+
