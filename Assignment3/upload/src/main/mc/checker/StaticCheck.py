@@ -1,7 +1,5 @@
-#    **************************************
-#    * Student name: Nguyen Thi Truc Ly   *
-#    * Student ID: 1710187                *
-#    ************************************** 
+#Student name: Nguyen Thi Truc Ly  
+#Student ID: 1710187                
 
 from AST import * 
 from Visitor import *
@@ -33,8 +31,8 @@ def checkRedeclared(list_decl, decl, kind):
 def getType(decl):
     return "Variable" if type(decl) is VarDecl else "Function"
 
-def overrideDeclaration(environment, name):
-    [environment.remove(id) for id in environment if id.name == name]
+# def overrideDeclaration(environment, name):
+#     [environment.remove(id) for id in environment if id.name == name]
 
 def BinOpType(left, right):
     if (type(left), type(right)) == (IntType, IntType):
@@ -84,7 +82,7 @@ class StaticChecker(BaseVisitor, Utils):
                     Symbol("putFloatLn",MType([FloatType()],VoidType())),
                     Symbol("putBool",MType([BoolType()],VoidType())),
                     Symbol("putBoolLn",MType([BoolType()],VoidType())),
-                    Symbol("putString",MType([StringType()],VoidType())),
+                    Symbol("putString", MType([StringType()], VoidType())),
                     Symbol("putStringLn",MType([StringType()],VoidType())),
                     Symbol("putLn",MType([StringType()],VoidType()))]
 
@@ -106,6 +104,7 @@ class StaticChecker(BaseVisitor, Utils):
             environment.append(checkRedeclared(environment, decl, getType(decl)))
             if type(decl) is FuncDecl:
                 entry_point = decl if decl.name.name == 'main' else entry_point
+
                 reachable_func[decl.name.name] =  decl.name.name == 'main'
 
         if not entry_point: 
@@ -119,7 +118,7 @@ class StaticChecker(BaseVisitor, Utils):
             if reachable_func[func] == 0:
                 # _func = self.lookup(func, environment, lambda x: x.name)
                 raise UnreachableFunction(func)
-        return []#None
+        return None
 
     def visitFuncDecl(self, ast, c): 
         environment = c[0].copy()
@@ -135,12 +134,11 @@ class StaticChecker(BaseVisitor, Utils):
         if not is_return and type(ast.returnType) is not VoidType:
             raise FunctionNotReturn(ast.name.name)
 
-    def visitBlock(self, ast, c):        
+    def visitBlock(self, ast, c):      
         environment = c[0].copy() 
         list_para = c[3] if c[3] else []
-        #is_return = []  
-        end = False   
-  
+        is_return = []  
+        end = False    
 
         for mem in ast.member:
             if type(mem) is VarDecl:    
@@ -151,7 +149,7 @@ class StaticChecker(BaseVisitor, Utils):
                 if end is True or end is "BC":
                     raise UnreachableStatement(mem)
                 end = self.visit(mem, (environment, c[1], c[2], [], c[4], c[5]))
-                #is_return.append(end)
+                is_return.append(end)
         
         environment += list_para
         return end if end is True or end is "BC" else False   
@@ -217,7 +215,7 @@ class StaticChecker(BaseVisitor, Utils):
             rtype = BinOpType(left,right)
             if rtype is not None:
                 return BoolType()
-            raise TypeMismatchInExpression(ast)
+            raise TypeMismatcz(ast)
         elif op == "==" or op == "!=":
             if (type(left),type(right)) == (IntType,IntType):
                 return BoolType()
@@ -252,8 +250,9 @@ class StaticChecker(BaseVisitor, Utils):
     def visitCallExpr(self, ast, c): 
         environment = c[0].copy() 
         res = self.lookup(ast.method.name, environment, lambda x: x.name)
+        if (res in StaticChecker.global_envi):
+            c[4][res.name] = 1
         list_para = [self.visit(x, (environment, c[1], c[2], [], c[4], c[5])) for x in ast.param]
-      
         if res is None or not type(res.mtype) is MType:
             raise Undeclared(Function(), ast.method.name)
         elif len(res.mtype.partype) != len(list_para):
@@ -262,7 +261,7 @@ class StaticChecker(BaseVisitor, Utils):
             for i in range(len(list_para)):
                 if assignRule(res.mtype.partype[i],list_para[i]) is False:
                     raise TypeMismatchInExpression(ast)
-    
+
             if ast.method.name != c[5]:
                 c[4][ast.method.name] += 1
 
@@ -324,7 +323,7 @@ class StaticChecker(BaseVisitor, Utils):
         return VoidType()
 
     def visitArrayType(self, ast, c):
-        return ast.eleType 
+        return ast.eleType
 
     def visitArrayPointerType(self, ast, c):
         return ast.eleType

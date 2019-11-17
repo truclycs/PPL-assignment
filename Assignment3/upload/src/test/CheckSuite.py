@@ -3,10 +3,6 @@ from TestUtils import TestChecker
 from AST import *
 
 class CheckSuite(unittest.TestCase):
-    def test_undeclared_function(self):
-        input = """void main() {foo();}"""
-        expect = "Undeclared Function: foo"
-        self.assertTrue(TestChecker.test(input,expect,400))
 
     def test_diff_numofparam_stmt(self):
         input = """void main () {
@@ -314,6 +310,11 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Undeclared Identifier: yeah"
         self.assertTrue(TestChecker.test(input,expect,431))
+        
+    def test_undeclared_function(self):
+        input = """void main() {foo();}"""
+        expect = "Undeclared Function: foo"
+        self.assertTrue(TestChecker.test(input,expect,400))
 
     def testUndeclaredFunction(self):
         input = """ 
@@ -796,24 +797,68 @@ class CheckSuite(unittest.TestCase):
         expect = "Unreachable Function: foo"
         self.assertTrue(TestChecker.test(input,expect,461))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,462))
+    def testFunctionNotReturn1(self):
+        input = """ 
+        int main() {
+            int a;
+            if (a == 1) {
+                return 0;
+            }
+            else {
+                a = 1;  
+            }
+        }        
+        """
+        expect = "Function main Not Return "
+        self.assertTrue(TestChecker.test(input,expect,462))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,463))
+    def testFunctionNotReturn2(self):
+        input = """ 
+        int main() {
+            int a;
+            if (a == 1) {
+                a = 10;
+            }
+            else {
+                return 0;
+            }
+        }        
+        """
+        expect = "Function main Not Return "
+        self.assertTrue(TestChecker.test(input,expect,463))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,464))
+    def test(self):
+        input = """ 
+        void main(){
+            foo1() ;
+        }
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
+        void foo1(){
+            putString("hello world");
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,464))
+
+    # def testFunctionNotReturn3(self):
+    #     input = """ 
+    #     int foo1() {
+    #         return 1;
+    #     }
+        
+    #     int foo2() {
+    #         foo1();
+    #         return 2;
+    #     }
+
+    #     int foo3() {
+    #         foo2();
+    #         return 3;
+    #     }
+
+    #     void main(){}
+    #     """
+    #     expect = "Unreachable Function: foo3"
     #     self.assertTrue(TestChecker.test(input,expect,465))
 
     # def test(self):
@@ -915,7 +960,6 @@ class CheckSuite(unittest.TestCase):
     #     input = """ """
     #     expect = ""
     #     self.assertTrue(TestChecker.test(input,expect,485))
-
     # def test(self):
     #     input = """ """
     #     expect = ""
