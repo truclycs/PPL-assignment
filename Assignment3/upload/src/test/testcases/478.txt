@@ -1,0 +1,5 @@
+ 
+        float main() {
+            return getFloat(1.53);
+        }
+        

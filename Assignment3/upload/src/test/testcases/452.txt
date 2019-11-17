@@ -1,0 +1,8 @@
+
+        void main(){
+            if (10.5) {
+                int i;
+                i = i * i;
+            }
+        }
+        

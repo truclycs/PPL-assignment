@@ -1,0 +1,1 @@
+Type Mismatch In Statement: If(FloatLiteral(10.5),Block([VarDecl(i,IntType),BinaryOp(=,Id(i),BinaryOp(*,Id(i),Id(i)))]))

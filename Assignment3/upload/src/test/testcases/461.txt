@@ -1,0 +1,10 @@
+ 
+        int main() {
+            int n;
+            do {
+                n = n + 1;
+            }
+            while (true);
+            return 0;
+        }
+        

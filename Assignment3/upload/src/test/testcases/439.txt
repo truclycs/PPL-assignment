@@ -1,0 +1,24 @@
+ 
+        int main() {
+            int i, n;
+            for (i = 0; i < n; i = i + 1) {
+                if (n % i == 0) {
+                    continue;
+                }
+                else {
+                    {
+                        continue;
+                    }
+                }
+            }
+
+            do {
+                i = i + 1;
+                continue;
+            } while (i <= n);
+
+            continue; //Here
+
+            return 0;
+        }
+        

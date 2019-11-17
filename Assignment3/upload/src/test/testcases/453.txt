@@ -1,0 +1,8 @@
+
+        void main(){
+            int n;
+            if ("true"){
+                n = 0;
+            }
+        }
+        

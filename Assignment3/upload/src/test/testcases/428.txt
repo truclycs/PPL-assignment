@@ -1,5 +1,12 @@
  
+        string getString() {
+            string s;
+            s = "string";
+            return s;
+        }
+
         int func(int n) {
+            getString();
             return n * func(n - 1);
         }
 

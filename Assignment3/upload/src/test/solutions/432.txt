@@ -1,1 +1,1 @@
-Undeclared Function: func
+Function foo Not Return 

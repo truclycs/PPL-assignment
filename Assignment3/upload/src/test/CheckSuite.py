@@ -4,6 +4,8 @@ from AST import *
 
 class CheckSuite(unittest.TestCase):
 
+#================Redeclared Variable/Function/Parameter==============
+
     def testRedeclaredVariable1(self):
         input = """
         int a;
@@ -224,6 +226,8 @@ class CheckSuite(unittest.TestCase):
         expect = "Redeclared Variable: here"
         self.assertTrue(TestChecker.test(input,expect,417))
 
+#================Undeclared Identifier/Function==============
+
     def testUndeclaredID1(self):
         input = """ 
         int main() {
@@ -356,7 +360,14 @@ class CheckSuite(unittest.TestCase):
 
     def testUndeclaredFunction3(self):
         input = """ 
+        string getString() {
+            string s;
+            s = "string";
+            return s;
+        }
+
         int func(int n) {
+            getString();
             return n * func(n - 1);
         }
 
@@ -391,642 +402,823 @@ class CheckSuite(unittest.TestCase):
         expect = ""
         self.assertTrue(TestChecker.test(input,expect,430))
 
-    # def test_diff_numofparam_stmt(self):
-    #     input = """void main () {
-    #         putIntLn();
-    #     }"""
-    #     expect = "Type Mismatch In Expression: CallExpr(Id(putIntLn),[])"
-    #     self.assertTrue(TestChecker.test(input,expect,401))
+#================Function not return==============
+
+    def testFuntionNotReturn1(self):
+        input = """ 
+        int x;
+
+        void funcVoid() {
+            int a, b;
+            x = a + b;
+        }
+
+        int getSum(int a, int b) {
+            return a + b;
+        }
+
+        boolean check(int a, int b) {
+            if (getSum(a, b) == 10) {
+                return true;
+            }
+        }
+
+        void getRes(int a, int b) {
+            funcVoid();
+            x = getSum(a, b) - x;
+            check(a, b);
+        }
+
+        void main() {
+            int a, b;
+            getRes(a, b);
+        }
+        """
+        expect = "Function check Not Return "
+        self.assertTrue(TestChecker.test(input,expect,431))
+
+    def testFuntionNotReturn2(self):
+        input = """ 
+        boolean foo(int a, int b) {
+            a = b;
+        }
+
+        int main() {
+            int a, b;
+            foo(a, b);
+            return 0;
+        }
+        """
+        expect = "Function foo Not Return "
+        self.assertTrue(TestChecker.test(input,expect,432))
+
+    def testFunctionNotReturn3(self):
+        input = """ 
+        int main() {
+            int a;
+            if (a == 1) {
+                return 0;
+            }
+            else {
+                a = 1;  
+            }
+        }        
+        """
+        expect = "Function main Not Return "
+        self.assertTrue(TestChecker.test(input,expect,433))
+
+    def testFunctionNotReturn4(self):
+        input = """ 
+        int main() {
+            int a;
+            if (a == 1) {
+                a = 10;
+            }
+            else {
+                return 0;
+            }
+        }        
+        """
+        expect = "Function main Not Return "
+        self.assertTrue(TestChecker.test(input,expect,434))
+
+    def testNotFailFunctionNotReturn1(self):
+        input = """
+        void main() {
+            int n;
+            n = 10;
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,435))
     
-    # def test_diff_numofparam_expr(self):
-    #     input = """void main () {
-    #         putIntLn(getInt(4));
-    #     }"""
-    #     expect = "Type Mismatch In Expression: CallExpr(Id(getInt),[IntLiteral(4)])"
-    #     self.assertTrue(TestChecker.test(input,expect,402))
+    def testNotFailFunctionNotReturn2(self):
+        input = """
+        int main(int n) {
+            if (n == 1) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,436))
 
-    # def test_diff_numofparam_expr_use_ast(self):
-    #     input = Program([
-    #             FuncDecl(Id("main"),[],IntType(),Block([
-    #                 CallExpr(Id("putIntLn"),[
-    #                     CallExpr(Id("getInt"),[IntLiteral(4)])
-    #                     ])]))])
-    #     expect = "Type Mismatch In Expression: CallExpr(Id(getInt),[IntLiteral(4)])"
-    #     self.assertTrue(TestChecker.test(input,expect,404))
+#================Break/Continue not in loop==============
 
-    # def test_diff_numofparam_stmt_use_ast(self):
-    #     input = Program([
-    #             FuncDecl(Id("main"),[],IntType(),Block([
-    #                 CallExpr(Id("putIntLn"),[])]))])
-    #     expect = "Type Mismatch In Expression: CallExpr(Id(putIntLn),[])"
-    #     self.assertTrue(TestChecker.test(input,expect,405))
+    def testBreakNotInLoop1(self):
+        input = """ 
+        int main() {
+            int i, n;
+            for (i = 0; i < n; i = i + 1) {
+                if (n % i == 0) {
+                    break;
+                }
+                else {
+                    {
+                        break;
+                    }
+                }
+            }
 
-    
+            do {
+                i = i + 1;
+                break;
+            } while (i <= n);
 
+            break; //Here
 
-    # def testNoTypeMismatchInStatementIf(self):
-    #     input = """
-    #     void main(){
-    #         int n;
-    #         if (true){
-    #             n = 0;
-    #         }
-    #     }
-    #     """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,435))
+            return 0;
+        }
+        """
+        expect = "Break Not In Loop"
+        self.assertTrue(TestChecker.test(input,expect,437))
 
-    # def testTypeMismatchInStatementIf(self):
-    #     input = """
-    #     void main(){
-    #         int i;
-    #         if (10.5){
-    #             i = 0;
-    #         }
-    #     }
-    #     """
-    #     expect = "Type Mismatch In Statement: If(FloatLiteral(10.5),Block([BinaryOp(=,Id(i),IntLiteral(0))]))"
-    #     self.assertTrue(TestChecker.test(input,expect,436))
+    def testBreakNotInLoop2(self):
+        input = """ 
+        int main() {
+            int x;
+            if (x > 10) {
+                break;
+            }
+            return 0;
+        }
+        """
+        expect = "Break Not In Loop"
+        self.assertTrue(TestChecker.test(input,expect,438))
 
-    # def testTypeMismatchInStatementIf1(self):
-    #     input = """
-    #     void main(){
-    #         int n;
-    #         if ("true"){
-    #             n = 0;
-    #         }
-    #     }
-    #     """ 
-    #     expect = "Type Mismatch In Statement: If(StringLiteral(true),Block([BinaryOp(=,Id(n),IntLiteral(0))]))"
-    #     self.assertTrue(TestChecker.test(input,expect,437))
+    def testContinueNotInLoop1(self):
+        input = """ 
+        int main() {
+            int i, n;
+            for (i = 0; i < n; i = i + 1) {
+                if (n % i == 0) {
+                    continue;
+                }
+                else {
+                    {
+                        continue;
+                    }
+                }
+            }
 
-    # def testTypeMismatchInStatementIf2(self):
-    #     input = """
-    #     void main(){
-    #         int n;
-    #         if (n == 10){
-    #             n = 1;
-    #         }
-    #         else {
-    #             if (4.4) {
-    #                 n = 0;
-    #             }
-    #         }
-    #     }
-    #     """ 
-    #     expect = "Type Mismatch In Statement: If(FloatLiteral(4.4),Block([BinaryOp(=,Id(n),IntLiteral(0))]))"
-    #     self.assertTrue(TestChecker.test(input,expect,438))
+            do {
+                i = i + 1;
+                continue;
+            } while (i <= n);
 
-    # def testNoTypeMismatchInStatementFor(self):
-    #     input = """ 
-    #     int main() {
-    #         int i, n;
-    #         int a[10];
-    #         for (i = 0; i < n; i = i + 1) {
-    #             a[i] = 0;
-    #         }
-    #         return 0;
-    #     }
-    #     """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,439))
+            continue; //Here
 
-    # def testTypeMismatchInStatementFor1(self):
-    #     input = """ 
-    #     int main() {
-    #         int i, n;
-    #         int a[10];
-    #         for (i == 0; i < n; i = i + 1) {
-    #             a[i] = 0;
-    #         }
-    #         return 0;
-    #     }
-    #     """
-    #     expect = "Type Mismatch In Statement: For(BinaryOp(==,Id(i),IntLiteral(0));BinaryOp(<,Id(i),Id(n));BinaryOp(=,Id(i),BinaryOp(+,Id(i),IntLiteral(1)));Block([BinaryOp(=,ArrayCell(Id(a),Id(i)),IntLiteral(0))]))"
-    #     self.assertTrue(TestChecker.test(input,expect,440))
+            return 0;
+        }
+        """
+        expect = "Continue Not In Loop"
+        self.assertTrue(TestChecker.test(input,expect,439))
 
-    # def testTypeMismatchInStatementFor2(self):
-    #     input = """ 
-    #     int main() {
-    #         int i, n;
-    #         int a[10];
-    #         for (i = 0; i < n; i == i + 1) {
-    #             a[i] = 0;
-    #         }
-    #         return 0;
-    #     }
-    #     """
-    #     expect = "Type Mismatch In Statement: For(BinaryOp(=,Id(i),IntLiteral(0));BinaryOp(<,Id(i),Id(n));BinaryOp(==,Id(i),BinaryOp(+,Id(i),IntLiteral(1)));Block([BinaryOp(=,ArrayCell(Id(a),Id(i)),IntLiteral(0))]))"
-    #     self.assertTrue(TestChecker.test(input,expect,441))
+    def testContinueNotInLoop2(self):
+        input = """ 
+        void main() {
+            int check_con;
+            check_con = 10000;
+            if (check_con < 100) {
+                check_con = 10;
+            }
+            else {
+                continue;
+            }
+            return;
+        }
+        """
+        expect = "Continue Not In Loop"
+        self.assertTrue(TestChecker.test(input,expect,440))
 
-    # def testTypeMismatchInStatementFor3(self):
-    #     input = """ 
-    #     int main() {
-    #         int i, n;
-    #         int a[10];
-    #         for (i = 0; i = n; i = i + 1) {
-    #             a[i] = 0;
-    #         }
-    #         return 0;
-    #     }
-    #     """
-    #     expect = "Type Mismatch In Statement: For(BinaryOp(=,Id(i),IntLiteral(0));BinaryOp(=,Id(i),Id(n));BinaryOp(=,Id(i),BinaryOp(+,Id(i),IntLiteral(1)));Block([BinaryOp(=,ArrayCell(Id(a),Id(i)),IntLiteral(0))]))"
-    #     self.assertTrue(TestChecker.test(input,expect,442))
+    def testBreakAndContinueInLoop(self):
+        input = """ 
+        void main() {
+            int i, n, res;
+            res = 1;
+            for (i = 0; i < n; i = i + 1) {
+                if (n % i == 0) {
+                    res = res * i;
+                    continue;
+                }
+                else {
+                    if (n % i == 1) {
+                        break;
+                    }
+                    else {
+                        res = res + i;
+                    }
+                }
+            }
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,441))
 
-    # def testTypeMismatchInStatementDoWhile(self):
-    #     input = """ 
-    #     int main() {
-    #         int n;
-    #         do {
-    #             n = n + 1;
-    #         }
-    #         while (n = 10);
-    #         return 0;
-    #     }
-    #     """
-    #     expect = "Type Mismatch In Statement: Dowhile([Block([BinaryOp(=,Id(n),BinaryOp(+,Id(n),IntLiteral(1)))])],BinaryOp(=,Id(n),IntLiteral(10)))"
-    #     self.assertTrue(TestChecker.test(input,expect,443))
+#================No Entry Point==============
 
-    # def testTypeMismatchInStatementDoWhile1(self):
-    #     input = """ 
-    #     int main() {
-    #         int n;
-    #         do {
-    #             n = n + 1;
-    #         }
-    #         while (4.4);
-    #         return 0;
-    #     }
-    #     """
-    #     expect = "Type Mismatch In Statement: Dowhile([Block([BinaryOp(=,Id(n),BinaryOp(+,Id(n),IntLiteral(1)))])],FloatLiteral(4.4))"
-    #     self.assertTrue(TestChecker.test(input,expect,444))
+    def testNoEntryPoint1(self):
+        input = """ 
+        int x;
 
-    # def testNoTypeMismatchInStatementReturn(self):
-    #     input = """ 
-    #     void main() {
-    #         string s;
-    #         s = "checkReturn";
-    #         return ;
-    #     }
-    #     """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,445))
+        void funcVoid() {
+            int a, b;
+            x = a + b;
+        }
 
-    # def testTypeMismatchInStatementReturn(self):
-    #     input = """ 
-    #     void main() {
-    #         return 0;
-    #     }
-    #     """
-    #     expect = "Type Mismatch In Statement: Return(IntLiteral(0))"
-    #     self.assertTrue(TestChecker.test(input,expect,446))
+        int getSum(int a, int b) {
+            return a + b;
+        }
 
-    # def testTypeMismatchInStatementReturn1(self):
-    #     input = """ 
-    #     int[] main() {
-    #         int a[10];
-    #         return;
-    #     }
-    #     """
-    #     expect = "Type Mismatch In Statement: Return()"
-    #     self.assertTrue(TestChecker.test(input,expect,447))
+        boolean check(int a, int b) {
+            if (getSum(a, b) == 10) {
+                return true;
+            }
+        }
 
-    # def testTypeMismatchInStatementReturn2(self):
-    #     input = """ 
-    #     float foo(int x, int y, int z) {
-    #         if (x == y) {
-    #             return 10.0;
-    #         }
-    #         else {
-    #             return true;
-    #         }
-    #     }
+        float getRes(int a, int b) {
+            funcVoid();
+            x = getSum(a, b) / x;
+            check(a, b);
+            return 10.0;
+        }
+        """
+        expect = "No Entry Point"
+        self.assertTrue(TestChecker.test(input,expect,442))
 
-    #     void main() {
-    #         int x, y, z;
-    #         foo(x, y, z);
-    #     }
-    #     """
-    #     expect = "Type Mismatch In Statement: Return(BooleanLiteral(true))"
-    #     self.assertTrue(TestChecker.test(input,expect,448))
+    def testNoEntryPoint2(self):
+        input = """ 
+        int getMax(int n, int a[]) {
+            int i;
+            int main;
+            main = a[0];
+            for (i = 0; i < n; i = i + 1) {
+                if (a[i] > main) {
+                    main = a[i];
+                }
+            }
+            return main;
+        }
+        """
+        expect = "No Entry Point"
+        self.assertTrue(TestChecker.test(input,expect,443))
 
-    # def testTypeMismatchInStatementReturn3(self):
-    #     input = """ 
-    #     boolean checkPrime(int n) {
-    #         if (n < 2) {
-    #             return false;
-    #         } 
-    #         int i;
-    #         for (i = 2; i * i <= n ; i = i + 1) {
-    #             if (n % i == 0) {
-    #                 return 0;
-    #             }
-    #         }
-    #         return true;
-    #     }
+    def testNoEntryPoint3(self):
+        input = """
+        void foo(int main) {
+            putStringLn("No Entry Point");
+        }
+        """
+        expect = "No Entry Point"
+        self.assertTrue(TestChecker.test(input,expect,444))
 
-    #     void main() {
-    #         int n;
-    #         checkPrime(n);
-    #     }
-    #     """
-    #     expect = "Type Mismatch In Statement: Return(IntLiteral(0))"
-    #     self.assertTrue(TestChecker.test(input,expect,449))
+#================Unreachable function==============
 
-    # def testFuntionNotReturn0(self):
-    #     input = """ 
-    #     int x;
-
-    #     void funcVoid() {
-    #         int a, b;
-    #         x = a + b;
-    #     }
-
-    #     int getSum(int a, int b) {
-    #         return a + b;
-    #     }
-
-    #     boolean check(int a, int b) {
-    #         if (getSum(a, b) == 10) {
-    #             return true;
-    #         }
-    #     }
-
-    #     float getRes(int a, int b) {
-    #         funcVoid();
-    #         x = getSum(a, b) / x;
-    #         check(a, b);
-    #         // must return in this Block
-    #     }
-
-    #     void main() {
-    #         int a, b;
-    #         getRes(a, b);
-    #     }
-    #     """
-    #     expect = "Function check Not Return "
-    #     self.assertTrue(TestChecker.test(input,expect,450))
-
-    # def testNotFailFunctionNotReturn(self):
-    #     input = """
-    #     void main() {
-    #         int n;
-    #         n = 10;
-    #     }
-    #     """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,451))
-
-    # def testFuntionNotReturn(self):
-    #     input = """ 
-    #     boolean foo(int a, int b) {
-    #         a = b;
-    #     }
-
-    #     int main() {
-    #         int a, b;
-    #         foo(a, b);
-    #         return 0;
-    #     }
-    #     """
-    #     expect = "Function foo Not Return "
-    #     self.assertTrue(TestChecker.test(input,expect,452))
-
-    # def testBreakNotInLoop(self):
-    #     input = """ 
-    #     int main() {
-    #         int i, n;
-    #         for (i = 0; i < n; i = i + 1) {
-    #             if (n % i == 0) {
-    #                 break;
-    #             }
-    #             else {
-    #                 {
-    #                     break;
-    #                 }
-    #             }
-    #         }
-
-    #         do {
-    #             i = i + 1;
-    #             break;
-    #         } while (i <= n);
-
-    #         break; //Here
-
-    #         return 0;
-    #     }
-    #     """
-    #     expect = "Break Not In Loop"
-    #     self.assertTrue(TestChecker.test(input,expect,453))
-
-    # def testContinueNotInLoop(self):
-    #     input = """ 
-    #     int main() {
-    #         int i, n;
-    #         for (i = 0; i < n; i = i + 1) {
-    #             if (n % i == 0) {
-    #                 continue;
-    #             }
-    #             else {
-    #                 {
-    #                     continue;
-    #                 }
-    #             }
-    #         }
-
-    #         do {
-    #             i = i + 1;
-    #             continue;
-    #         } while (i <= n);
-
-    #         continue; //Here
-
-    #         return 0;
-    #     }
-    #     """
-    #     expect = "Continue Not In Loop"
-    #     self.assertTrue(TestChecker.test(input,expect,454))
-
-    # def testNoEntryPoint(self):
-    #     input = """ 
-    #     int x;
-
-    #     void funcVoid() {
-    #         int a, b;
-    #         x = a + b;
-    #     }
-
-    #     int getSum(int a, int b) {
-    #         return a + b;
-    #     }
-
-    #     boolean check(int a, int b) {
-    #         if (getSum(a, b) == 10) {
-    #             return true;
-    #         }
-    #     }
-
-    #     float getRes(int a, int b) {
-    #         funcVoid();
-    #         x = getSum(a, b) / x;
-    #         check(a, b);
-    #         return 10.0;
-    #     }
-    #     """
-    #     expect = "No Entry Point"
-    #     self.assertTrue(TestChecker.test(input,expect,455))
-
-    # def testNoEntryPoint1(self):
-    #     input = """ 
-    #     int getMax(int n, int a[]) {
-    #         int i;
-    #         int main;
-    #         main = a[0];
-    #         for (i = 0; i < n; i = i + 1) {
-    #             if (a[i] > main) {
-    #                 main = a[i];
-    #             }
-    #         }
-    #         return main;
-    #     }
-    #     """
-    #     expect = "No Entry Point"
-    #     self.assertTrue(TestChecker.test(input,expect,456))
-
-    # def testUnreachableFunction(self):
-    #     input = """ 
-    #     int getMax(int n) {
-    #         int i, a[10];
-    #         int max;
-    #         max = a[0];
-    #         for (i = 0; i < n; i = i + 1) {
-    #             if (a[i] > max) {
-    #                 max = a[i];
-    #             }
-    #         }
-    #         return max;
-    #     }
-
-    #     void main() {
-    #         int n;
-    #         n = 10;
-    #     }
-    #     """
-    #     expect = "Unreachable Function: getMax"
-    #     self.assertTrue(TestChecker.test(input,expect,457))
-
-    # def testBreakNotInLoop1(self):
-    #     input = """ 
-    #     int main() {
-    #         int x;
-    #         if (x > 10) {
-    #             break;
-    #         }
-    #         return 0;
-    #     }
-    #     """
-    #     expect = "Break Not In Loop"
-    #     self.assertTrue(TestChecker.test(input,expect,458))
-
-    # def testContinueNotInLoop1(self):
-    #     input = """ 
-    #     void main() {
-    #         int check_con;
-    #         check_con = 10000;
-    #         if (check_con < 100) {
-    #             check_con = 10;
-    #         }
-    #         else {
-    #             continue;
-    #         }
-    #         return;
-    #     }
-    #     """
-    #     expect = "Continue Not In Loop"
-    #     self.assertTrue(TestChecker.test(input,expect,459))
-
-    # def testUnreachableFunction1(self):
-    #     input = """ 
-    #     void foo(){}
-    #     void main(){}
-    #     """
-    #     expect = "Unreachable Function: foo"
-    #     self.assertTrue(TestChecker.test(input,expect,460))
-
-    # def testUnreachableFunction2(self):
-    #     input = """ 
-    #     void foo() {
-    #         foo();
-    #     }
-    #     void main(){}
-    #     """
-    #     expect = "Unreachable Function: foo"
-    #     self.assertTrue(TestChecker.test(input,expect,461))
-
-    # def testFunctionNotReturn1(self):
-    #     input = """ 
-    #     int main() {
-    #         int a;
-    #         if (a == 1) {
-    #             return 0;
-    #         }
-    #         else {
-    #             a = 1;  
-    #         }
-    #     }        
-    #     """
-    #     expect = "Function main Not Return "
-    #     self.assertTrue(TestChecker.test(input,expect,462))
-
-    # def testFunctionNotReturn2(self):
-    #     input = """ 
-    #     int main() {
-    #         int a;
-    #         if (a == 1) {
-    #             a = 10;
-    #         }
-    #         else {
-    #             return 0;
-    #         }
-    #     }        
-    #     """
-    #     expect = "Function main Not Return "
-    #     self.assertTrue(TestChecker.test(input,expect,463))
-
-    # def test(self):
-    #     input = """ 
-    #     void main(){
-    #         foo1() ;
-    #     }
-
-    #     void foo1(){
-    #         putString("hello world");
-    #     }
-    #     """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,464))
-
-    # def testFunctionNotReturn3(self):
-    #     input = """ 
-    #     int foo1() {
-    #         return 1;
-    #     }
+    def testUnreachableFunction1(self):
+        input = """ 
+        int foo1() {
+            return 1;
+        }
         
-    #     int foo2() {
-    #         foo1();
-    #         return 2;
-    #     }
+        int foo2() {
+            foo1();
+            return 2;
+        }
 
-    #     int foo3() {
-    #         foo2();
-    #         return 3;
-    #     }
+        int foo3() {
+            foo2();
+            return 3;
+        }
 
-    #     void main(){}
-    #     """
-    #     expect = "Unreachable Function: foo3"
-    #     self.assertTrue(TestChecker.test(input,expect,465))
+        void main(){}
+        """
+        expect = "Unreachable Function: foo3"
+        self.assertTrue(TestChecker.test(input,expect,445))
+        
+    def testUnreachableFunction2(self):
+        input = """ 
+        int getMax(int n) {
+            int i, a[10];
+            int max;
+            max = a[0];
+            for (i = 0; i < n; i = i + 1) {
+                if (a[i] > max) {
+                    max = a[i];
+                }
+            }
+            return max;
+        }
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,466))
+        void main() {
+            int n;
+            n = 10;
+        }
+        """
+        expect = "Unreachable Function: getMax"
+        self.assertTrue(TestChecker.test(input,expect,446))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,467))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,468))
+    def testUnreachableFunction3(self):
+        input = """ 
+        void foo(){}
+        void main(){}
+        """
+        expect = "Unreachable Function: foo"
+        self.assertTrue(TestChecker.test(input,expect,447))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,469))
+    def testUnreachableFunction4(self):
+        input = """ 
+        void foo() {
+            foo();
+        }
+        void main(){}
+        """
+        expect = "Unreachable Function: foo"
+        self.assertTrue(TestChecker.test(input,expect,448))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,470))
+    def testUnreachableFunction5(self):
+        input = """ 
+        void main() {
+            foo1();
+        }
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,471))
+        void foo1() {
+            foo2();
+        }
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,472))
+        void foo2() {
+            foo1();
+        }
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,473))
+        void foo3(){}
+        """
+        expect = "Unreachable Function: foo3"
+        self.assertTrue(TestChecker.test(input,expect,449))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,474))
+    def testReachableFunction(self):
+        input = """ 
+        void main() {
+            foo1();
+            foo3();
+        }
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,475))
+        void foo1() {
+            foo2();
+        }
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,476))
+        void foo2() {
+            foo1();
+        }
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,477))
+        void foo3(){}
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,450))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,478))
+#================Type Mismatch In Statement==============
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,479))
+    def testNoTypeMismatchInStatementIf(self):
+        input = """
+        int main(){
+            if (true) {
+                return 1;
+            }
+            return 0;
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,451))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,480))
+    def testTypeMismatchInStatementIf1(self):
+        input = """
+        void main(){
+            if (10.5) {
+                int i;
+                i = i * i;
+            }
+        }
+        """
+        expect = "Type Mismatch In Statement: If(FloatLiteral(10.5),Block([VarDecl(i,IntType),BinaryOp(=,Id(i),BinaryOp(*,Id(i),Id(i)))]))"
+        self.assertTrue(TestChecker.test(input,expect,452))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,481))
+    def testTypeMismatchInStatementIf2(self):
+        input = """
+        void main(){
+            int n;
+            if ("true"){
+                n = 0;
+            }
+        }
+        """ 
+        expect = "Type Mismatch In Statement: If(StringLiteral(true),Block([BinaryOp(=,Id(n),IntLiteral(0))]))"
+        self.assertTrue(TestChecker.test(input,expect,453))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,482))
+    def testTypeMismatchInStatementIf3(self):
+        input = """
+        void main(){
+            int n;
+            if (n == 10){
+                n = 1;
+            }
+            else {
+                if (n = n + 1) {
+                    n = 0;
+                }
+            }
+        }
+        """ 
+        expect = "Type Mismatch In Statement: If(BinaryOp(=,Id(n),BinaryOp(+,Id(n),IntLiteral(1))),Block([BinaryOp(=,Id(n),IntLiteral(0))]))"
+        self.assertTrue(TestChecker.test(input,expect,454))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,483))
+    def testNoTypeMismatchInStatementFor(self):
+        input = """ 
+        int main() {
+            int i, n;
+            int a[10];
+            for (i = 0; i < n; i = i + 1) {
+                a[i] = 0;
+            }
+            return 0;
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,455))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,484))
+    def testTypeMismatchInStatementFor1(self):
+        input = """ 
+        int main() {
+            int i, n;
+            int a[10];
+            for (i == 0; i < n; i = i + 1) {
+                a[i] = 0;
+            }
+            return 0;
+        }
+        """
+        expect = "Type Mismatch In Statement: For(BinaryOp(==,Id(i),IntLiteral(0));BinaryOp(<,Id(i),Id(n));BinaryOp(=,Id(i),BinaryOp(+,Id(i),IntLiteral(1)));Block([BinaryOp(=,ArrayCell(Id(a),Id(i)),IntLiteral(0))]))"
+        self.assertTrue(TestChecker.test(input,expect,456))
 
-    # def test(self):
-    #     input = """ """
-    #     expect = ""
-    #     self.assertTrue(TestChecker.test(input,expect,485))
+    def testTypeMismatchInStatementFor2(self):
+        input = """ 
+        int main() {
+            int i, n;
+            int a[10];
+            for (i = 0; i < n; i == i + 1) {
+                a[i] = 0;
+            }
+            return 0;
+        }
+        """
+        expect = "Type Mismatch In Statement: For(BinaryOp(=,Id(i),IntLiteral(0));BinaryOp(<,Id(i),Id(n));BinaryOp(==,Id(i),BinaryOp(+,Id(i),IntLiteral(1)));Block([BinaryOp(=,ArrayCell(Id(a),Id(i)),IntLiteral(0))]))"
+        self.assertTrue(TestChecker.test(input,expect,457))
+
+    def testTypeMismatchInStatementFor3(self):
+        input = """ 
+        int main() {
+            int i, n;
+            int a[10];
+            for (i = 0; i = n; i = i + 1) {
+                a[i] = 0;
+            }
+            return 0;
+        }
+        """
+        expect = "Type Mismatch In Statement: For(BinaryOp(=,Id(i),IntLiteral(0));BinaryOp(=,Id(i),Id(n));BinaryOp(=,Id(i),BinaryOp(+,Id(i),IntLiteral(1)));Block([BinaryOp(=,ArrayCell(Id(a),Id(i)),IntLiteral(0))]))"
+        self.assertTrue(TestChecker.test(input,expect,458))
+
+    def testTypeMismatchInStatementDoWhile1(self):
+        input = """ 
+        int main() {
+            int n;
+            do {
+                n = n + 1;
+            }
+            while (n = 10);
+            return 0;
+        }
+        """
+        expect = "Type Mismatch In Statement: Dowhile([Block([BinaryOp(=,Id(n),BinaryOp(+,Id(n),IntLiteral(1)))])],BinaryOp(=,Id(n),IntLiteral(10)))"
+        self.assertTrue(TestChecker.test(input,expect,459))
+
+    def testTypeMismatchInStatementDoWhile2(self):
+        input = """ 
+        int main() {
+            int n;
+            do {
+                n = n + 1;
+            }
+            while (4.4);
+            return 0;
+        }
+        """
+        expect = "Type Mismatch In Statement: Dowhile([Block([BinaryOp(=,Id(n),BinaryOp(+,Id(n),IntLiteral(1)))])],FloatLiteral(4.4))"
+        self.assertTrue(TestChecker.test(input,expect,460))
+
+    def testNoTypeMismatchInStatementDoWhile(self):
+        input = """ 
+        int main() {
+            int n;
+            do {
+                n = n + 1;
+            }
+            while (true);
+            return 0;
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,461))
+
+    def testNoTypeMismatchInStatementReturn1(self):
+        input = """ 
+        void main() {
+            string s;
+            s = "checkReturn";
+            return ;
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,462))
+
+    def testNoTypeMismatchInStatementReturn2(self):
+        input = """ 
+        int main() {
+            int a[10];
+            a[7] = 15;
+            return a[0];
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,463))
+
+    def testTypeMismatchInStatementReturn1(self):
+        input = """ 
+        void main() {
+            return 0;
+        }
+        """
+        expect = "Type Mismatch In Statement: Return(IntLiteral(0))"
+        self.assertTrue(TestChecker.test(input,expect,464))
+
+    def testTypeMismatchInStatementReturn2(self):
+        input = """ 
+        int main() {
+            return 1.16;
+        }
+        """
+        expect = "Type Mismatch In Statement: Return(FloatLiteral(1.16))"
+        self.assertTrue(TestChecker.test(input,expect,465))
+
+    def testTypeMismatchInStatementReturn3(self):
+        input = """ 
+        float foo(int x, int y, int z) {
+            if (x == y) {
+                return 10.0;
+            }
+            else {
+                return true;
+            }
+        }
+
+        void main() {
+            int x, y, z;
+            foo(x, y, z);
+        }
+        """
+        expect = "Type Mismatch In Statement: Return(BooleanLiteral(true))"
+        self.assertTrue(TestChecker.test(input,expect,466))
+
+    def testTypeMismatchInStatementReturn4(self):
+        input = """ 
+        boolean checkPrime(int n) {
+            if (n < 2) {
+                return false;
+            } 
+            int i;
+            for (i = 2; i * i <= n ; i = i + 1) {
+                if (n % i == 0) {
+                    return 0;
+                }
+            }
+            return true;
+        }
+
+        void main() {
+            int n;
+            checkPrime(n);
+        }
+        """
+        expect = "Type Mismatch In Statement: Return(IntLiteral(0))"
+        self.assertTrue(TestChecker.test(input,expect,467))
+    
+    def testTypeMismatchInStatementReturn5(self):
+        input = """ 
+        boolean checkPrime(int n) {
+            if (n < 2) {
+                return false;
+            } 
+            int i;
+            for (i = 2; i * i <= n ; i = i + 1) {
+                if (n % i == 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        int get(int n) {
+            return checkPrime(n);
+        }
+
+        void main() {
+            int n;
+            get(n);
+        }
+        """
+        expect = "Type Mismatch In Statement: Return(CallExpr(Id(checkPrime),[Id(n)]))"
+        self.assertTrue(TestChecker.test(input,expect,468))
+
+    def testTypeMismatchInStatementReturn6(self):
+        input = """ 
+        int[] main() {
+            int a[10];
+            return a;
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,469))
+
+    def testTypeMismatchInStatementReturn7(self):
+        input = """ 
+        int[] main() {
+            int a[10];
+            return a[0];
+        }
+        """
+        expect = "Type Mismatch In Statement: Return(ArrayCell(Id(a),IntLiteral(0)))"
+        self.assertTrue(TestChecker.test(input,expect,470))
+
+#================ Type Mismatch In Expression===============
+
+    def testDiffNumofparamStmt(self):
+        input = """
+        void main () {
+            putIntLn();
+        }"""
+        expect = "Type Mismatch In Expression: CallExpr(Id(putIntLn),[])"
+        self.assertTrue(TestChecker.test(input,expect,471))
+    
+    def testDiffNumofparamExpr(self):
+        input = """
+        void main () {
+            putIntLn(getInt(4));
+        }"""
+        expect = "Type Mismatch In Expression: CallExpr(Id(getInt),[IntLiteral(4)])"
+        self.assertTrue(TestChecker.test(input,expect,472))
+
+    def test_diff_numofparam_expr_use_ast(self):
+        input = Program([
+                FuncDecl(Id("main"),[],IntType(),Block([
+                    CallExpr(Id("putIntLn"),[
+                        CallExpr(Id("getInt"),[IntLiteral(4)])
+                        ])]))])
+        expect = "Type Mismatch In Expression: CallExpr(Id(getInt),[IntLiteral(4)])"
+        self.assertTrue(TestChecker.test(input,expect,473))
+
+    def test_diff_numofparam_stmt_use_ast(self):
+        input = Program([
+                FuncDecl(Id("main"),[],IntType(),Block([
+                    CallExpr(Id("putIntLn"),[])]))])
+        expect = "Type Mismatch In Expression: CallExpr(Id(putIntLn),[])"
+        self.assertTrue(TestChecker.test(input,expect,474))
+
+    def testTypeMismatchInExp(self):
+        input = """
+        int a[10],b;
+        void main(){
+            string str;
+            int iNum;
+            float arr[10];
+            float fNum;
+            boolean isTrue;
+            isTrue = true;
+            fNum = 15;
+            iNum = 15;
+            iNum && fNum;
+        }
+        """
+        expect = "Type Mismatch In Expression: BinaryOp(&&,Id(iNum),Id(fNum))"
+        self.assertTrue(TestChecker.test(input,expect,475))
+
+    def testTypeMismatchInGetInt(self):
+        input = """ 
+        int main() {
+            return getInt(5);
+        }
+        """
+        expect = "Type Mismatch In Expression: CallExpr(Id(getInt),[IntLiteral(5)])"
+        self.assertTrue(TestChecker.test(input,expect,476))
+
+    def testTypeMismatchInPutInt(self):
+        input = """ 
+        void main() {
+            putInt("input");
+        }
+        """
+        expect = "Type Mismatch In Expression: CallExpr(Id(putInt),[StringLiteral(input)])"
+        self.assertTrue(TestChecker.test(input,expect,477))
+
+    def testTypeMismatchInGetFloat(self):
+        input = """ 
+        float main() {
+            return getFloat(1.53);
+        }
+        """
+        expect = "Type Mismatch In Expression: CallExpr(Id(getFloat),[FloatLiteral(1.53)])"
+        self.assertTrue(TestChecker.test(input,expect,478))
+
+    def testTypeMismatchInPutFloat(self):
+        input = """ 
+        void main() {
+            getFloat(putInt(18));
+        }
+        """
+        expect = "Type Mismatch In Expression: CallExpr(Id(getFloat),[CallExpr(Id(putInt),[IntLiteral(18)])])"
+        self.assertTrue(TestChecker.test(input,expect,479))
+
+    def testTypeMismatchInPutBool(self):
+        input = """ 
+        void main() {
+            putBool("true");
+        }
+        """
+        expect = "Type Mismatch In Expression: CallExpr(Id(putBool),[StringLiteral(true)])"
+        self.assertTrue(TestChecker.test(input,expect,480))
+
+    def testTypeMismatchInPutString(self):
+        input = """ 
+        void main() {
+            putString(false);
+        }
+        """
+        expect = "Type Mismatch In Expression: CallExpr(Id(putString),[BooleanLiteral(false)])"
+        self.assertTrue(TestChecker.test(input,expect,481))
+
+    def testBuiltIn(self):
+        input = """ 
+        void main() {
+            int a;
+            a = getInt();
+            putIntLn(4);
+            putFloat(4.4);
+            putFloatLn(4.4);
+            putBool(true);
+            putBoolLn(false);
+            putString("Built-in");
+            putStringLn("Built-in");
+            putLn("\\n");
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,482))
+
+    def testTypeMismatchInArray(self):
+        input = """ 
+        int a[10], c;
+        void main(){
+            int arr[10];
+            float num;
+            num = 1;
+            arr[1] = 1;
+            arr[2] = arr[1];
+            arr[num];
+        }
+        """
+        expect = "Type Mismatch In Expression: ArrayCell(Id(arr),Id(num))"
+        self.assertTrue(TestChecker.test(input,expect,483))
+
+    def testTypeMismatchBinaryOp(self):
+        input = """ 
+        void main() {
+            int a;
+            float b;
+            a = b;
+        }
+        """
+        expect = "Type Mismatch In Expression: BinaryOp(=,Id(a),Id(b))"
+        self.assertTrue(TestChecker.test(input,expect,484))
+
+    def test(self):
+        input = """ 
+        void main() {
+            int a;
+            5 = a;
+        }
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,485))
     # def test(self):
     #     input = """ """
     #     expect = ""
@@ -1107,4 +1299,12 @@ class CheckSuite(unittest.TestCase):
     #         func = 15;
     #         func();
     #         abc();
+    #     }
+
+
+        #         foo1() ;
+    #     }
+
+    #     void foo1(){
+    #         putString("hello world");
     #     }

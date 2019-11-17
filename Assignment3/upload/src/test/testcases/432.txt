@@ -1,6 +1,11 @@
  
+        boolean foo(int a, int b) {
+            a = b;
+        }
+
         int main() {
-            int func;
-            func();
+            int a, b;
+            foo(a, b);
+            return 0;
         }
         

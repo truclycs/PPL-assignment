@@ -1,0 +1,14 @@
+ 
+        void main() {
+            int a;
+            a = getInt();
+            putIntLn(4);
+            putFloat(4.4);
+            putFloatLn(4.4);
+            putBool(true);
+            putBoolLn(false);
+            putString("Built-in");
+            putStringLn("Built-in");
+            putLn("\n");
+        }
+        

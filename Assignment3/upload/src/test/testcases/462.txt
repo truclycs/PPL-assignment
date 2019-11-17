@@ -1,0 +1,7 @@
+ 
+        void main() {
+            string s;
+            s = "checkReturn";
+            return ;
+        }
+        

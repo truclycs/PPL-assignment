@@ -1,0 +1,13 @@
+ 
+        void main() {
+            int check_con;
+            check_con = 10000;
+            if (check_con < 100) {
+                check_con = 10;
+            }
+            else {
+                continue;
+            }
+            return;
+        }
+        

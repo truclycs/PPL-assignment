@@ -1,0 +1,23 @@
+ 
+        boolean checkPrime(int n) {
+            if (n < 2) {
+                return false;
+            } 
+            int i;
+            for (i = 2; i * i <= n ; i = i + 1) {
+                if (n % i == 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        int get(int n) {
+            return checkPrime(n);
+        }
+
+        void main() {
+            int n;
+            get(n);
+        }
+        
