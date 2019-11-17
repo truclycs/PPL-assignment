@@ -1,6 +1,15 @@
 
-        int main() {
+        int foo() {
             int a;
-            int a;
+            {
+                int a;
+                {
+                    int c, c;
+                }
+            }
+            return 0;
+        }
+        void main() {
+            foo();
         }
         

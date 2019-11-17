@@ -1,7 +1,6 @@
 
-        string foo(){}
-        string foo(){}
-        int main() {
-            foo();
+        void main() {
+            int a;
+            string a[10];
         }
         

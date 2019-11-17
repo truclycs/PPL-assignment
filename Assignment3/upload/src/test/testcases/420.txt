@@ -1,6 +1,12 @@
-
+ 
         int foo() {
-            int a, a;
+            int b;
+            a = 1;
+            b = 2;
+            return b;
         }
-        int main() {}
+
+        int main() {
+            return foo();
+        }
         

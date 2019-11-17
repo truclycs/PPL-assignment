@@ -1,3 +1,7 @@
-void main () {
-            putIntLn(getInt(4));
+
+        int c;
+        void main() {
+            putString("...");
         }
+        string c[10];
+        

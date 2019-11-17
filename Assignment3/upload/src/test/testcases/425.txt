@@ -1,8 +1,7 @@
  
-        float foo(int a) {
-            a = 1;
-            b = 2;
+        int n;
+        void main() {
+            n = 1;
+            y[18] = 2;
         }
-
-        int main() {}
         

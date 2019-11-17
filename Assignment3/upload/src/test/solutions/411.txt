@@ -1,1 +1,1 @@
-Redeclared Function: foo
+Redeclared Variable: a

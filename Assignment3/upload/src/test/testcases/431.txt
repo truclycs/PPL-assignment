@@ -1,7 +1,0 @@
- 
-        int n;
-        int main() {
-            n = 1;
-            yeah = 2;
-        }
-        

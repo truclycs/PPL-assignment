@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from typing import List
 from Visitor import Visitor
 
-
 class AST(ABC):
     def __eq__(self, other): 
         return self.__dict__ == other.__dict__

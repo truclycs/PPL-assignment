@@ -5,7 +5,9 @@
 
         int main() {
             int func;
+            func = 15;
             func();
             abc();
+            return func();
         }
         

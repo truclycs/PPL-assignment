@@ -1,5 +1,4 @@
 
-        int c;
-        void main() {}
-        string c[10];
-        
+        int main(string x, int a[], float a){
+            return 0;
+        } 

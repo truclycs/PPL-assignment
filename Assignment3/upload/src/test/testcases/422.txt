@@ -1,12 +1,12 @@
-
-        int foo() {
-            int a;
-            {
-                int a;
-                {
-                    int c, c;
-                }
-            }
+ 
+        void foo() {
+            n = 1;
+            x = n;
         }
-        int main() {}
+        int n;
+        void main() {
+            putFloat(11.34);
+            foo();
+            return;
+        }
         

@@ -1,7 +1,13 @@
+ 
+        int n;
 
         int foo() {
-            string arr[10];
-            boolean arr[10];
+            n = 1;
+            m = 2;
+            return m;
         }
-        int main() {}
+
+        void main() {
+            foo();
+        }
         

@@ -1,7 +1,6 @@
  
         float foo(float a, float b) {
-            a = b + 1;
-            return a;
+            return a * b;
         }
 
         int main() {

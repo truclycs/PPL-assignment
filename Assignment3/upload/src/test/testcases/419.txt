@@ -1,5 +1,13 @@
+ 
+        float foo(int a) {
+            a = 1;
+            b = 2;
+            return 4.7;
+        }
 
         int main() {
-            boolean x, x;
+            int a;
+            foo(a);
+            return 0;
         }
         

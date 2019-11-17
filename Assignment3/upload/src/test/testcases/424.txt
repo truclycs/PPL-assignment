@@ -1,5 +1,8 @@
  
-        int main() {
-            a = 1;
+        int n;
+        void main() {
+            n = 1;
+            int n;
+            why = 2;
         }
         

@@ -1,4 +1,4 @@
 
-        int a, b, c, d, a;
-        void main() {}
-        
+        void main(string x, boolean x, int x, float x){
+            return;
+        } 

@@ -31,8 +31,8 @@ def checkRedeclared(list_decl, decl, kind):
 def getType(decl):
     return "Variable" if type(decl) is VarDecl else "Function"
 
-# def overrideDeclaration(environment, name):
-#     [environment.remove(id) for id in environment if id.name == name]
+def overrideDeclaration(environment, name):
+    [environment.remove(id) for id in environment if id.name == name]
 
 def BinOpType(left, right):
     if (type(left), type(right)) == (IntType, IntType):
@@ -43,18 +43,18 @@ def BinOpType(left, right):
         return FloatType()
     return None
 
-def assignRule(left,right):
+def assignRule(left, right):
     if type(left) == VoidType or type(left) == ArrayType:
         return False
     elif ((type(left) == ArrayPointerType and type(right) == ArrayType)) or\
          ((type(left) == ArrayPointerType and type(right) == ArrayPointerType)):
-        return assE(left.eleType, right.eleType)
-    elif (type(left), type(right)) == (FloatType,IntType):
+        return eleType(left.eleType, right.eleType)
+    elif (type(left), type(right)) == (FloatType, IntType):
         return True 
     else:
         return type(left) == type(right)
 
-def assE(left, right):
+def eleType(left, right):
     if ((type(left), type(right)) == (BoolType, BoolType)) or\
        ((type(left), type(right)) == (StringType, StringType)) or\
        ((type(left), type(right)) == (FloatType, FloatType)) or\
@@ -63,7 +63,7 @@ def assE(left, right):
     else:
         return False
 
-def assignExplicitType(left,right):
+def explicitType(left, right):
     if ((type(left), type(right)) == (BoolType, BoolType)) or\
        ((type(left), type(right)) == (StringType, StringType)) or\
        ((type(left), type(right)) == (FloatType, FloatType)) or\
@@ -74,17 +74,17 @@ def assignExplicitType(left,right):
         return False
 
 class StaticChecker(BaseVisitor, Utils):
-    global_envi =   [Symbol("getInt",MType([],IntType())),
-                    Symbol("putInt",MType([IntType()],VoidType())),
-                    Symbol("putIntLn",MType([IntType()],VoidType())),
-                    Symbol("getFloat",MType([],FloatType())),
-                    Symbol("putFloat",MType([FloatType()],VoidType())),
-                    Symbol("putFloatLn",MType([FloatType()],VoidType())),
-                    Symbol("putBool",MType([BoolType()],VoidType())),
-                    Symbol("putBoolLn",MType([BoolType()],VoidType())),
+    global_envi =  [Symbol("getInt", MType([], IntType())),
+                    Symbol("putInt", MType([IntType()], VoidType())),
+                    Symbol("putIntLn", MType([IntType()], VoidType())),
+                    Symbol("getFloat", MType([], FloatType())),
+                    Symbol("putFloat", MType([FloatType()], VoidType())),
+                    Symbol("putFloatLn", MType([FloatType()], VoidType())),
+                    Symbol("putBool", MType([BoolType()], VoidType())),
+                    Symbol("putBoolLn", MType([BoolType()], VoidType())),
                     Symbol("putString", MType([StringType()], VoidType())),
-                    Symbol("putStringLn",MType([StringType()],VoidType())),
-                    Symbol("putLn",MType([StringType()],VoidType()))]
+                    Symbol("putStringLn", MType([StringType()], VoidType())),
+                    Symbol("putLn", MType([StringType()], VoidType()))]
 
     def __init__(self, ast):
         self.ast = ast
@@ -94,67 +94,63 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitProgram(self, ast, c):
         environment = c.copy()  
-        entry_point = None
         return_type = None
+        entry_point = 0
         is_loop = False
-        main_call = None
+        list_para = None
         reachable_func = {}
+        main_call = None
         
         for decl in ast.decl:
             environment.append(checkRedeclared(environment, decl, getType(decl)))
             if type(decl) is FuncDecl:
-                entry_point = decl if decl.name.name == 'main' else entry_point
-
-                reachable_func[decl.name.name] =  decl.name.name == 'main'
+                entry_point = decl.name.name == 'main' or entry_point
+                reachable_func[decl.name.name] = decl.name.name == 'main'
 
         if not entry_point: 
             raise NoEntryPoint()
 
         for decl in ast.decl:
-            if not type(decl) is VarDecl:
-                self.visit(decl, (environment, return_type, is_loop, None, reachable_func, main_call))
+            if type(decl) is FuncDecl:
+                self.visit(decl, (environment, return_type, is_loop, list_para, reachable_func, main_call))
 
         for func in reachable_func:
             if reachable_func[func] == 0:
-                # _func = self.lookup(func, environment, lambda x: x.name)
                 raise UnreachableFunction(func)
+        
         return None
 
     def visitFuncDecl(self, ast, c): 
         environment = c[0].copy()
-        para = []
-    
-        for p in ast.param:
-            para.append(checkRedeclared(para, p, "Parameter"))
+        list_para = []
 
-        environment += para
+        for para in ast.param:
+            list_para.append(checkRedeclared(list_para, para, "Parameter"))
+
+        environment += list_para
         
-        is_return = self.visit(ast.body, (environment, ast.returnType, False, para, c[4], ast.name.name))
+        is_return = self.visit(ast.body, (environment, ast.returnType, False, list_para, c[4], ast.name.name))
        
         if not is_return and type(ast.returnType) is not VoidType:
             raise FunctionNotReturn(ast.name.name)
 
     def visitBlock(self, ast, c):      
         environment = c[0].copy() 
-        list_para = c[3] if c[3] else []
-        is_return = []  
+        list_para = c[3]
         end = False    
 
-        for mem in ast.member:
+        for mem in ast.member:  
             if type(mem) is VarDecl:    
                 list_para.append(checkRedeclared(list_para, mem, "Variable"))
-                # overrideDeclaration(environment, mem.variable)
+                overrideDeclaration(environment, mem.variable)
             else:
                 environment += list_para
-                if end is True or end is "BC":
-                    raise UnreachableStatement(mem)
                 end = self.visit(mem, (environment, c[1], c[2], [], c[4], c[5]))
-                is_return.append(end)
-        
+                
         environment += list_para
         return end if end is True or end is "BC" else False   
 
-    def visitVarDecl(self, ast, c): pass
+    # def visitVarDecl(self, ast, c): pass
         # local = c[0]
         # type = c[1]
         # environment = c[2]
@@ -231,7 +227,7 @@ class StaticChecker(BaseVisitor, Utils):
                 return BoolType()
             raise TypeMismatchInExpression(ast)
         elif op == "=":
-            if assignExplicitType(left,right): 
+            if explicitType(left,right): 
                 return left
             raise TypeMismatchInExpression(ast)
         raise TypeMismatchInExpression(ast)
@@ -249,10 +245,14 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitCallExpr(self, ast, c): 
         environment = c[0].copy() 
+
         res = self.lookup(ast.method.name, environment, lambda x: x.name)
+    
         if (res in StaticChecker.global_envi):
             c[4][res.name] = 1
+            
         list_para = [self.visit(x, (environment, c[1], c[2], [], c[4], c[5])) for x in ast.param]
+        
         if res is None or not type(res.mtype) is MType:
             raise Undeclared(Function(), ast.method.name)
         elif len(res.mtype.partype) != len(list_para):

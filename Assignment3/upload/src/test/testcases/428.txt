@@ -1,8 +1,12 @@
  
-        float foo() {
-            n = 1;
-            x = n;
+        int func(int n) {
+            return n * func(n - 1);
         }
-        int n;
-        int main() {}
+
+        void main() {
+            int n;
+            n = 10;
+            func(n);
+            abc();
+        }
         

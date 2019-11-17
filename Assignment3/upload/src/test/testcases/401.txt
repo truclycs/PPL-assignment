@@ -1,3 +1,5 @@
-void main () {
-            putIntLn();
-        }
+
+        int b;
+        float b;
+        void main() {}
+        

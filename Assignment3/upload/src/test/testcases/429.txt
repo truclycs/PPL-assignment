@@ -1,6 +1,1 @@
- 
-        int main() {
-            n = 1;
-            int n;
-        }
-        
+Program([FuncDecl(Id(main),[],IntType,Block([CallExpr(Id(foo),[])]))])

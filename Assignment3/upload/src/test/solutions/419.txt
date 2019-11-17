@@ -1,1 +1,1 @@
-Redeclared Variable: x
+Undeclared Identifier: b

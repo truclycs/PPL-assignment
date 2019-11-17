@@ -1,5 +1,5 @@
 
-        int b;
-        float b;
-        void main() {}
+        int main(int a, int a){
+            return 0;
+        } 
         

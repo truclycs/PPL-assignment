@@ -1,8 +1,11 @@
  
-        int n;
+        float foo(float a, float b) {
+            return a * b;
+        }
+
         int main() {
-            n = 1;
-            int n;
-            why = 2;
+            float a, b;
+            foo(a, b);
+            return 0;
         }
         

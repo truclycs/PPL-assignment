@@ -1,7 +1,9 @@
 
-        string foo(){}
         int main() {
-            foo();
+            int a;
+            string b;
+            float c;
+            boolean b[10];
+            return 0;
         }
-        float foo(){}
         

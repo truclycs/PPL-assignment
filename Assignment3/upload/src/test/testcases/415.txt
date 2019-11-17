@@ -1,1 +1,9 @@
-int main(string x, boolean x, int a, float a){} 
+
+        void foo() {
+            string arr[10];
+            boolean arr[10];
+        }
+        void main() {
+            foo();
+        }
+        

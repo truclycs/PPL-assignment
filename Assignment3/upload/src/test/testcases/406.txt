@@ -1,5 +1,9 @@
 
-        int a;
-        int a;
-        void main() {}
+        void foo(){}
+        void main() {
+            foo();
+        }
+        float foo(){
+            return 17.11;
+        }
         
