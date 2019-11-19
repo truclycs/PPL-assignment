@@ -11,11 +11,9 @@
             }
             return true;
         }
-
         int get(int n) {
             return checkPrime(n);
         }
-
         void main() {
             int n;
             get(n);

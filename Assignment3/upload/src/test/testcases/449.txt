@@ -2,14 +2,11 @@
         void main() {
             foo1();
         }
-
         void foo1() {
             foo2();
         }
-
         void foo2() {
             foo1();
         }
-
         void foo3(){}
         

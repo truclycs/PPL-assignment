@@ -1,6 +1,11 @@
  
         void main() {
-            int a;
-            5 = a;
+            float a;
+            if (a != 4.4) {
+                a = 4;
+            }
+            else {
+                a = 2;
+            }
         }
         

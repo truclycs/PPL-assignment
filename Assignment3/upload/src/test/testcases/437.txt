@@ -11,14 +11,11 @@
                     }
                 }
             }
-
             do {
                 i = i + 1;
                 break;
             } while (i <= n);
-
             break; //Here
-
             return 0;
         }
         

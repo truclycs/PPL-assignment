@@ -1,0 +1,8 @@
+ 
+        void main() {
+            boolean flag;
+            if (flag <= true) {
+                flag = false;
+            }
+        }
+        

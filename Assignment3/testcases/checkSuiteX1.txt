@@ -1,0 +1,321 @@
+#TEST_REDECLARED-----------------------------------------------------------------------------------(15)
+
+    def test_redeclared_global_variable(self):
+        input = """
+        int a, b;
+        int a;
+        void main() {}"""
+        expect = "Redeclared Variable: a"
+        self.assertTrue(TestChecker.test(input,expect,400))
+
+    def test_redeclared_main_local_variable(self):
+        input = """
+        int a, b;
+        void main() {
+            int a, b, c;
+            int c;
+        }"""
+        expect = "Redeclared Variable: c"
+        self.assertTrue(TestChecker.test(input,expect,401))
+
+    def test_redeclared_function_name(self):
+        input = """
+        void a() {}
+        void a() {}
+        void main() {
+            a();
+        }"""
+        expect = "Redeclared Function: a"
+        self.assertTrue(TestChecker.test(input,expect,402))
+
+    def test_redeclared_function_variable_name(self):
+        input = """
+        boolean x, a;
+        void a() {}
+        void main() {}"""
+        expect = "Redeclared Function: a"
+        self.assertTrue(TestChecker.test(input,expect,403))
+
+    def test_redeclared_block_variable_name(self):
+        input = """
+        string s;
+        void main() {
+            int s, t;
+            {
+                boolean t, u;
+                float u;
+            }
+        }"""
+        expect = "Redeclared Variable: u"
+        self.assertTrue(TestChecker.test(input,expect,404))
+
+    def test_redeclared_param_name(self):
+        input = """
+        void foo(int a, int b, int a) {}
+        void main() {}"""
+        expect = "Redeclared Parameter: a"
+        self.assertTrue(TestChecker.test(input,expect,405))
+
+    def test_redeclared_var_in_func(self):
+        input = """
+        float test;
+        void __test(int test, int fail) {int fail;}
+        void main() {}"""
+        expect = "Redeclared Variable: fail"
+        self.assertTrue(TestChecker.test(input,expect,406))
+
+    def test_redeclared_block_in_func(self):
+        input = """
+        void a(int a, int b) {
+            int c;
+            {
+                float a, b, c, d;
+                int d;
+            }
+        }
+        int main() {}"""
+        expect = "Redeclared Variable: d"
+        self.assertTrue(TestChecker.test(input,expect,407))
+
+    def test_redeclared_func(self):
+        input = """
+        int __init, __str;
+        void foo(int __init) {}
+        void __str() {}
+        void main() {}"""
+        expect = "Redeclared Function: __str"
+        self.assertTrue(TestChecker.test(input,expect,408))
+
+    def test_redeclared_complex_block(self):
+        input = """
+        string x, y, z;
+        void _x(int x) {
+            float _x, y;
+            int z;
+            {
+                int x;
+                {
+                    int x;
+                    {
+                        int x;
+                    }
+                }
+            }
+            boolean z;
+        }
+        void main() {}"""
+        expect = "Redeclared Variable: z"
+        self.assertTrue(TestChecker.test(input,expect,409))
+
+    def test_redeclared_param_two_function(self):
+        input = """
+        void foo(boolean _a, string _b) {}
+        void goo(int z, boolean _a, string _b, int z) {}
+        void main() {
+            foo();
+            goo();
+        }"""
+        expect = "Redeclared Parameter: z"
+        self.assertTrue(TestChecker.test(input,expect,410))
+
+    def test_redeclared_arrvar_in_main_func(self):
+        input = """
+        int a[5], b, c;
+        float d;
+        void main() {
+            int a, main[10], fail;
+            int fail[5];
+        }
+        string d;"""
+        expect = "Redeclared Variable: fail"
+        self.assertTrue(TestChecker.test(input,expect,411))
+
+    def test_redeclared_var_after_main_func(self):
+        input = """
+        int a, b, c;
+        float d;
+        void main() {
+            int a, b, c;
+        }
+        string d;"""
+        expect = "Redeclared Variable: d"
+        self.assertTrue(TestChecker.test(input,expect,412))
+
+    def test_redeclared_func_with_many_var(self):
+        input = """
+        int a;
+        void foo(int a){}
+        boolean b;
+        void goo(int b){}
+        string c;
+        float d[3];
+        void main() {
+            int a, b, c;
+            foo(a);
+            goo(b);
+            a();
+        }
+        float[] a() {return d;}"""
+        expect = "Redeclared Function: a"
+        self.assertTrue(TestChecker.test(input,expect,413))
+
+    def test_redeclared_successful_all_scope(self):
+        input = """
+        int a[5], b[2], c;
+        void func(int a, int b) {}
+        float d;
+        void main() {
+            string a[2], b, c[2];
+            {
+                boolean a, b[2];
+                {
+                    string a, b, c;
+                }
+                int c;
+            }
+            int main;
+            func(main, main);
+            notFail();
+        }
+        string success;
+        void notFail() {}"""
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,414))
+
+#TEST_UNDECLARED-----------------------------------------------------------------------------------(10)
+
+    def test_undeclared_identifier_in_main_simple(self):
+        input = """
+        int a, b[2], c;
+        void main() {
+            d;
+        }"""
+        expect = "Undeclared Identifier: d"
+        self.assertTrue(TestChecker.test(input,expect,415))
+
+    def test_undeclared_function_in_main_simple(self):
+        input = """
+        int a, b[2], c;
+        void main() {
+            int a;
+            a();
+        }"""
+        expect = "Undeclared Function: a"
+        self.assertTrue(TestChecker.test(input,expect,416))
+    
+    def test_undeclared_id_param_main_simple(self):
+        input = """
+        int a, b[2], c;
+        void foo(int a) {}
+        void main() {
+            foo(b[0]);
+            foo(d);
+        }"""
+        expect = "Undeclared Identifier: d"
+        self.assertTrue(TestChecker.test(input,expect,417))
+
+    def test_undeclared_identifier_in_exp(self):
+        input = """
+        float a;
+        int func() {return 1;}
+        void main() {
+            int a;
+            c = 3;
+            a = func() + c;
+            a + d;
+        }
+        int c;"""
+        expect = "Undeclared Identifier: d"
+        self.assertTrue(TestChecker.test(input,expect,418))
+
+    def test_undeclared_func_in_exp(self):
+        input = """
+        int a;
+        float b[2];
+        void main() {
+            foo() + goo();
+            notFound(a);
+        }
+        int foo() {
+            return 1;
+        }
+        float goo() {
+            return 2.5;
+        }"""
+        expect = "Undeclared Function: notFound"
+        self.assertTrue(TestChecker.test(input,expect,419))
+
+    def test_undeclared_param_in_callexp(self):
+        input = """
+        int test(int a, int b) {
+            return a + b;
+        }
+        void main() {
+            int a[1], b;
+            test(a[0], b);
+            test(b, fail);
+        }"""
+        expect = "Undeclared Identifier: fail"
+        self.assertTrue(TestChecker.test(input,expect,420))
+
+    def test_undeclared_identifier_in_func(self):
+        input = """
+        string sherlock() {
+            string ret;
+            sher = "sher";
+            ret = sher + lock;
+            return ret;
+        }
+        void main() {
+            sherlock();
+        }
+        string sher;"""
+        expect = "Undeclared Identifier: lock"
+        self.assertTrue(TestChecker.test(input,expect,421))
+
+    def test_undeclared_func_in_func(self):
+        input = """
+        int plus(int a, int b) {
+            return a + b;
+        }
+        void main() {
+            int a, b;
+            a = b = 9;
+            plus(mul(a, b), div(a, b));
+        }
+        int mul(int a, int b) {
+            return a * b;
+        }"""
+        expect = "Undeclared Function: div"
+        self.assertTrue(TestChecker.test(input,expect,422))
+
+    def test_undeclared_arrcell_index(self):
+        input = """
+        void main() {
+            int index;
+            index = 5;
+            a[index] + a[9] + a[b];
+        }
+        int a[10];"""
+        expect = "Undeclared Identifier: b"
+        self.assertTrue(TestChecker.test(input,expect,423))
+
+    def test_undeclared_no_error(self):
+        input = """
+        float arr[10];
+        void main() {
+            int a, b, c;
+            a = b = c = 100;
+            arr[1] = func(a); 
+            d = func(b);
+            test(c);
+        }
+        float func(int a) {
+            return a * 0.2 - 3;
+        }
+        float d;
+        int test(int a) {
+            return a + 1;
+        }"""
+        expect = ""
+        self.assertTrue(TestChecker.test(input,expect,424))

@@ -1,0 +1,9 @@
+ 
+        void main() {
+            boolean flag;
+            flag = true;
+            float f;
+            f = 4.4;
+            f = f + flag;
+        }
+        

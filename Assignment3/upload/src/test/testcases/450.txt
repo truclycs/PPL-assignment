@@ -3,14 +3,11 @@
             foo1();
             foo3();
         }
-
         void foo1() {
             foo2();
         }
-
         void foo2() {
             foo1();
         }
-
         void foo3(){}
         

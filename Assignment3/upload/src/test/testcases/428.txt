@@ -4,12 +4,10 @@
             s = "string";
             return s;
         }
-
         int func(int n) {
             getString();
             return n * func(n - 1);
         }
-
         void main() {
             int n;
             n = 10;

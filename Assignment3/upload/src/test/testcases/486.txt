@@ -1,0 +1,17 @@
+ 
+        int foo(int x) {
+            return x * x;
+        }
+
+        int[] main(int a[]) {
+            int b[10];
+            int x;
+            x = 10;
+            if (foo(x) == 100) {
+                return a;
+            }
+            else {
+                return b;
+            }
+        }
+        

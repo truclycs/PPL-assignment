@@ -7,11 +7,9 @@
             foo1();
             return 2;
         }
-
         int foo3() {
             foo2();
             return 3;
         }
-
         void main(){}
         

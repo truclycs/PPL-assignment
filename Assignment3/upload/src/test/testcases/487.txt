@@ -1,0 +1,6 @@
+ 
+        void main() {
+            float f;
+            f = f % 10;
+        }
+        

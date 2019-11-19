@@ -1,0 +1,16 @@
+
+        int[] getArr(int a[]) {
+            int b[10];
+            if (b[0] < 10) {
+                return b;
+            }
+            else {
+                return a;
+            }
+        }
+
+        void main(int b[]) {
+            int a[10];
+            b = getArr(a);
+        }
+        

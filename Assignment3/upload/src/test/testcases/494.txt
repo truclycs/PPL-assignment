@@ -1,0 +1,7 @@
+ 
+        void main() {
+            int a, b, c;
+            float d;
+            b = d / c + a;
+        }
+        

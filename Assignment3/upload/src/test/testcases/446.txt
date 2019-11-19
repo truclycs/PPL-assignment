@@ -10,7 +10,6 @@
             }
             return max;
         }
-
         void main() {
             int n;
             n = 10;

@@ -7,7 +7,6 @@
                 return true;
             }
         }
-
         void main() {
             int x, y, z;
             foo(x, y, z);

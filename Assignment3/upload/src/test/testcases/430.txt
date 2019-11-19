@@ -2,7 +2,6 @@
         float foo(float a, float b) {
             return a * b;
         }
-
         int main() {
             float a, b;
             foo(a, b);

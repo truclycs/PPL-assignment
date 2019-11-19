@@ -1,27 +1,22 @@
  
         int x;
-
         void funcVoid() {
             int a, b;
             x = a + b;
         }
-
         int getSum(int a, int b) {
             return a + b;
         }
-
         boolean check(int a, int b) {
             if (getSum(a, b) == 10) {
                 return true;
             }
         }
-
         void getRes(int a, int b) {
             funcVoid();
             x = getSum(a, b) - x;
             check(a, b);
         }
-
         void main() {
             int a, b;
             getRes(a, b);

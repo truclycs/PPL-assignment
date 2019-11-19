@@ -9,6 +9,6 @@
             putBoolLn(false);
             putString("Built-in");
             putStringLn("Built-in");
-            putLn("\n");
+            putLn();
         }
         
