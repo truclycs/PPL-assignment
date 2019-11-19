@@ -1418,8 +1418,8 @@ class CheckSuite(unittest.TestCase):
             return f;
         }
 
-        int[] arr() {
-            int a[10];
+        int[] arr(){
+            int a [20]; 
             return a;
         }
 
@@ -1439,7 +1439,7 @@ class CheckSuite(unittest.TestCase):
                     break;
                 }
             }
-
+            arr()[10] = 10;
             total();
             return 0;
         }

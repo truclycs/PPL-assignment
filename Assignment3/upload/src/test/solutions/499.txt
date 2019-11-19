@@ -1,1 +1,0 @@
-Type Mismatch In Expression: ArrayCell(CallExpr(Id(arr),[]),IntLiteral(0))

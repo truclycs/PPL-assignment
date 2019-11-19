@@ -1,0 +1,9 @@
+ 
+        int [] foo(){
+            int a [20]; 
+            return a;
+        }
+        void main (){
+            foo()[10] = 20;
+        }
+        

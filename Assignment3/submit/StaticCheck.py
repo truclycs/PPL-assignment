@@ -210,6 +210,8 @@ class StaticChecker(BaseVisitor, Utils):
                 return BoolType()
             elif (type(left),type(right)) == (BoolType,BoolType):
                 return BoolType()
+            elif (type(left),type(right)) == (StringType,StringType):
+                return BoolType()
             raise TypeMismatchInExpression(ast)
         elif op == "%":
             if (type(left),type(right)) == (IntType,IntType):
@@ -275,7 +277,7 @@ class StaticChecker(BaseVisitor, Utils):
             raise TypeMismatchInExpression(ast)
         else:
             arr = self.visit(ast.arr,(environment,c[1],c[2],[],c[4],c[5]))
-            if type(arr) is (ArrayType or ArrayPointerType):
+            if type(arr) in [ArrayType, ArrayPointerType]:
                 return arr.eleType
             else:
                 raise TypeMismatchInExpression(ast)

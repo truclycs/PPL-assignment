@@ -41,8 +41,8 @@
             return f;
         }
 
-        int[] arr() {
-            int a[10];
+        int[] arr(){
+            int a [20]; 
             return a;
         }
 
@@ -62,9 +62,8 @@
                     break;
                 }
             }
-
+            arr()[10] = 10;
             total();
-            arr()[0];
             return 0;
         }
         
