@@ -1,12 +1,10 @@
 
-        string str;
-        int main(float a) {
-            str = "Are u happy?";
-            putString(str);
-            string s;
-            s = str = "Yup!!!";
-            putString(s);
-            if (s == str) {}
+        int foo() {
             return 0;
+        }
+        void main(){
+            int foo;
+            foo = 5;
+            foo();
         }
         

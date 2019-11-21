@@ -1,1 +1,1 @@
-Type Mismatch In Expression: BinaryOp(==,Id(s),Id(str))
+Undeclared Function: foo

@@ -1451,3 +1451,18 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input,expect,499))    
+
+
+    # def test(self):
+    #     input = """
+    #     int foo() {
+    #         return 0;
+    #     }
+    #     void main(){
+    #         int foo;
+    #         foo = 5;
+    #         foo();
+    #     }
+    #     """
+    #     expect = ""
+    #     self.assertTrue(TestChecker.test(input,expect,500))
