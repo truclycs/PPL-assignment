@@ -1,1 +1,8 @@
-Program([FuncDecl(Id(main),[],IntType,Block([CallExpr(Id(putIntLn),[])]))])
+
+        void main() {
+            boolean flag;
+            !flag;
+            int a;
+            !a;
+        }
+        

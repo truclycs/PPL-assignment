@@ -148,7 +148,7 @@ class StaticChecker(BaseVisitor, Utils):
                 end = self.visit(mem, (environment, c[1], c[2], [], c[4], c[5]))
                 
         environment += list_para
-        return end if end is True or end is "BC" else False   
+        return end if end is True or end is 2 else False   
 
     def visitIf(self, ast, c):
         environment = c[0].copy()
@@ -161,10 +161,10 @@ class StaticChecker(BaseVisitor, Utils):
         
         if ts is True and es is True:
             return True
-        elif ts is "BC" and es is "BC" or\
-             ts is "BC" and es is True or\
-             ts is True and es is "BC":
-            return "BC"
+        elif ts is 2 and es is 2 or\
+             ts is 2 and es is True or\
+             ts is True and es is 2:
+            return 2
 
     def visitFor(self,ast,c):
         environment = c[0].copy()
@@ -182,7 +182,7 @@ class StaticChecker(BaseVisitor, Utils):
         environment = c[0].copy()
         end = False 
         for st in ast.sl:
-            if end is True or end is "BC":
+            if end is True or end is 2:
                 raise UnreachableStatement(st)
             end = self.visit(st,(environment,c[1],True,[],c[4],c[5]))
         if type(self.visit(ast.exp,(environment,c[1],False,[],c[4],c[5]))) is not BoolType:
@@ -209,8 +209,6 @@ class StaticChecker(BaseVisitor, Utils):
             if (type(left),type(right)) == (IntType,IntType):
                 return BoolType()
             elif (type(left),type(right)) == (BoolType,BoolType):
-                return BoolType()
-            elif (type(left),type(right)) == (StringType,StringType):
                 return BoolType()
             raise TypeMismatchInExpression(ast)
         elif op == "%":
@@ -285,12 +283,12 @@ class StaticChecker(BaseVisitor, Utils):
     def visitBreak(self, ast, c):
         if c[2] == False:
             raise BreakNotInLoop()
-        return "BC"
+        return 2
 
     def visitContinue(self, ast, c):
         if c[2] == False:
             raise ContinueNotInLoop()
-        return "BC"
+        return 2
 
     def visitReturn(self, ast, c):        
         environment = c[0].copy()

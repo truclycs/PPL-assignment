@@ -1,9 +1,12 @@
- 
-        int [] foo(){
-            int a [20]; 
-            return a;
-        }
-        void main (){
-            foo()[10] = 20;
+
+        string str;
+        int main(float a) {
+            str = "Are u happy?";
+            putString(str);
+            string s;
+            s = str = "Yup!!!";
+            putString(s);
+            if (s == str) {}
+            return 0;
         }
         

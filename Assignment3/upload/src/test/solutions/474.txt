@@ -1,1 +1,1 @@
-Type Mismatch In Expression: CallExpr(Id(putIntLn),[])
+Type Mismatch In Expression: UnaryOp(!,Id(a))

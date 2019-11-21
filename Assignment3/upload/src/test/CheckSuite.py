@@ -6,7 +6,7 @@ class CheckSuite(unittest.TestCase):
 
 #================Redeclared Variable/Function/Parameter==============
 
-    def testRedeclaredVariable1(self):
+    def testRedeclaredVariableGlobal(self):
         input = """
         int a;
         int a;
@@ -15,7 +15,7 @@ class CheckSuite(unittest.TestCase):
         expect = "Redeclared Variable: a"
         self.assertTrue(TestChecker.test(input,expect,400))
 
-    def testRedeclaredVariable2(self):  
+    def testRedeclaredbGlobal(self):  
         input = """
         int b;
         float b;
@@ -24,7 +24,7 @@ class CheckSuite(unittest.TestCase):
         expect = "Redeclared Variable: b"
         self.assertTrue(TestChecker.test(input,expect,401))
 
-    def testRedeclaredVariable3(self):  
+    def testRedeclaredcGlobal(self):  
         input = """
         int c;
         void main() {
@@ -35,7 +35,7 @@ class CheckSuite(unittest.TestCase):
         expect = "Redeclared Variable: c"
         self.assertTrue(TestChecker.test(input,expect,402))
 
-    def testRedeclaredVariable4(self):  
+    def testRedeclaredVariable(self):  
         input = """
         int a, b, c, d, a;
         void main() {
@@ -1051,11 +1051,16 @@ class CheckSuite(unittest.TestCase):
         expect = "Type Mismatch In Expression: CallExpr(Id(getInt),[IntLiteral(4)])"
         self.assertTrue(TestChecker.test(input,expect,473))
 
-    def test_diff_numofparam_stmt_use_ast(self):
-        input = Program([
-                FuncDecl(Id("main"),[],IntType(),Block([
-                    CallExpr(Id("putIntLn"),[])]))])
-        expect = "Type Mismatch In Expression: CallExpr(Id(putIntLn),[])"
+    def testUnary(self):
+        input = """
+        void main() {
+            boolean flag;
+            !flag;
+            int a;
+            !a;
+        }
+        """
+        expect = "Type Mismatch In Expression: UnaryOp(!,Id(a))"
         self.assertTrue(TestChecker.test(input,expect,474))
 
     def testTypeMismatchInExp(self):
