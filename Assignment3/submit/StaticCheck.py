@@ -1,6 +1,5 @@
 #Student ID: 1710187  
-#Student name: Nguyen Thi Truc Ly  
-              
+#Student name: Nguyen Thi Truc Ly   
 from AST import * 
 from Visitor import *
 from Utils import Utils
@@ -35,40 +34,33 @@ def overrideDeclaration(environment, name):
     [environment.remove(id) for id in environment if id.name == name]
 
 def BinOpType(left, right):
-    if (type(left), type(right)) == (IntType, IntType):
+    lr = (type(left), type(right))
+    if lr == (IntType, IntType):
         return IntType()
-    elif ((type(left), type(right)) == (FloatType, FloatType)) or\
-         ((type(left), type(right)) == (FloatType, IntType)) or\
-         ((type(left), type(right)) == (IntType, FloatType)): 
+    elif lr in [(FloatType, FloatType), (FloatType, IntType), (IntType, FloatType)]:
         return FloatType()
     return None
 
 def assignRule(left, right):
-    if type(left) == VoidType or type(left) == ArrayType:
+    l = type(left)
+    r = type(right)
+    if l in [VoidType, ArrayType]:
         return False
-    elif ((type(left) == ArrayPointerType and type(right) == ArrayType)) or\
-         ((type(left) == ArrayPointerType and type(right) == ArrayPointerType)):
+    elif (l, r) in [(ArrayPointerType, ArrayType), (ArrayPointerType, ArrayPointerType)]:
         return eleType(left.eleType, right.eleType)
-    elif (type(left), type(right)) == (FloatType, IntType):
+    elif (l, r) == (FloatType, IntType):
         return True 
     else:
-        return type(left) == type(right)
+        return l == r
 
 def eleType(left, right):
-    if ((type(left), type(right)) == (BoolType, BoolType)) or\
-       ((type(left), type(right)) == (StringType, StringType)) or\
-       ((type(left), type(right)) == (FloatType, FloatType)) or\
-       ((type(left), type(right)) == (IntType, IntType)):
+    if (type(left), type(right)) in [(BoolType, BoolType), (StringType, StringType), (FloatType, FloatType), (IntType, IntType)]:
         return True
     else:
         return False
 
 def explicitType(left, right):
-    if ((type(left), type(right)) == (BoolType, BoolType)) or\
-       ((type(left), type(right)) == (StringType, StringType)) or\
-       ((type(left), type(right)) == (FloatType, FloatType)) or\
-       ((type(left), type(right)) == (IntType, IntType)) or\
-       ((type(left), type(right)) == (FloatType, IntType)):
+    if (type(left), type(right)) in [(BoolType, BoolType), (StringType, StringType), (FloatType, FloatType), (IntType, IntType), (FloatType, IntType)]:
         return True
     else: 
         return False
@@ -123,14 +115,10 @@ class StaticChecker(BaseVisitor, Utils):
     def visitFuncDecl(self, ast, c): 
         environment = c[0].copy()
         list_para = []
-
         for para in ast.param:
             list_para.append(checkRedeclared(list_para, para, "Parameter"))
-
         environment += list_para
-        
         is_return = self.visit(ast.body, (environment, ast.returnType, False, list_para, c[4], ast.name.name))
-       
         if not is_return and type(ast.returnType) is not VoidType:
             raise FunctionNotReturn(ast.name.name)
 
@@ -148,41 +136,33 @@ class StaticChecker(BaseVisitor, Utils):
                 end = self.visit(mem, (environment, c[1], c[2], [], c[4], c[5]))
                 
         environment += list_para
-        return end if end is True or end is "BC" else False   
+        return end if end is True or end is 2 else False   
 
     def visitIf(self, ast, c):
         environment = c[0].copy()
-
-        if type(self.visit(ast.expr,(environment,c[1],c[2],None,c[4],c[5]))) != BoolType:
+        if type(self.visit(ast.expr, (environment, c[1], c[2], None, c[4], c[5]))) is not BoolType:
             raise TypeMismatchInStatement(ast)
-
-        ts = self.visit(ast.thenStmt,(environment,c[1],c[2],[],c[4],c[5]))
-        es = self.visit(ast.elseStmt,(environment,c[1],c[2],[],c[4],c[5])) if ast.elseStmt else None
-        
-        if ts is True and es is True:
+        then_stmt = self.visit(ast.thenStmt, (environment, c[1], c[2], [], c[4], c[5]))
+        else_stmt = self.visit(ast.elseStmt, (environment, c[1], c[2], [], c[4], c[5])) if ast.elseStmt else None
+        if (then_stmt, else_stmt) == (True, True):
             return True
-        elif ts is "BC" and es is "BC" or\
-             ts is "BC" and es is True or\
-             ts is True and es is "BC":
-            return "BC"
+        elif (then_stmt, else_stmt) in [(2, 2), (2, True), (True, 2)]:
+            return 2
 
     def visitFor(self,ast,c):
         environment = c[0].copy()
         ex1 = self.visit(ast.expr1,(environment,c[1],False,[],c[4],c[5]))
         ex2 = self.visit(ast.expr2,(environment,c[1],False,[],c[4],c[5]))
         ex3 = self.visit(ast.expr3,(environment,c[1],False,[],c[4],c[5]))
-        if type(ex1) is not IntType or\
-           type(ex2) is not BoolType or\
-           type(ex3) is not IntType:
-            raise TypeMismatchInStatement(ast)
-    
+        if type(ex1) is not IntType or type(ex2) is not BoolType or type(ex3) is not IntType:
+            raise TypeMismatchInStatement(ast)    
         self.visit(ast.loop,(environment,c[1],True,[],c[4],c[5]))
         
     def visitDowhile(self, ast, c):
         environment = c[0].copy()
         end = False 
         for st in ast.sl:
-            if end is True or end is "BC":
+            if end in [(True), (2)]:
                 raise UnreachableStatement(st)
             end = self.visit(st,(environment,c[1],True,[],c[4],c[5]))
         if type(self.visit(ast.exp,(environment,c[1],False,[],c[4],c[5]))) is not BoolType:
@@ -191,61 +171,62 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitBinaryOp(self, ast, c):
         environment = c[0].copy() if c[0] is not None else []
-        left  = self.visit(ast.left,(environment,c[1],c[2],[],c[4],c[5]))
-        right  = self.visit(ast.right,(environment,c[1],c[2],[],c[4],c[5]))
-        op  = ast.op
+        left = self.visit(ast.left, (environment, c[1], c[2], [], c[4], c[5]))
+        right = self.visit(ast.right, (environment, c[1], c[2], [], c[4], c[5]))
+        op = ast.op
 
-        if op == "+" or op == "-" or op == "*" or op == "/":
-            rtype = BinOpType(left,right)
+        lr = (type(left), type(right))
+
+        if op in [("+"), ("-"), ("*"), ("/")]:
+            rtype = BinOpType(left, right)
             if rtype is not None:
                 return rtype
             raise TypeMismatchInExpression(ast)
-        elif op == "<" or op == "<=" or op == ">" or op == ">=":
+        elif op in [("<"), ("<="), (">"), (">=")]:
             rtype = BinOpType(left,right)
             if rtype is not None:
                 return BoolType()
             raise TypeMismatchInExpression(ast)
-        elif op == "==" or op == "!=":
-            if (type(left),type(right)) == (IntType,IntType):
-                return BoolType()
-            elif (type(left),type(right)) == (BoolType,BoolType):
-                return BoolType()
-            elif (type(left),type(right)) == (StringType,StringType):
+
+        elif op in [("=="), ("!=")]:
+            if lr in [(IntType, IntType), (BoolType, BoolType)]:
                 return BoolType()
             raise TypeMismatchInExpression(ast)
+
         elif op == "%":
-            if (type(left),type(right)) == (IntType,IntType):
+            if lr == (IntType, IntType):
                 return IntType()
             raise TypeMismatchInExpression(ast)
-        elif op == "&&" or op == "||":
-            if (type(left), type(right)) == (BoolType,BoolType):
+
+        elif op in [("&&"), ("||")]:
+            if lr == (BoolType, BoolType):
                 return BoolType()
             raise TypeMismatchInExpression(ast)
+
         elif op == "=":
             if explicitType(left, right): 
                 if type(ast.left) not in [Id, ArrayCell]:
                     raise NotLeftValue(ast.left)
                 return left
             raise TypeMismatchInExpression(ast)
+
         raise TypeMismatchInExpression(ast)
 
     def visitUnaryOp(self,ast,c):
         environment = c[0].copy()
-        rtype  = self.visit(ast.body,(environment,c[1],c[2],[],c[4],c[5]))
+        rtype  = self.visit(ast.body, (environment, c[1], c[2], [], c[4], c[5]))
         if ast.op is "!":
             if type(rtype) is not BoolType:
                 raise TypeMismatchInExpression(ast) 
             return BoolType()
-        if (type(rtype) is not IntType) and (type(rtype) is not FloatType):
+        if type(rtype) not in [IntType, FloatType]:
             raise TypeMismatchInExpression(ast) 
         return rtype 
 
     def visitCallExpr(self, ast, c): 
         environment = c[0].copy() 
-
         res = self.lookup(ast.method.name, environment, lambda x: x.name)
-
-        if (res in StaticChecker.global_envi):
+        if res in StaticChecker.global_envi:
             c[4][res.name] = 1
             
         list_para = [self.visit(x, (environment, c[1], c[2], [], c[4], c[5])) for x in ast.param]
@@ -256,24 +237,24 @@ class StaticChecker(BaseVisitor, Utils):
             raise TypeMismatchInExpression(ast)
         else:
             for i in range(len(list_para)):
-                if assignRule(res.mtype.partype[i],list_para[i]) is False:
+                if not assignRule(res.mtype.partype[i],list_para[i]):
                     raise TypeMismatchInExpression(ast)
 
             if ast.method.name != c[5]:
-                c[4][ast.method.name] += 1
+                c[4][ast.method.name] = 1
 
             return res.mtype.rettype
 
     def visitId(self, ast, c):
         environment = c[0].copy()
         id = self.lookup(ast.name, environment, lambda x: x.name)
-        if id is None:
+        if not id:
             raise Undeclared(Identifier(), ast.name) 
         return id.mtype 
 
     def visitArrayCell(self, ast, c):
         environment = c[0].copy()
-        if type(self.visit(ast.idx,(environment,c[1],c[2],[],c[4],c[5]))) is not IntType:
+        if type(self.visit(ast.idx, (environment, c[1], c[2], [], c[4], c[5]))) is not IntType:
             raise TypeMismatchInExpression(ast)
         else:
             arr = self.visit(ast.arr,(environment,c[1],c[2],[],c[4],c[5]))
@@ -283,24 +264,24 @@ class StaticChecker(BaseVisitor, Utils):
                 raise TypeMismatchInExpression(ast)
 
     def visitBreak(self, ast, c):
-        if c[2] == False:
+        if not c[2]:
             raise BreakNotInLoop()
-        return "BC"
+        return 2
 
     def visitContinue(self, ast, c):
-        if c[2] == False:
+        if not c[2]:
             raise ContinueNotInLoop()
-        return "BC"
+        return 2
 
     def visitReturn(self, ast, c):        
         environment = c[0].copy()
         rtype = c[1]
-        if ast.expr is None:
+        if not ast.expr:
             if type(rtype) is VoidType:
                 return True
             else:
                 raise TypeMismatchInStatement(ast)
-        elif assignRule(rtype, self.visit(ast.expr,(environment,None, False,[],c[4],c[5]))) is False:
+        elif not assignRule(rtype, self.visit(ast.expr, (environment, None, False, [], c[4], c[5]))):
             raise TypeMismatchInStatement(ast)
         return True 
       

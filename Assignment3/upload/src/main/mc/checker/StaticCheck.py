@@ -140,7 +140,7 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitIf(self, ast, c):
         environment = c[0].copy()
-        if type(self.visit(ast.expr, (environment, c[1], c[2], None, c[4], c[5]))) != BoolType:
+        if type(self.visit(ast.expr, (environment, c[1], c[2], None, c[4], c[5]))) is not BoolType:
             raise TypeMismatchInStatement(ast)
         then_stmt = self.visit(ast.thenStmt, (environment, c[1], c[2], [], c[4], c[5]))
         else_stmt = self.visit(ast.elseStmt, (environment, c[1], c[2], [], c[4], c[5])) if ast.elseStmt else None
@@ -167,9 +167,7 @@ class StaticChecker(BaseVisitor, Utils):
             end = self.visit(st,(environment,c[1],True,[],c[4],c[5]))
         if type(self.visit(ast.exp,(environment,c[1],False,[],c[4],c[5]))) is not BoolType:
             raise TypeMismatchInStatement(ast)
-
-        return end
-        # return True if end is True else None
+        return True if end is True else None
 
     def visitBinaryOp(self, ast, c):
         environment = c[0].copy() if c[0] is not None else []
