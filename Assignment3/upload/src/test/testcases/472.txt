@@ -1,4 +1,17 @@
+void main(){
+            foo1();
+            int a;
+            for(a = 1; a < 32; a = a + a){
+                break;
+                continue;
+                if(a > 0){
+                break;
+            }
+            }
+            
+            //continue;
+        }
 
-        void main () {
-            putIntLn(getInt(4));
+        void foo1(){
+            putString("hello world");
         }

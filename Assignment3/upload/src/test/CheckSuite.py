@@ -1041,13 +1041,24 @@ class CheckSuite(unittest.TestCase):
         expect = "Type Mismatch In Expression: CallExpr(Id(getInt),[IntLiteral(4)])"
         self.assertTrue(TestChecker.test(input,expect,472))
 
-    def test_diff_numofparam_expr_use_ast(self):
-        input = Program([
-                FuncDecl(Id("main"),[],IntType(),Block([
-                    CallExpr(Id("putIntLn"),[
-                        CallExpr(Id("getInt"),[IntLiteral(4)])
-                        ])]))])
-        expect = "Type Mismatch In Expression: CallExpr(Id(getInt),[IntLiteral(4)])"
+    def testOverrideFuncFooByVarFoo(self):
+        input = """
+        int foo() {
+            return 0;
+        }
+
+        void foo2() {
+            foo();
+        }
+
+        void main(){
+            int foo;
+            foo = 5;
+            foo2();
+            foo();
+        }
+        """
+        expect = "Type Mismatch In Expression: CallExpr(Id(foo),[])"
         self.assertTrue(TestChecker.test(input,expect,473))
 
     def testUnary(self):
@@ -1450,18 +1461,3 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input,expect,499))    
-
-
-    def test(self):
-        input = """
-        int foo() {
-            return 0;
-        }
-        void main(){
-            int foo;
-            foo = 5;
-            foo();
-        }
-        """
-        expect = ""
-        self.assertTrue(TestChecker.test(input,expect,500))

@@ -1,15 +1,10 @@
- 
-        int foo1() {
-            return 1;
+
+        void R(int a){
+            a = a + 1;
         }
-        
-        int foo2() {
-            foo1();
-            return 2;
+        int param;
+        void main(){
+            param  = 1;
+            R(param + 1);
+            return param;
         }
-        int foo3() {
-            foo2();
-            return 3;
-        }
-        void main(){}
-        

@@ -1,7 +1,13 @@
- 
-        int main() {
-            int a[10];
-            a[7] = 15;
-            return a[0];
+
+        boolean or(boolean a, boolean b){
+            return a || b;
         }
-        
+
+        boolean main(boolean a, boolean b){
+            return or(a, b);
+        }
+
+        boolean orInt(int c, int b){
+            orInt(c, b);
+            return c || b;
+        }

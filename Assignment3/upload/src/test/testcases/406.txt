@@ -1,9 +1,6 @@
 
-        void foo(){}
-        void main() {
-            foo();
-        }
-        float foo(){
-            return 17.11;
-        }
-        
+        int s;
+        void main(){
+            return;
+        } 
+        boolean True(int s, int s){return true;}

@@ -1,9 +1,8 @@
- 
-        void main() {
-            boolean flag;
-            flag = true;
-            float f;
-            f = 4.4;
-            f = f + flag;
+
+        void main(int g){
+            float array[5];
+            array[4] = 0;
+            4 - 5 + g = g;
+            return;
         }
         

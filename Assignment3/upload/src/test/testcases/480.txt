@@ -1,5 +1,3 @@
- 
-        void main() {
-            putBool("true");
-        }
+
+        int foo;
         

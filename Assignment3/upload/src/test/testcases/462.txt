@@ -1,7 +1,14 @@
- 
-        void main() {
-            string s;
-            s = "checkReturn";
-            return ;
+
+        boolean and(boolean a, boolean b){
+            return a && b;
+        }
+
+        boolean main(boolean a, boolean b){
+            return and(a, b);
+        }
+
+        boolean andInt(int a, int b){
+            andInt(a, b);
+            return a && b;
         }
         

@@ -1,1 +1,1 @@
-Redeclared Variable: x
+Redeclared Variable: b

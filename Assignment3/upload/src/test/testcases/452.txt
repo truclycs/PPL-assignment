@@ -1,8 +1,12 @@
 
-        void main(){
-            if (10.5) {
-                int i;
-                i = i * i;
-            }
+        int main(){
+            int a;
+            a = 5;
+            int b;
+            b = 6;
+            string c;
+            c = "hello";
+            a > b;
+            c > a;
+            return -1;
         }
-        

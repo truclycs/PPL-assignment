@@ -1,14 +1,14 @@
- 
-        float foo(int x, int y, int z) {
-            if (x == y) {
-                return 10.0;
-            }
-            else {
-                return true;
-            }
-        }
-        void main() {
-            int x, y, z;
-            foo(x, y, z);
+
+        void main(){
+            int a;
+            a = 5;
+            int b;
+            b = 6;
+            float c;
+            c = 1.e-9;
+            string s;
+            s = "1710195";
+            a = a + b + b +a +a+ b+a;
+            s = s + s;
         }
         

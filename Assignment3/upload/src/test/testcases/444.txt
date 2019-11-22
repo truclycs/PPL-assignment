@@ -1,5 +1,7 @@
 
-        void foo(int main) {
-            putStringLn("No Entry Point");
-        }
-        
+        int foo;
+            void foo(){return;} 
+            void main() {
+                return;
+            }
+            

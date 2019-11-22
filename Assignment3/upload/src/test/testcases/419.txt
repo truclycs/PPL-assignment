@@ -1,12 +1,14 @@
- 
-        float foo(int a) {
-            a = 1;
-            b = 2;
-            return 4.7;
+
+        int mul(int l, int r){
+            int res;
+            res = l*r;
+            return res;
         }
-        int main() {
-            int a;
-            foo(a);
-            return 0;
+        void main(int arg[]){
+            int res;
+            int a, b, c;
+            res = a*b + b*c + c*b + mul(c,a);
+            res = res + sum(res);
+            return;
         }
         

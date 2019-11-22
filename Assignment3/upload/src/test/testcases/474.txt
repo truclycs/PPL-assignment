@@ -1,8 +1,5 @@
 
-        void main() {
-            boolean flag;
-            !flag;
-            int a;
-            !a;
+        void main(){
+            continue;
         }
         

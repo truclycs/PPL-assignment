@@ -1,10 +1,8 @@
- 
-        int main() {
-            int n;
-            do {
-                n = n + 1;
-            }
-            while (4.4);
-            return 0;
-        }
-        
+
+        int a;
+        void foo2(){}
+        int main(){
+            int a;
+            foo();
+            return 1;}
+        int foo(){return a + 1;}

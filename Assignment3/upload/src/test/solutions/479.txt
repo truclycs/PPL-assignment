@@ -1,1 +1,1 @@
-Type Mismatch In Expression: CallExpr(Id(getFloat),[CallExpr(Id(putInt),[IntLiteral(18)])])
+Type Mismatch In Statement: Return(IntLiteral(1))

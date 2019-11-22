@@ -1,7 +1,12 @@
-
-        int main() {
+ 
+        int main(){
             int a;
-            int a;
-            return 0;
+            a = 5;
+            boolean b;
+            b = true;
+            if(b){
+                float a;
+                int a;
+            }
+            return -1;
         }
-        

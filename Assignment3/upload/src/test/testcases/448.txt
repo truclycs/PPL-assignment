@@ -1,6 +1,12 @@
- 
-        void foo() {
-            foo();
+
+        int[] main(){
+            boolean b;
+            b = true;
+            int param[5];
+            foo(param[5]);
+            return b;
         }
-        void main(){}
+        int[] foo(int a[]){
+            return a[3];
+        }
         

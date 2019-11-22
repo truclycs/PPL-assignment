@@ -1,15 +1,10 @@
-
-        int foo() {
-            int a;
-            {
+void main(int arg[]){
+            if(true){
                 int a;
-                {
-                    int c, c;
+                a = 1;
+                if(a == 1){
+                    arg[2] = a;
                 }
+                string a;
             }
-            return 0;
         }
-        void main() {
-            foo();
-        }
-        

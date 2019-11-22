@@ -1,10 +1,18 @@
- 
-        int main() {
-            int n;
-            do {
-                n = n + 1;
-            }
-            while (true);
-            return 0;
+
+        float foo(int a, float b){
+            return a + b;
+        }
+        void main(){
+            int a;
+            a = 5;
+            boolean bool;
+            !bool;
+            int b;
+            b = 6;
+            float c;
+            c = 1.e-9;
+            c =  foo(b, c) - c;
+            !a;
+            //a = a + b + s;
         }
         

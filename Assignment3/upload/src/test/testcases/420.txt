@@ -1,11 +1,8 @@
- 
-        int foo() {
-            int b;
-            a = 1;
-            b = 2;
-            return b;
+
+        boolean main(int a){
+            boolean b, c, d;
+            if(bool(a, b, c, d)){
+                return true;
+            }
+            return false;
         }
-        int main() {
-            return foo();
-        }
-        

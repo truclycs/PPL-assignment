@@ -1,17 +1,6 @@
- 
-        string getString() {
-            string s;
-            s = "string";
-            return s;
+
+        string main(){
+            d = 5;
+            return c;
         }
-        int func(int n) {
-            getString();
-            return n * func(n - 1);
-        }
-        void main() {
-            int n;
-            n = 10;
-            func(n);
-            abc();
-        }
-        
+        int d;

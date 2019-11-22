@@ -1,10 +1,38 @@
- 
-        int foo(int x) {
-            return x;
-        }
 
-        void main() {
-            int n;
-            foo(n) = n;
+        float main(){
+            if(true){
+                if (true){
+                    if (true){
+                        return 0;
+                    }
+                    else{
+                        int a;
+                        float b;
+                        string c;
+                        boolean d;
+                        int e[5];
+                        a = 5;
+                        b = 5.1;
+                        c = "Nam";
+                        d = true;
+                    }
+                }
+                else{
+                    return 0;
+                }
+            }
+            else{
+                if (true){
+                    return 0;
+                }
+                else{
+                    if (true){
+                        return 0;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+            }
         }
         

@@ -1,10 +1,13 @@
- 
-        float foo(float a, float b) {
-            return a * b;
+
+        int test;
+        void main(){
+            foo(test);
+            foo1();
         }
-        int main() {
-            float a, b;
-            foo(a, b);
-            return 0;
+        void foo1(){
+            return;
         }
-        
+        float foo(int a){
+            test = 5;
+            return b;
+        }

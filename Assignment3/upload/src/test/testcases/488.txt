@@ -1,8 +1,8 @@
- 
-        void main() {
-            boolean flag;
-            if (flag <= true) {
-                flag = false;
-            }
+
+        void main(boolean g){
+            float array[5];
+            array[4] = 0;
+            4 > 5 = g;
+            return;
         }
         

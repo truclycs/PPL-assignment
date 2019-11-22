@@ -1,1 +1,1 @@
-Type Mismatch In Statement: Return(CallExpr(Id(checkPrime),[Id(n)]))
+Type Mismatch In Expression: UnaryOp(-,CallExpr(Id(foo),[]))

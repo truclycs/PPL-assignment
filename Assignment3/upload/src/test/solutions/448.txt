@@ -1,1 +1,1 @@
-Unreachable Function: foo
+Type Mismatch In Expression: CallExpr(Id(foo),[ArrayCell(Id(param),IntLiteral(5))])

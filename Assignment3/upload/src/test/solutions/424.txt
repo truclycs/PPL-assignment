@@ -1,1 +1,1 @@
-Undeclared Identifier: why
+Undeclared Function: undeclare

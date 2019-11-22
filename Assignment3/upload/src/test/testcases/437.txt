@@ -1,21 +1,18 @@
- 
-        int main() {
-            int i, n;
-            for (i = 0; i < n; i = i + 1) {
-                if (n % i == 0) {
-                    break;
-                }
-                else {
-                    {
-                        break;
-                    }
-                }
-            }
-            do {
-                i = i + 1;
-                break;
-            } while (i <= n);
-            break; //Here
-            return 0;
+
+        
+        int main(){
+            foo(a, c);
+            return -1;
         }
+        void foo(int arg[], float c){
+            string name;
+            name  = "Nguyen Dang Ha Nam";
+            int len;
+            len = 0;
+            for (arg[5] = 4; len != arg[5]; c = len - 1){
+                return;
+            }
+        }
+        int a[5];
+        float c;
         

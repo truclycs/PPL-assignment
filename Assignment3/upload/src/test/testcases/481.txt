@@ -1,5 +1,7 @@
- 
-        void main() {
-            putString(false);
+
+        int ain;
+        int main;
+        void Main(){
+
         }
         

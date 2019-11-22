@@ -1,12 +1,4 @@
- 
-        void main() {
-            foo1();
+
+        string main(int a, float b){
+            return b = a;
         }
-        void foo1() {
-            foo2();
-        }
-        void foo2() {
-            foo1();
-        }
-        void foo3(){}
-        

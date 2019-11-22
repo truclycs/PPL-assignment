@@ -1,6 +1,30 @@
 
-        void main() {
-            int a;
-            a + 1 = 10;
+        float main(){
+            if(true){
+                if (true){
+                    if (true){
+                        return 0;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else{
+                    return 0;
+                }
+            }
+            else{
+                if (true){
+                    return 0;
+                }
+                else{
+                    if (true){
+                        return 0;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+            }
         }
         

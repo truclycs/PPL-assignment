@@ -1,7 +1,5 @@
- 
-        void main() {
-            int a, b, c;
-            float d;
-            b = d / c + a;
+
+        float main(int a, float b){
+            return b/a;
         }
         

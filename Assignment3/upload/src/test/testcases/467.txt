@@ -1,18 +1,19 @@
- 
-        boolean checkPrime(int n) {
-            if (n < 2) {
-                return false;
-            } 
-            int i;
-            for (i = 2; i * i <= n ; i = i + 1) {
-                if (n % i == 0) {
-                    return 0;
-                }
-            }
-            return true;
+
+        void foo(){
+            foo();
         }
-        void main() {
-            int n;
-            checkPrime(n);
+
+        void main(){
+            int a;
+            a = 5;
+            int b;
+            b = 6;
+            float c;
+            c = 1.e-9;
+            string s;
+            s = "1710195";
+            a = a + b + b +a +a+ b+a;
+            int man;
+            man = main();
         }
         

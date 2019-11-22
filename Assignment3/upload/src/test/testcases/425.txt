@@ -1,7 +1,8 @@
- 
-        int n;
-        void main() {
-            n = 1;
-            y[18] = 2;
+
+        int main(int arg[], int b){
+            do{
+                return b;
+            }
+            while foo(arg[1], b);
+            return b;
         }
-        

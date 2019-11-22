@@ -1,18 +1,5 @@
 
-        int foo() {
-            int a;
-            {
-                int here;
-                {
-                    int scope; 
-                    boolean a;
-                }
-                float here;
-            }
-            return 0;
-        }
-        int main() {
+        int main(int a, int b, int c){
             foo();
             return 0;
         }
-        

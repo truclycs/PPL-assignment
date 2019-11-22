@@ -1,11 +1,16 @@
- 
-        int n;
-        int foo() {
-            n = 1;
-            m = 2;
-            return m;
+
+        int foo(int a){
+            if (a > 0){
+                return 1;
+            }
+            return foo(a + 1);
         }
-        void main() {
-            foo();
+        void main(){
+            int res, test;
+            test = -1000;
+            res = foo(test);
+            if(res > 0){
+                Main();
+                return;
+            }
         }
-        

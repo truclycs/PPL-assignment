@@ -1,11 +1,11 @@
- 
-        int main() {
-            int a;
-            if (a == 1) {
-                a = 10;
+
+        void main(int arg[], int c){
+            string name;
+            name  = "Nguyen Dang Ha Nam";
+            putString(name);
+            int len;
+            len = 10;
+            if(putInt(len)){
+                return;
             }
-            else {
-                return 0;
-            }
-        }        
-        
+        }

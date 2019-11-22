@@ -1,12 +1,12 @@
- 
-        void foo() {
-            n = 1;
-            x = n;
-        }
-        int n;
-        void main() {
-            putFloat(11.34);
-            foo();
-            return;
+
+        int main(){
+            boolean main;
+            main = true;
+            if(main){
+                do 
+                    main = res();
+                while main;
+            }
+            return 0;
         }
         

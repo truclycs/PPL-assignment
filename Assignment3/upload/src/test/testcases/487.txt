@@ -1,6 +1,10 @@
- 
-        void main() {
-            float f;
-            f = f % 10;
+
+        void main(int g){
+            int ma;
+            float array[5];
+            array[4] = 0;
+            ma = array[4];
+            
+            ma = main;
+            return;
         }
-        

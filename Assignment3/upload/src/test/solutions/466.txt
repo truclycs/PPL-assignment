@@ -1,1 +1,1 @@
-Type Mismatch In Statement: Return(BooleanLiteral(true))
+Type Mismatch In Expression: BinaryOp(+,Id(s),Id(s))

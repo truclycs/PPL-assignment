@@ -1,4 +1,13 @@
- 
-        void foo(){}
-        void main(){}
+
+        int[] foo(){
+            int a[10];
+            a[1] = 2;
+            return a;
+        }
+        int[] main(){
+            boolean b;
+            b = true;
+            foo();
+            return b;
+        }
         

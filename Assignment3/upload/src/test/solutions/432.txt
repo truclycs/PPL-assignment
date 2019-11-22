@@ -1,1 +1,1 @@
-Function foo Not Return 
+Undeclared Identifier: a

@@ -1,4 +1,10 @@
 
-        void main () {
-            putIntLn();
+        void foo(){
+            return;
+        }
+        int main(){
+            int LHS;
+            LHS = 3;
+            LHS + 1 = 5;
+            return 1;
         }

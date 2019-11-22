@@ -1,8 +1,7 @@
- 
-        int n;
-        void main() {
-            n = 1;
-            int n;
-            why = 2;
+
+        int main(int arg[], int b){
+            if(undeclare(b)){
+                return b;
+            }
+            return 0;
         }
-        

@@ -1,5 +1,16 @@
- 
-        int main() {
-            return getInt(5);
+
+         float main(int min, int max){
+            float f;
+            for (min; min < 5; max = max + 1){
+                float f;
+                f = 6.6;
+                int g;
+                break;
+                if(!(min == 66)){
+                    break;
+                }
+            }
+            continue;
+            return f;
         }
         

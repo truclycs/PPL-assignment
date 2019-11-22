@@ -1,5 +1,1 @@
-
-        int a;
-        int a;
-        void main() {}
-        
+int foo(){return 0;}

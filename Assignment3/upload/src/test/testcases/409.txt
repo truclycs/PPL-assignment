@@ -1,4 +1,6 @@
-
-        void main(string x, boolean x, int x, float x){
+ 
+        void main(){}
+        void Main(string k){
+            int k[6];
             return;
-        } 
+        }

@@ -1,1 +1,1 @@
-Type Mismatch In Statement: For(BinaryOp(=,Id(i),IntLiteral(0));BinaryOp(=,Id(i),Id(n));BinaryOp(=,Id(i),BinaryOp(+,Id(i),IntLiteral(1)));Block([BinaryOp(=,ArrayCell(Id(a),Id(i)),IntLiteral(0))]))
+Type Mismatch In Expression: BinaryOp(=,Id(b),BinaryOp(+,BinaryOp(+,BinaryOp(+,BinaryOp(+,BinaryOp(-,BinaryOp(+,BinaryOp(+,Id(a),BinaryOp(/,BinaryOp(*,Id(b),Id(a)),Id(c))),Id(b)),BinaryOp(*,Id(c),Id(c))),Id(a)),Id(a)),Id(b)),Id(a)))

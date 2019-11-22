@@ -1,1 +1,1 @@
-Undeclared Identifier: b
+Undeclared Function: sum

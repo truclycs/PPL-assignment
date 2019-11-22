@@ -1,1 +1,1 @@
-Not Left Value: IntLiteral(10)
+Type Mismatch In Statement: Return(BinaryOp(/,Id(a),Id(b)))

@@ -1,12 +1,14 @@
 
-        string foo(){
-            return "foo";
-        }
-        string foo(){
-            return "redeclared";
-        }
-        int main() {
-            foo();
+        int s;
+        void d(int c){}
+        int t;
+        int main(int t, float t[]){
+            float a;
+            a = 1;
+            s = 2;
+            f = 2;
+            d(2);
+            //g();
             return 0;
         }
-        
+        int f;

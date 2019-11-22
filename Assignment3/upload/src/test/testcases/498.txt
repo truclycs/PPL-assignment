@@ -1,6 +1,28 @@
 
-        void main() {
-            boolean flag;
-            true = flag;
+        float main(){
+            if(true){
+                if (true){
+                    if (true){
+                        return 0;
+                    }
+                }
+                else{
+                    return 0;
+                }
+            }
+            else{
+                if (true){
+                    return 0;
+                }
+                else{
+                    if (true){
+                        return 0;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+            }
+            return -1;
         }
         

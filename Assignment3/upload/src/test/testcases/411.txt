@@ -1,6 +1,14 @@
 
-        void main() {
+        void main(){
             int a;
-            string a[10];
+            a = 5;
+            boolean b;
+            b = true;
+            if(b){
+                a = 1;
+            }
+            else{
+                float b;
+                int b;
+            }
         }
-        

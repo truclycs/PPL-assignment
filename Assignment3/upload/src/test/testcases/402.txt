@@ -1,7 +1,1 @@
-
-        int c;
-        void main() {
-            putString("...");
-        }
-        string c[10];
-        
+int test;

@@ -1,10 +1,4 @@
- 
-        boolean foo(int a, int b) {
-            a = b;
+
+        int main(){
+            return a + 1;
         }
-        int main() {
-            int a, b;
-            foo(a, b);
-            return 0;
-        }
-        

@@ -1,13 +1,4 @@
- 
-        void main() {
-            foo1();
-            foo3();
-        }
-        void foo1() {
-            foo2();
-        }
-        void foo2() {
-            foo1();
-        }
-        void foo3(){}
-        
+
+        int foo(){return 0;}
+        float main(){return 0;}
+        void Main(){return foo();}

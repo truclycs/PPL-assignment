@@ -1,12 +1,11 @@
-
-        int foo() {
-            return 0;
+int main(){
+            int MSSV;
+            MSSV = 1710195;
+            if(MSSV == 1710195){
+                return MSSV;
+            }
+            return 1;
         }
-        float foo() {
-            return 4.4;
-        }
-        int main() {
-            foo();
-            return 0;
-        }
+        void foo(){}
+        float foo(int a){}
         

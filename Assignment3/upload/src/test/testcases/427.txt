@@ -1,7 +1,4 @@
- 
-        void main() {
-            int func;
-            func = 10;
-            foo();
+int c;
+        void main(){
+            b = 5;
         }
-        

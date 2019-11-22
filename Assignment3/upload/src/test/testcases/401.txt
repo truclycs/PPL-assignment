@@ -1,5 +1,1 @@
-
-        int b;
-        float b;
-        void main() {}
-        
+int Main(int main){return 1710195;}

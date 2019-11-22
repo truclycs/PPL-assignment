@@ -1,7 +1,2 @@
-
-        int a, b, c, d, a;
-        void main() {
-            putStringLn("...");
-            return;
-        }
-        
+int main(){return 0;}
+        void main(int a){}

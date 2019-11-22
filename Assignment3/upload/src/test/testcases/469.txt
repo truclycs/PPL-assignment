@@ -1,6 +1,14 @@
- 
-        int[] main() {
-            int a[10];
-            return a;
+
+        float main(){
+            int a;
+            a = 5;
+            -foo();
+            return -main();
+        }
+        float foo(){
+            return -13.5;
+        }
+        void wrong(){
+            -wrong();
         }
         

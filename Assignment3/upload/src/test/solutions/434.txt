@@ -1,1 +1,1 @@
-Function main Not Return 
+Type Mismatch In Statement: If(CallExpr(Id(putInt),[Id(len)]),Block([Return()]))

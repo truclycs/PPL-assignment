@@ -2,9 +2,15 @@
         int foo() {
             return 0;
         }
+
+        void foo2() {
+            foo();
+        }
+
         void main(){
             int foo;
             foo = 5;
+            foo2();
             foo();
         }
         

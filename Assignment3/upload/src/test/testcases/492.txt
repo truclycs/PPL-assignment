@@ -1,14 +1,15 @@
- 
-        void main(){
-            int n;
-            foo(complex(n));
+
+        int main(){
+            if(true){
+                if (true){
+                    return 0;
+                }
+                else{
+                    return 0;
+                }
+            }
+            else{
+                return 0;
+            }
         }
-        int foo(int a[]){
-            int arr;
-            return arr;
-        }
-        float[] complex(int a){
-            float f[10];
-            return f;
-        }        
         
