@@ -116,6 +116,10 @@ class StaticChecker(BaseVisitor, Utils):
         list_para = []
         for para in ast.param:
             list_para.append(checkRedeclared(list_para, para, "Parameter"))
+        
+        for para in list_para:
+            overrideDeclaration(environment, para.name)
+
         environment += list_para
         is_return = self.visit(ast.body, (environment, ast.returnType, False, list_para, c[4], ast.name.name))
         if is_return is False and type(ast.returnType) is not VoidType:
@@ -161,8 +165,6 @@ class StaticChecker(BaseVisitor, Utils):
         environment = c[0].copy()
         end = False 
         for st in ast.sl:
-            if end is 2 or end is True:
-                raise UnreachableStatement(st)
             end = self.visit(st,(environment,c[1],True,[],c[4],c[5]))
         if type(self.visit(ast.exp,(environment,c[1],False,[],c[4],c[5]))) is not BoolType:
             raise TypeMismatchInStatement(ast)

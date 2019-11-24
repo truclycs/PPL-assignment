@@ -1,16 +1,16 @@
 
-        int foo() {
-            return 0;
-        }
+                int a;
+                string main(boolean PPL){
+                    funcall(a, a + 1);
+                    if(PPL)
+                        return "Runnnnnnnnnn";
+                    else{
+                        // Runnnnnnnnnnnnnnnnnnnnnnn
+                    }
+                    return "Still runnnnnnn";
+                }
 
-        void foo2() {
-            foo();
-        }
-
-        void main(){
-            int foo;
-            foo = 5;
-            foo2();
-            foo();
-        }
-        
+                int funcall(int a, int b){
+                    return a + b;
+                }
+                
