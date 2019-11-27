@@ -1,19 +1,17 @@
 
-            int main(int argc, string argv){
-                string input;
-                print("Hello, This is Chat Bot made by Ryan \n") ;
-                print("say hi");
-                do {
-                    scanf("%s",input);
-                    for (i=0; i<length(input); i = i + 1)
-                        input[i] = tolower(input[i],loc);
-                    if (input == "hi")
-                        print("hello there \n");
-                    else if (input == "hi")
-                        print("Hey, what's up?\n");
-                    else
-                        print("Well i didn't understand. I hope i will be able to, soon! \n");
-                } while (input != "exit");
-                return 0;
+        float calculateSD(float data[])
+        {
+            float sum, mean, standardDeviation;
+            sum = 0.0;
+            standardDeviation = 0.0;
+            int i;
+            for(i=0; i<10; i=i+1)
+            {
+                sum = sum + data[i];
             }
+            mean = sum/10;
+            for(i = 0; i < 10; i = i + 1)
+            standardDeviation = standardDeviation + pow(data[i] - mean, 2);
+            return sqrt(standardDeviation/10);
+        }
         

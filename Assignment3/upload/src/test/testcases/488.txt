@@ -1,8 +1,0 @@
-
-        void main(boolean g){
-            float array[5];
-            array[4] = 0;
-            4 > 5 = g;
-            return;
-        }
-        

@@ -1,10 +1,8 @@
 
-            string main(){
-                for ( i = 0; i < 3E5; i = i + 1){
-                    {}
-                    {{}}
-                    {{{}}}
-                    {{{{}}}}
-                }
-            }
+        int main(int argc){
+            int a, b, c; // variable declaration
+            a=b=c=5; // assignment statement
+            float f[5]; // variable declaration
+            if ( a==b ) f[0] = 1.0; // if statement
+        }
         

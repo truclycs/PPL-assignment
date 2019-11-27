@@ -1,5 +1,0 @@
-
-        float main(int a, float b){
-            return b/a;
-        }
-        

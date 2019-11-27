@@ -1,5 +1,14 @@
 
-            void main(){
-                a = (((((((((((((((((((((((((((((((((((((((((((((a/3)))))))))))))))))))))))))))))))))))))))))))));
-            }
+        void main(){
+            int i[5];
+            boolean check;
+            do{
+                int count;
+                count = 0;
+                if(count != 0)
+                    break;
+                count = count*count;
+                {}
+            } while count == 0;
+        }
         

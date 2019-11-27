@@ -1,7 +1,0 @@
-
-        int ain;
-        int main;
-        void Main(){
-
-        }
-        

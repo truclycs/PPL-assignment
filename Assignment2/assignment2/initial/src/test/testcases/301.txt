@@ -1,6 +1,6 @@
 
-                int x,y,z;
-                float x,y,z;
-                string x,y,z;
-                boolean x,y,z;
+        int std_id;
+        float sem_score;
+        boolean isStudent;
+        string myString;
         

@@ -1,10 +1,11 @@
 
-            void main(){
-                int b;
-                b = 0;
-                if (5 == 6)
-                    b = b -3;
-                else 
-                    b = b /5;
+        int main(){
+            for (i = 1; j = 1; k = 1){
+                i = i + 2;
+                if ( i > j )
+                    print(i);
+                else
+                    print(j);
             }
+        }
         

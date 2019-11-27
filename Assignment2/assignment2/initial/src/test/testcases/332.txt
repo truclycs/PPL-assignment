@@ -1,9 +1,11 @@
 
-            void main(){
-                if (6 < 7)
-                    if ( 8 < 9)
-                        print("True");
-                    else
-                        print("False");
+        void main(){
+            for(changeA = 0; changeA < MATRIX/n_pros; changeA = changeA + 1)
+            {
+                for(i = 0; i < MATRIX; i = i + 1)
+                {
+                    matA[i] = rand % 2;
+                }
             }
+        }
         

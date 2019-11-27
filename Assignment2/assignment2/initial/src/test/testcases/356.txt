@@ -1,20 +1,5 @@
 
-            void main(){
-                int a, c[10];
-                int i;
-                i = 1;
-                a = c[0];
-                if (c[1] > a)
-                    do 
-                        a = a + 5;
-                        { int z;}
-                        //This is a test
-                    while a == 10;
-                else {
-                    do 
-                        {game = 10;}
-                        {game = true;}
-                    while a != 5;
-                }
-            }
+        int main(){
+            foo(2)[3+x] = a[b[2]] +3; //pass
+        }
         

@@ -1,15 +1,15 @@
 
-            int main() {
-                printf("Enter a sentence: ");
-                reverseSentence();
-                return 0;
-            }
-            void reverseSentence() {
-                string c;
-                scanf("%c", c);
-                if( c != "\n") {
-                    reverseSentence();
-                    printf("%c",c);
+        int main()
+        {
+            int number, i;
+            printf("Factors of %d are: ", number);
+            for(i=1; i <= number; i = i + 1)
+            {
+                if (number%i == 0)
+                {
+                    printf("%d ",i);
                 }
             }
+            return 0;
+        }
         

@@ -1,17 +1,17 @@
 
-            int main() {
-                int n, t1, t2, nextTerm;
-                for (i = 1; i <= n; i = i + 1) {
-                     // Prints the first two terms.
-                    if ((i == 1) || (i == 2)) {
-                        print( "%d",t1);
-                        continue;
-                    }
-                    nextTerm = t1 + t2;
-                    t1 = t2;
-                    t2 = nextTerm;
-                    print("%d ",nextTerm);
-                }
-                return 0;
-            }
+        int hcf(int n1, int n2)
+        {
+            if (n2 != 0)
+                return hcf(n2, n1%n2);
+            else 
+                return n1;
+        }
+        int main()
+        {
+            int n1, n2;
+            printf("Enter two positive integers: ");
+            n1 = 8; n2 = 73;
+            printf("G.C.D of %d and %d is %d.", n1, n2, hcf(n1,n2));
+            return 0;
+        }
         

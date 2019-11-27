@@ -1,21 +1,20 @@
 
-            int i; 
-            int f() {
-                return 200; 
-            }
-            void main() {  
-                int main;
-                main = f();
-                putIntLn(main); 
+        int main()
+        {
+            string s1, s2, i, j;
+            printf("Enter first string: ");
+            gets(s1);
+            printf("Enter second string: ");
+            gets(s2);
+            // calculate the length of string s1
+            // and store it in i
+            for(i = 0; s1[i] != ""; i = i + 1)
+                for(j = 0; s2[j] != ""; j = j + 1)
                 {
-                    int i;
-                    int main;
-                    int f;
-                    main = f = i = 100; 
-                    putIntLn(i); 
-                    putIntLn(main); 
-                    putIntLn(f);
+                    s1[i] = s2[j];
                 }
-                putIntLn(main); 
-            }
+            s1[i] = "";
+            printf("After concatenation: %s", s1);
+            return 0;
+        }
         

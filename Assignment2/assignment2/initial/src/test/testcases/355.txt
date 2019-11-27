@@ -1,14 +1,6 @@
 
-            void main(){
-                int a, c[10];
-                int i;
-                i = 1;
-                a = c[0];
-                if (c[1] > a)
-                    do 
-                        a = a + 5;
-                        { int z;}
-                        //This is a test
-                    while (a == 10) && (b + c >= d);
-            }
+        int main(){
+            ((arr))[5]; //pass
+            ((foo()))[5]; //pass
+        }
         

@@ -1,13 +1,9 @@
 
-            void main(){
-                int x;
-                x = 3;
-                if (x < 5){
-                    x = x -10;
-                    foo(x);
-                } else {
-                    x = x * 1.3e-3;
-                    foo(x);
-                }
+        void main(){
+            for(i = 0; i < MATRIX; i = i + 1)
+            {
+                    matA[i] = -rand % 2;
             }
+            return;
+        }
         

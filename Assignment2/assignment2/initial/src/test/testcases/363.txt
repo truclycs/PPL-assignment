@@ -1,8 +1,7 @@
 
-            void main(){
-                do
-                    break;
-                    break;
-                while (x = 10);
-            }
+        int main(){
+            arr[(i)]; //pass
+            arr[(1 + 2 - 3 * 4 / 5 % 6)]; //pass
+            arr[ (a = b) ]; //pass
+        }
         

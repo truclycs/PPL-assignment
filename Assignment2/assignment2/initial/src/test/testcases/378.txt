@@ -1,8 +1,7 @@
 
-            void main(){
-                do
-                    return a_p_t_x_4_8_6_9;
-                    return this_is_just_a_test_for_the_return_statement;
-                while (yes_this_is_true);
-            }
+        int main() {
+            // printf() displays the string inside quotation
+            printf("Hello, World!");
+            return 0;
+        }
         

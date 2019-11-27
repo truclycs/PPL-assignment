@@ -1,8 +1,0 @@
-
-        boolean main(int a){
-            boolean b, c, d;
-            if(bool(a, b, c, d)){
-                return true;
-            }
-            return false;
-        }

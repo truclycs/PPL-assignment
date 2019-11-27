@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([StringLiteral(^ What are words),StringLiteral(@ Anywhere you are, I am near),StringLiteral(# Anywhere you go, Ill be there),StringLiteral($ Anytime you whisper my name, youll see),StringLiteral(% How every single promise Ill keep),StringLiteral(^ Cause what kind of guy would I be),StringLiteral(& If I was to leave when you need me most),BooleanLiteral(true),BooleanLiteral(false)]))])
+Program([VarDecl(x,IntType),VarDecl(y,IntType),FuncDecl(Id(main),[],VoidType,Block([])),VarDecl(z,StringType)])

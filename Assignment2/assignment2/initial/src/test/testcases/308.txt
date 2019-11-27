@@ -1,3 +1,4 @@
 
-            int trichomobas_hominis(int a_varaiable[]){ /* Nothing to do */}
+        float[] main1() {}
+        boolean[] main2() {}
         

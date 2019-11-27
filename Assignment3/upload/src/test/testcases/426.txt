@@ -1,3 +1,0 @@
-int c;
-        float c;
-        int main(){return;}

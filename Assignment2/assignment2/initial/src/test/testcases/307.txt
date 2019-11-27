@@ -1,4 +1,5 @@
 
-            void what_the_test(int x, string y){}
-            string _test_the_code_by_a_code(boolean y){}
+        void main(){}
+        int main1(){}
+        float main2(){}
         

@@ -1,4 +1,0 @@
-
-        float Return(){return foo();}
-        int foo(){return main();}
-        int main(){return 1.2;}

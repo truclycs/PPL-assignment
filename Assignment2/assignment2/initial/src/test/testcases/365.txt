@@ -1,8 +1,6 @@
 
-            float foo(){
-                do {
-                    if (a % 3 == 0) break;
-                    a = a + 1;
-                } while (a < 100);
-            }
+        int main(){
+            func(1 + 2 - 3 * 4 / 5 % 6);
+            func((1 + 2 - 3 * 4 / 5 % 6));
+        }
         

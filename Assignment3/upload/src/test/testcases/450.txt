@@ -1,4 +1,0 @@
-
-        int foo(){return 0;}
-        float main(){return 0;}
-        void Main(){return foo();}

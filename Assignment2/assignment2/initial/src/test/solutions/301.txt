@@ -1,1 +1,1 @@
-Program([VarDecl(x,IntType),VarDecl(y,IntType),VarDecl(z,IntType),VarDecl(x,FloatType),VarDecl(y,FloatType),VarDecl(z,FloatType),VarDecl(x,StringType),VarDecl(y,StringType),VarDecl(z,StringType),VarDecl(x,BoolType),VarDecl(y,BoolType),VarDecl(z,BoolType)])
+Program([VarDecl(std_id,IntType),VarDecl(sem_score,FloatType),VarDecl(isStudent,BoolType),VarDecl(myString,StringType)])

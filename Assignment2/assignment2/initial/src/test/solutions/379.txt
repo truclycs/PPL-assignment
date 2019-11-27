@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([Dowhile([BinaryOp(=,Id(a),CallExpr(Id(random),[])),If(BinaryOp(<,Id(a),IntLiteral(10)),Continue(),Return(BinaryOp(-,BinaryOp(*,Id(a),IntLiteral(3)),IntLiteral(100))))],BooleanLiteral(true))]))])
+Program([FuncDecl(Id(main),[],IntType,Block([VarDecl(number,IntType),CallExpr(Id(printf),[StringLiteral(Enter an integer: )]),CallExpr(Id(printf),[StringLiteral(You entered: %d),Id(number)]),Return(IntLiteral(0))]))])

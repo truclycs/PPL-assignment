@@ -1,8 +1,0 @@
-
-        int main(int arg[], int b){
-            do{
-                return b;
-            }
-            while foo(arg[1], b);
-            return b;
-        }

@@ -1,5 +1,7 @@
 
-            void main(){
-                a[b + c - d[ 7 * 2 ] - e[4]] = 1;
-            }
+        void main(){
+            do {} {} {} {} {} {}
+            {}
+            while a == b ;
+        }
         

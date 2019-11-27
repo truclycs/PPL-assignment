@@ -116,6 +116,10 @@ class StaticChecker(BaseVisitor, Utils):
         list_para = []
         for para in ast.param:
             list_para.append(checkRedeclared(list_para, para, "Parameter"))
+        
+        for para in list_para:
+            overrideDeclaration(environment, para.name)
+
         environment += list_para
         is_return = self.visit(ast.body, (environment, ast.returnType, False, list_para, c[4], ast.name.name))
         if is_return is False and type(ast.returnType) is not VoidType:

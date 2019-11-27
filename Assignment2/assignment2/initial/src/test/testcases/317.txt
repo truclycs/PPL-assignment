@@ -1,6 +1,11 @@
 
-            void main(){
-                a || b || c;
-                a && b && c;
+        void main(){
+            if ( a && b )
+            {
+                if( a || b ){a || b ;}
+                else
+                {}
             }
+            else{a && b ;}
+        }
         

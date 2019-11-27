@@ -1,9 +1,10 @@
 
-            void main(){
-                if ( a != b ){
-                    if( 3.E5 )
-                        a = b + true ;
-                } else 
-                    j || -7;
-            }
+        int main(){
+            for (j = 0; j < c; j = j + 1)
+                print("i"); // for
+                print("i"); // main
+                print("i"); // main
+                print("i"); // main
+                print("i"); // main
+        }
         

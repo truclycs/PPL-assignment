@@ -1,8 +1,3 @@
 
-            void main(){
-                the_id;
-                id;
-                _std21_;
-                _sddas_[3];
-            }
+        int[] main(string a[], float b[], boolean c){}
         

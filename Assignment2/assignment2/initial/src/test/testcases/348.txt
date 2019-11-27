@@ -1,11 +1,12 @@
 
-            float main(){
-                for ( i = 0; i < 3E5; i = i + 1){
-                    for (i = 100 + a < 10; i > 6; i = i / 2 *3){
-                        for (i > 3; i = 10; i + 3 = 3)
-                            //Do nothing here
-                            a = 10;
-                    }
+        int main(int argc){
+            int argc;
+            int argv[10];
+            {
+                if (argv[1] == argc){
+                    return 0;
                 }
+                return 1;
             }
+        }
         

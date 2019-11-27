@@ -1,13 +1,10 @@
 
-            void main(){
-                if (x < 10){
-                    for (x = false;True;x = foo(3)){
-                        x = x + 1;
-                    }
-                } else {
-                    for (x;y;z){
-                        foo(x,y,z,t);
-                    }
+        int main(){
+            for(i = 0; i < 10 ; i = i + 1)
+                j = 1;
+                for(j = 0; j < 10 ; j = j + 1){
+                int k;
+                k = 1;
                 }
-            }
+        }
         

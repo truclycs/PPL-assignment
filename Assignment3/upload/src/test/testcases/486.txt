@@ -1,8 +1,0 @@
-
-        void main(int a[]){
-            int ab;
-            ab = 5;
-            5 = ab;
-            return;
-        }
-        

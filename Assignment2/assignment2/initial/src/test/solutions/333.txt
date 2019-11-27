@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([If(BinaryOp(<,IntLiteral(6),IntLiteral(7)),Block([If(BinaryOp(<,IntLiteral(8),IntLiteral(9)),CallExpr(Id(print),[StringLiteral(True)]))]),CallExpr(Id(print),[StringLiteral(False)]))]))])
+Program([FuncDecl(Id(isPrime),[VarDecl(n,IntType)],BoolType,Block([VarDecl(i,IntType),For(BinaryOp(=,Id(i),IntLiteral(2));BinaryOp(<,Id(i),Id(n));BinaryOp(=,Id(i),BinaryOp(+,Id(i),IntLiteral(1)));If(BinaryOp(==,BinaryOp(%,Id(n),Id(i)),IntLiteral(0)),Return(BooleanLiteral(false)))),Return(BooleanLiteral(true))]))])

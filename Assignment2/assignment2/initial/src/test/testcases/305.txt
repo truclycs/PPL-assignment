@@ -1,11 +1,3 @@
 
-            void main(){ /* Nothing here */}
-            int main(){
-                // Your code here
-            }
-            string main(){
-                // This is just a test
-                // Test the code 
-            }
-            boolean main(){}
+        int i; float j; string k;
         

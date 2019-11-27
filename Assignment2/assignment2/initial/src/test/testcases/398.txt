@@ -1,15 +1,15 @@
 
-            // Check prime number
-            boolean checkPrime(int n) {
-                int i;
-                boolean isPrime; 
-                isPrime = true;
-                for(i = 2; i <= n/2; i = i + 1) {
-                    if(n % i == 0) {
-                        isPrime = false;
-                        break;
-                    }
-                }
-                return isPrime;
-            }
+        int main() 
+        { 
+            // Calculate the time taken by fun() 
+            // clock_t t;
+            t = clock(); 
+            fun(); 
+            t = clock() - t; 
+            float time_taken;
+            time_taken = (t/CLOCKS_PER_SEC); // in seconds 
+
+            printf("fun() took %f seconds to execute \n", time_taken); 
+            return 0;
+        } 
         

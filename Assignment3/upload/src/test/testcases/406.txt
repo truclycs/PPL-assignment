@@ -1,6 +1,0 @@
-
-        int s;
-        void main(){
-            return;
-        } 
-        boolean True(int s, int s){return true;}

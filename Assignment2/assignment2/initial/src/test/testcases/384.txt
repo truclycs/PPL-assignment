@@ -1,6 +1,14 @@
 
-            void main(){
-                return foo("x","y",a[3],test);
-                return _test_not_a_test(1,3e3);   
+        int main()
+        {
+            int n, i, sum;
+            sum = 0;
+            n = 100;
+            for(i = 1; i <= n; i = i + 1)
+            {
+                sum = sum + i;
             }
+            printf("Sum = %d",sum);
+            return 0;
+        } 
         

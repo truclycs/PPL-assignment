@@ -1,6 +1,5 @@
 
-            void main(){
-                if (a == 5) break;
-                else break;
-            }
+        int main(){
+            arr [ ( arr[5] ) ]; //pass
+        }
         

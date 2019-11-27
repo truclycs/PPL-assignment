@@ -1,13 +1,22 @@
 
-            void main(){
-                return "^ What are words";
-                return "@ Anywhere you are, I am near";
-                return "# Anywhere you go, Ill be there";
-                return "$ Anytime you whisper my name, youll see";
-                return "% How every single promise Ill keep";
-                return "^ Cause what kind of guy would I be";
-                return "& If I was to leave when you need me most";
-                return true;
-                return false;
+        int main()
+        {
+            float n1, n2, n3;
+            n1 = n2 = n3 = 109.0e-1; 
+            if (n1>=n2)
+            {
+                if(n1>=n3)
+                    printf("%.2lf is the largest number.", n1);
+                else
+                    printf("%.2lf is the largest number.", n3);
             }
+            else
+            {
+                if(n2>=n3)
+                    printf("%.2lf is the largest number.", n2);
+                else
+                    printf("%.2lf is the largest number.",n3);
+            }
+            return 0;
+        }
         

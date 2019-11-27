@@ -1,7 +1,0 @@
-
-        int main(){
-            int a, b, c, d;
-            a = b + 5 / d * 5 - e;
-            return 0;
-        }
-        

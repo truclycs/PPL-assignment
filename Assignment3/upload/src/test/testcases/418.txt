@@ -1,6 +1,0 @@
-
-        void foo(int a){ a = a + 1; test();}
-        int main(int a, int b, int c){
-            foo(a);
-            return 0;
-        }

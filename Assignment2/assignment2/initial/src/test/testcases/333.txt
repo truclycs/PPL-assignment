@@ -1,9 +1,12 @@
 
-            void main(){
-                if (6<7){
-                    if (8 < 9)
-                        print("True");
-                } else 
-                    print("False");
-            }
+        boolean isPrime(int n)
+        {
+            // Corner case
+            // Check from 2 to n-1
+            int i;
+            for (i = 2; i < n; i = i + 1)
+                if (n % i == 0)
+                    return false;
+            return true;
+        }
         

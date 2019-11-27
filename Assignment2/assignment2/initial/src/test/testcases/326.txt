@@ -1,5 +1,9 @@
 
-            void main(){
-                print(a = b + c * foo(a/d) % a[1000],"Test" + str(isEqual(1000,100) == true));
-            }
+        void main(){
+        do
+            {int a;}
+            a = 0;
+            a = a + 1;
+        while a != 0;
+        }
         

@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([Dowhile([Return(Id(a_p_t_x_4_8_6_9)),Return(Id(this_is_just_a_test_for_the_return_statement))],Id(yes_this_is_true))]))])
+Program([FuncDecl(Id(main),[],IntType,Block([CallExpr(Id(printf),[StringLiteral(Hello, World!)]),Return(IntLiteral(0))]))])

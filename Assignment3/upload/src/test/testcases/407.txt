@@ -1,7 +1,0 @@
-
-        int test;
-        float main(int test){
-            boolean test;
-            test = true;
-            return 0.0005;
-        }

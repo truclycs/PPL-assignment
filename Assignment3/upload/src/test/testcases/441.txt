@@ -1,4 +1,0 @@
-
-        float Return(){return foo();}
-        void foo(){return;}
-        float main(){return 1.2;}

@@ -1,20 +1,11 @@
 
-            void main(){
-                if (x == 10){
-                    for (x = 10; x < 100; x = x + 1)
-                        if (x % 3 == 0)
-                            print(x);
-                        else 
-                            if (x % 5 == 0)
-                                print(x - 10);
-                    for (y = x; y < 2 * x; y = y + 3){
-                        int z;
-                        z = 1;
-                        for (i = 1; i < y; i = i + 1){
-                            z = z * i;
-                        }
-                        print(z);
-                    }
-                }
-            }       
+        int main(){
+            for(i = 0; i < 10 ; i = i + 1)
+                if( i == 0)
+            break ;
+            else
+                continue;
+                int j;
+                j = 10;
+        }
         

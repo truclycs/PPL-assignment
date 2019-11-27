@@ -1,9 +1,14 @@
 
-            void main(){
-                if ( a != b ){
-                    a && 9 = 6;
-                } else { 
-                    math_score = math_score + 1;
-                }
+        int main() {
+            // loop from 1 to 10
+            int i;
+            for (i = 1; i <= 10; i = i + 1) {
+                if (i == 6)
+                    continue;
+                else
+                    //
+                    printf("%d ", i);
             }
+            return 0;
+        }
         

@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([If(BinaryOp(!=,Id(a),Id(b)),Block([BinaryOp(=,BinaryOp(&&,Id(a),IntLiteral(9)),IntLiteral(6))]),Block([]))]))])
+Program([FuncDecl(Id(main),[],IntType,Block([VarDecl(i,IntType),VarDecl(j,IntType),Dowhile([Block([BinaryOp(=,Id(j),IntLiteral(1)),Dowhile([Block([BinaryOp(=,Id(j),BinaryOp(+,Id(j),IntLiteral(1)))])],BinaryOp(<=,Id(j),IntLiteral(10))),BinaryOp(=,Id(i),BinaryOp(+,Id(i),IntLiteral(1)))])],BinaryOp(<=,Id(i),IntLiteral(10))),Return(IntLiteral(0))]))])

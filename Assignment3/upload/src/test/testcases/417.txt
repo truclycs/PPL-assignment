@@ -1,5 +1,0 @@
-
-        int main(int a, int b, int c){
-            foo();
-            return 0;
-        }

@@ -1,6 +1,10 @@
 
-            void main(){
-                foo("x","y",a[3],test);
-                _test_not_a_test(1,3e3);   
-            }
+        int x, y;
+        void main(int x[], int y){
+            //nothing in block
+        }
+        string z;
+        int[] prime(string z[]){
+            //nothing in block
+        }
         

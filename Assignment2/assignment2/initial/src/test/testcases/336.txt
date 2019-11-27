@@ -1,9 +1,11 @@
 
-            void main(){
-                if ( a != b )
-                    if( 3.E5 )
-                        a = b + true ;
-                    else 
-                        j = 7;
-            }
+        int main() {
+            int i;
+            i = 20;
+            if (i < 15)
+                printf("i is smaller than 15");
+            else
+                printf("i is greater than 15");
+            return 0;
+        }
         

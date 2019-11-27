@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([Dowhile([Block([]),Block([Block([])]),Block([Block([Block([])])]),Block([Block([Block([Block([])])])])],IntLiteral(1))]))])
+Program([FuncDecl(Id(main),[],IntType,Block([ArrayCell(Id(arr),CallExpr(Id(func),[])),ArrayCell(Id(arr),CallExpr(Id(func),[IntLiteral(1)]))]))])

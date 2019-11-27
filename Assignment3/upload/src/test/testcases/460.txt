@@ -1,8 +1,0 @@
-
-        int a;
-        void foo2(){}
-        int main(){
-            int a;
-            foo();
-            return 1;}
-        int foo(){return a + 1;}

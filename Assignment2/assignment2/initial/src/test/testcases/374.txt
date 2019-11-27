@@ -1,3 +1,13 @@
 
-            string main(){{{{{{{continue;}}}}}}}
+        int a;
+        float b[3];
+        int[] foo(int a, float b[]) {
+            int c[3];
+            if (a>0)
+                foo(a-1, b);
+            return c;
+        }
+        void foo(int a) {
+            float f;
+        }
         

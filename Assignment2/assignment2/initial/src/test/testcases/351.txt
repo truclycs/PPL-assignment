@@ -1,12 +1,6 @@
 
-            void main(){
-                do
-                    {
-                        x = x + 3;
-                    }
-                    {
-                        x = x - 10;
-                    }
-                while (x < 3);
-            }
+        int main(){
+            foo()[5]; //pass
+            (foo())[5]; //pass
+        }
         

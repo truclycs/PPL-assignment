@@ -1,5 +1,0 @@
-int main(){
-            int LHS;
-            1 = LHS;
-            return 1;
-        }

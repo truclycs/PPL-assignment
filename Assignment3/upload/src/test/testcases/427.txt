@@ -1,4 +1,0 @@
-int c;
-        void main(){
-            b = 5;
-        }

@@ -1,7 +1,9 @@
 
-            float main(){
-                for ( i = 0; i < 3E5; i = i + 1){
-                    do {} {} {} {a == 10;} while a == 10;
-                }
-            }
+        int main(int argc){
+            return;
+            return a = a + 0;
+            return a;
+            return main;
+            return "nothing";
+        }
         

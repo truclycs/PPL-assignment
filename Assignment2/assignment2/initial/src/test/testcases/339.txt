@@ -1,7 +1,14 @@
 
-            void main(){
-                if ( a != b ){
-                    a && 9 = 6;
-                } else {}
-            }
+        int main()
+        {
+            int i, j;
+            do{
+                j = 1;
+                do{
+                    j = j + 1;
+                } while ( j <= 10 );
+                i = i + 1;
+            } while ( i <= 10 );
+            return 0;
+        }
         

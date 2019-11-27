@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(trichomobas_hominis),[VarDecl(a_varaiable,ArrayTypePointer(IntType))],IntType,Block([]))])
+Program([FuncDecl(Id(main1),[],ArrayTypePointer(FloatType),Block([])),FuncDecl(Id(main2),[],ArrayTypePointer(BoolType),Block([]))])

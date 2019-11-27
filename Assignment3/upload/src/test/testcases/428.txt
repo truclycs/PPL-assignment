@@ -1,6 +1,0 @@
-
-        string main(){
-            d = 5;
-            return c;
-        }
-        int d;

@@ -1,11 +1,7 @@
 
-            void main(){
-                do 
-                    if (a == b) {
-                        //Not a test case 
-                    } else {
-                        //Just a block
-                    } 
-                while a != b ;
-            }
+        void goo(float x[]) {
+            arr[func()]; //pass
+            arr[func(1)]; //pass
+            arr[func(1,2,3, another_arr[4])]; //pass
+        }
         

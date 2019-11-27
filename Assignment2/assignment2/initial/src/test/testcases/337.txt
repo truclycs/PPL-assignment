@@ -1,9 +1,10 @@
 
-            void main(){
-                if ( a != b )
-                    a && 9 = 6;
-                else 
-                    if (a = 5)
-                        a >= 7;
-            }
+        void findElement(int arr[], int size, int key)
+        {
+            int i;
+            // loop to traverse array and search for key
+            for (i = 0; i < size; i = i + 1)
+                if (arr[i] == key)
+                    printf("Element found at position: %d", (i + 1));
+        }
         

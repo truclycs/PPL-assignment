@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([For(Id(x);Id(y);Id(z);Break())]))])
+Program([FuncDecl(Id(main),[],IntType,Block([ArrayCell(Id(arr),Id(i)),ArrayCell(Id(arr),BinaryOp(-,BinaryOp(+,IntLiteral(1),IntLiteral(2)),BinaryOp(%,BinaryOp(/,BinaryOp(*,IntLiteral(3),IntLiteral(4)),IntLiteral(5)),IntLiteral(6)))),ArrayCell(Id(arr),UnaryOp(-,UnaryOp(-,UnaryOp(-,UnaryOp(-,UnaryOp(-,UnaryOp(-,UnaryOp(-,UnaryOp(-,UnaryOp(-,UnaryOp(-,IntLiteral(3)))))))))))),ArrayCell(Id(arr),BinaryOp(=,Id(a),Id(b)))]))])

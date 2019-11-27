@@ -1,7 +1,0 @@
-
-        int main(int arg[], int b){
-            if(undeclare(b)){
-                return b;
-            }
-            return 0;
-        }

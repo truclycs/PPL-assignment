@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([For(Id(x);Id(y);Id(z);For(Id(x);Id(y);Id(z);For(Id(x);Id(y);Id(z);For(Id(x);Id(y);Id(z);CallExpr(Id(foo),[Id(x),Id(y),Id(z)])))))]))])
+Program([FuncDecl(Id(main),[],IntType,Block([For(BinaryOp(=,Id(i),IntLiteral(0));BinaryOp(<,Id(i),IntLiteral(10));BinaryOp(=,Id(i),BinaryOp(+,Id(i),IntLiteral(1)));BinaryOp(=,Id(j),IntLiteral(1))),VarDecl(j,IntType),For(BinaryOp(=,Id(j),IntLiteral(0));BinaryOp(<,Id(j),IntLiteral(10));BinaryOp(=,Id(j),BinaryOp(+,Id(j),IntLiteral(1)));Block([VarDecl(k,IntType),BinaryOp(=,Id(k),IntLiteral(1))]))]))])

@@ -1,6 +1,4 @@
 
-                int x[10];
-                float x[10];
-                string x[10];
-                boolean x[10];
+        int alpha;
+        int alpha, beta, gama;
         

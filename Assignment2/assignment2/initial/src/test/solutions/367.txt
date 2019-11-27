@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([Continue(),Continue(),Continue()]))])
+Program([FuncDecl(Id(main),[],IntType,Block([CallExpr(Id(func),[ArrayCell(Id(arr),Id(num)),ArrayCell(Id(arr),BinaryOp(+,Id(num),IntLiteral(1))),ArrayCell(Id(arr),BinaryOp(+,Id(num),IntLiteral(2)))])]))])

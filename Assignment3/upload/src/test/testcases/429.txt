@@ -1,9 +1,0 @@
-
-        int test;
-        void main(){
-            test = 0;
-            foo(test);
-            foo(a);
-        }
-        int foo(int test){return 0 + 1;}
-        

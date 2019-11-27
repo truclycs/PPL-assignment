@@ -1,5 +1,6 @@
 
-            void main(){
-                foo(a = b - c % foo(a[10 + (5 - 3) / 4])) - foo(_a + true * -1.2e-3 + 5.7e9 - 9.10);
-            }
+        int main(){
+            for (i = 0; i < alpha; i = i + 1){}
+            for (i; j; k) {}
+        }
         

@@ -1,11 +1,6 @@
 
-            void main(){
-                for (x < 100; x >= x + 1; x = x * foo(x)[100]){
-                    int x;
-                    print(x);
-                    if (x == 10){
-                        x = x + 1;
-                    }
-                }
-            }
+        int main(){
+            for(i = 0; i < 10 ; i = i + 1)
+                continue;
+        }
         

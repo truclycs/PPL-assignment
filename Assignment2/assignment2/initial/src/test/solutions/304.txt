@@ -1,1 +1,1 @@
-Program([VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType),VarDecl(x,IntType)])
+Program([VarDecl(my_Arr,ArrayType(IntType,0)),VarDecl(my_Arr,ArrayType(IntType,1)),VarDecl(my_Arr,ArrayType(IntType,2))])

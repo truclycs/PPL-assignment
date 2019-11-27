@@ -1,14 +1,10 @@
 
-            void main(){
-                if ((a == b - d + c) && (4 < d - e)){
-                    int x,y;
-                    x = y + foo(x,y);
-                    if (x = a){
-                        e = f;
-                    } else {
-                        print(10);
-                        a && b - f;
-                    }
-                }
+        void printPrime(int n)
+        {
+            int i;
+            for (i = 2; i <= n; i = i + 1) {
+                if (isPrime(i))
+                    print(i);
             }
+        }
         

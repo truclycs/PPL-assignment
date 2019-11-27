@@ -1,8 +1,8 @@
 
-            void main(){
-                do
-                    continue;
-                    continue;
-                while (x = 10);
-            }
+        int main(){
+            a = 5;
+            a = (5 + 5) - 5;
+            a[5] = a * (5 / b);
+            func(5)[--3] = --3;
+        }
         

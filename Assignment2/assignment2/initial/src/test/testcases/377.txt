@@ -1,6 +1,17 @@
 
-            void main(){
-                for (x;y;z)
-                    return (-(x - 3) % x) * (3 / 4);
+        void main () {
+            int main ;
+            main = f() ;
+            putIntLn( main ) ;
+            {
+                int i ;
+                int main ;
+                int f ;
+                main = f = i = 100;
+                putIntLn( i ) ;
+                putIntLn( main ) ;
+                putIntLn ( f ) ;
             }
+            putIntLn( main ) ;
+        }
         

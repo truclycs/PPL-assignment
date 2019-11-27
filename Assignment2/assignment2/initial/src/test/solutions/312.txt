@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([FloatLiteral(1.23445),FloatLiteral(130.0),FloatLiteral(1.45e-100),FloatLiteral(0.456),FloatLiteral(456.0),FloatLiteral(1000.0)]))])
+Program([VarDecl(x,IntType),VarDecl(y,IntType),VarDecl(z,IntType),FuncDecl(Id(main),[],VoidType,Block([VarDecl(x,IntType),VarDecl(y,IntType),VarDecl(z,IntType)]))])

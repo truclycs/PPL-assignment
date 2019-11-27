@@ -1,3 +1,15 @@
 
-            int[] foo(int a, float b[]) {int c[3]; if (a>0) foo(a-1,b); return c; }
+        int main()
+        {
+            string s1, s2, i;
+            printf("Enter string s1: ");
+            gets(s1);
+            for(i = 0; s1[i] != ""; i = i + 1)
+            {
+                s2[i] = s1[i];
+            }
+            s2[i] = "";
+            printf("String s2: %s", s2);
+            return 0;
+        }
         

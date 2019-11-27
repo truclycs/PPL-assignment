@@ -1,16 +1,12 @@
 
-            void main(){
-                return 1;
-                return 2;
-                return 3;
-                return 4;
-                return 5;
-                return 6;
-                return 7;
-                return 8;
-                return 9;
-                return 10;
-                return 11;
-                return 12345567890;
-            }
+        int main()
+        {
+            int integerType;
+            float floatType;
+
+            // Sizeof operator is used to evaluate the size of a variable
+            printf("Size of int: %ld bytes\n",sizeof(integerType));
+            printf("Size of float: %ld bytes\n",sizeof(floatType));
+            return 0;
+        }
         

@@ -1,12 +1,12 @@
 
-        void main()
+        int main() 
         {
-            float C;C = 0;
-            float F;
-            printf("Nhap vao nhiet do F = ");
-            scanf("%f", F);
-            C = 5*(F - 32)/9.0;
-            printf("Nhieu do Celcius = %f oC", C);
-            getch();
+            int lower, upper, count;
+            lower = 5; upper = 7; count = 1;  
+            // Use current time as 
+            // seed for random generator 
+            srand(time(0));
+            printRandoms(lower, upper, count);  
+            return 0;
         }
         

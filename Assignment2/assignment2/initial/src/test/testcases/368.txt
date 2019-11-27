@@ -1,6 +1,5 @@
 
-            void main(){
-                if (a == 5) continue;
-                else continue;
-            }
+        int main(){
+            func(foo(1), foo(2), foo(3));
+        }
         

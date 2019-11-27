@@ -1,1 +1,0 @@
-Type Mismatch In Statement: For(BinaryOp(=,Id(name),StringLiteral(Nam));BinaryOp(!=,Id(len),IntLiteral(10));BinaryOp(=,Id(len),BinaryOp(-,Id(len),IntLiteral(1)));Block([Return()]))
