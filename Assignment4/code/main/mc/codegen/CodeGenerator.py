@@ -167,7 +167,7 @@ class CodeGenVisitor(BaseVisitor, Utils):
             str1, typ1 = self.visit(x, Access(frame, nenv, False, True))
             in_ = (in_[0] + str1, in_[1].append(typ1))
         self.emit.printout(in_[0])
-        self.emit.printout(self.emit.emitINVOKESTATIC(cname + "/" + ast.method.name, ctype, frame))
+        self.emit.printout(self.emit.emitINVOKESTATIC(cname + "/" + ast.method.name, ctype, frame))        
 
     def visitIntLiteral(self, ast, o):
         #ast: IntLiteral
