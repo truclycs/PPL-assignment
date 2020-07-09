@@ -1,7 +1,0 @@
-
-        int main(){
-            a = arr[a+a] = func(a);
-            a = b = c = 5 + (a + b) + c;
-            a = b && c || d;
-        }
-        

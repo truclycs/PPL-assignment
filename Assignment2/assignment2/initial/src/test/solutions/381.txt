@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[],IntType,Block([VarDecl(integerType,IntType),VarDecl(floatType,FloatType),CallExpr(Id(printf),[StringLiteral(Size of int: %ld bytes\n),CallExpr(Id(sizeof),[Id(integerType)])]),CallExpr(Id(printf),[StringLiteral(Size of float: %ld bytes\n),CallExpr(Id(sizeof),[Id(floatType)])]),Return(IntLiteral(0))]))])

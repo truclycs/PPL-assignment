@@ -1,6 +1,0 @@
-
-        void main(){
-            do i = 5; while b<=0;
-            do j = 5; while b>=0;
-        }
-        

@@ -1,3 +1,0 @@
-
-        int[] main(string a[], float b[], boolean c){}
-        

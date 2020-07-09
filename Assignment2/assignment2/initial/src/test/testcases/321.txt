@@ -1,8 +1,0 @@
-
-        int[] main(){
-        do {
-            do {//
-} while ( a < 0);
-        } while a == b ;
-        }
-        

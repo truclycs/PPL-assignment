@@ -1,5 +1,0 @@
-
-        int main(){
-            func(foo(1), arr[5], i, a + 5, a < 5);
-        }
-        

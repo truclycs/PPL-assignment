@@ -1,6 +1,0 @@
-
-        int main(){
-            func(a < b, 1 >= b, a <= 2, 1 < 2);
-            func(a || b && c, -a-b, !a && !b || !!c);
-        }
-        

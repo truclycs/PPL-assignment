@@ -1,5 +1,0 @@
-
-        int main(){
-            func(arr[num], arr[num + 1], arr[num + 2]);
-        }
-        

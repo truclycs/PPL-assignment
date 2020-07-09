@@ -1,1 +1,0 @@
-Program([VarDecl(math_score,ArrayType(FloatType,5)),VarDecl(phys_score,FloatType),VarDecl(chem_score,FloatType)])

@@ -1,8 +1,0 @@
-
-        int main(){
-            arr[i]; //pass
-            arr[1 + 2 - 3 * 4 / 5 % 6]; //pass
-            arr[----------3]; //pass
-            arr[ a = b ]; //pass
-        }
-        

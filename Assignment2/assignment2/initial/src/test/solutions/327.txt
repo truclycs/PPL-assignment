@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([VarDecl(i,ArrayType(IntType,5)),VarDecl(check,BoolType),Dowhile([Block([VarDecl(count,IntType),BinaryOp(=,Id(count),IntLiteral(0)),If(BinaryOp(!=,Id(count),IntLiteral(0)),Break()),BinaryOp(=,Id(count),BinaryOp(*,Id(count),Id(count))),Block([])])],BinaryOp(==,Id(count),IntLiteral(0)))]))])

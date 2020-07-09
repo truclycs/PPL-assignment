@@ -1,9 +1,0 @@
-
-        void main(){
-            for(i = 0; i < MATRIX; i = i + 1)
-            {
-                    matA[i] = -rand % 2;
-            }
-            return;
-        }
-        

@@ -1,6 +1,0 @@
-
-        int main(){
-            ((arr))[5]; //pass
-            ((foo()))[5]; //pass
-        }
-        

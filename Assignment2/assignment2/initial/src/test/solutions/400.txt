@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[],IntType,Block([VarDecl(lower,IntType),VarDecl(upper,IntType),VarDecl(count,IntType),BinaryOp(=,Id(lower),IntLiteral(5)),BinaryOp(=,Id(upper),IntLiteral(7)),BinaryOp(=,Id(count),IntLiteral(1)),CallExpr(Id(srand),[CallExpr(Id(time),[IntLiteral(0)])]),CallExpr(Id(printRandoms),[Id(lower),Id(upper),Id(count)]),Return(IntLiteral(0))]))])

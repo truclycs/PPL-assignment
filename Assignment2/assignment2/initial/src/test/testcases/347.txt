@@ -1,9 +1,0 @@
-
-        int main(int argc){
-            return;
-            return a = a + 0;
-            return a;
-            return main;
-            return "nothing";
-        }
-        

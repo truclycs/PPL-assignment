@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[],IntType,Block([ArrayCell(Id(arr),ArrayCell(Id(arr),IntLiteral(5))),ArrayCell(Id(arr1),ArrayCell(Id(arr2),ArrayCell(Id(arr3),IntLiteral(5))))]))])

@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(checksum),[VarDecl(etc,BoolType),VarDecl(check,ArrayTypePointer(BoolType))],BoolType,Block([]))])

@@ -1,6 +1,0 @@
-
-        int main(){
-            foo()[5]; //pass
-            (foo())[5]; //pass
-        }
-        

@@ -1,5 +1,0 @@
-
-        void main(){
-        do do {{if(a){}}} while 5 == 0 ; while 5 >= 10 ;
-        }
-        

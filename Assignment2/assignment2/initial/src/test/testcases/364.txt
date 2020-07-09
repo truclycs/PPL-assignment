@@ -1,6 +1,0 @@
-
-        int main(){
-            arr[((i))]; //pass
-            arr[((a + b - c * d / e % f))]; //pass
-        }
-        

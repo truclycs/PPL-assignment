@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[],IntType,Block([VarDecl(number,IntType),CallExpr(Id(printf),[StringLiteral(Enter an integer: )]),CallExpr(Id(printf),[StringLiteral(You entered: %d),Id(number)]),Return(IntLiteral(0))]))])

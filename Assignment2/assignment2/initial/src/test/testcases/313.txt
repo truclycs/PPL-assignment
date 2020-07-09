@@ -1,7 +1,0 @@
-
-        int x, y;
-        void main(){
-            //nothing in block
-        }
-        string z;
-        

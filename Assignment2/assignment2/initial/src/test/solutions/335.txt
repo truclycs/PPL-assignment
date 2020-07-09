@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[],IntType,Block([For(BinaryOp(=,Id(j),IntLiteral(0));BinaryOp(<,Id(j),Id(c));BinaryOp(=,Id(j),BinaryOp(+,Id(j),IntLiteral(1)));CallExpr(Id(print),[StringLiteral(i)])),CallExpr(Id(print),[StringLiteral(i)]),CallExpr(Id(print),[StringLiteral(i)]),CallExpr(Id(print),[StringLiteral(i)]),CallExpr(Id(print),[StringLiteral(i)])]))])

@@ -1,1 +1,0 @@
-Program([VarDecl(a,IntType),VarDecl(b,IntType),VarDecl(c,IntType),VarDecl(d,ArrayType(IntType,4)),VarDecl(e,ArrayType(IntType,5)),VarDecl(f,ArrayType(IntType,6))])

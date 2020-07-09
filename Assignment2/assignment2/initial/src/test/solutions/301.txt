@@ -1,1 +1,0 @@
-Program([VarDecl(std_id,IntType),VarDecl(sem_score,FloatType),VarDecl(isStudent,BoolType),VarDecl(myString,StringType)])

@@ -1,6 +1,0 @@
-
-        void foo(int x, int y, float z, string s, int a[]) {
-            x = y + c;
-            a[5] = z + x;
-        }
-        

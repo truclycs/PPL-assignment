@@ -1,1 +1,0 @@
-Program([VarDecl(i,IntType),VarDecl(j,FloatType),VarDecl(k,StringType)])

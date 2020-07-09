@@ -1,6 +1,0 @@
-
-        boolean checksum(boolean etc, boolean check[])
-        {
-            	
-        }
-        

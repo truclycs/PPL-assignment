@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[VarDecl(argc,IntType)],IntType,Block([VarDecl(a,IntType),VarDecl(b,IntType),VarDecl(c,IntType),BinaryOp(=,Id(a),BinaryOp(=,Id(b),BinaryOp(=,Id(c),IntLiteral(5)))),VarDecl(f,ArrayType(FloatType,5)),If(BinaryOp(==,Id(a),Id(b)),BinaryOp(=,ArrayCell(Id(f),IntLiteral(0)),FloatLiteral(1.0)))]))])

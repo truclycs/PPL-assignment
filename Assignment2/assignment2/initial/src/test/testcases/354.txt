@@ -1,6 +1,0 @@
-
-        int main(){
-            func(1+2, a[5], a < 5)[5]; //pass
-            func(func(1), a, a == b)[10]; //pass
-        }
-        

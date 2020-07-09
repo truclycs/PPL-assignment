@@ -1,5 +1,0 @@
-
-        void main(){}
-        int main1(){}
-        float main2(){}
-        

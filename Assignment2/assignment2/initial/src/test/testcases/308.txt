@@ -1,4 +1,0 @@
-
-        float[] main1() {}
-        boolean[] main2() {}
-        

@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[],IntType,Block([BinaryOp(=,Id(t),CallExpr(Id(clock),[])),CallExpr(Id(fun),[]),BinaryOp(=,Id(t),BinaryOp(-,CallExpr(Id(clock),[]),Id(t))),VarDecl(time_taken,FloatType),BinaryOp(=,Id(time_taken),BinaryOp(/,Id(t),Id(CLOCKS_PER_SEC))),CallExpr(Id(printf),[StringLiteral(fun() took %f seconds to execute \n),Id(time_taken)]),Return(IntLiteral(0))]))])

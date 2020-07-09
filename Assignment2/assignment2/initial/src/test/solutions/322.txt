@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([Dowhile([Block([Block([Block([VarDecl(i,IntType)])])])],BinaryOp(<,Id(b),IntLiteral(0)))]))])
